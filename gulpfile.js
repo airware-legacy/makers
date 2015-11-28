@@ -5,6 +5,7 @@ var concat = require('gulp-concat'),
 	gulpif = require('gulp-if'),
 	less = require('gulp-less'),
 	minifyCSS = require('gulp-minify-css'),
+	minifyJS = require('gulp-uglify'),
     mocha = require('gulp-mocha');
 
 
@@ -32,6 +33,7 @@ gulp.task('lint', function () {
         .pipe(eslint.failAfterError());
 });
 
+
 // Minify and combine all CSS
 gulp.task('styles', ['clean'], function() {
     return gulp.src([
@@ -44,4 +46,17 @@ gulp.task('styles', ['clean'], function() {
         .pipe(minifyCSS())
         .pipe(concat('all.min.css'))
         .pipe(gulp.dest('build/css'));
+});
+
+
+// Minify and combine all JavaScript
+gulp.task('scripts', ['clean'], function() {
+    return gulp.src([
+            'node_modules/jquery/dist/jquery.js',
+            'node_modules/bootstrap/dist/js/bootstrap.js',
+            'src/js/custom.js'
+        ])
+        .pipe(concat('all.min.js'))
+        .pipe(minifyJS({preserveComments:'some'}))
+        .pipe(gulp.dest('build/js'));
 });
