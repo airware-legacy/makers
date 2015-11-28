@@ -60,3 +60,10 @@ gulp.task('scripts', ['clean'], function() {
         .pipe(minifyJS({preserveComments:'some'}))
         .pipe(gulp.dest('build/js'));
 });
+
+
+// Copy static files to build dir
+gulp.task('static', function() {
+	return gulp.src('src/static/**')
+		.pipe(gulp.dest('build'))
+});
