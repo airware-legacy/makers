@@ -26,9 +26,11 @@
   },
   "homepage": "https://github.com/airware/makers-airware-com",
   "dependencies": {
+    "bootstrap": "^3.3.6",
     "del": "^2.1.0",
     "gulp": "^3.9.0",
     "gulp-eslint": "^1.1.1",
-    "gulp-mocha": "^2.2.0"
+    "gulp-mocha": "^2.2.0",
+    "jquery": "^2.1.4"
   }
 }
