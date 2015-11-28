@@ -63,7 +63,16 @@ gulp.task('scripts', ['clean'], function() {
 
 
 // Copy static files to build dir
-gulp.task('static', function() {
+gulp.task('static', ['clean'], function() {
 	return gulp.src('src/static/**')
 		.pipe(gulp.dest('build'))
 });
+
+
+// Build macro
+gulp.task('build', [
+	'clean',
+	'static',
+	'styles',
+	'scripts'
+]);
