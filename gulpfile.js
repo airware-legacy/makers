@@ -3,10 +3,12 @@ var concat = require('gulp-concat'),
 	eslint = require('gulp-eslint'),
 	gulp = require('gulp'),
 	gulpif = require('gulp-if'),
+	hb = require('handlebars'),
 	less = require('gulp-less'),
 	minifyCSS = require('gulp-minify-css'),
 	minifyJS = require('gulp-uglify'),
-    mocha = require('gulp-mocha');
+    mocha = require('gulp-mocha')
+    regPartials = require('./lib/gulp-hb-partials.js');
 
 
 // Clean the build dir
@@ -69,10 +71,18 @@ gulp.task('static', ['clean'], function() {
 });
 
 
+// Register HBpartials
+gulp.task('partials', function() {
+	return gulp.src('src/views/partials/**.html')
+		.pipe(regPartials(hb));
+});
+
+
 // Build macro
 gulp.task('build', [
 	'clean',
 	'static',
 	'styles',
-	'scripts'
+	'scripts',
+	'partials'
 ]);
