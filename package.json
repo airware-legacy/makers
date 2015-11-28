@@ -24,5 +24,8 @@
   "bugs": {
     "url": "https://github.com/airware/makers-airware-com/issues"
   },
-  "homepage": "https://github.com/airware/makers-airware-com"
+  "homepage": "https://github.com/airware/makers-airware-com",
+  "dependencies": {
+    "del": "^2.1.0"
+  }
 }
