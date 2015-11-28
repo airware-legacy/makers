@@ -1,0 +1,28 @@
+{
+  "name": "makers-airware-com",
+  "version": "0.1.0",
+  "description": "Airware makers blog.",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "gulp test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/airware/makers-airware-com"
+  },
+  "keywords": [
+    "Makers",
+    "Blog",
+    "Static",
+    "Gulp",
+    "Engineering",
+    "Design",
+    "Opensource"
+  ],
+  "author": "Eric Johnson <ejohnson@airware.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/airware/makers-airware-com/issues"
+  },
+  "homepage": "https://github.com/airware/makers-airware-com"
+}
