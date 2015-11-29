@@ -42,9 +42,7 @@ gulp.task('styles', ['clean'], function() {
             'node_modules/bootstrap/dist/css/bootstrap.css',
             'src/less/custom.less'
         ])
-    	.pipe(gulpif(function(file) {
-    			return /(.*).less/.test(file.path);
-    		}, less()))
+    	.pipe(gulpif(/[.]less$/, less()))
         .pipe(minifyCSS())
         .pipe(concat('all.min.css'))
         .pipe(gulp.dest('build/css'));
