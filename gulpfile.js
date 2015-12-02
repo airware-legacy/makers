@@ -1,17 +1,20 @@
 var concat = require('gulp-concat'),
     eslint = require('gulp-eslint'),
     express = require('express'),
+    frontMatter = require('gulp-front-matter'),
     fs = require('fs'),
     gulp = require('gulp'),
     gulpif = require('gulp-if'),
     gzip = require('gulp-gzip'),
     hb = require('handlebars'),
     less = require('gulp-less'),
+    marked = require('gulp-marked'),
     minifyCSS = require('gulp-minify-css'),
     minifyHTML = require('gulp-minify-html'),
     minifyJS = require('gulp-uglify'),
     mocha = require('gulp-mocha'),
     regPartials = require('./lib/gulp-hb-partials.js'),
+    rename = require('gulp-rename'),
     zlib = require('zlib');
 
 
@@ -83,10 +86,23 @@ gulp.task('static', function() {
 });
 
 
-// Register HBpartials
+// Register HB partials
 gulp.task('partials', function() {
     return gulp.src('src/views/partials/*.html')
         .pipe(regPartials(hb));
+});
+
+
+// Generate posts
+gulp.task('posts', function() {
+    return gulp.src('src/markdown/posts/**/*.md')
+        .pipe(frontMatter())
+        .pipe(marked())
+        .pipe(rename({
+            suffix: '/index',
+            extname: '.html'
+        }))
+        .pipe(gulp.dest('build'));
 });
 
 
@@ -111,7 +127,8 @@ gulp.task('build', [
     'static',
     'styles',
     'scripts',
-    'partials'
+    'partials',
+    'posts'
 ]);
 
 
