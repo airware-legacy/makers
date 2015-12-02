@@ -1,92 +1,97 @@
 var concat = require('gulp-concat'),
-	del  = require('del'),
-	eslint = require('gulp-eslint'),
+    eslint = require('gulp-eslint'),
     express = require('express'),
     fs = require('fs'),
-	gulp = require('gulp'),
-	gulpif = require('gulp-if'),
+    gulp = require('gulp'),
+    gulpif = require('gulp-if'),
     gzip = require('gulp-gzip'),
-	hb = require('handlebars'),
-	less = require('gulp-less'),
-	minifyCSS = require('gulp-minify-css'),
+    hb = require('handlebars'),
+    less = require('gulp-less'),
+    minifyCSS = require('gulp-minify-css'),
     minifyHTML = require('gulp-minify-html'),
-	minifyJS = require('gulp-uglify'),
-    mocha = require('gulp-mocha')
-    regPartials = require('./lib/gulp-hb-partials.js')
+    minifyJS = require('gulp-uglify'),
+    mocha = require('gulp-mocha'),
+    regPartials = require('./lib/gulp-hb-partials.js'),
     zlib = require('zlib');
 
 
-// Clean the build dir
-gulp.task('clean', function() {
-	return del('build/**');
-});
-
-
 // Run tests and product coverage
-gulp.task('test', function () {
+gulp.task('test', ['build'], function () {
     return gulp.src(['test/*.js'])
         .pipe(mocha());
 });
 
 
 // Lint as JS files (including this one)
-gulp.task('lint', function () {
+gulp.task('lint', ['test'], function () {
     return gulp.src([
-            '**/*.js',
-            '!node_modules/**'
-        ])
-        .pipe(eslint())
-        .pipe(eslint.format())
-        .pipe(eslint.failAfterError());
+        'src/js/*.js',
+        'gulpfile.js',
+        'test/*.js',
+        '!node_modules/**'
+    ])
+    .pipe(eslint({
+        rules : {
+            'no-mixed-spaces-and-tabs' : 2,
+            'space-after-keywords' : 2,
+            'semi' : 2,
+            'camelcase' : 1,
+            'curly' : 2,
+            'no-unused-vars' : 0,
+            'comma-dangle' : 2,
+            'quotes' : 0,
+            'indent': 2
+        }
+    }))
+    .pipe(eslint.format());
 });
 
 
 // Minify and combine all CSS
-gulp.task('styles', ['clean'], function() {
+gulp.task('styles', function() {
     return gulp.src([
-            'node_modules/bootstrap/dist/css/bootstrap.css',
-            'src/less/custom.less'
-        ])
-    	.pipe(gulpif(/[.]less$/, less()))
-        .pipe(minifyCSS())
-        .pipe(concat('all.min.css'))
-        .pipe(gzip({ append: false }))
-        .pipe(gulp.dest('build/css'));
+        'node_modules/bootstrap/dist/css/bootstrap.css',
+        'src/less/*.less'
+    ])
+    .pipe(gulpif(/[.]less$/, less()))
+    .pipe(minifyCSS())
+    .pipe(concat('all.min.css'))
+    .pipe(gzip({ append: false }))
+    .pipe(gulp.dest('build/css'));
 });
 
 
 // Minify and combine all JavaScript
-gulp.task('scripts', ['clean'], function() {
+gulp.task('scripts', function() {
     return gulp.src([
-            'node_modules/jquery/dist/jquery.js',
-            'node_modules/bootstrap/dist/js/bootstrap.js',
-            'src/js/custom.js'
-        ])
-        .pipe(concat('all.min.js'))
-        .pipe(minifyJS({preserveComments:'some'}))
-        .pipe(gzip({ append: false }))
-        .pipe(gulp.dest('build/js'));
+        'node_modules/jquery/dist/jquery.js',
+        'node_modules/bootstrap/dist/js/bootstrap.js',
+        'src/js/*.js'
+    ])
+    .pipe(concat('all.min.js'))
+    .pipe(minifyJS({ preserveComments: 'some' }))
+    .pipe(gzip({ append: false }))
+    .pipe(gulp.dest('build/js'));
 });
 
 
 // Copy static files to build dir
-gulp.task('static', ['clean'], function() {
-	return gulp.src('src/static/**')
-        .pipe(gulpif(/.html$/, minifyHTML()))
+gulp.task('static', function() {
+    return gulp.src('src/static/**')
         .pipe(gzip({ append: false }))
-		.pipe(gulp.dest('build'))
+        .pipe(gulp.dest('build'));
 });
 
 
 // Register HBpartials
 gulp.task('partials', function() {
-	return gulp.src('src/views/partials/**.html')
-		.pipe(regPartials(hb));
+    return gulp.src('src/views/partials/*.html')
+        .pipe(regPartials(hb));
 });
 
 
 // Serve files for local development
-gulp.task('serve', ['build'], function(callback) {
+gulp.task('serve', function(callback) {
     express()
         .use(function(req, res, next) {
             res.header('Content-Encoding', 'gzip');
@@ -103,9 +108,18 @@ gulp.task('serve', ['build'], function(callback) {
 
 // Build macro
 gulp.task('build', [
-	'clean',
-	'static',
-	'styles',
-	'scripts',
-	'partials'
+    'static',
+    'styles',
+    'scripts',
+    'partials'
 ]);
+
+
+// Watch certain files
+gulp.task('watch', ['serve', 'lint'], function() {
+    gulp.watch(['src/**', 'test/**'], ['lint']);
+});
+
+
+// What to do when you run `$ gulp`
+gulp.task('default', ['watch']);
