@@ -1,6 +1,7 @@
 var concat = require('gulp-concat'),
     eslint = require('gulp-eslint'),
     express = require('express'),
+    extend = require('jquery-extend'),
     frontMatter = require('gulp-front-matter'),
     fs = require('fs'),
     gulp = require('gulp'),
@@ -13,13 +14,19 @@ var concat = require('gulp-concat'),
     minifyHTML = require('gulp-minify-html'),
     minifyJS = require('gulp-uglify'),
     mocha = require('gulp-mocha'),
+    moment = require('moment'),
     rename = require('gulp-rename'),
     tap = require('gulp-tap'),
     zlib = require('zlib');
 
 
-// Data stores
-var authors = {};
+// HB data
+var data = {
+    authors : {}, // Populated from MArkdown by 'authors' task
+    pageTitle : 'Airware Makers',
+    year : moment().format('YYYY'),
+    timestamp : moment().format('YYYY-MM-DD-HH-mm-ss')
+};
 
 
 // Run tests and product coverage
@@ -107,26 +114,28 @@ gulp.task('authors', function() {
         .pipe(marked())
         .pipe(rename({ extname : '' }))
         .pipe(tap(function(file) {
-            var author = file.data;
-            author.bio = file.contents.toString();
-            authors[file.relative] = author;
+            data.authors[file.relative] = extend(file.data, {
+                bio : file.contents.toString()
+            });
         }));
 });
 
 
 // Generate posts
 gulp.task('posts', ['partials', 'authors'], function() {
-
     var template = hb.compile(fs.readFileSync('./src/views/layouts/base.html', 'utf-8'));
 
     return gulp.src('src/markdown/posts/**/*.md')
         .pipe(frontMatter({ property: 'data' }))
         .pipe(marked())
-        .pipe(tap(function(file) {
-            file.data.view = 'post';
-            file.data.author = authors[file.data.author];
-            file.data.post = file.contents.toString();
-            file.contents = new Buffer(template(file.data), 'utf-8');
+        .pipe(tap(function(file) { console.log(file.data);
+            file.contents = new Buffer(template(extend(true, {}, data, {
+                view : 'post',
+                pageTitle : file.data.title + ' | ' + data.pageTitle,
+                title : file.data.title,
+                author : data.authors[file.data.author],
+                post : file.contents.toString()
+            })), 'utf-8');
         }))
         .pipe(rename({
             suffix: '/index',
