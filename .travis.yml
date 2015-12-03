@@ -1,0 +1,33 @@
+sudo: false
+language: node_js
+node_js:
+- '4.2'
+- '4.1'
+- '4.0'
+env:
+  global:
+  - secure: E+RCvVyIOBRjJOdjhgHNTR/Y5tmugspdJGoeQAPgXpxMYz3KjhqOk9rPdM6pm2KU5zKGWGdQStvbRNjOeMObGctpeFA60tYKMJcQwlZWnI1T7uLyO6KaT4/OKkce8Yry2KWszz9MAJKN8zSOb/Cn2r1BYtyekUsr8UcavMkXFhPkuLqTHVzIMlFdEpVJaQhPC+d3d3FDkEXnTQqtvMQFDUhs3aNysn75YhT6uCIUvqHTfpnIjrwB/5ECKcG0w/emXv8VmMut7YbnkVbRtg7G/5dee/KhgWBttOHOuQRPy/PpRRPx/ZREBn0cWD1PYVi8XL1mEgGcPUjXSi4GswTBt7qMgsmXPBLvY20A0HH244oF59YAvSRA2phCffaR7AfzTWi/8OIfpCoa5JSpWPHb6nXhfUiAPvjfXhbnRvJe25M9Qyc10TiDbYajJ1LRtzZyeB63C1JH1eMWYiXvd91Bl1/5AR7r5oLw0lNheB57N5qCyisaj1VEnzXB2eZfa8MZ0oV7LvrGmHoebXiHoYa7E3gjaDC0iNptlBKb8tBQr5yAB31g6zbXEc1zshCF2xsr40b0ciNM1pyZHH99TPod69vuYj+dtkfmNyDIvs6TpU/czdKLjPkNM3I/a+8xz+sYbclUTil73y+qy+Eh1YZ+9ff4KPTFxdPDYtCeWRtVieY=
+  - secure: RJd6DeomHq636b+NLJ0uNn88jaZJdWoPs+IPOCgzMq3Pwx/++gmepxUNR0OpwOVxNdak5tEKb80pQ9/9H6NQzwR459VDXtsLCGv849awXkWM5fHRCHfIAy+TZy8HRZUJuyBCb00iHnTdL22q27rPP4SR0ohLOgjM5OfaWYdU22L0dzm7sNgpETX3nSA/iFtLeLVQaTCCwyamsrlyWP6ldS/N3i5yRjalMXw1emA/Sps81eOIsXPOXJK0UB/x5U3dFsTP+GFZ4rlK6tjhXDXZn4AV4BTC8N+aO0IdTTv98T/vK9Tj1u7g0ao5+NHC9v+phtKL7rgg3ty0lTb2KJPo6CluWwRq9MkuEMMMuEJme3fwDyN5vXX40qS+sVmIcyPFG4qhX6XZur8esumCjR1c/nylU/EuSnmEqpSvyqxXfoqHLTKZheEbPtFO+V7wZa/zLd/i4HiiRsE1eim9LAccQKycycpQXzudPfW0gInQoCQhElOM3Ipc+rFNvQ1c3nrqZxIhkBN4z9Jij3ODnqWDzM53t1XjPndf+TrrfLiTRcj36BttVADcGOTsie6JZm7x6FrCHzoh36lIKw9VFM8nGZOFvIuTVxhz95V1g+4wkqDJ8VwWCcE32UlSLcoPEiEJxYdDMzRNng6OpnNSofNIExO7syUJRDCk0/i1fizx+GU=
+deploy:
+- provider: s3
+  region: us-west-2
+  access_key_id: $AWS_ACCESS_KEY_ID
+  secret_access_key: $AWS_SECRET_ACCESS_KEY
+  detect_encoding: true
+  local_dir: build
+  skip_cleanup: true
+  bucket: airware-makers
+  on:
+    branch: master
+    node_js: '4.2'
+- provider: s3
+  region: us-west-2
+  access_key_id: $AWS_ACCESS_KEY_ID
+  secret_access_key: $AWS_SECRET_ACCESS_KEY
+  detect_encoding: true
+  local_dir: build
+  skip_cleanup: true
+  bucket: airware-makers-staging
+  on:
+    branch: develop
+    node_js: '4.2'
