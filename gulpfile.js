@@ -13,8 +13,8 @@ var concat = require('gulp-concat'),
     minifyHTML = require('gulp-minify-html'),
     minifyJS = require('gulp-uglify'),
     mocha = require('gulp-mocha'),
-    regPartials = require('./lib/gulp-hb-partials.js'),
     rename = require('gulp-rename'),
+    tap = require('gulp-tap'),
     zlib = require('zlib');
 
 
@@ -57,8 +57,8 @@ gulp.task('styles', function() {
         'src/less/*.less'
     ])
     .pipe(gulpif(/[.]less$/, less()))
-    .pipe(minifyCSS())
     .pipe(concat('all.min.css'))
+    .pipe(minifyCSS())
     .pipe(gzip({ append: false }))
     .pipe(gulp.dest('build/css'));
 });
@@ -89,19 +89,31 @@ gulp.task('static', function() {
 // Register HB partials
 gulp.task('partials', function() {
     return gulp.src('src/views/partials/*.html')
-        .pipe(regPartials(hb));
+        .pipe(rename({ extname: '' }))
+        .pipe(tap(function(file) {
+            hb.registerPartial(file.relative, file.contents.toString());
+        }));
 });
 
 
 // Generate posts
-gulp.task('posts', function() {
+gulp.task('posts', ['partials'], function() {
+
+    var template = hb.compile(fs.readFileSync('./src/views/layouts/base.html', 'utf-8'));
+
     return gulp.src('src/markdown/posts/**/*.md')
-        .pipe(frontMatter())
+        .pipe(frontMatter({ property: 'data' }))
         .pipe(marked())
+        .pipe(tap(function(file) {
+            file.data.view = 'post';
+            file.data.post = file.contents.toString();
+            file.contents = new Buffer(template(file.data), 'utf-8');
+        }))
         .pipe(rename({
             suffix: '/index',
             extname: '.html'
         }))
+        .pipe(minifyHTML())
         .pipe(gzip({ append: false }))
         .pipe(gulp.dest('build'));
 });
