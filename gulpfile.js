@@ -102,6 +102,7 @@ gulp.task('posts', function() {
             suffix: '/index',
             extname: '.html'
         }))
+        .pipe(gzip({ append: false }))
         .pipe(gulp.dest('build'));
 });
 
