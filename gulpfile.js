@@ -18,6 +18,10 @@ var concat = require('gulp-concat'),
     zlib = require('zlib');
 
 
+// Data stores
+var authors = {};
+
+
 // Run tests and product coverage
 gulp.task('test', ['build'], function () {
     return gulp.src(['test/*.js'])
@@ -60,7 +64,7 @@ gulp.task('styles', function() {
     .pipe(concat('all.min.css'))
     .pipe(minifyCSS())
     .pipe(gzip({ append: false }))
-    .pipe(gulp.dest('build/css'));
+    .pipe(gulp.dest('build'));
 });
 
 
@@ -74,7 +78,7 @@ gulp.task('scripts', function() {
     .pipe(concat('all.min.js'))
     .pipe(minifyJS({ preserveComments: 'some' }))
     .pipe(gzip({ append: false }))
-    .pipe(gulp.dest('build/js'));
+    .pipe(gulp.dest('build'));
 });
 
 
@@ -96,8 +100,22 @@ gulp.task('partials', function() {
 });
 
 
+// Load authors
+gulp.task('authors', function() {
+    return gulp.src('src/markdown/authors/*.md')
+        .pipe(frontMatter({ property: 'data' }))
+        .pipe(marked())
+        .pipe(rename({ extname : '' }))
+        .pipe(tap(function(file) {
+            var author = file.data;
+            author.bio = file.contents.toString();
+            authors[file.relative] = author;
+        }));
+});
+
+
 // Generate posts
-gulp.task('posts', ['partials'], function() {
+gulp.task('posts', ['partials', 'authors'], function() {
 
     var template = hb.compile(fs.readFileSync('./src/views/layouts/base.html', 'utf-8'));
 
@@ -106,6 +124,7 @@ gulp.task('posts', ['partials'], function() {
         .pipe(marked())
         .pipe(tap(function(file) {
             file.data.view = 'post';
+            file.data.author = authors[file.data.author];
             file.data.post = file.contents.toString();
             file.contents = new Buffer(template(file.data), 'utf-8');
         }))
@@ -141,6 +160,7 @@ gulp.task('build', [
     'styles',
     'scripts',
     'partials',
+    'authors',
     'posts'
 ]);
 
