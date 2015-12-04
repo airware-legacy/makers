@@ -8,7 +8,8 @@ var concat = require('gulp-concat'),
     gulpif = require('gulp-if'),
     gzip = require('gulp-gzip'),
     hb = require('handlebars'),
-    highlight = require('highlight.js')
+    highlight = require('highlight.js'),
+    layouts = require('handlebars-layouts'),
     less = require('gulp-less'),
     marked = require('gulp-marked'),
     minifyCSS = require('gulp-minify-css'),
@@ -17,8 +18,7 @@ var concat = require('gulp-concat'),
     mocha = require('gulp-mocha'),
     moment = require('moment'),
     rename = require('gulp-rename'),
-    tap = require('gulp-tap'),
-    zlib = require('zlib');
+    tap = require('gulp-tap');
 
 
 // HB data
@@ -37,6 +37,10 @@ gulp.task('test', ['build'], function () {
 });
 
 
+// add layouts helpers to HB
+layouts.register(hb);
+
+
 // Lint as JS files (including this one)
 gulp.task('lint', ['test'], function () {
     return gulp.src([
@@ -46,16 +50,9 @@ gulp.task('lint', ['test'], function () {
         '!node_modules/**'
     ])
     .pipe(eslint({
+        extends : 'eslint:recommended',
         rules : {
-            'no-mixed-spaces-and-tabs' : 2,
-            'space-after-keywords' : 2,
-            'semi' : 2,
-            'camelcase' : 1,
-            'curly' : 2,
-            'no-unused-vars' : 0,
-            'comma-dangle' : 2,
-            'quotes' : 0,
-            'indent': 2
+            'no-undef' : 0
         }
     }))
     .pipe(eslint.format());
@@ -130,11 +127,11 @@ gulp.task('posts', ['partials', 'authors'], function() {
     return gulp.src('src/markdown/posts/**/*.md')
         .pipe(frontMatter({ property: 'data' }))
         .pipe(marked({
-            highlight: function (code) {
-                return require('highlight.js').highlightAuto(code).value
+            highlight: function(code) {
+                return highlight.highlightAuto(code).value;
             }
         }))
-        .pipe(tap(function(file) { console.log(file.data);
+        .pipe(tap(function(file) {
             file.contents = new Buffer(template(extend(true, {}, data, {
                 view : 'post',
                 pageTitle : file.data.title + ' | ' + data.pageTitle,
