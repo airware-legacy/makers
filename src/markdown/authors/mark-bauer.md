@@ -1,6 +1,7 @@
 ---
 name: Mark Bauer
 title: Product Designer
+org: Airware
 email: mbauer@airware.com
 ---
 

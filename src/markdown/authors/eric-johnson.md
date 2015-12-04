@@ -1,6 +1,7 @@
 ---
 name: Eric Johnson
 title: Director of Engineering, Software
+org: Airware
 email: ejohnson@airware.com
 site: https://ericjohnson.me
 twitter: edjboston

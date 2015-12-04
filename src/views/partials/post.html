@@ -2,11 +2,7 @@
 	<div class="container">
 		<h1>{{title}}</h1>
 		
-		<ul>
-			<li>{{author.name}}</li>
-			<li>{{author.title}}</li>
-			<li><a href="mailto:{{author.email}}">{{author.email}}</a></li>
-		</ul>
+		<p>By <a href="mailto:{{author.email}}">{{author.name}}</a>, {{author.title}} @ {{author.org}}</p>
 		
 		{{{post}}}
 	</div>

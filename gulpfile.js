@@ -8,6 +8,7 @@ var concat = require('gulp-concat'),
     gulpif = require('gulp-if'),
     gzip = require('gulp-gzip'),
     hb = require('handlebars'),
+    highlight = require('highlight.js')
     less = require('gulp-less'),
     marked = require('gulp-marked'),
     minifyCSS = require('gulp-minify-css'),
@@ -65,6 +66,7 @@ gulp.task('lint', ['test'], function () {
 gulp.task('styles', function() {
     return gulp.src([
         'node_modules/bootstrap/dist/css/bootstrap.css',
+        'node_modules/highlight.js/styles/default.css',
         'src/less/*.less'
     ])
     .pipe(gulpif(/[.]less$/, less()))
@@ -127,7 +129,11 @@ gulp.task('posts', ['partials', 'authors'], function() {
 
     return gulp.src('src/markdown/posts/**/*.md')
         .pipe(frontMatter({ property: 'data' }))
-        .pipe(marked())
+        .pipe(marked({
+            highlight: function (code) {
+                return require('highlight.js').highlightAuto(code).value
+            }
+        }))
         .pipe(tap(function(file) { console.log(file.data);
             file.contents = new Buffer(template(extend(true, {}, data, {
                 view : 'post',

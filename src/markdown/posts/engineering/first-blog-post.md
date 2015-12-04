@@ -3,37 +3,109 @@ title: First Blog Post
 author: eric-johnson
 ---
 
-Intro
------
+H2
+--
 
-Blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah.
+This is a paragraph blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah.
 
-Blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah. Blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah.
 
-Blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah. Blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah.
+### Emphasis
 
-Section
--------
+*single asterisks*
 
-Blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah.
+_single underscores_
 
-* Unordered list item #1
-* Unordered list item #1
-* Unordered list item #1
-* Unordered list item #1
+**double asterisks**
 
-Blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah.
+__double underscores__
 
-Closing
--------
 
-Blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah. Blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah..
+### Hyperlinks
 
-Blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah. Blah blah blah blah.
+This is [an example](http://example.com/ "Title") inline link.
 
-1. Ordered ist item #1
-2. Ordered ist item #2
-3. Ordered ist item #3
-4. Ordered ist item #4
+[This link](http://example.net/) has no title attribute.
 
-Blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah. Blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah.
+
+### Reference-style links
+
+This is [an example][id] reference-style link.
+
+[id]: http://example.com/  "Optional Title Here"
+
+
+### URL Autolinking
+
+https://help.github.com/articles/github-flavored-markdown/
+
+### Strikethrough text
+
+Some of this text is ~~struck through~~
+
+
+### Blockquotes
+
+> This is the first level of quoting.
+>
+> > This is nested blockquote.
+>
+> Back to the first level.
+
+
+### Code blocks
+
+	function(arg) {
+		console.log(arg);
+	}
+
+
+### Fenced code blocks
+
+```
+function test() {
+	console.log("notice the blank line before this function?");
+}
+```
+
+### Syntax highlighting
+
+```js
+function test() {
+	console.log("notice the blank line before this function?");
+}
+```
+### Horizontal rules
+
+* * *
+
+### Tables
+
+You can create tables by assembling a list of words and dividing them with hyphens - (for the first row), and then separating each column with a pipe |:
+
+First Header  | Second Header
+------------- | -------------
+Content Cell  | Content Cell
+Content Cell  | Content Cell
+
+For aesthetic purposes, you can also add extra pipes on the ends:
+
+| First Header  | Second Header |
+| ------------- | ------------- |
+| Content Cell  | Content Cell  |
+| Content Cell  | Content Cell  |
+
+
+### Unordered list
+
+* Item #1
+* Item #2
+* Item #3
+* Item #4
+
+
+### Ordered list
+
+1. Item #1
+2. Item #2
+3. Item #3
+4. Item #4
