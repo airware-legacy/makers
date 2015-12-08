@@ -1,6 +1,7 @@
 ---
 title: Second Blog Post
 author: mark-bauer
+category: design
 ---
 
 Intro

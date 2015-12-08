@@ -1,6 +1,7 @@
 ---
 title: First Blog Post
 author: eric-johnson
+category: engineering
 ---
 
 H2

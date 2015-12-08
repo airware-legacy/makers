@@ -21,9 +21,13 @@ var concat = require('gulp-concat'),
     tap = require('gulp-tap');
 
 
-// HB data
+// Config HB
+layouts.register(hb);
+
 var data = {
-    authors : {}, // Populated from MArkdown by 'authors' task
+    authors : {}, // Populated from Markdown by 'authors' task
+    posts : {}, // Populated by the 'posts' task
+    tags : {}, // Populated by the 'posts' task
     pageTitle : 'Airware Makers',
     year : moment().format('YYYY'),
     timestamp : moment().format('YYYY-MM-DD-HH-mm-ss')
@@ -32,13 +36,9 @@ var data = {
 
 // Run tests and product coverage
 gulp.task('test', ['build'], function () {
-    return gulp.src(['test/*.js'])
+    return gulp.src('test/*.js')
         .pipe(mocha());
 });
-
-
-// add layouts helpers to HB
-layouts.register(hb);
 
 
 // Lint as JS files (including this one)
@@ -49,12 +49,7 @@ gulp.task('lint', ['test'], function () {
         'test/*.js',
         '!node_modules/**'
     ])
-    .pipe(eslint({
-        extends : 'eslint:recommended',
-        rules : {
-            'no-undef' : 0
-        }
-    }))
+    .pipe(eslint())
     .pipe(eslint.format());
 });
 
@@ -98,17 +93,19 @@ gulp.task('static', function() {
 
 // Register HB partials
 gulp.task('partials', function() {
-    return gulp.src('src/views/partials/*.html')
-        .pipe(rename({ extname: '' }))
-        .pipe(tap(function(file) {
-            hb.registerPartial(file.relative, file.contents.toString());
-        }));
+    return gulp.src('src/partials/*.html')
+    .pipe(rename({ extname: '' }))
+    .pipe(tap(function(file) {
+        hb.registerPartial(file.relative, file.contents.toString());
+    }));
 });
 
 
 // Load authors
 gulp.task('authors', function() {
-    return gulp.src('src/markdown/authors/*.md')
+    data.authors = {};
+
+    return gulp.src('src/authors/*.md')
         .pipe(frontMatter({ property: 'data' }))
         .pipe(marked())
         .pipe(rename({ extname : '' }))
@@ -122,9 +119,11 @@ gulp.task('authors', function() {
 
 // Generate posts
 gulp.task('posts', ['partials', 'authors'], function() {
-    var template = hb.compile(fs.readFileSync('./src/views/layouts/base.html', 'utf-8'));
+    var template = hb.compile(fs.readFileSync('src/partials/post.html', 'utf-8'));
+    var category;
+    data.posts = {};
 
-    return gulp.src('src/markdown/posts/**/*.md')
+    return gulp.src('src/posts/*.md')
         .pipe(frontMatter({ property: 'data' }))
         .pipe(marked({
             highlight: function(code) {
@@ -132,18 +131,42 @@ gulp.task('posts', ['partials', 'authors'], function() {
             }
         }))
         .pipe(tap(function(file) {
-            file.contents = new Buffer(template(extend(true, {}, data, {
-                view : 'post',
-                pageTitle : file.data.title + ' | ' + data.pageTitle,
-                title : file.data.title,
+            category = file.data.category;
+            var post = {
+                slug : file.relative.replace('.html', ''),
+                title : file.data.title + ' | ' + data.pageTitle,
+                h1 : file.data.title,
                 author : data.authors[file.data.author],
-                post : file.contents.toString()
-            })), 'utf-8');
+                post : file.contents.toString(),
+                year : data.year,
+                timestamp : data.timestamp
+            };
+            data.posts[post.slug] = post;
+            file.contents = new Buffer(template(post), 'utf-8');
         }))
-        .pipe(rename({
-            suffix: '/index',
-            extname: '.html'
+        .pipe(rename(function(path) {
+            path.dirname = [ path.dirname, category, path.basename ].join('/');
+            path.basename = 'index';
+            path.extname = '.html';
         }))
+        .pipe(minifyHTML())
+        .pipe(gzip({ append: false }))
+        .pipe(gulp.dest('build'));
+});
+
+
+// Generate posts
+gulp.task('pages', ['partials', 'authors'], function() {
+    return gulp.src('src/pages/**/*.html')
+        .pipe(tap(function(file) {
+            var template = hb.compile(file.contents.toString());
+            file.contents = new Buffer(template(data));
+        }))
+        .pipe(gulpif(/^((?!index).)*$/, rename(function(path) {
+            path.dirname = [ path.dirname, path.basename ].join('/');
+            path.basename = 'index';
+            path.extname = '.html';
+        })))
         .pipe(minifyHTML())
         .pipe(gzip({ append: false }))
         .pipe(gulp.dest('build'));
@@ -173,13 +196,18 @@ gulp.task('build', [
     'scripts',
     'partials',
     'authors',
+    'pages',
     'posts'
 ]);
 
 
 // Watch certain files
 gulp.task('watch', ['serve', 'lint'], function() {
-    gulp.watch(['src/**', 'test/**'], ['lint']);
+    gulp.watch([
+        'src/**/*',
+        'test/**',
+        'gulpfile.js'
+    ], ['lint']);
 });
 
 

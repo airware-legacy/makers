@@ -50,5 +50,33 @@
     "jquery-extend": "^2.0.3",
     "moment": "^2.10.6",
     "should": "^7.1.1"
+  },
+  "eslintConfig": {
+    "extends": "eslint:recommended",
+    "env": {
+      "node": true,
+      "es6": true,
+      "mocha": true
+    },
+    "globals": {
+      "$": true,
+      "window": true,
+      "document": true,
+      "ga": true
+    },
+    "rules": {
+      "no-mixed-spaces-and-tabs": 2,
+      "space-after-keywords": 2,
+      "semi": 2,
+      "camelcase": 1,
+      "curly": [
+        2,
+        "multi"
+      ],
+      "no-unused-vars": 0,
+      "comma-dangle": 2,
+      "quotes": 0,
+      "indent": 2
+    }
   }
 }
