@@ -23,7 +23,6 @@ var concat = require('gulp-concat'),
 
 // Config HB
 layouts.register(hb);
-
 var data = {
     authors : {}, // Populated from Markdown by 'authors' task
     posts : {}, // Populated by the 'posts' task
@@ -205,8 +204,7 @@ gulp.task('build', [
 gulp.task('watch', ['serve', 'lint'], function() {
     gulp.watch([
         'src/**/*',
-        'test/**',
-        'gulpfile.js'
+        'test/**'
     ], ['lint']);
 });
 
