@@ -93,10 +93,10 @@ gulp.task('static', function() {
 // Register HB partials
 gulp.task('partials', function() {
     return gulp.src('src/partials/*.html')
-    .pipe(rename({ extname: '' }))
-    .pipe(tap(function(file) {
-        hb.registerPartial(file.relative, file.contents.toString());
-    }));
+        .pipe(rename({ extname: '' }))
+        .pipe(tap(function(file) {
+            hb.registerPartial(file.relative, file.contents.toString());
+        }));
 });
 
 
