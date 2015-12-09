@@ -109,9 +109,18 @@ gulp.task('authors', function() {
         .pipe(marked())
         .pipe(rename({ extname : '' }))
         .pipe(tap(function(file) {
-            data.authors[file.relative] = extend(file.data, {
-                bio : file.contents.toString()
-            });
+            var author = {
+                slug : file.relative,
+                name : file.data.name,
+                title : file.data.title,
+                org : file.data.org,
+                email : file.data.email,
+                bio : file.contents.toString(),
+                // Optional
+                site : file.data.site || null,
+                twitter : file.data.twitter || null
+            };
+            data.authors[author.slug] = author;
         }));
 });
 
@@ -119,7 +128,6 @@ gulp.task('authors', function() {
 // Generate posts
 gulp.task('posts', ['partials', 'authors'], function() {
     var template = hb.compile(fs.readFileSync('src/partials/post.html', 'utf-8'));
-    var category;
     data.posts = {};
 
     return gulp.src('src/posts/*.md')
@@ -130,23 +138,25 @@ gulp.task('posts', ['partials', 'authors'], function() {
             }
         }))
         .pipe(tap(function(file) {
-            category = file.data.category;
+            // Inject category into file path
+            file.path = file.path.replace(file.relative, file.data.category + '/' + file.relative);
+
             var post = {
                 slug : file.relative.replace('.html', ''),
                 title : file.data.title + ' | ' + data.pageTitle,
                 h1 : file.data.title,
                 author : data.authors[file.data.author],
+                snippet : file.contents.toString().match(/<p>(.*)<\/p>/)[1],
                 post : file.contents.toString(),
                 year : data.year,
                 timestamp : data.timestamp
             };
+
+            // Populate the posts object
             data.posts[post.slug] = post;
+
+            // Render the template
             file.contents = new Buffer(template(post), 'utf-8');
-        }))
-        .pipe(rename(function(path) {
-            path.dirname = [ path.dirname, category, path.basename ].join('/');
-            path.basename = 'index';
-            path.extname = '.html';
         }))
         .pipe(minifyHTML())
         .pipe(gzip({ append: false }))
