@@ -41,6 +41,14 @@
   font-style: normal;
 }
 
+/* *
+ * Color Palette
+ */
+
+@home: #ffffff;
+@eng: #43c3b7;
+@design: #f4bb41;
+@open-source: #F58240;
 
 /* *
  * Styles
@@ -51,10 +59,14 @@
 .italic { font-family:'Colfax-RegularItalic'; font-style:normal; }
 
 body {
-
+    &.home { h1 { color:#ffffff; } }
+    &.eng { h1 { color:@eng; } }
+    &.design { h1 { color:@design; } }
+    &.open-source { h1 { color:@open-source; } }
 }
 
 main {
+    .jumbotron { background-color:#ccc; }
     padding-top:5em; padding-bottom:3em;
     .category { text-transform:capitalize; }
 }

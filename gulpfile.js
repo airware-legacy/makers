@@ -196,6 +196,7 @@ gulp.task('pages', ['posts'], function() {
             var page = {
                 title     : file.frontMatter.title,
                 tagline   : file.frontMatter.tagline || null,
+                class     : file.frontMatter.class,
                 year      : data.year,
                 timestamp : data.timestamp,
                 pageTitle : data.pageTitle,
