@@ -1,7 +1,10 @@
 ---
-title: Second Blog Post
-author: mark-bauer
-category: design
+title: First Blog Post
+author: eric-johnson
+category: engineering
+tags:
+- JavaScript
+- Front End
 ---
 
 H2

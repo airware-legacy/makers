@@ -131,7 +131,7 @@ gulp.task('posts', ['partials', 'authors'], function() {
     data.posts = {};
 
     return gulp.src('src/posts/*.md')
-        .pipe(frontMatter({ property: 'data' }))
+        .pipe(frontMatter())
         .pipe(marked({
             highlight: function(code) {
                 return highlight.highlightAuto(code).value;
@@ -139,16 +139,19 @@ gulp.task('posts', ['partials', 'authors'], function() {
         }))
         .pipe(tap(function(file) {
             // Inject category into file path
-            file.path = file.path.replace(file.relative, file.data.category + '/' + file.relative);
+            file.path = file.path
+                .replace(file.relative, file.frontMatter.category + '/' + file.relative)
+                .replace('.html', '/index.html');
 
+            // Map everything into a single object
             var post = {
-                slug : file.relative.replace('.html', ''),
-                title : file.data.title + ' | ' + data.pageTitle,
-                h1 : file.data.title,
-                author : data.authors[file.data.author],
-                snippet : file.contents.toString().match(/<p>(.*)<\/p>/)[1],
-                post : file.contents.toString(),
-                year : data.year,
+                slug      : file.relative.replace('.html', ''),
+                title     : file.frontMatter.title + ' | ' + data.pageTitle,
+                h1        : file.frontMatter.title,
+                snippet   : file.contents.toString().match(/<p>(.*)<\/p>/)[1], // First paragraph contents
+                post      : file.contents.toString(),
+                author    : data.authors[file.frontMatter.author],
+                year      : data.year,
                 timestamp : data.timestamp
             };
 
@@ -167,9 +170,13 @@ gulp.task('posts', ['partials', 'authors'], function() {
 // Generate posts
 gulp.task('pages', ['partials', 'authors'], function() {
     return gulp.src('src/pages/**/*.html')
+        .pipe(frontMatter({ property: 'data' }))
         .pipe(tap(function(file) {
             var template = hb.compile(file.contents.toString());
-            file.contents = new Buffer(template(data));
+            file.contents = new Buffer(template(extend(true, {
+                year : data.year,
+                timestamp : data.timestamp
+            }, file.data)));
         }))
         .pipe(gulpif(/^((?!index).)*$/, rename(function(path) {
             path.dirname = [ path.dirname, path.basename ].join('/');

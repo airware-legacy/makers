@@ -2,6 +2,9 @@
 title: Second Blog Post
 author: mark-bauer
 category: design
+tags:
+- Product
+- Visual Design
 ---
 
 H2

@@ -1,7 +1,11 @@
 ---
-title: Second Blog Post
+title: Sixth Blog Post
 author: mark-bauer
 category: design
+tags:
+- User Experience
+- Optimization
+- A/B Testing
 ---
 
 H2

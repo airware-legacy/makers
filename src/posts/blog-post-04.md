@@ -1,7 +1,11 @@
 ---
-title: Second Blog Post
+title: Fourth Blog Post
 author: mark-bauer
 category: design
+tags:
+- Sketch
+- Process
+- Art
 ---
 
 H2
