@@ -143,7 +143,7 @@ gulp.task('posts', ['partials'], function() {
                 slug        : file.relative.replace('.html', ''),
                 title       : file.frontMatter.title,
                 date        : file.frontMatter.date,
-                link        : '/' + [ file.frontMatter.category, file.relative.replace('.html', '') ].join('/'),
+                link        : '/' + file.frontMatter.category + '/' + file.relative.replace('.html', '') + '/',
                 displayDate : moment(file.frontMatter.date).format('MMMM DD, YYYY'),
                 category    : file.frontMatter.category,
                 tags        : file.frontMatter.tags.map(function(tag) {
