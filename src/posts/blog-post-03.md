@@ -2,6 +2,7 @@
 title: Third Blog Post
 author: luke-doyle
 category: engineering
+date: 2015-12-10
 tags:
 - Kubernetes
 - DevOps

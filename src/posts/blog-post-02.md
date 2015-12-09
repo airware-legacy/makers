@@ -2,6 +2,7 @@
 title: Second Blog Post
 author: mark-bauer
 category: design
+date: 2015-12-08
 tags:
 - Product
 - Visual Design

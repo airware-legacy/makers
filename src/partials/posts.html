@@ -1,0 +1,27 @@
+<section id="posts">
+	<ul>
+	{{#each posts}}
+		<li><b>Title:</b> {{this.title}} (<a href="{{this.link}}">hyperlink</a>)</li>
+			<ul>
+				<li><b>Date:</b> {{this.displayDate}}</li>
+				<li><b>Category:</b> {{this.category}}</li>
+				<li><b>Author:</b>
+					<ul>
+						<li><b>Name:</b> {{this.author.name}}</li>
+						<li><b>Email:</b> {{this.author.email}}</li>
+						<li><b>Org:</b> {{this.author.org}}</li>
+					</ul>
+				</li>
+				<li><b>Tags:</b>
+					<ul>
+						{{#this.tags}}
+							<li>{{this.name}} ({{this.slug}})</li>
+						{{/this.tags}}
+					</ul>
+				</li>
+				<li><b>Snippet:</b> {{this.snippet}}</dd>
+			</ul>
+		</li>
+	{{/each}}
+	</ul>
+</section>

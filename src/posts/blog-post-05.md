@@ -2,6 +2,7 @@
 title: Fifth Blog Post
 author: eric-johnson
 category: engineering
+date: 2015-12-13
 tags:
 - Agile
 - Scrum

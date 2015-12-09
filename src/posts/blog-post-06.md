@@ -2,6 +2,7 @@
 title: Sixth Blog Post
 author: mark-bauer
 category: design
+date: 2015-12-15
 tags:
 - User Experience
 - Optimization

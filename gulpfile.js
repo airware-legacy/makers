@@ -24,11 +24,11 @@ var concat = require('gulp-concat'),
 // Config HB
 layouts.register(hb);
 var data = {
-    authors : {}, // Populated from Markdown by 'authors' task
-    posts : {}, // Populated by the 'posts' task
-    tags : {}, // Populated by the 'posts' task
+    authors   : [], // Populated from Markdown by 'authors' task
+    posts     : [], // Populated by the 'posts' task
+    tags      : [], // Populated by the 'posts' task
     pageTitle : 'Airware Makers',
-    year : moment().format('YYYY'),
+    year      : moment().format('YYYY'),
     timestamp : moment().format('YYYY-MM-DD-HH-mm-ss')
 };
 
@@ -91,7 +91,7 @@ gulp.task('static', function() {
 
 
 // Register HB partials
-gulp.task('partials', function() {
+gulp.task('partials', ['authors'], function() {
     return gulp.src('src/partials/*.html')
         .pipe(rename({ extname: '' }))
         .pipe(tap(function(file) {
@@ -102,7 +102,7 @@ gulp.task('partials', function() {
 
 // Load authors
 gulp.task('authors', function() {
-    data.authors = {};
+    data.authors = [];
 
     return gulp.src('src/authors/*.md')
         .pipe(frontMatter({ property: 'data' }))
@@ -120,15 +120,15 @@ gulp.task('authors', function() {
                 site : file.data.site || null,
                 twitter : file.data.twitter || null
             };
-            data.authors[author.slug] = author;
+            data.authors.push(author);
         }));
 });
 
 
 // Generate posts
-gulp.task('posts', ['partials', 'authors'], function() {
+gulp.task('posts', ['partials'], function() {
     var template = hb.compile(fs.readFileSync('src/partials/post.html', 'utf-8'));
-    data.posts = {};
+    data.posts = [];
 
     return gulp.src('src/posts/*.md')
         .pipe(frontMatter())
@@ -138,27 +138,38 @@ gulp.task('posts', ['partials', 'authors'], function() {
             }
         }))
         .pipe(tap(function(file) {
-            // Inject category into file path
-            file.path = file.path
-                .replace(file.relative, file.frontMatter.category + '/' + file.relative)
-                .replace('.html', '/index.html');
-
             // Map everything into a single object
             var post = {
-                slug      : file.relative.replace('.html', ''),
-                title     : file.frontMatter.title + ' | ' + data.pageTitle,
-                h1        : file.frontMatter.title,
-                snippet   : file.contents.toString().match(/<p>(.*)<\/p>/)[1], // First paragraph contents
-                post      : file.contents.toString(),
-                author    : data.authors[file.frontMatter.author],
-                year      : data.year,
-                timestamp : data.timestamp
+                slug        : file.relative.replace('.html', ''),
+                title       : file.frontMatter.title,
+                date        : file.frontMatter.date,
+                link        : '/' + [ file.frontMatter.category, file.relative.replace('.html', '') ].join('/'),
+                displayDate : moment(file.frontMatter.date).format('MMMM DD, YYYY'),
+                category    : file.frontMatter.category,
+                tags        : file.frontMatter.tags.map(function(tag) {
+                    return {
+                        name : tag,
+                        slug : tag.replace(' ', '-').toLowerCase()
+                                .replace(/[^a-zA-Z0-9-_]/g, '')
+                    };
+                }),
+                snippet     : file.contents.toString().match(/<p>(.*)<\/p>/)[1], // First paragraph contents
+                post        : file.contents.toString(),
+                author      : data.authors.filter(function(author) {
+                    return author.slug == file.frontMatter.author;
+                })[0],
+                pageTitle   : data.pageTitle,
+                year        : data.year,
+                timestamp   : data.timestamp
             };
 
             // Populate the posts object
-            data.posts[post.slug] = post;
+            data.posts.push(post);
 
-            // Render the template
+            // Change file and put back into stream
+            file.path = file.path
+                .replace(file.relative, file.frontMatter.category + '/' + file.relative) // Inject category
+                .replace('.html', '/index.html'); // Convert to an index file
             file.contents = new Buffer(template(post), 'utf-8');
         }))
         .pipe(minifyHTML())
@@ -168,15 +179,35 @@ gulp.task('posts', ['partials', 'authors'], function() {
 
 
 // Generate posts
-gulp.task('pages', ['partials', 'authors'], function() {
+gulp.task('pages', ['posts'], function() {
+    data.posts.sort(function(a, b) {
+        return moment(a.date).format('X') < moment(b.date).format('X');
+    });
+
     return gulp.src('src/pages/**/*.html')
-        .pipe(frontMatter({ property: 'data' }))
+        .pipe(frontMatter())
         .pipe(tap(function(file) {
+            // Filter posts by category
+            var posts = data.posts.filter(function(post) { // Reverse chron
+                return [].concat(file.frontMatter.categories).indexOf(post.category) > -1 || null;
+            });
+
+            // Map data
+            var page = {
+                title     : file.frontMatter.title,
+                tagline   : file.frontMatter.tagline || null,
+                year      : data.year,
+                timestamp : data.timestamp,
+                pageTitle : data.pageTitle,
+                posts     : posts
+            };
+
+            // Homepage gets a featured post
+            if (file.frontMatter.featured) page.featured = page.posts.shift();
+
+            // Rewrite file for stream
             var template = hb.compile(file.contents.toString());
-            file.contents = new Buffer(template(extend(true, {
-                year : data.year,
-                timestamp : data.timestamp
-            }, file.data)));
+            file.contents = new Buffer(template(page));
         }))
         .pipe(gulpif(/^((?!index).)*$/, rename(function(path) {
             path.dirname = [ path.dirname, path.basename ].join('/');
@@ -210,10 +241,7 @@ gulp.task('build', [
     'static',
     'styles',
     'scripts',
-    'partials',
-    'authors',
-    'pages',
-    'posts'
+    'pages'
 ]);
 
 

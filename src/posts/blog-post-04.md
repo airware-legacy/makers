@@ -2,6 +2,7 @@
 title: Fourth Blog Post
 author: mark-bauer
 category: design
+date: 2015-12-11
 tags:
 - Sketch
 - Process

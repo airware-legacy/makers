@@ -2,6 +2,7 @@
 title: First Blog Post
 author: eric-johnson
 category: engineering
+date: 2015-12-07
 tags:
 - JavaScript
 - Front End
