@@ -1,27 +1,26 @@
 <section id="posts">
-	<ul>
-	{{#each posts}}
-		<li><b>Title:</b> {{this.title}} (<a href="{{this.link}}">hyperlink</a>)</li>
-			<ul>
-				<li><b>Date:</b> {{this.displayDate}}</li>
-				<li><b>Category:</b> {{this.category}}</li>
-				<li><b>Author:</b>
-					<ul>
-						<li><b>Name:</b> {{this.author.name}}</li>
-						<li><b>Email:</b> {{this.author.email}}</li>
-						<li><b>Org:</b> {{this.author.org}}</li>
-					</ul>
-				</li>
-				<li><b>Tags:</b>
-					<ul>
-						{{#this.tags}}
-							<li>{{this.name}} ({{this.slug}})</li>
-						{{/this.tags}}
-					</ul>
-				</li>
-				<li><b>Snippet:</b> {{this.snippet}}</dd>
-			</ul>
-		</li>
-	{{/each}}
-	</ul>
+    {{#each posts}}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="thumbnail clearfix">
+                <div class="col-md-2">
+                    <img class="img-responsive" src="http://placehold.it/220x220" alt="{{title}}">
+                </div>
+                <div class="col-md-10">
+                    <h2>{{this.title}}</h2>
+                    <p class="italic">
+                        Published in <a class="category" href="{{category}}">{{category}}</a><br>
+                        {{displayDate}} by {{author.name}}
+                    </p>
+                    <p>{{snippet}}</p>
+                    <ul class="list-inline">
+                        {{#this.tags}}
+                        <li>{{this.name}}</li>
+                        {{/this.tags}}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{/each}}
 </section>
