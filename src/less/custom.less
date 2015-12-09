@@ -1,11 +1,61 @@
 /*! Custom LESS styles for the Airware Makers blog */
 
+
+/* *
+ * Fonts
+ */
+
+/* Colfax Regular */
+@font-face {
+    font-family: 'Colfax-Regular';
+    src: url('/fonts/Colfax-Regular.eot?#iefix') format('embedded-opentype'),
+         url('/fonts/Colfax-Regular.otf') format('opentype'),
+	     url('/fonts/Colfax-Regular.woff') format('woff'),
+	     url('/fonts/Colfax-Regular.ttf') format('truetype'),
+	     url('/fonts/Colfax-Regular.svg#Colfax-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Colfax Regular Italic */
+@font-face {
+  font-family: 'Colfax-RegularItalic';
+  src: url('Colfax-RegularItalic.eot?#iefix') format('embedded-opentype'),
+       url('Colfax-RegularItalic.otf') format('opentype'),
+	   url('Colfax-RegularItalic.woff') format('woff'),
+	   url('Colfax-RegularItalic.ttf') format('truetype'),
+	   url('Colfax-RegularItalic.svg#Colfax-RegularItalic') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Colfax Medium */
+@font-face {
+  font-family: 'Colfax-Medium';
+  src: url('Colfax-Medium.eot?#iefix') format('embedded-opentype'),
+       url('Colfax-Medium.otf') format('opentype'),
+	   url('Colfax-Medium.woff') format('woff'),
+	   url('Colfax-Medium.ttf') format('truetype'),
+	   url('Colfax-Medium.svg#Colfax-Medium') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+/* *
+ * Styles
+ */
+
+* { font-family:'Colfax-Regular'; }
+.bold { font-family:'Colfax-Medium'; font-weight:normal; }
+.italic { font-family:'Colfax-RegularItalic'; font-style:normal; }
+
 body {
 	background:#ccc; /* For footer */
 }
 
 main {
-	background: #fff;
+	background: #fff; /* Override body bg color for footer */
 	padding-top:5em;
 	padding-bottom:3em;
 	.category { text-transform:capitalize; }
