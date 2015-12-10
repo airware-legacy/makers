@@ -86,9 +86,8 @@ gulp.task('scripts', function() {
 gulp.task('static', function() {
     return gulp.src('src/static/**')
         .pipe(gulpif(/robots\.txt/, tap(function(file) {
-            if ( process.env.TRAVIS_BRANCH == 'develop' ) {
+            if ( process.env.TRAVIS_BRANCH == 'develop' )
                 file.contents = new Buffer('User-agent: *\nDisallow: /');
-            }
         })))
         .pipe(gzip({ append: false }))
         .pipe(gulp.dest('build'));
