@@ -49,7 +49,7 @@
     "jquery": "^2.1.4",
     "jquery-extend": "^2.0.3",
     "moment": "^2.10.6",
-    "should": "^7.1.1"
+    "should": "^8.0.0"
   },
   "eslintConfig": {
     "extends": "eslint:recommended",
