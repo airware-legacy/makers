@@ -210,7 +210,7 @@ gulp.task('pages', ['posts'], function() {
             var template = hb.compile(file.contents.toString());
             file.contents = new Buffer(template(page));
         }))
-        .pipe(gulpif(/^((?!index).)*$/, rename(function(path) {
+        .pipe(gulpif(/^((?!index|error).)*$/, rename(function(path) {
             path.dirname = [ path.dirname, path.basename ].join('/');
             path.basename = 'index';
             path.extname = '.html';
