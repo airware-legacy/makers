@@ -105,20 +105,20 @@ gulp.task('authors', function() {
     data.authors = [];
 
     return gulp.src('src/authors/*.md')
-        .pipe(frontMatter({ property: 'data' }))
+        .pipe(frontMatter())
         .pipe(marked())
         .pipe(rename({ extname : '' }))
         .pipe(tap(function(file) {
             var author = {
                 slug : file.relative,
-                name : file.data.name,
-                title : file.data.title,
-                org : file.data.org,
-                email : file.data.email,
+                name : file.frontMatter.name,
+                title : file.frontMatter.title,
+                org : file.frontMatter.org,
+                email : file.frontMatter.email,
                 bio : file.contents.toString(),
                 // Optional
-                site : file.data.site || null,
-                twitter : file.data.twitter || null
+                site : file.frontMatter.site || null,
+                twitter : file.frontMatter.twitter || null
             };
             data.authors.push(author);
         }));
