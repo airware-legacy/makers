@@ -1,4 +1,11 @@
 {{#extend "base"}}
+	{{#content "header"}}
+		{{#extend "header"}}
+			{{#content "headline"}}
+				{{> header_post}}
+			{{/content}}
+		{{/extend}}
+	{{/content}}
 
 	{{#content "body"}}
 
@@ -7,5 +14,4 @@
 		{{{post}}}
 
 	{{/content}}
-
 {{/extend}}

@@ -1,5 +1,5 @@
 /*! Custom LESS styles for the Airware Makers blog */
-
+@import './variables.less';
 
 /* *
  * Fonts
@@ -42,15 +42,6 @@
 }
 
 /* *
- * Color Palette
- */
-
-@home: #ffffff;
-@eng: #43c3b7;
-@design: #f4bb41;
-@open-source: #F58240;
-
-/* *
  * Styles
  */
 
@@ -59,10 +50,10 @@
 .italic { font-family:'Colfax-RegularItalic'; font-style:normal; }
 
 body {
-    &.home { h1 { color:#ffffff; } }
-    &.eng { h1 { color:@eng; } }
-    &.design { h1 { color:@design; } }
-    &.open-source { h1 { color:@open-source; } }
+    &.home { h1 { color:@home-primary-color; } }
+    &.eng { h1 { color:@eng-primary-color; } }
+    &.design { h1 { color:@design-primary-color; } }
+    &.open-source { h1 { color:@open-source-primary-color; } }
 }
 
 main {
@@ -74,3 +65,8 @@ main {
 footer {
     padding:2em; text-align:center;
 }
+
+
+@import './nav.less';
+@import './layout.less';
+@import './card.less';

@@ -1,0 +1,131 @@
+@import './mixins.less';
+@import './variables.less';
+
+.airware-header {
+  height: 500px;
+  .header-eng-bg();
+  padding: 30px 15px;
+
+  .headline-cnt {
+    &:extend(.jumbotron);
+    .make-sm-column(6);
+    .make-sm-column-offset(3);
+    .make-xs-column(12);
+    text-align: center;
+    padding-top: 90px;
+    background: transparent;
+
+    .headline {
+      margin-bottom: 15px;
+    }
+
+    .headline-deck {
+      color: #fff;
+      margin: 0;
+      font-size: 15px;
+    }
+
+    .headline-category {
+      color: @eng-primary-color;
+    }
+  }
+
+  .airware-nav {
+    .make-xs-column(12);
+    padding-bottom: 15px;
+
+    &-logo-cnt, &-items {
+      .make-sm-column(6);
+      .make-xs-column(12);
+      text-align: center;
+    }
+
+    &-logo-cnt {
+      .airware-nav-logo {
+        display: inline-block;
+
+        .airware-logo {
+          width: 247px;
+          .img-responsive();
+        }
+      }
+    }
+
+    &-item {
+      padding: 5px 0;
+      font-size: 15px;
+      margin-left: 15px;
+      color: #fff;
+      text-decoration: none;
+
+      &:first-child {
+        margin-left: 0;
+      }
+    }
+
+    @media (min-width: @screen-sm) {
+      &-logo-cnt {
+        text-align: left;
+      }
+
+      &-items {
+        text-align: right;
+      }
+    }
+  }
+}
+
+.home {
+  .headline {
+    color: #fff;
+  }
+  .nav-item-hover-color(@eng-primary-color);
+}
+
+.eng {
+  .airware-header {
+    .header-eng-bg();
+  }
+
+  .engineering-nav-item {
+    border-bottom: 2px solid @eng-primary-color;
+  }
+
+  .headline, .headline-category {
+    color: @eng-primary-color;
+  }
+
+  .nav-item-hover-color(@eng-primary-color);
+}
+
+.design {
+  .airware-header {
+    .header-design-bg();
+  }
+
+  .design-nav-item {
+    border-bottom: 2px solid @design-primary-color;
+  }
+
+  .headline, .headline-category {
+    color: @design-primary-color;
+  }
+
+  .nav-item-hover-color(@design-primary-color);
+}
+
+.open-source {
+  .airware-header {
+    .header-open-source-bg();
+  }
+
+  .open-source-nav-item {
+    border-bottom: 2px solid @open-source-primary-color;
+  }
+
+  .headline, .headline-category {
+    color: @open-source-primary-color;
+  }
+
+  .nav-item-hover-color(@open-source-primary-color);
+}

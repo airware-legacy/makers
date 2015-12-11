@@ -5,16 +5,18 @@ class: open-source
 ---
 
 {{#extend "base"}}
+	{{#content "header"}}
+		{{#extend "header"}}
+			{{#content "headline"}}
+				{{> header_category}}
+			{{/content}}
+		{{/extend}}
+	{{/content}}
 
 	{{#content "body"}}
-
-		{{> jumbotron_category}}
-
 		<ul>
 			<li>Hardcoded card for <a href="/open-source/vili/">Vili</a></li>
 			<li>Hardcoded card for <a class="external" href="https://github.com/edj-boston/makers-airware-com">this blog</a> (linking externally)</li>
 		</ul>
-
 	{{/content}}
-
 {{/extend}}

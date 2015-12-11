@@ -77,7 +77,7 @@ gulp.task('styles', ['clean'], function() {
     return gulp.src([
         'node_modules/bootstrap/dist/css/bootstrap.css',
         'node_modules/highlight.js/styles/default.css',
-        'src/less/*.less'
+        'src/less/custom.less'
     ])
     .pipe(gulpif(/[.]less$/, less()))
     .pipe(concat('all.min.css'))
@@ -85,7 +85,6 @@ gulp.task('styles', ['clean'], function() {
     .pipe(gzip({ append: false }))
     .pipe(gulp.dest('build'));
 });
-
 
 // Minify and combine all JavaScript
 gulp.task('scripts', ['clean'], function() {

@@ -1,45 +1,19 @@
-<header>
-    <div class="container">
-        <nav class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="/">Airware Makers</a>
-                </div>
-            <div id="navbar" class="collapse navbar-collapse">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a href="/engineering/">Engineering</a>
-                    </li>
-                    <li>
-                        <a href="/design/">Design</a>
-                    </li>
-                    <li></li>
-                    <li role="presentation" class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="/open-source/" role="button" aria-haspopup="true" aria-expanded="false">
-                            Open Source <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a href="/open-source/vili/">Vili</a>
-                            </li>
-                            <li>
-                                <a class="external" href="https://github.com/edj-boston/makers-airware-com">This Blog</a>
-                            </li>
-                            <li role="separator" class="divider"></li>
-                            <li>
-                                <a href="/open-source/">All Projects</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-          </div>
-        </nav>
+<header class="airware-header">
+    <nav class="airware-nav">
+        <div class="airware-nav-logo-cnt">
+            <a class="airware-nav-logo" href="/">
+                <img class="airware-logo" src="/img/logo.png">
+            </a>
+        </div>
+
+        <div class="airware-nav-items">
+            <a class="airware-nav-item engineering-nav-item" href="/engineering/">Engineering</a>
+            <a class="airware-nav-item design-nav-item" href="/design/">Design</a>
+            <a class="airware-nav-item open-source-nav-item" href="/open-source/">Open Source</a>
+        </div>
+    </nav>
+
+    <div class="headline-cnt">
+        {{#block "headline"}}{{/block}}
     </div>
 </header>

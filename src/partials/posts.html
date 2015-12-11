@@ -1,26 +1,20 @@
 <section id="posts">
     {{#each posts}}
-    <div class="row">
-        <div class="col-md-12">
-            <div class="thumbnail clearfix">
-                <div class="col-md-2">
-                    <img class="img-responsive" src="http://placehold.it/220x220" alt="{{title}}">
-                </div>
-                <div class="col-md-10">
-                    <h2><a href="{{this.link}}">{{this.title}}</a></h2>
-                    <p class="italic">
-                        Published in <a class="category" href="/{{category}}">{{category}}</a><br>
-                        {{displayDate}} by {{author.name}}
-                    </p>
-                    <p>{{snippet}}</p>
-                    <ul class="list-inline">
-                        {{#each this.tags}}
-                        <li>{{this.name}}</li>
-                        {{/each}}
-                    </ul>
-                </div>
+        <div class="card">
+            <div class="card-thumbnail" style="background-image:url('/img/{{this.thumbnail}}');"></div>
+
+            <div class="card-content">
+                <h2 class="headline">
+                    <a href="{{this.link}}">{{this.title}}</a>
+                </h2>
+
+                <p class="headline-deck">
+                    Published in <a class="headline-category" href="{{category}}">{{category}}</a><br>
+                    {{displayDate}} by {{author.name}}
+                </p>
+
+                <p class="snippet">{{snippet}}...</p>
             </div>
         </div>
-    </div>
     {{/each}}
 </section>

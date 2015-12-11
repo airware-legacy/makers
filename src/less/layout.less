@@ -1,0 +1,40 @@
+@import "./variables.less";
+@import './mixins.less';
+
+.home, .design, .eng, .open-source {
+  .airware-content {
+    padding: 30px;
+  }
+}
+
+.airware-footer {
+  padding-top: 0;
+
+  .external-links, .copyright {
+    text-align: center;
+  }
+
+  @media (min-width: @screen-md) {
+    .external-links, .copyright {
+      .make-md-column(6);
+    }
+
+    .external-links {
+      float: left;
+      text-align: left;
+
+      .external {
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: none;
+        }
+      }
+    }
+
+    .copyright {
+      float: right;
+      text-align: right;
+    }
+  }
+}

@@ -2,6 +2,7 @@
 title: Fifth Blog Post
 author: eric-johnson
 category: engineering
+thumbnail: low_poly_viking.png
 date: 2015-12-13
 tags:
 - Agile
