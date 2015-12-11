@@ -1,4 +1,5 @@
 var concat = require('gulp-concat'),
+    del = require('del'),
     eslint = require('gulp-eslint'),
     express = require('express'),
     extend = require('jquery-extend'),
@@ -23,38 +24,50 @@ var concat = require('gulp-concat'),
 
 // Config HB
 layouts.register(hb);
-var data = {
-    authors   : [], // Populated from Markdown by 'authors' task
-    posts     : [], // Populated by the 'posts' task
-    tags      : [], // Populated by the 'posts' task
-    pageTitle : 'Airware Makers',
-    year      : moment().format('YYYY'),
-    timestamp : moment().format('YYYY-MM-DD-HH-mm-ss')
-};
 
 
-// Run tests and product coverage
-gulp.task('test', ['build'], function () {
-    return gulp.src('test/*.js')
-        .pipe(mocha());
+// Shared data object for passing between tasks
+var data;
+
+
+/* *
+ * Build Step 0
+ */
+
+// Clean data and build dirs
+gulp.task('clean', function(done) {
+    data = {
+        authors   : [], // Populated by 'authors' task
+        posts     : [], // Populated by 'posts' task
+        tags      : [], // Populated by 'posts' task
+        pageTitle : 'Airware Makers',
+        year      : moment().format('YYYY'),
+        timestamp : moment().format('YYYY-MM-DD-HH-mm-ss')
+    };
+
+    del(['build/**', '!build'])
+        .then(done());
 });
 
 
-// Lint as JS files (including this one)
-gulp.task('lint', ['test'], function () {
-    return gulp.src([
-        'src/js/*.js',
-        'gulpfile.js',
-        'test/*.js',
-        '!node_modules/**'
-    ])
-    .pipe(eslint())
-    .pipe(eslint.format());
+/* *
+ * Build Step 1
+ */
+
+// Copy static files to build dir
+gulp.task('static', ['clean'], function() {
+    return gulp.src('src/static/**')
+        .pipe(gulpif(/robots\.txt/, tap(function(file) {
+            // Clear robots.txt if we're building production
+            if ( process.env.TRAVIS_BRANCH == 'master' ) file.contents = new Buffer('');
+        })))
+        .pipe(gzip({ append: false }))
+        .pipe(gulp.dest('build'));
 });
 
 
 // Minify and combine all CSS
-gulp.task('styles', function() {
+gulp.task('styles', ['clean'], function() {
     return gulp.src([
         'node_modules/bootstrap/dist/css/bootstrap.css',
         'node_modules/highlight.js/styles/default.css',
@@ -69,7 +82,7 @@ gulp.task('styles', function() {
 
 
 // Minify and combine all JavaScript
-gulp.task('scripts', function() {
+gulp.task('scripts', ['clean'], function() {
     return gulp.src([
         'node_modules/jquery/dist/jquery.js',
         'node_modules/bootstrap/dist/js/bootstrap.js',
@@ -82,32 +95,20 @@ gulp.task('scripts', function() {
 });
 
 
-// Copy static files to build dir
-gulp.task('static', function() {
-    return gulp.src('src/static/**')
-        .pipe(gulpif(/robots\.txt/, tap(function(file) {
-            if ( process.env.TRAVIS_BRANCH == 'develop' )
-                file.contents = new Buffer('User-agent: *\nDisallow: /');
-        })))
-        .pipe(gzip({ append: false }))
-        .pipe(gulp.dest('build'));
-});
-
-
 // Register HB partials
-gulp.task('partials', ['authors'], function() {
+gulp.task('partials', ['clean'], function() {
     return gulp.src('src/partials/*.html')
         .pipe(rename({ extname: '' }))
         .pipe(tap(function(file) {
-            hb.registerPartial(file.relative, file.contents.toString());
+            var name = file.relative;
+            var str = file.contents.toString();
+            hb.registerPartial(name, str);
         }));
 });
 
 
 // Load authors
-gulp.task('authors', function() {
-    data.authors = [];
-
+gulp.task('authors', ['clean'], function() {
     return gulp.src('src/authors/*.md')
         .pipe(frontMatter())
         .pipe(marked())
@@ -129,8 +130,12 @@ gulp.task('authors', function() {
 });
 
 
+/* *
+ * Build Step 2
+ */
+
 // Generate posts
-gulp.task('posts', ['partials'], function() {
+gulp.task('posts', ['static', 'styles', 'scripts', 'partials', 'authors'], function() {
     var template = hb.compile(fs.readFileSync('src/partials/post.html', 'utf-8'));
     data.posts = [];
 
@@ -181,6 +186,9 @@ gulp.task('posts', ['partials'], function() {
         .pipe(gulp.dest('build'));
 });
 
+/* *
+ * Build Step 3
+ */
 
 // Generate posts
 gulp.task('pages', ['posts'], function() {
@@ -225,39 +233,71 @@ gulp.task('pages', ['posts'], function() {
 });
 
 
+/* *
+ * Build Step 4
+ */
+
+// Run tests and product coverage
+gulp.task('test', ['pages'], function () {
+    return gulp.src('test/*.js')
+        .pipe(mocha());
+});
+
+
+// Lint as JS files (including this one)
+gulp.task('lint', ['pages'], function () {
+    return gulp.src([
+        'src/js/*.js',
+        'gulpfile.js',
+        'test/*.js',
+        '!node_modules/**'
+    ])
+    .pipe(eslint())
+    .pipe(eslint.format());
+});
+
+
+/* * 
+ * Helper Tasks
+ */
+
 // Serve files for local development
-gulp.task('serve', function(callback) {
+gulp.task('serve', function(done) {
     express()
+        // Set compression header for all requests
         .use(function(req, res, next) {
             res.header('Content-Encoding', 'gzip');
             next();
         })
+        // Static middleware
         .use(express.static('build'))
+        // Serve error page
         .use(function(req, res) {
             res.status(404)
                 .sendFile(__dirname + '/build/error.html');
         })
-        .listen(3000, callback);
+        .listen(3000, done);
 });
-
-
-// Build macro
-gulp.task('build', [
-    'static',
-    'styles',
-    'scripts',
-    'pages'
-]);
 
 
 // Watch certain files
-gulp.task('watch', ['serve', 'lint'], function() {
-    gulp.watch([
+gulp.task('watch', ['build'], function() {
+    return gulp.watch([
         'src/**/*',
-        'test/**'
-    ], ['lint']);
+        'test/*'
+    ], ['build']);
 });
 
 
+// Build Macro
+gulp.task('build', [
+    // 'clean'
+    // 'static', 'styles', 'scripts', 'partials', 'authors'
+    // 'posts'
+    // 'pages'
+    'test', 'lint'
+]);
+
+
 // What to do when you run `$ gulp`
-gulp.task('default', ['watch']);
+gulp.task('default', ['watch', 'serve']);
