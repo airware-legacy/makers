@@ -164,9 +164,9 @@ gulp.task('posts', ['static', 'styles', 'scripts', 'partials', 'authors'], funct
                 }),
                 snippet     : file.contents.toString().match(/<p>(.*)<\/p>/)[1], // First paragraph contents
                 post        : file.contents.toString(),
-                author      : data.authors.filter(function(author) {
+                author      : data.authors.find(function(author) {
                     return author.slug == file.frontMatter.author;
-                })[0],
+                }),
                 pageTitle   : data.pageTitle,
                 year        : data.year,
                 timestamp   : data.timestamp
@@ -183,7 +183,12 @@ gulp.task('posts', ['static', 'styles', 'scripts', 'partials', 'authors'], funct
         }))
         .pipe(minifyHTML())
         .pipe(gzip({ append: false }))
-        .pipe(gulp.dest('build'));
+        .pipe(gulp.dest('build'))
+        .on('end', function() {
+            data.posts.sort(function(a, b) {
+                return moment(a.date).format('X') < moment(b.date).format('X');
+            });
+        });
 });
 
 /* *
@@ -192,10 +197,6 @@ gulp.task('posts', ['static', 'styles', 'scripts', 'partials', 'authors'], funct
 
 // Generate posts
 gulp.task('pages', ['posts'], function() {
-    data.posts.sort(function(a, b) {
-        return moment(a.date).format('X') < moment(b.date).format('X');
-    });
-
     return gulp.src('src/pages/**/*.html')
         .pipe(frontMatter())
         .pipe(tap(function(file) {
