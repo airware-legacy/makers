@@ -137,7 +137,6 @@ gulp.task('authors', ['clean'], function() {
 // Generate posts
 gulp.task('posts', ['static', 'styles', 'scripts', 'partials', 'authors'], function() {
     var template = hb.compile(fs.readFileSync('src/partials/post.html', 'utf-8'));
-    data.posts = [];
 
     return gulp.src('src/posts/*.md')
         .pipe(frontMatter())
