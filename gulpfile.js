@@ -114,14 +114,14 @@ gulp.task('authors', function() {
         .pipe(rename({ extname : '' }))
         .pipe(tap(function(file) {
             var author = {
-                slug : file.relative,
-                name : file.frontMatter.name,
-                title : file.frontMatter.title,
-                org : file.frontMatter.org,
-                email : file.frontMatter.email,
-                bio : file.contents.toString(),
+                slug    : file.relative,
+                bio     : file.contents.toString(),
+                name    : file.frontMatter.name,
+                title   : file.frontMatter.title,
+                org     : file.frontMatter.org,
+                email   : file.frontMatter.email,
                 // Optional
-                site : file.frontMatter.site || null,
+                site    : file.frontMatter.site || null,
                 twitter : file.frontMatter.twitter || null
             };
             data.authors.push(author);
