@@ -1,4 +1,5 @@
-var concat = require('gulp-concat'),
+var Author = require('./lib/Author'),
+    concat = require('gulp-concat'),
     del = require('del'),
     eslint = require('gulp-eslint'),
     express = require('express'),
@@ -10,6 +11,7 @@ var concat = require('gulp-concat'),
     gzip = require('gulp-gzip'),
     hb = require('handlebars'),
     highlight = require('highlight.js'),
+    indexify = require('./lib/gulp-indexify'),
     layouts = require('handlebars-layouts'),
     less = require('gulp-less'),
     marked = require('gulp-marked'),
@@ -19,6 +21,8 @@ var concat = require('gulp-concat'),
     mocha = require('gulp-mocha'),
     moment = require('moment'),
     parsePath = require('parse-filepath'),
+    Page = require('./lib/Page'),
+    Post = require('./lib/Post'),
     rename = require('gulp-rename'),
     tap = require('gulp-tap');
 
@@ -113,17 +117,10 @@ gulp.task('authors', ['clean'], function() {
         .pipe(frontMatter())
         .pipe(marked())
         .pipe(tap(function(file) {
-            var author = {
+            var author = new Author(extend(true, {}, file.frontMatter, {
                 slug    : parsePath(file.path).name,
-                bio     : file.contents.toString(),
-                name    : file.frontMatter.name,
-                title   : file.frontMatter.title,
-                org     : file.frontMatter.org,
-                email   : file.frontMatter.email,
-                // Optional
-                site    : file.frontMatter.site || null,
-                twitter : file.frontMatter.twitter || null
-            };
+                bio     : file.contents.toString()
+            }));
             data.authors.push(author);
         }));
 });
@@ -145,46 +142,36 @@ gulp.task('posts', ['static', 'styles', 'scripts', 'partials', 'authors'], funct
             }
         }))
         .pipe(tap(function(file) {
-            // Map everything into a single object
-            var post = {
-                slug        : file.relative.replace('.html', ''),
-                title       : file.frontMatter.title,
-                date        : file.frontMatter.date,
-                link        : '/' + file.frontMatter.category + '/' + file.relative.replace('.html', '') + '/',
-                displayDate : moment(file.frontMatter.date).format('MMMM DD, YYYY'),
-                category    : file.frontMatter.category,
-                tags        : file.frontMatter.tags.map(function(tag) {
-                    return {
-                        name : tag,
-                        slug : tag.replace(' ', '-').toLowerCase()
-                                .replace(/[^a-zA-Z0-9-_]/g, '')
-                    };
-                }),
-                snippet     : file.contents.toString().match(/<p>(.*)<\/p>/)[1], // First paragraph contents
-                post        : file.contents.toString(),
-                author      : data.authors.find(function(author) {
-                    return author.slug == file.frontMatter.author;
-                }),
-                pageTitle   : data.pageTitle,
-                year        : data.year,
-                timestamp   : data.timestamp
-            };
+
+            var author = data.authors.find(function(author) {
+                return author.slug == file.frontMatter.author;
+            });
+
+            var post = new Post(extend(true, {}, file.frontMatter, {
+                slug      : parsePath(file.path).name,
+                content   : file.contents.toString(),
+                author    : author,
+                pageTitle : data.pageTitle,
+                year      : data.year,
+                timestamp : data.timestamp
+            }));
 
             // Populate the posts object
             data.posts.push(post);
 
             // Change file and put back into stream
-            file.path = file.path
-                .replace(file.relative, file.frontMatter.category + '/' + file.relative) // Inject category
-                .replace('.html', '/index.html'); // Convert to an index file
-            file.contents = new Buffer(template(post), 'utf-8');
+            file.path = post.makePath(file.path);
+            file.contents = new Buffer(template(post));
         }))
         .pipe(minifyHTML())
         .pipe(gzip({ append: false }))
         .pipe(gulp.dest('build'))
         .on('end', function() {
             data.posts.sort(function(a, b) {
-                return moment(a.date).format('X') < moment(b.date).format('X');
+                // Sort posts
+                var timestampA = moment(a.date).format('X');
+                var timestampB = moment(b.date).format('X');
+                return timestampA < timestampB; // DESC
             });
         });
 });
@@ -198,34 +185,23 @@ gulp.task('pages', ['posts'], function() {
     return gulp.src('src/pages/**/*.html')
         .pipe(frontMatter())
         .pipe(tap(function(file) {
-            // Filter posts by category
-            var posts = data.posts.filter(function(post) { // Reverse chron
-                return [].concat(file.frontMatter.categories).indexOf(post.category) > -1 || null;
-            });
-
             // Map data
-            var page = {
-                title     : file.frontMatter.title,
-                tagline   : file.frontMatter.tagline || null,
-                class     : file.frontMatter.class,
+            var page = new Page(extend(true, {}, file.frontMatter, {
+                slug      : parsePath(file.path).name,
+                content   : file.contents.toString(),
+                posts     : data.posts,
                 year      : data.year,
                 timestamp : data.timestamp,
-                pageTitle : data.pageTitle,
-                posts     : posts
-            };
-
-            // Homepage gets a featured post
-            if (file.frontMatter.featured) page.featured = page.posts.shift();
+                pageTitle : data.pageTitle
+            }));
 
             // Rewrite file for stream
-            var template = hb.compile(file.contents.toString());
+            var template = hb.compile(page.content);
             file.contents = new Buffer(template(page));
         }))
-        .pipe(gulpif(/^((?!index|error).)*$/, rename(function(path) {
-            path.dirname = [ path.dirname, path.basename ].join('/');
-            path.basename = 'index';
-            path.extname = '.html';
-        })))
+        .pipe(indexify({
+            exempt : [ 'error' ]
+        }))
         .pipe(minifyHTML())
         .pipe(gzip({ append: false }))
         .pipe(gulp.dest('build'));
@@ -246,9 +222,10 @@ gulp.task('test', ['pages'], function () {
 // Lint as JS files (including this one)
 gulp.task('lint', ['pages'], function () {
     return gulp.src([
-        'src/js/*.js',
         'gulpfile.js',
+        'src/js/*.js',
         'test/*.js',
+        'lib/**/*.js',
         '!node_modules/**'
     ])
     .pipe(eslint())
@@ -283,7 +260,8 @@ gulp.task('serve', function(done) {
 gulp.task('watch', ['build'], function() {
     return gulp.watch([
         'src/**/*',
-        'test/*'
+        'test/*',
+        'lib/**'
     ], ['build']);
 });
 
