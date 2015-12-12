@@ -1,4 +1,4 @@
-Airware Makers Blog
+Airware Makers Blog [![Build Status](https://travis-ci.org/edj-boston/makers-airware-com.svg?branch=master)](https://travis-ci.org/edj-boston/makers-airware-com) [![Dependency Status](https://david-dm.org/edj-boston/makers-airware-com.svg)](https://david-dm.org/edj-boston/makers-airware-com) [![devDependency Status](https://david-dm.org/edj-boston/makers-airware-com/dev-status.svg)](https://david-dm.org/edj-boston/makers-airware-com#info=devDependencies)
 ===================
 
 The Airware Makers blog highlights the work of our engineering and design teams. It features content about software engineering, firmware, hardware, aerospace, 3D printing, visual design, user experience, and more. We also are proud to open source certain aspects of our code for use and improvement by the community.
