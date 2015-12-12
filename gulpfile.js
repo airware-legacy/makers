@@ -23,7 +23,6 @@ var Author = require('./lib/Author'),
     parsePath = require('parse-filepath'),
     Page = require('./lib/Page'),
     Post = require('./lib/Post'),
-    rename = require('gulp-rename'),
     tap = require('gulp-tap');
 
 
@@ -162,6 +161,7 @@ gulp.task('posts', ['static', 'styles', 'scripts', 'partials', 'authors'], funct
             // Change file and put back into stream
             file.path = post.makePath(file.path);
             file.contents = new Buffer(template(post));
+
         }))
         .pipe(minifyHTML())
         .pipe(gzip({ append: false }))
