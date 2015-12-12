@@ -18,6 +18,7 @@ var concat = require('gulp-concat'),
     minifyJS = require('gulp-uglify'),
     mocha = require('gulp-mocha'),
     moment = require('moment'),
+    parsePath = require('parse-filepath'),
     rename = require('gulp-rename'),
     tap = require('gulp-tap');
 
@@ -98,11 +99,10 @@ gulp.task('scripts', ['clean'], function() {
 // Register HB partials
 gulp.task('partials', ['clean'], function() {
     return gulp.src('src/partials/*.html')
-        .pipe(rename({ extname: '' }))
         .pipe(tap(function(file) {
-            var name = file.relative;
-            var str = file.contents.toString();
-            hb.registerPartial(name, str);
+            var name = parsePath(file.path).name;
+            var html = file.contents.toString();
+            hb.registerPartial(name, html);
         }));
 });
 
@@ -112,10 +112,9 @@ gulp.task('authors', ['clean'], function() {
     return gulp.src('src/authors/*.md')
         .pipe(frontMatter())
         .pipe(marked())
-        .pipe(rename({ extname : '' }))
         .pipe(tap(function(file) {
             var author = {
-                slug    : file.relative,
+                slug    : parsePath(file.path).name,
                 bio     : file.contents.toString(),
                 name    : file.frontMatter.name,
                 title   : file.frontMatter.title,
