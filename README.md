@@ -11,8 +11,9 @@ Follow these steps to develop locally or contribute to the blog:
 
 1. Install [Node and NPM](https://nodejs.org/en/)
 2. Clone [https://github.com/airware/makers-airware-com](https://github.com/airware/makers-airware-com)
-3. `cd` to your local copy and run `npm install` from your shell
-4. Run `gulp` from your shell
+3. `$ cd` to your local copy and run `npm install` from your shell
+4. Run `$ gulp` from your shell
+	* Optionally specify your own port `$ gulp -p 3333`
 5. Navigate to [http://localhost:3000](http://localhost:3000)
 
 

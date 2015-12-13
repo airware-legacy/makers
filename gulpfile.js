@@ -8,6 +8,7 @@ var Author = require('./lib/Author'),
     fs = require('fs'),
     gulp = require('gulp'),
     gulpif = require('gulp-if'),
+    gutil = require('gulp-util'),
     gzip = require('gulp-gzip'),
     hb = require('handlebars'),
     highlight = require('highlight.js'),
@@ -23,7 +24,8 @@ var Author = require('./lib/Author'),
     parsePath = require('parse-filepath'),
     Page = require('./lib/Page'),
     Post = require('./lib/Post'),
-    tap = require('gulp-tap');
+    tap = require('gulp-tap'),
+    argv = require('yargs').argv;
 
 
 // Config HB
@@ -239,6 +241,8 @@ gulp.task('lint', ['pages'], function () {
 
 // Serve files for local development
 gulp.task('serve', function(done) {
+    var port = argv.p || 3000;
+
     express()
         // Set compression header for all requests
         .use(function(req, res, next) {
@@ -252,7 +256,10 @@ gulp.task('serve', function(done) {
             res.status(404)
                 .sendFile(__dirname + '/build/error.html');
         })
-        .listen(3000, done);
+        .listen(port, function() {
+            gutil.log('Server listening on port', port);
+            done();
+        });
 });
 
 

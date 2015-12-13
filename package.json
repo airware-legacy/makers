@@ -42,6 +42,7 @@
     "gulp-mocha": "^2.2.0",
     "gulp-tap": "^0.1.3",
     "gulp-uglify": "^1.5.1",
+    "gulp-util": "^3.0.7",
     "handlebars": "^4.0.5",
     "handlebars-layouts": "^3.1.3",
     "highlight.js": "^9.0.0",
@@ -50,7 +51,8 @@
     "moment": "^2.10.6",
     "parse-filepath": "^0.6.3",
     "should": "^8.0.0",
-    "through2": "^2.0.0"
+    "through2": "^2.0.0",
+    "yargs": "^3.31.0"
   },
   "eslintConfig": {
     "extends": "eslint:recommended",
