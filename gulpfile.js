@@ -22,8 +22,8 @@ var Author = require('./lib/Author'),
     mocha = require('gulp-mocha'),
     moment = require('moment'),
     parsePath = require('parse-filepath'),
-    Page = require('./lib/Page'),
-    Post = require('./lib/Post'),
+    processPages = require('./lib/gulp-process-pages'),
+    processPosts = require('./lib/gulp-process-posts'),
     tap = require('gulp-tap'),
     argv = require('yargs').argv;
 
@@ -132,50 +132,31 @@ gulp.task('authors', ['clean'], function() {
  */
 
 // Generate posts
-gulp.task('posts', ['static', 'styles', 'scripts', 'partials', 'authors'], function() {
-    var template = hb.compile(fs.readFileSync('src/partials/post.html', 'utf-8'));
+gulp.task('posts', ['static', 'styles', 'scripts', 'partials', 'authors'], function(done) {
+    fs.readFile('src/partials/post.html', 'utf-8', function(err, str) {
+        if (err) throw err;
+        var template = hb.compile(str);
 
-    return gulp.src('src/posts/*.md')
-        .pipe(frontMatter())
-        .pipe(marked({
-            highlight: function(code) {
-                return highlight.highlightAuto(code).value;
-            }
-        }))
-        .pipe(tap(function(file) {
-
-            var author = data.authors.find(function(author) {
-                return author.slug == file.frontMatter.author;
+        gulp.src('src/posts/*.md')
+            .pipe(frontMatter())
+            .pipe(marked({
+                highlight: function(code) {
+                    return highlight.highlightAuto(code).value;
+                }
+            }))
+            .pipe(processPosts(data, template))
+            .pipe(minifyHTML())
+            .pipe(gzip({ append: false }))
+            .pipe(gulp.dest('build'))
+            .on('end', function() {
+                // Sort posts by date descending
+                data.posts.sort(function(a, b) {
+                    return moment(a.date).format('X') < moment(b.date).format('X'); // DESC
+                });
+                done();
             });
+    });
 
-            var post = new Post(extend(true, {}, file.frontMatter, {
-                slug      : parsePath(file.path).name,
-                content   : file.contents.toString(),
-                author    : author,
-                pageTitle : data.pageTitle,
-                year      : data.year,
-                timestamp : data.timestamp
-            }));
-
-            // Populate the posts object
-            data.posts.push(post);
-
-            // Change file and put back into stream
-            file.path = post.makePath(file.path);
-            file.contents = new Buffer(template(post));
-
-        }))
-        .pipe(minifyHTML())
-        .pipe(gzip({ append: false }))
-        .pipe(gulp.dest('build'))
-        .on('end', function() {
-            data.posts.sort(function(a, b) {
-                // Sort posts
-                var timestampA = moment(a.date).format('X');
-                var timestampB = moment(b.date).format('X');
-                return timestampA < timestampB; // DESC
-            });
-        });
 });
 
 /* *
@@ -186,21 +167,7 @@ gulp.task('posts', ['static', 'styles', 'scripts', 'partials', 'authors'], funct
 gulp.task('pages', ['posts'], function() {
     return gulp.src('src/pages/**/*.html')
         .pipe(frontMatter())
-        .pipe(tap(function(file) {
-            // Map data
-            var page = new Page(extend(true, {}, file.frontMatter, {
-                slug      : parsePath(file.path).name,
-                content   : file.contents.toString(),
-                posts     : data.posts,
-                year      : data.year,
-                timestamp : data.timestamp,
-                pageTitle : data.pageTitle
-            }));
-
-            // Rewrite file for stream
-            var template = hb.compile(page.content);
-            file.contents = new Buffer(template(page));
-        }))
+        .pipe(processPages(data, hb))
         .pipe(indexify({
             exempt : [ 'error' ]
         }))
