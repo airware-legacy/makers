@@ -168,9 +168,7 @@ gulp.task('pages', ['posts'], function() {
     return gulp.src('src/pages/**/*.html')
         .pipe(frontMatter())
         .pipe(processPages(data, hb))
-        .pipe(indexify({
-            exempt : [ 'error' ]
-        }))
+        .pipe(indexify('error'))
         .pipe(minifyHTML())
         .pipe(gzip({ append: false }))
         .pipe(gulp.dest('build'));
