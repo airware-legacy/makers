@@ -1,0 +1,27 @@
+@import '../variables.less';
+
+.make-headline(@font-color) {
+  color: @font-color;
+  padding-bottom: @headline-bottom-padding;
+
+  > a {
+    color: @font-color;
+  }
+}
+
+.make-headline-metadata(@font-color) {
+  font-family: @italic-font-family;
+  font-size: @font-size-base;
+  padding-bottom: @headline-metadata-bottom-padding;
+  color: @font-color;
+
+  &.headline-metadata-light {
+    color: @font-color;
+  }
+
+  .headline-category {
+    font-family: @italic-font-family;
+    text-transform: capitalize;
+    color: @headline-cat-color;
+  }
+}

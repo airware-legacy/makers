@@ -7,12 +7,15 @@
         <title>{{title}} | {{pageTitle}}</title>
         <link type="text/css" rel="stylesheet" href="/all.min.css?{{timestamp}}"/>
         <link type="image/x-icon" rel="shortcut icon" href="/favicon.ico"/>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
     </head>
     <body class="{{class}}">
             {{#block "header"}}{{/block}}
 
-            <main class="airware-content">
-                {{#block "body"}}{{/block}}
+            <main class="container-fluid airware-main">
+                <div class="airware-content">
+                    {{#block "body"}}{{/block}}
+                </div>
             </main>
 
             {{> footer}}

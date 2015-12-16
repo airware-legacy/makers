@@ -1,0 +1,64 @@
+@import './variables.less';
+@import './mixins.less';
+
+.headline-cnt {
+  .headline {
+    .make-headline(@headline-font-color);
+  }
+
+  .headline-light {
+    .make-headline(@headline-light-font-color);
+  }
+
+  .headline-metadata {
+    .make-headline-metadata(@headline-font-color);
+  }
+
+  .headline-metadata-light {
+    .make-headline-metadata(@headline-light-font-color);
+  }
+
+  .headline, .headline-light, .headline-metadata, .headline-metadata-light, .snippet {
+    margin: 0;
+  }
+
+  .snippet {
+    height: unit(3 * @line-height-base, em);
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    &:after {
+      content: ' ';
+      text-align: right;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      height: @line-height-base;
+      background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%);
+    }
+  }
+}
+
+.home .airware-hero {
+  .headline, .headline-light {
+    color: #fff;
+  }
+}
+
+.eng .airware-hero {
+  .headline, .headline-light, .headline-category {
+    color: @eng-primary-color;
+  }
+}
+
+.design .airware-hero {
+  .headline, .headline-light, .headline-category {
+    color: @design-primary-color;
+  };
+}
+
+.open-source .airware-hero {
+  .headline, .headline-light, .headline-category {
+    color: @open-source-primary-color;
+  }
+}

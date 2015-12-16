@@ -1,5 +1,5 @@
 ---
-title: Second Blog Post
+title: A Simple(ish) Definition of Digital Product Design
 author: mark-bauer
 category: design
 thumbnail: low_poly_viking.png
@@ -9,109 +9,10 @@ tags:
 - Visual Design
 ---
 
-H2
---
+'Product Designer' is a job title that has been growing in popularity over the past few years, but there is a lot of ambiguity around what it actually means. It’s traditionally been used as a way to describe industrial designers, the people who design cars, appliances and other physical objects. However, it’s becoming an increasingly popular way to describe folks like myself who work for software companies and design digital products. We’ve called these people UI, UX or Interaction Designers for a long time now so why the name change? Is there a real reason behind it or is it just another Silicon Valley buzzword that will eventually fade into obscurity?
 
-This is a paragraph blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah.
+There is a real reason and it’s actually a reflection of a much larger trend in the industry. Technology companies are starting to embrace a more holistic approach to design. As technology becomes more advanced and accessible companies are shifting away from the model of endlessly adding features and starting to focus on delivering simple and pleasant experiences that solve real problems. Design thinking and the ability to connect with the end user of a product are becoming an increasingly significant competitive advantage for technology companies. That means that design is becoming more deeply integrated into the product development process and the role of a modern designer is starting to evolve. 
 
+While the evolution is exciting, as a designer it can be difficult to know exactly what your role is and even more difficult to describe that role to someone else. For a long time the latter was actually a point of insecurity for me. I felt like what I was doing was really important, but when it came time to articulate why I would struggle to come up with a simple description that would really resonate with people. 
 
-### Emphasis
-
-*single asterisks*
-
-_single underscores_
-
-**double asterisks**
-
-__double underscores__
-
-
-### Hyperlinks
-
-This is [an example](http://example.com/ "Title") inline link.
-
-[This link](http://example.net/) has no title attribute.
-
-
-### Reference-style links
-
-This is [an example][id] reference-style link.
-
-[id]: http://example.com/  "Optional Title Here"
-
-
-### URL Autolinking
-
-https://help.github.com/articles/github-flavored-markdown/
-
-### Strikethrough text
-
-Some of this text is ~~struck through~~
-
-
-### Blockquotes
-
-> This is the first level of quoting.
->
-> > This is nested blockquote.
->
-> Back to the first level.
-
-
-### Code blocks
-
-	function(arg) {
-		console.log(arg);
-	}
-
-
-### Fenced code blocks
-
-```
-function test() {
-	console.log("notice the blank line before this function?");
-}
-```
-
-### Syntax highlighting
-
-```js
-function test() {
-	console.log("notice the blank line before this function?");
-}
-```
-### Horizontal rules
-
-* * *
-
-### Tables
-
-You can create tables by assembling a list of words and dividing them with hyphens - (for the first row), and then separating each column with a pipe |:
-
-First Header  | Second Header
-------------- | -------------
-Content Cell  | Content Cell
-Content Cell  | Content Cell
-
-For aesthetic purposes, you can also add extra pipes on the ends:
-
-| First Header  | Second Header |
-| ------------- | ------------- |
-| Content Cell  | Content Cell  |
-| Content Cell  | Content Cell  |
-
-
-### Unordered list
-
-* Item #1
-* Item #2
-* Item #3
-* Item #4
-
-
-### Ordered list
-
-1. Item #1
-2. Item #2
-3. Item #3
-4. Item #4
+That changed when I started at Airware. I came on board as the first Product Designer and I was asked to give a “What is Product Design?” presentation for some of the managers and engineers. It’s pretty much the most fundamental question you can be asked as an employee, “what do you do here?” and I was worried that I wouldn’t be able to give a compelling answer. So fueled by some healthy panic I came up with a way of describing things that really clicked with people, and actually helped influence the way I think about my own job. 

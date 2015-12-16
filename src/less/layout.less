@@ -1,40 +1,112 @@
 @import "./variables.less";
 @import './mixins.less';
 
+* {
+  font-family: @normal-font-family;
+}
+
+body {
+  background-color: @body-bg;
+  font-size: @font-size-base;
+}
+
+h1, h2, h2, h3, h4, h5, h6,
+h1 > a, h2 > a, h3 > a, h4 >a, h5 > a, h6 > a {
+  font-family: @bold-font-family;
+  font-weight: normal;
+}
+
+h1 {
+  font-size: @h1-font-size;
+}
+
+h2 {
+  font-size: @h2-font-size;
+}
+
+h3 {
+  font-size: @h3-font-size;
+}
+
+h4 {
+  font-size: @h4-font-size;
+}
+
+a, a:hover {
+  text-decoration: none;
+}
+
+.airware-header-cnt {
+  max-width: @container-width;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.airware-main {
+  width: 100%;
+  z-index: 2;
+  background-color: @body-bg;
+  position: relative;
+  padding: 0;
+  .translate3d(0, 0, 1px);
+
+  .airware-content {
+    padding: @padding-xs 0;
+  }
+}
+
 .home, .design, .eng, .open-source {
   .airware-content {
-    padding: 30px;
+    margin: 0 auto;
+    max-width: @container-width;
+    padding: @padding-xs;
   }
 }
 
 .airware-footer {
-  padding-top: 0;
+  hr {
+    padding-bottom: @padding-xs;
+  }
 
   .external-links, .copyright {
     text-align: center;
   }
 
+  .external-links{
+    li {
+      margin-left: @padding-xs;
+
+      &:first-child {
+        margin-left: 0;
+      }
+
+      a {
+        color: @gray;
+      }
+    }
+  }
+
+  .copyright {
+    color: @dark-font-color;
+    padding-bottom: @padding-xs;
+  }
+
   @media (min-width: @screen-md) {
     .external-links, .copyright {
       .make-md-column(6);
+      padding-bottom: @padding-xs;
     }
 
     .external-links {
       float: left;
       text-align: left;
-
-      .external {
-        text-decoration: none;
-
-        &:hover {
-          text-decoration: none;
-        }
-      }
+      padding-left: @padding-normal;
     }
 
     .copyright {
       float: right;
       text-align: right;
+      padding-right: @padding-normal;
     }
   }
 }

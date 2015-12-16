@@ -2,37 +2,37 @@
 @import './variables.less';
 
 .airware-header {
-  height: 500px;
-  .header-eng-bg();
-  padding: 30px 15px;
+  height: @header-height;
+  .header-default-bg();
 
-  .headline-cnt {
+  .airware-header-cnt {
+    position: relative;
+    padding: @padding-normal @padding-xs;
+    z-index: 2;
+  }
+
+  .airware-header-bg-overlay {
+    width: 100%;
+    height: @header-height;
+    position: absolute;
+    top: 0;
+    background-color: @header-overlay-bg-color;
+    opacity: @header-overlay-opacity;
+  }
+
+  .airware-hero {
     &:extend(.jumbotron);
     .make-sm-column(6);
     .make-sm-column-offset(3);
     .make-xs-column(12);
     text-align: center;
-    padding-top: 90px;
+    padding-top: 4 * @padding-normal;
     background: transparent;
-
-    .headline {
-      margin-bottom: 15px;
-    }
-
-    .headline-deck {
-      color: #fff;
-      margin: 0;
-      font-size: 15px;
-    }
-
-    .headline-category {
-      color: @eng-primary-color;
-    }
   }
 
   .airware-nav {
     .make-xs-column(12);
-    padding-bottom: 15px;
+    padding-bottom: @padding-xs;
 
     &-logo-cnt, &-items {
       .make-sm-column(6);
@@ -45,16 +45,16 @@
         display: inline-block;
 
         .airware-logo {
-          width: 247px;
+          width: @logo-width;
           .img-responsive();
         }
       }
     }
 
     &-item {
-      padding: 5px 0;
-      font-size: 15px;
-      margin-left: 15px;
+      padding: @padding-base 0;
+      font-size: @font-size-base;
+      margin-left: @padding-normal;
       color: #fff;
       text-decoration: none;
 
@@ -76,9 +76,6 @@
 }
 
 .home {
-  .headline {
-    color: #fff;
-  }
   .nav-item-hover-color(@eng-primary-color);
 }
 
@@ -88,11 +85,7 @@
   }
 
   .engineering-nav-item {
-    border-bottom: 2px solid @eng-primary-color;
-  }
-
-  .headline, .headline-category {
-    color: @eng-primary-color;
+    border-bottom: @header-active-border-width solid @eng-primary-color;
   }
 
   .nav-item-hover-color(@eng-primary-color);
@@ -104,11 +97,7 @@
   }
 
   .design-nav-item {
-    border-bottom: 2px solid @design-primary-color;
-  }
-
-  .headline, .headline-category {
-    color: @design-primary-color;
+    border-bottom: @header-active-border-width solid @design-primary-color;
   }
 
   .nav-item-hover-color(@design-primary-color);
@@ -116,15 +105,11 @@
 
 .open-source {
   .airware-header {
-    .header-open-source-bg();
+    .header-design-bg();
   }
 
   .open-source-nav-item {
-    border-bottom: 2px solid @open-source-primary-color;
-  }
-
-  .headline, .headline-category {
-    color: @open-source-primary-color;
+    border-bottom: @header-active-border-width solid @open-source-primary-color;
   }
 
   .nav-item-hover-color(@open-source-primary-color);
