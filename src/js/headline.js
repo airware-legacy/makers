@@ -1,4 +1,4 @@
-;(function () {
+;(function () { //eslint-disable-line no-extra-semi
     $(document).ready(function () {
         $(document).on('click', '.card', onHeadlineClick);
     });

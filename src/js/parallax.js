@@ -1,4 +1,4 @@
-;(function () {
+;(function () { //eslint-disable-line no-extra-semi
     var isIE = !_.isUndefined(window.ActiveXObject);
     var vendors = ['moz', 'webkit', 'o'];
 
