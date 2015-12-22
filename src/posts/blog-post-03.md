@@ -2,7 +2,7 @@
 title: Third Blog Post
 author: luke-doyle
 category: engineering
-thumbnail: low_poly_viking.png
+thumbnail: test.png
 date: 2015-12-10
 tags:
 - Kubernetes

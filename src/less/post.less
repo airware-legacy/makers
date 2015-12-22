@@ -19,6 +19,12 @@
       .make-sm-column(6);
       .make-sm-column-offset(3);
     }
+
+    @media (min-width: @screen-sm) and (max-width: @screen-md) {
+      padding: 0;
+      .make-sm-column(8);
+      .make-sm-column-offset(2);
+    }
   }
 
   > h1, > h2, > h3, > h4, > h5, > h6, > p, > pre, > hr, > table, > ul, > ol, > blockquote {
@@ -31,10 +37,23 @@
   }
 
   ul, ol {
-    padding-left: @padding-normal;
+    padding: @padding-xs @padding-normal;
+    font-size: 12px;
+    list-style-position: inside;
+  }
 
-    @media (max-width: @screen-sm) {
-      margin-left: @padding-normal;
+  img {
+    .img-responsive();
+    width: 100%;
+    cursor: pointer;
+  }
+
+  a {
+    color: @gray;
+
+    &:hover {
+      color: @gray;
+      text-decoration: underline;
     }
   }
 

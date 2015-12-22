@@ -1,12 +1,12 @@
-<section id="posts">
+<section class="posts">
     {{#each posts}}
         <div class="card card-vertical">
-            <div class="card-thumbnail" style="background-image:url('/img/{{this.thumbnail}}');"></div>
+            <div class="card-thumbnail" style="background-image:url('/img/{{thumbnail}}');"></div>
 
             <div class="card-content">
-                <div class="headline-cnt" data-href="{{link}}">
+                <div class="headline-cnt {{#isExternal}}external{{/isExternal}}" data-external="{{external}}" data-href="{{link}}">
                     <h2 class="headline">
-                        <a href="{{this.link}}">{{{this.title}}}</a>
+                        <a href="{{this.link}}">{{{title}}}</a>
                     </h2>
 
                     <p class="headline-metadata">

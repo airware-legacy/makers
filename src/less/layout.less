@@ -8,6 +8,10 @@
 body {
   background-color: @body-bg;
   font-size: @font-size-base;
+
+  &.scroll-lock {
+    overflow: hidden;
+  }
 }
 
 h1, h2, h2, h3, h4, h5, h6,
@@ -46,25 +50,39 @@ a, a:hover {
   width: 100%;
   z-index: 2;
   background-color: @body-bg;
+  margin-top: @header-height;
   position: relative;
   padding: 0;
-  .translate3d(0, 0, 1px);
 
   .airware-content {
-    padding: @padding-xs 0;
+    padding: @padding-normal 0;
+    overflow-x: hidden;
   }
 }
 
-.home, .design, .eng, .open-source {
+.home, .design, .eng {
   .airware-content {
     margin: 0 auto;
     max-width: @container-width;
-    padding: @padding-xs;
+    padding: @padding-normal @padding-xs;
+  }
+}
+
+.open-source {
+  .airware-content {
+    margin: 0 auto;
+    max-width: @container-width;
+    padding: @padding-normal 0;
   }
 }
 
 .airware-footer {
+  position: relative;
+  width: 100%;
+  background: @body-bg;
+
   hr {
+    margin-top: 0;
     padding-bottom: @padding-xs;
   }
 
@@ -91,9 +109,9 @@ a, a:hover {
     padding-bottom: @padding-xs;
   }
 
-  @media (min-width: @screen-md) {
+  @media (min-width: @screen-sm) {
     .external-links, .copyright {
-      .make-md-column(6);
+      .make-sm-column(6);
       padding-bottom: @padding-xs;
     }
 

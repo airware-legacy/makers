@@ -2,7 +2,7 @@
 title: Fourth Blog Post
 author: mark-bauer
 category: design
-thumbnail: low_poly_viking.png
+thumbnail: test.png
 date: 2015-12-11
 tags:
 - Sketch

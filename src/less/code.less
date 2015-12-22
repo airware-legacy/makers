@@ -1,6 +1,8 @@
 @import './variables.less';
 
 code {
+  font-family: @normal-font-family;
+
   .hljs-keyword {
     color: @design-primary-color;
   }
@@ -11,5 +13,15 @@ code {
 
   .hljs-built_in {
     color: @dark-font-color;
+  }
+
+  .hljs-string {
+    color: @purple;
+  }
+
+  .hljs-function {
+    .hljs-title {
+      color: @brown;
+    }
   }
 }

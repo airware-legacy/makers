@@ -1,0 +1,66 @@
+@import './variables.less';
+@import './mixins.less';
+
+.airware-nav-hamburger {
+  position: fixed;
+  cursor: pointer;
+  top: @hamburger-top-padding;
+  right: @hamburger-right-padding;
+  .square(@hamburger-size);
+
+  &[data-modal="close"] {
+    .airware-nav-hamburger-icon {
+      background-color: transparent;
+
+      &:before, &:after {
+        background-color: @dark-bg-color;
+        .transition-delay(~'0s, 0.2s');
+      }
+
+      &:before {
+        top: 0;
+        .rotate(45deg);
+      }
+
+      &:after {
+        bottom: 0;
+        .rotate(-45deg);
+      }
+    }
+  }
+
+  .airware-nav-hamburger-icon {
+    position: absolute;
+    width: @hamburger-size;
+    height: @hamburger-icon-height;
+    margin-top: 4 * @hamburger-icon-height;
+    background-color: @light-bg-color;
+
+    &:before, &:after {
+      content: ' ';
+      position: absolute;
+      width: 100%;
+      left: 0;
+      height: @hamburger-icon-height;
+      background-color: @light-bg-color;
+      .transition-duration(~'0.2s, 0.2s');
+      .transition-delay(~'0.2s, 0s');
+    }
+
+    &:before {
+      transition-property: top, transform;
+      -webkit-transition-property: top, -webkit-transform;
+      top: -4 * @hamburger-icon-height;
+    }
+
+    &:after {
+      transition-property: bottom, transform;
+      -webkit-transition-property: bottom, -webkit-transform;
+      bottom: -4 * @hamburger-icon-height;
+    }
+  }
+
+  @media (min-width: @screen-md) {
+    display: none;
+  }
+}

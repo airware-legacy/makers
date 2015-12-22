@@ -89,8 +89,9 @@ gulp.task('styles', ['clean'], function() {
 // Minify and combine all JavaScript
 gulp.task('scripts', ['clean'], function() {
     return gulp.src([
-        'node_modules/lodash/index.js',
         'node_modules/jquery/dist/jquery.js',
+        'node_modules/velocity-animate/velocity.js',
+        'node_modules/velocity-animate/velocity.ui.js',
         'node_modules/bootstrap/dist/js/bootstrap.js',
         'src/js/*.js'
     ])

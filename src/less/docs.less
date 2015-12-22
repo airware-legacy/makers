@@ -1,0 +1,33 @@
+@import './variables.less';
+
+.docs {
+  .docs-sections-list {
+    margin: 0 0 @padding-xs 0;
+    padding: 0;
+    list-style: none;
+
+    @media (min-width: @screen-md) {
+      margin: 0;
+    }
+  }
+
+  .docs-sections-list-item {
+    height: @padding-normal;
+
+    a, a:hover {
+      color: @open-source-primary-color;
+    }
+  }
+
+  .docs-content {
+    .docs-title {
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+  }
+
+  .docs-links {
+    text-align: right;
+  }
+}

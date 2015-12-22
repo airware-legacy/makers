@@ -2,14 +2,13 @@
 @import './variables.less';
 
 .card {
-  .make-row();
+  .make-xs-column(12);
   .box-shadow(@card-shadow);
-  margin-left: 0;
-  margin-right: 0;
   margin-top: @padding-normal;
   background-color: @card-bg;
   cursor: pointer;
   position: relative;
+  padding: 0;
   .transition(@card-transition);
 
   &:after {
@@ -53,6 +52,7 @@
 
   &-thumbnail {
     background-size: cover;
+    background-position: center center;
     height: @thumbnail-size;
   }
 

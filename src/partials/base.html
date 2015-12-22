@@ -7,7 +7,6 @@
         <title>{{title}} | {{pageTitle}}</title>
         <link type="text/css" rel="stylesheet" href="/all.min.css?{{timestamp}}"/>
         <link type="image/x-icon" rel="shortcut icon" href="/favicon.ico"/>
-        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
     </head>
     <body class="{{class}}">
             {{#block "header"}}{{/block}}
@@ -19,6 +18,20 @@
             </main>
 
             {{> footer}}
+
+            <div class="airware-modal hidden">
+                <div class="airware-modal-content"></div>
+                <div class="airware-modal-overlay"></div>
+            </div>
+
+            <div class="airware-nav-hamburger" data-modal="open" data-modal-breakpoint="992" data-modal-template="#modal-nav">
+                <span class="airware-nav-hamburger-icon"></span>
+            </div>
     </body>
+
+    <script type="text/html" id="modal-nav">
+        {{> mobilemenu}}
+    </script>
+
     <script type="text/javascript" src="/all.min.js?{{timestamp}}"></script>
 </html>

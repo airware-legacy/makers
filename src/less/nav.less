@@ -3,6 +3,11 @@
 
 .airware-header {
   height: @header-height;
+  .backface-visibility(hidden);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  overflow: hidden;
   .header-default-bg();
 
   .airware-header-cnt {
@@ -22,6 +27,8 @@
 
   .airware-hero {
     &:extend(.jumbotron);
+    .make-md-column(8);
+    .make-md-column-offset(2);
     .make-sm-column(6);
     .make-sm-column-offset(3);
     .make-xs-column(12);
@@ -32,21 +39,34 @@
 
   .airware-nav {
     .make-xs-column(12);
-    padding-bottom: @padding-xs;
+    padding: 0;
+    margin: 0;
 
     &-logo-cnt, &-items {
       .make-sm-column(6);
-      .make-xs-column(12);
+      .make-xs-column(6);
+      padding: 0;
       text-align: center;
     }
 
     &-logo-cnt {
+      text-align: left;
+
       .airware-nav-logo {
         display: inline-block;
 
         .airware-logo {
-          width: @logo-width;
-          .img-responsive();
+          width: 150px;
+          height: 50px;
+          background-repeat: no-repeat;
+          background-size: contain;
+          background-image: url('/img/short_logo.png');
+
+          @media (min-width: @screen-md) {
+            width: @logo-width;
+            margin-left: 0;
+            background-image: url('/img/logo.png');
+          }
         }
       }
     }
@@ -57,6 +77,11 @@
       margin-left: @padding-normal;
       color: #fff;
       text-decoration: none;
+      display: none;
+
+      @media (min-width: @screen-md) {
+        display: inline-block;
+      }
 
       &:first-child {
         margin-left: 0;
@@ -64,10 +89,6 @@
     }
 
     @media (min-width: @screen-sm) {
-      &-logo-cnt {
-        text-align: left;
-      }
-
       &-items {
         text-align: right;
       }

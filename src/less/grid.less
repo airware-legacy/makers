@@ -1,0 +1,20 @@
+@import './mixins.less';
+@import './variables.less';
+
+.grid {
+  .grid-cell {
+    .make-xs-column(12);
+    .make-md-column(6);
+    margin-top: @padding-xs;
+
+    &:first-child {
+      margin-top: 0;
+    }
+
+    @media (min-width: @screen-md) {
+      &, &:first-child {
+        margin-top: 0;
+      }
+    }
+  }
+}
