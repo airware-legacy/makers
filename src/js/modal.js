@@ -67,20 +67,17 @@
         }
 
         this.$el.velocity('stop').velocity('transition.expandIn', {
-           duration: 200,
+            duration: 200,
 
-           begin: function () {
-               self._previousScroll = $(window).scrollTop();
+            begin: function () {
+                if (self._onShowBegin) {
+                    self._onShowBegin();
+                }
 
-               if (self._onShowBegin) {
-                   self._onShowBegin();
-               }
-
-               self._updateContent(html);
-               self.$el.removeClass('hidden');
-               self._scrollLock(true);
-               $(window).scrollTop(self._previousScroll);
-           }
+                self._updateContent(html);
+                self.$el.removeClass('hidden');
+                self._scrollLock(true);
+            }
         });
     };
 
@@ -96,20 +93,20 @@
         }
 
         this.$el.velocity('stop').velocity('transition.expandOut', {
-           duration: 100,
+            duration: 100,
 
-           begin: function () {
-               if (self._onHideBegin) {
-                   self._onHideBegin();
-               }
-           },
+            begin: function () {
+                if (self._onHideBegin) {
+                    self._onHideBegin();
+                }
+            },
 
-           complete: function () {
-               self.$el.addClass('hidden');
-               self._updateContent();
-               self._scrollLock(false);
-               self.destroy();
-           }
+            complete: function () {
+                self.$el.addClass('hidden');
+                self._updateContent();
+                self._scrollLock(false);
+                self.destroy();
+            }
         });
     };
 
@@ -134,9 +131,9 @@
 
     var $document = $(document);
     $document.ready(function () {
-       var modal = new Modal();
+        var modal = new Modal();
 
-       $document.on('click', '[data-modal="open"]', function (e) {
+        $document.on('click', '[data-modal="open"]', function (e) {
             var $el = $(e.currentTarget);
 
             modal.setOptions({
@@ -145,21 +142,21 @@
                 lightbox: $el.data('modal-lightbox'),
 
                 onShowBegin: function () {
-                   $el.attr('data-modal', 'close');
-                   $el.css({ zIndex: modal.getZIndex() + 1 });
+                    $el.attr('data-modal', 'close');
+                    $el.css({ zIndex: modal.getZIndex() + 1 });
                 },
 
                 onHideBegin: function () {
-                   $el.attr('data-modal', 'open');
-                   $el.css({ zIndex: 0 });
+                    $el.attr('data-modal', 'open');
+                    $el.css({ zIndex: 0 });
                 }
             });
 
             modal.show($($el.data('modal-template')));
-       });
+        });
 
-       $document.on('click', '[data-modal="close"]', function (e) {
-           modal.hide();
-       });
+        $document.on('click', '[data-modal="close"]', function (e) {
+            modal.hide();
+        });
     });
 })();

@@ -17,7 +17,7 @@
         if (this.isExternal()) {
             window.open(this.$el.data('href'), '_blank');
         } else {
-            window.location.href = this.$el.data('href')
+            window.location.href = this.$el.data('href');
         }
     };
 
