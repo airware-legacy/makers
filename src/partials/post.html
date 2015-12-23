@@ -1,11 +1,15 @@
 {{#extend "base"}}
-
-	{{#content "body"}}
-
-		<h1>{{title}}</h1>
-
-		{{{post}}}
-
+	{{#content "header"}}
+		{{#extend "header"}}
+			{{#content "hero"}}
+				{{> hero_headline_post}}
+			{{/content}}
+		{{/extend}}
 	{{/content}}
 
+	{{#content "body"}}
+		<div class="row post" data-post-category="{{category}}">
+			{{{this.content}}}
+		</div>
+	{{/content}}
 {{/extend}}

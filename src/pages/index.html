@@ -8,13 +8,16 @@ categories:
 ---
 
 {{#extend "base"}}
+	{{#content "header"}}
+		{{#extend "header"}}
+			{{#content "hero"}}
+				{{> hero_headline_feature}}
+			{{/content}}
+		{{/extend}}
+	{{/content}}
 
 	{{#content "body"}}
-
-		{{> jumbotron_home}}
-
 		{{> posts}}
-
 	{{/content}}
 
 {{/extend}}

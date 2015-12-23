@@ -7,13 +7,16 @@ categories:
 ---
 
 {{#extend "base"}}
+	{{#content "header"}}
+		{{#extend "header"}}
+			{{#content "hero"}}
+				{{> hero_headline_category}}
+			{{/content}}
+		{{/extend}}
+	{{/content}}
 
 	{{#content "body"}}
-
-		{{> jumbotron_category}}
-
 		{{> posts}}
-
 	{{/content}}
 
 {{/extend}}

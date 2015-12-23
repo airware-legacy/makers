@@ -2,19 +2,59 @@
 title: Open Source
 tagline: Giving Back
 class: open-source
+categories:
+- open-source
 ---
 
 {{#extend "base"}}
-
-	{{#content "body"}}
-
-		{{> jumbotron_category}}
-
-		<ul>
-			<li>Hardcoded card for <a href="/open-source/vili/">Vili</a></li>
-			<li>Hardcoded card for <a class="external" href="https://github.com/edj-boston/makers-airware-com">this blog</a> (linking externally)</li>
-		</ul>
-
+	{{#content "header"}}
+		{{#extend "header"}}
+			{{#content "hero"}}
+				{{> hero_headline_category}}
+			{{/content}}
+		{{/extend}}
 	{{/content}}
 
+	{{#content "body"}}
+		<section class="grid open-source-projects">
+
+			<div class="grid-cell open-source-project vili">
+				<div class="card">
+					<div class="card-thumbnail" style="background-image:url('https://placehold.it/250');"></div>
+
+					<div class="card-content">
+						<div class="headline-cnt" data-href="/open-source/vili/">
+							<h2 class="headline">
+								<a href="{{this.link}}">Vili</a>
+							</h2>
+
+							<p class="snippet">
+								blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
+							</p>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+			<div class="grid-cell open-source-project makers">
+				<div class="card">
+					<div class="card-thumbnail" style="background-image:url('https://placehold.it/250');"></div>
+
+					<div class="card-content">
+						<div class="headline-cnt external" data-href="https://github.com/edj-boston/makers-airware-com">
+							<h2 class="headline">
+								<a href="{{this.link}}">Makers Blog</a>
+							</h2>
+
+							<p class="snippet">
+								blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
+							</p>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</section>
+	{{/content}}
 {{/extend}}

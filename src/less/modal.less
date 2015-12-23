@@ -1,0 +1,72 @@
+@import './mixins.less';
+@import './variables.less';
+
+.airware-modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: @light-bg-color;
+  z-index: 10;
+
+  &.lightbox {
+    background-color: rgba(0, 0, 0, 0.8);
+
+    .airware-modal-content {
+      .square(100%);
+      padding: 10% 20%;
+    }
+    
+    img {
+      .img-responsive();
+      height: 100%;
+      margin: auto;
+    }
+  }
+
+  .mobile-menu {
+    color: @light-gray;
+    padding: 3 * @padding-normal 0;
+
+    .mobile-menu-title {
+      border-bottom: 1px solid @light-gray;
+      margin-left: @padding-normal;
+      margin-right: @padding-normal;
+      margin-bottom: 0;
+    }
+
+    .airware-nav-item {
+      height: 75px;
+      display: block;
+      font-size: 2 * @font-size-base;
+      padding: @padding-xs @padding-normal;
+      color: @dark-font-color;
+
+      &, &:hover {
+        border-bottom: none;
+      }
+    }
+  }
+}
+
+.eng {
+  .airware-modal .engineering-nav-item {
+    border-left: 2px solid @eng-primary-color;
+    color: @eng-primary-color;
+  }
+}
+
+.design {
+  .airware-modal .design-nav-item {
+    border-left: 2px solid @design-primary-color;
+    color: @design-primary-color;
+  }
+}
+
+.open-source {
+  .airware-modal .open-source-nav-item {
+    border-left: 2px solid @open-source-primary-color;
+    color: @open-source-primary-color;
+  }
+}

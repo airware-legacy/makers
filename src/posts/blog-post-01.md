@@ -2,6 +2,7 @@
 title: First Blog Post
 author: eric-johnson
 category: engineering
+thumbnail: test.png
 date: 2015-12-07
 tags:
 - JavaScript
@@ -11,18 +12,7 @@ tags:
 H2
 --
 
-This is a paragraph blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah.
-
-
-### Emphasis
-
-*single asterisks*
-
-_single underscores_
-
-**double asterisks**
-
-__double underscores__
+This is a __double underscores__ paragraph **double asterisks** blah blah blah _single underscores_ blah blah blah blah blah blah *single asterisks* blah blah blah blah blah blah blah blah blah blah blah.
 
 
 ### Hyperlinks
@@ -50,12 +40,8 @@ Some of this text is ~~struck through~~
 
 ### Blockquotes
 
-> This is the first level of quoting.
+> This is the first level of quoting. This is the first level of quoting. This is the first level of quoting. This is the first level of quoting.
 >
-> > This is nested blockquote.
->
-> Back to the first level.
-
 
 ### Code blocks
 
@@ -75,8 +61,12 @@ function test() {
 ### Syntax highlighting
 
 ```js
-function test() {
-	console.log("notice the blank line before this function?");
+var map;
+function initMap() {
+	map = new google.maps.Map(document.getElementById('map'), {
+		center: { lat: -34.397, lng: 150.644 },
+		zoom: 8
+	});
 }
 ```
 ### Horizontal rules

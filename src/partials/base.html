@@ -9,15 +9,29 @@
         <link type="image/x-icon" rel="shortcut icon" href="/favicon.ico"/>
     </head>
     <body class="{{class}}">
-            {{> header}}
+            {{#block "header"}}{{/block}}
 
-            <main>
-                <div class="container">
+            <main class="container-fluid airware-main">
+                <div class="airware-content">
                     {{#block "body"}}{{/block}}
                 </div>
             </main>
 
             {{> footer}}
+
+            <div class="airware-modal hidden">
+                <div class="airware-modal-content"></div>
+                <div class="airware-modal-overlay"></div>
+            </div>
+
+            <div class="airware-nav-hamburger" data-modal="open" data-modal-breakpoint="992" data-modal-template="#modal-nav">
+                <span class="airware-nav-hamburger-icon"></span>
+            </div>
     </body>
+
+    <script type="text/html" id="modal-nav">
+        {{> mobilemenu}}
+    </script>
+
     <script type="text/javascript" src="/all.min.js?{{timestamp}}"></script>
 </html>

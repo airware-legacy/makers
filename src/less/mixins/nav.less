@@ -1,0 +1,10 @@
+@import '../variables.less';
+
+.nav-item-hover-color(@color) {
+  .airware-nav-item {
+    &:hover {
+      text-decoration: none;
+      border-bottom: @header-active-border-width solid @color;
+    }
+  }
+}

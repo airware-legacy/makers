@@ -1,0 +1,137 @@
+@import './mixins.less';
+@import './variables.less';
+
+.airware-header {
+  height: @header-height;
+  .backface-visibility(hidden);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  overflow: hidden;
+  .header-default-bg();
+
+  .airware-header-cnt {
+    position: relative;
+    padding: @padding-normal @padding-xs;
+    z-index: 2;
+  }
+
+  .airware-header-bg-overlay {
+    width: 100%;
+    height: @header-height;
+    position: absolute;
+    top: 0;
+    background-color: @header-overlay-bg-color;
+    opacity: @header-overlay-opacity;
+  }
+
+  .airware-hero {
+    &:extend(.jumbotron);
+    .make-md-column(8);
+    .make-md-column-offset(2);
+    .make-sm-column(6);
+    .make-sm-column-offset(3);
+    .make-xs-column(12);
+    text-align: center;
+    padding-top: 4 * @padding-normal;
+    background: transparent;
+  }
+
+  .airware-nav {
+    .make-xs-column(12);
+    padding: 0;
+    margin: 0;
+
+    &-logo-cnt, &-items {
+      .make-sm-column(6);
+      .make-xs-column(6);
+      padding: 0;
+      text-align: center;
+    }
+
+    &-logo-cnt {
+      text-align: left;
+
+      .airware-nav-logo {
+        display: inline-block;
+
+        .airware-logo {
+          width: 150px;
+          height: 50px;
+          background-repeat: no-repeat;
+          background-size: contain;
+          background-image: url('/img/short_logo.png');
+
+          @media (min-width: @screen-md) {
+            width: @logo-width;
+            margin-left: 0;
+            background-image: url('/img/logo.png');
+          }
+        }
+      }
+    }
+
+    &-item {
+      padding: @padding-base 0;
+      font-size: @font-size-base;
+      margin-left: @padding-normal;
+      color: #fff;
+      text-decoration: none;
+      display: none;
+
+      @media (min-width: @screen-md) {
+        display: inline-block;
+      }
+
+      &:first-child {
+        margin-left: 0;
+      }
+    }
+
+    @media (min-width: @screen-sm) {
+      &-items {
+        text-align: right;
+      }
+    }
+  }
+}
+
+.home {
+  .nav-item-hover-color(@eng-primary-color);
+}
+
+.eng {
+  .airware-header {
+    .header-eng-bg();
+  }
+
+  .engineering-nav-item {
+    border-bottom: @header-active-border-width solid @eng-primary-color;
+  }
+
+  .nav-item-hover-color(@eng-primary-color);
+}
+
+.design {
+  .airware-header {
+    .header-design-bg();
+  }
+
+  .design-nav-item {
+    border-bottom: @header-active-border-width solid @design-primary-color;
+  }
+
+  .nav-item-hover-color(@design-primary-color);
+}
+
+.open-source {
+  .airware-header {
+    .header-design-bg();
+  }
+
+  .open-source-nav-item {
+    border-bottom: @header-active-border-width solid @open-source-primary-color;
+  }
+
+  .nav-item-hover-color(@open-source-primary-color);
+}

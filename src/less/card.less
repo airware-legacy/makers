@@ -1,0 +1,62 @@
+@import './mixins.less';
+@import './variables.less';
+
+.card {
+  .make-xs-column(12);
+  .box-shadow(@card-shadow);
+  margin-top: @padding-normal;
+  background-color: @card-bg;
+  cursor: pointer;
+  position: relative;
+  padding: 0;
+  .transition(@card-transition);
+
+  &:after {
+    content: ' ';
+    z-index: -1;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    top: 0;
+    left: 0;
+    .box-shadow(@card-hover-shadow);
+    .transition(@card-hover-transition);
+  }
+
+  &:hover {
+    .translate3d(0, @card-hover-transform, 0);
+
+    &:after {
+      opacity: 1;
+    }
+  }
+
+  &.card-vertical {
+    @media (min-width: @screen-sm) {
+      .card-thumbnail {
+        float: left;
+        .square(@thumbnail-size);
+      }
+
+      .card-content {
+        height: @thumbnail-size;
+        margin-left: @thumbnail-size;
+      }
+    }
+  }
+
+  &:first-child {
+    margin-top: 0;
+  }
+
+  &-thumbnail {
+    background-size: cover;
+    background-position: center center;
+    height: @thumbnail-size;
+  }
+
+  &-content {
+    padding: @padding-normal;
+  }
+}

@@ -52,6 +52,7 @@
     "parse-filepath": "^0.6.3",
     "should": "^8.0.0",
     "through2": "^2.0.0",
+    "velocity-animate": "^1.2.3",
     "yargs": "^3.31.0"
   },
   "eslintConfig": {
@@ -63,6 +64,7 @@
     },
     "globals": {
       "$": true,
+      "_": true,
       "window": true,
       "document": true,
       "ga": true
@@ -72,10 +74,6 @@
       "space-after-keywords": 2,
       "semi": 2,
       "camelcase": 1,
-      "curly": [
-        2,
-        "multi"
-      ],
       "no-unused-vars": 0,
       "comma-dangle": 2,
       "quotes": 0,

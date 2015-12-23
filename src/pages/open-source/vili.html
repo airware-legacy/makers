@@ -1,18 +1,54 @@
 ---
 title: Vili
+tagline: Your future deployment system
 class: open-source
 ---
 
 {{#extend "base"}}
-
-	{{#content "body"}}
-
-		<h1>{{title}}</h1>
-
-		<p>Whatever we want to say about Vili can go here.</p>
-
-		<p>It's pretty much free-form HTML.</p>
-
+	{{#content "header"}}
+		{{#extend "header"}}
+			{{#content "hero"}}
+				{{> hero_headline_category}}
+			{{/content}}
+		{{/extend}}
 	{{/content}}
 
+	{{#content "body"}}
+		<section class="docs vili">
+			<div class="docs-sections col-xs-12 col-md-3">
+				<ul class="docs-sections-list">
+					<li class="docs-sections-list-item">
+						<a href="/open-source/vili#overview">Overview</a>
+					</li>
+					<li class="docs-sections-list-item">
+						<a href="/open-source/vili#install">Installation</a>
+					</li>
+					<li class="docs-sections-list-item">
+						<a href="/open-source/vili#examples">Examples</a>
+					</li>
+				</ul>
+			</div>
+
+			<div class="docs-content col-xs-12 col-md-6">
+				<h2 id="overview" class="docs-title">Overview</h2>
+				<p class="docs-desc">
+					This is the overview section
+				</p>
+
+				<h2 id="install" class="docs-title">Installation</h2>
+				<p class="docs-desc">
+					This is the install section
+				</p>
+
+				<h2 id="examples" class="docs-title">Examples</h2>
+				<p class="docs-desc">
+					This is the examples section
+				</p>
+			</div>
+
+			<div class="docs-links col-xs-12 col-md-3">
+				<a href="https://github.com/airware" target="_blank" class="github-btn">View on Github</a>
+			</div>
+		</section>
+	{{/content}}
 {{/extend}}

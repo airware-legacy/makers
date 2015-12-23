@@ -1,0 +1,125 @@
+@import './variables.less';
+@import './mixins.less';
+
+.posts {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.post {
+  margin-top: -@padding-xs;
+
+  h1, h2, h3, h4, h5, h6, p, hr, pre, table, ul, ol {
+    .make-xs-column(12);
+    margin: 0;
+    padding: 0 @padding-normal;
+
+    @media (min-width: @screen-sm) {
+      padding: 0;
+      .make-sm-column(6);
+      .make-sm-column-offset(3);
+    }
+
+    @media (min-width: @screen-sm) and (max-width: @screen-md) {
+      padding: 0;
+      .make-sm-column(8);
+      .make-sm-column-offset(2);
+    }
+  }
+
+  > h1, > h2, > h3, > h4, > h5, > h6, > p, > pre, > hr, > table, > ul, > ol, > blockquote {
+    margin-top: @padding-xs;
+  }
+
+  th, td {
+    padding: @padding-xs;
+    text-align: center;
+  }
+
+  ul, ol {
+    padding: @padding-xs @padding-normal;
+    font-size: 12px;
+    list-style-position: inside;
+  }
+
+  img {
+    .img-responsive();
+    width: 100%;
+    cursor: pointer;
+  }
+
+  a {
+    color: @gray;
+
+    &:hover {
+      color: @gray;
+      text-decoration: underline;
+    }
+  }
+
+  pre {
+    padding: @padding-normal;
+    background-color: @pre-bg;
+    border-radius: 0;
+    border: 1px solid @light-gray;
+    overflow-x: auto;
+
+    code {
+      white-space: pre;
+      word-wrap: normal;
+    }
+  }
+
+  blockquote {
+    .make-xs-column(12);
+    background: @gray;
+    padding: @padding-normal;
+    border: 0;
+    margin-bottom: 0;
+
+    p {
+      padding: @padding-normal;
+      position: relative;
+
+      &:before, &:after {
+        content: ' ';
+        position: absolute;
+        background-size: @padding-normal;
+        background-repeat: no-repeat;
+        .quote-bg();
+        .square(@padding-normal);
+      }
+
+      &:before {
+        top: -@padding-base;
+        left: 0;
+      }
+
+      &:after {
+        right: 0;
+        bottom: -@padding-xs;
+      }
+    }
+  }
+}
+
+.post[data-post-category="engineering"] {
+  blockquote {
+    background: @eng-primary-color;
+    color: @blockquote-dark-font-color;
+  }
+}
+
+.post[data-post-category="design"] {
+  blockquote {
+    background: @design-primary-color;
+    color: @blockquote-light-font-color;
+  }
+}
+
+.post[data-post-category="open-source"] {
+  blockquote {
+    background: @open-source-primary-color;
+    color: @blockquote-dark-font-color;
+  }
+}
