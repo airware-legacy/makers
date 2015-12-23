@@ -1,5 +1,6 @@
 var Author = require('./lib/Author'),
     concat = require('gulp-concat'),
+    reviewerList = require('./lib/hb-helper-reviewerlist'),
     del = require('del'),
     eslint = require('gulp-eslint'),
     express = require('express'),
@@ -30,6 +31,7 @@ var Author = require('./lib/Author'),
 
 // Config HB
 layouts.register(hb);
+hb.registerHelper('reviewerList', reviewerList);
 
 
 // Shared data object for passing between tasks

@@ -1,6 +1,8 @@
 ---
 title: Makers blog
 author: eric-johnson
+reviewers:
+- mark-bauer
 category: open-source
 thumbnail: test.png
 external: https://github.com/edj-boston/makers-airware-com

@@ -1,6 +1,8 @@
 ---
 title: Fourth Blog Post
 author: mark-bauer
+reviewers:
+- eric-johnson
 category: design
 thumbnail: test.png
 date: 2015-12-11

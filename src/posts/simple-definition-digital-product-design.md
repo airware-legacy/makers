@@ -1,6 +1,8 @@
 ---
 title: A Simple(ish) Definition of Digital Product Design
 author: mark-bauer
+reviewers:
+- eric-johnson
 category: design
 thumbnail: test.png
 date: 2015-12-08
