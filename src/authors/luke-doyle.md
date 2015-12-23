@@ -1,5 +1,6 @@
 ---
 name: Luke Doyle
+nickname: Luke D
 title: Software Engineer
 org: Airware
 email: ldoyle@airware.com

@@ -1,5 +1,6 @@
 ---
 name: Mark Bauer
+nickname: Mark B
 title: Product Designer
 org: Airware
 email: mbauer@airware.com

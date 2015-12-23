@@ -1,5 +1,6 @@
 ---
 name: Eric Johnson
+nickname: Eric J
 title: Director of Engineering, Software
 org: Airware
 email: ejohnson@airware.com
