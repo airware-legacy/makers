@@ -1,4 +1,5 @@
-var fs = require('fs');
+var assert = require('assert'),
+    fs     = require('fs');
 
 
 describe('The assets copied from the src/static directory...', function() {
@@ -10,10 +11,14 @@ describe('The assets copied from the src/static directory...', function() {
         });
     });
 
-    it('Should include a robots.txt file', function(done) {
-        fs.stat('build/robots.txt', function(err, stats) {
+    it('Should include ALL images in /img', function(done) {
+        fs.readdir('build/img', function(err, built) {
             if (err) throw err;
-            done();
+            fs.readdir('src/static/img', function(err, source) {
+                if (err) throw err;
+                assert.deepEqual(built, source);
+                done();
+            });
         });
     });
 
