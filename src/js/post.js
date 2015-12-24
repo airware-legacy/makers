@@ -1,4 +1,8 @@
-;(function () { //eslint-disable-line no-extra-semi
+/*!
+ * Custom Post
+ */
+
+(function () { //eslint-disable-line no-extra-semi
     'use-strict';
 
     function Post($el) {

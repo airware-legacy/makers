@@ -189,8 +189,12 @@ gulp.task('test', ['pages'], function () {
 });
 
 
+/* *
+ * Build Step 5
+ */
+
 // Lint as JS files (including this one)
-gulp.task('lint', ['pages'], function () {
+gulp.task('lint', ['test'], function () {
     return gulp.src([
         'gulpfile.js',
         'src/js/*.js',
@@ -247,7 +251,8 @@ gulp.task('build', [
     // 'static', 'styles', 'scripts', 'partials', 'authors'
     // 'posts'
     // 'pages'
-    'test', 'lint'
+    // 'test',
+    'lint'
 ]);
 
 

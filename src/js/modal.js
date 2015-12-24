@@ -1,4 +1,8 @@
-;(function () { //eslint-disable-line no-extra-semi
+/*!
+ * Custom Modal
+ */
+
+(function () { //eslint-disable-line no-extra-semi
     'use-strict';
 
     function Modal() {
