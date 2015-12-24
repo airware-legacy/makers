@@ -1,4 +1,4 @@
-Airware Makers Blog [![Build Status](https://travis-ci.org/edj-boston/makers-airware-com.svg?branch=master)](https://travis-ci.org/edj-boston/makers-airware-com) [![Dependency Status](https://david-dm.org/edj-boston/makers-airware-com.svg)](https://david-dm.org/edj-boston/makers-airware-com) [![devDependency Status](https://david-dm.org/edj-boston/makers-airware-com/dev-status.svg)](https://david-dm.org/edj-boston/makers-airware-com#info=devDependencies)
+Airware Makers Blog [![Build Status](https://travis-ci.org/airware/makers.svg?branch=master)](https://travis-ci.org/airware/makers) [![Dependency Status](https://david-dm.org/airware/makers.svg)](https://david-dm.org/airware/makers) [![devDependency Status](https://david-dm.org/airware/makers/dev-status.svg)](https://david-dm.org/airware/makers#info=devDependencies)
 ===================
 
 The Airware Makers blog highlights the work of our engineering and design teams. It features content about software engineering, firmware, hardware, aerospace, 3D printing, visual design, user experience, and more. We also are proud to open source certain aspects of our code for use and improvement by the community.
@@ -9,12 +9,12 @@ Setup
 
 Follow these steps to develop locally or contribute to the blog:
 
-1. Install [Node and NPM](https://nodejs.org/en/)
-2. Clone [https://github.com/airware/makers-airware-com](https://github.com/airware/makers-airware-com)
+1. Install [Node 4.x (and NPM)](https://nodejs.org/en/)
+2. Fork/clone [https://github.com/airware/makers](https://github.com/airware/makers)
 3. `$ cd` to your local copy and run `npm install` from your shell
 4. Run `$ gulp` from your shell
 	* Optionally specify your own port `$ gulp -p 3333`
-5. Navigate to [http://localhost:3000](http://localhost:3000)
+5. Navigate to [http://localhost:3000](http://localhost:3000) (or add your custom port)
 
 
 Contributing
@@ -23,8 +23,6 @@ Contributing
 Check out [Understanding the Github Flow](https://guides.github.com/introduction/flow/) to get an overview of how contributing to an open source project works.
 
 ### Content
-
-Content
 
 #### Simple
 
@@ -71,10 +69,10 @@ Note: Pushing to feature branches hosted on Github will trigger a build and test
 Maintainers
 -----------
 
-* Eric J, Back end & blog editor
-* Mark B, Design
-* Nick I, Front end
-* Caity C, Copy editing
+* Eric J: Backend & blog editor
+* Mark B: Design
+* Nick I: Front end
+* Caity C: Copy editing
 
 
 To Do
@@ -83,4 +81,4 @@ To Do
 * Tag pages
 * Author pages
 * Separate test tasks for rapid local development versus full tests for CI runs
-* Better management of gulp task dependency ordering with macros or wait for Gulp 4
+* Upgrade to Gulp 4 (when out)
