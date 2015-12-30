@@ -17,7 +17,7 @@
 
     Post.prototype.initTables = function () {
         this.$tables.each(function () {
-           $(this)
+            $(this)
                .addClass('table')
                .wrap('<div class="table-responsive"></div>');
         });

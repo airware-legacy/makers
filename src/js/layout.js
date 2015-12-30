@@ -27,9 +27,7 @@
     }
 
     Layout.prototype.slideInHero = function () {
-       this.$hero.velocity(this.options.hero.transition, {
-           duration: this.options.hero.duration
-       });
+        this.$hero.velocity(this.options.hero.transition, { duration: this.options.hero.duration });
     };
 
     Layout.prototype.onScroll = function () {
