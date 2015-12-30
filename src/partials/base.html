@@ -18,20 +18,9 @@
             </main>
 
             {{> footer}}
-
-            <div class="airware-modal hidden">
-                <div class="airware-modal-content"></div>
-                <div class="airware-modal-overlay"></div>
-            </div>
-
-            <div class="airware-nav-hamburger" data-modal="open" data-modal-breakpoint="992" data-modal-template="#modal-nav">
-                <span class="airware-nav-hamburger-icon"></span>
-            </div>
+            {{> mobilemenu}}
+            {{> hamburger}}
     </body>
-
-    <script type="text/html" id="modal-nav">
-        {{> mobilemenu}}
-    </script>
 
     <script type="text/javascript" src="/all.min.js?{{timestamp}}"></script>
 </html>

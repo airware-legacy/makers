@@ -10,25 +10,8 @@
         this.$imgs = this.$el.find('img');
         this.$links = this.$el.find('a');
 
-        this.initImages();
         this.initLinks();
     }
-
-    Post.prototype.initImages = function () {
-        var self = this;
-
-        this.$imgs.each(function () {
-            var $img = $(this);
-            var source = $img.attr('src');
-
-            if (source.length) {
-                $img
-                    .attr('data-modal', 'open')
-                    .attr('data-modal-autoclose', true)
-                    .attr('data-modal-lightbox', self._getLargeImageURL(source));
-            }
-        });
-    };
 
     Post.prototype.initLinks = function () {
         this.$links.each(function () {
