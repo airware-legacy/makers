@@ -1,6 +1,13 @@
 @import './variables.less';
+@import './mixins.less';
 
 .docs {
+  .make-md-column(10);
+  .make-md-column-offset(1);
+  .make-sm-column(8);
+  .make-sm-column-offset(2);
+  .make-xs-column(12);
+
   .docs-sections-list {
     margin: 0 0 @padding-xs 0;
     padding: 0;
