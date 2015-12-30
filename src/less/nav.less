@@ -14,6 +14,10 @@
     position: relative;
     padding: @padding-normal @padding-xs;
     z-index: 2;
+
+    @media (min-width: @screen-md) {
+      padding: @padding-normal;
+    }
   }
 
   .airware-header-bg-overlay {
@@ -27,10 +31,10 @@
 
   .airware-hero {
     &:extend(.jumbotron);
-    .make-md-column(8);
-    .make-md-column-offset(2);
-    .make-sm-column(6);
-    .make-sm-column-offset(3);
+    .make-md-column(10);
+    .make-md-column-offset(1);
+    .make-sm-column(8);
+    .make-sm-column-offset(2);
     .make-xs-column(12);
     text-align: center;
     padding-top: 4 * @padding-normal;
