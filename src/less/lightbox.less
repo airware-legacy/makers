@@ -41,7 +41,7 @@
     top: @padding-normal;
     right: @padding-xs;
     cursor: pointer;
-    .square(8 * @hamburger-icon-height);
+    .square(@hamburger-size);
 
     @media (min-width: @screen-md) {
       right: @padding-normal;
@@ -55,14 +55,22 @@
         top: 4 * @hamburger-icon-height;
         background: @light-bg-color;
         height: @hamburger-icon-height;
+        .transition(transform 0.2s ease-in-out);
+        -webkit-transition: -webkit-transform 0.2s ease-in-out;
+        .rotate(0deg);
       }
+    }
 
-      &:before {
-        .rotate(45deg);
-      }
+    &.active {
+      .airware-lightbox-dismiss-icon {
 
-      &:after {
-        .rotate(-45deg);
+        &:before {
+          .rotate(45deg);
+        }
+
+        &:after {
+          .rotate(-45deg);
+        }
       }
     }
   }

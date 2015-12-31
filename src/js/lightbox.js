@@ -108,6 +108,10 @@
                     delay: self.options.content.transitions.delay,
                     duration: self.options.content.transitions.duration
                 });
+            },
+
+            complete: function () {
+                self.$close.addClass('active');
             }
         });
     };
@@ -124,6 +128,8 @@
             duration: this.options.content.transitions.duration,
 
             begin: function () {
+                self.$close.removeClass('active');
+
                 self.$el.velocity(self.options.overlay.transitions.out, {
                     delay: self.options.overlay.transitions.delay,
                     duration: self.options.content.transitions.duration,
