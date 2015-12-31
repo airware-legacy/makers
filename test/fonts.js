@@ -1,5 +1,4 @@
-var fs     = require('fs'),
-    should = require('should');
+var fs = require('fs');
 
 
 describe('The build/fonts directory...', function() {

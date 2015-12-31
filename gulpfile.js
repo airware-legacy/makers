@@ -212,7 +212,9 @@ gulp.task('pages', ['posts'], function() {
 // Run tests and product coverage
 gulp.task('test', ['pages'], function () {
     return gulp.src('test/*.js')
-        .pipe(mocha());
+        .pipe(mocha({
+            require : ['should']
+        }));
 });
 
 

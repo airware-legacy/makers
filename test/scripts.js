@@ -1,6 +1,5 @@
-var fs     = require('fs'),
-    should = require('should'),
-    zlib   = require('zlib');
+var fs   = require('fs'),
+    zlib = require('zlib');
 
 
 describe('The dynamically concatenated and minified JS...', function() {
