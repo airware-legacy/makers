@@ -1,7 +1,7 @@
-var Author = require('./lib/Author'),
+var argv = require('yargs').argv,
+    Author = require('./lib/Author'),
     concat = require('gulp-concat'),
     cssNano = require('gulp-cssnano'),
-    reviewerList = require('./lib/hb-helper-reviewerlist'),
     del = require('del'),
     eslint = require('gulp-eslint'),
     express = require('express'),
@@ -24,9 +24,9 @@ var Author = require('./lib/Author'),
     parsePath = require('parse-filepath'),
     processPages = require('./lib/gulp-process-pages'),
     processPosts = require('./lib/gulp-process-posts'),
+    reviewerList = require('./lib/hb-helper-reviewerlist'),
     tap = require('gulp-tap'),
-    uglify = require('gulp-uglify'),
-    argv = require('yargs').argv;
+    uglify = require('gulp-uglify');
 
 
 // Config HB
