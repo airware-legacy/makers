@@ -21,8 +21,8 @@ var argv         = require('yargs').argv,
     marked       = require('gulp-marked'),
     mocha        = require('gulp-mocha'),
     moment       = require('moment'),
+    Page         = require('./lib/Page'),
     parsePath    = require('parse-filepath'),
-    processPages = require('./lib/gulp-process-pages'),
     processPosts = require('./lib/gulp-process-posts'),
     reviewerList = require('./lib/hb-helper-reviewerlist'),
     tap          = require('gulp-tap'),
@@ -170,7 +170,18 @@ gulp.task('posts', ['static', 'styles', 'scripts', 'partials', 'authors'], funct
 gulp.task('pages', ['posts'], function() {
     return gulp.src('src/pages/**/*.html')
         .pipe(frontMatter())
-        .pipe(processPages(data, hb))
+        .pipe(tap(function(file) {
+            var page = new Page(extend(true, {}, file.frontMatter, {
+                slug      : parsePath(file.path).name,
+                content   : file.contents.toString(),
+                posts     : data.posts,
+                year      : data.year,
+                timestamp : data.timestamp,
+                pageTitle : data.pageTitle
+            }));
+            var template = hb.compile(page.content);
+            file.contents = new Buffer(template(page));
+        }))
         .pipe(indexify('error'))
         .pipe(htmlMin())
         .pipe(gzip({ append: false }))
