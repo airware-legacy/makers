@@ -1,5 +1,6 @@
 var Author = require('./lib/Author'),
     concat = require('gulp-concat'),
+    cssNano = require('gulp-cssnano'),
     reviewerList = require('./lib/hb-helper-reviewerlist'),
     del = require('del'),
     eslint = require('gulp-eslint'),
@@ -17,7 +18,6 @@ var Author = require('./lib/Author'),
     layouts = require('handlebars-layouts'),
     less = require('gulp-less'),
     marked = require('gulp-marked'),
-    minifyCSS = require('gulp-minify-css'),
     minifyHTML = require('gulp-minify-html'),
     mocha = require('gulp-mocha'),
     moment = require('moment'),
@@ -83,7 +83,7 @@ gulp.task('styles', ['clean'], function() {
     ])
     .pipe(gulpif(/[.]less$/, less()))
     .pipe(concat('all.min.css'))
-    .pipe(minifyCSS())
+    .pipe(cssNano())
     .pipe(gzip({ append: false }))
     .pipe(gulp.dest('build'));
 });
