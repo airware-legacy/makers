@@ -22,7 +22,7 @@ var argv         = require('yargs').argv,
     mocha        = require('gulp-mocha'),
     moment       = require('moment'),
     Page         = require('./lib/Page'),
-    parsePath    = require('parse-filepath'),
+    path         = require('path'),
     Post         = require('./lib/Post'),
     reviewerList = require('./lib/hb-helper-reviewerlist'),
     tap          = require('gulp-tap'),
@@ -108,7 +108,7 @@ gulp.task('scripts', ['clean'], function() {
 gulp.task('partials', ['clean'], function() {
     return gulp.src('src/partials/*.html')
         .pipe(tap(function(file) {
-            var name = parsePath(file.path).name;
+            var name = path.parse(file.path).name;
             var html = file.contents.toString();
             hb.registerPartial(name, html);
         }));
@@ -122,7 +122,7 @@ gulp.task('authors', ['clean'], function() {
         .pipe(marked())
         .pipe(tap(function(file) {
             var author = new Author(extend(true, {}, file.frontMatter, {
-                slug    : parsePath(file.path).name,
+                slug    : path.parse(file.path).name,
                 bio     : file.contents.toString()
             }));
             data.authors.push(author);
@@ -149,7 +149,7 @@ gulp.task('posts', ['static', 'styles', 'scripts', 'partials', 'authors'], funct
             }))
             .pipe(tap(function(file) {
                 var post = new Post(extend(true, {}, file.frontMatter, {
-                    slug       : parsePath(file.path).name,
+                    slug       : path.parse(file.path).name,
                     content    : file.contents.toString(),
                     authors    : data.authors,
                     pageTitle  : data.pageTitle,
@@ -188,7 +188,7 @@ gulp.task('pages', ['posts'], function() {
         .pipe(frontMatter())
         .pipe(tap(function(file) {
             var page = new Page(extend(true, {}, file.frontMatter, {
-                slug      : parsePath(file.path).name,
+                slug      : path.parse(file.path).name,
                 content   : file.contents.toString(),
                 posts     : data.posts,
                 year      : data.year,
