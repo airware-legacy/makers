@@ -19,13 +19,13 @@ var Author = require('./lib/Author'),
     marked = require('gulp-marked'),
     minifyCSS = require('gulp-minify-css'),
     minifyHTML = require('gulp-minify-html'),
-    minifyJS = require('gulp-uglify'),
     mocha = require('gulp-mocha'),
     moment = require('moment'),
     parsePath = require('parse-filepath'),
     processPages = require('./lib/gulp-process-pages'),
     processPosts = require('./lib/gulp-process-posts'),
     tap = require('gulp-tap'),
+    uglify = require('gulp-uglify'),
     argv = require('yargs').argv;
 
 
@@ -98,7 +98,7 @@ gulp.task('scripts', ['clean'], function() {
         'src/js/*.js'
     ])
     .pipe(concat('all.min.js'))
-    .pipe(minifyJS({ preserveComments: 'some' }))
+    .pipe(uglify({ preserveComments: 'some' }))
     .pipe(gzip({ append: false }))
     .pipe(gulp.dest('build'));
 });
