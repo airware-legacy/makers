@@ -34,7 +34,14 @@ describe('The dynamically concatenated and minified JS...', function() {
     });
 
     it('Should contain custom JavaScript', function() {
-        var scripts = ['Custom Headline', 'Custom Mobile Menu', 'Custom Post', 'Custom Layout', 'Custom Lightbox'];
+        var scripts = [
+            'Custom Headline',
+            'Custom Mobile Menu',
+            'Custom Post',
+            'Custom Layout',
+            'Custom Lightbox',
+            'Custom Animations'
+        ];
 
         scripts.forEach(function (script) {
             str.should.containEql(script);
