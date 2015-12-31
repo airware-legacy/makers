@@ -10,12 +10,16 @@
     };
 
     function Lightbox() {
+        this.prev = this.prev.bind(this);
+        this.next = this.next.bind(this);
+        this.onKeyDown = this.onKeyDown.bind(this);
+
         this.$el = $('.airware-lightbox');
         this.$content = this.$el.find('.airware-lightbox-content');
         this.$body = $('body');
 
         this.$document = $(document);
-        this.$document.on('keydown', this.onKeyDown.bind(this));
+        this.swipeManager = this.$document.hammer();
 
         this.$close = this.$el.find('.airware-lightbox-dismiss');
         this.$close.on('click', this.hide.bind(this));
@@ -45,10 +49,6 @@
     }
 
     Lightbox.prototype.onKeyDown = function (e) {
-        if (this.$el.hasClass('hidden')) {
-            return;
-        }
-
         var keyCode = e.keyCode || e.which;
 
         if (keyCode === KEYS.ESCAPE) {
@@ -88,6 +88,11 @@
             html += '<img src="' + src + '" class="airware-lightbox-img ' + (index === self._current ? 'active': 'hidden') + '">';
         });
 
+        // set document events
+        this.$document.on('keydown', this.onKeyDown);
+        this.swipeManager.on('swiperight', this.prev);
+        this.swipeManager.on('swipeleft', this.next);
+
         // add content
         this.$content.append(html);
         this._$images = this.$content.children();
@@ -109,6 +114,11 @@
 
     Lightbox.prototype.hide = function () {
         var self = this;
+
+        // remove document events
+        this.$document.off('keydown', this.onKeyDown);
+        this.swipeManager.off('swiperight', this.prev);
+        this.swipeManager.off('swipeleft', this.next);
 
         this.$content.velocity(this.options.content.transitions.out, {
             duration: this.options.content.transitions.duration,

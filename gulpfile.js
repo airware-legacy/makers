@@ -94,6 +94,8 @@ gulp.task('scripts', ['clean'], function() {
         'node_modules/jquery/dist/jquery.js',
         'node_modules/velocity-animate/velocity.js',
         'node_modules/velocity-animate/velocity.ui.js',
+        'node_modules/hammerjs/hammer.js',
+        'node_modules/jquery-hammerjs/jquery.hammer.js',
         'node_modules/bootstrap/dist/js/bootstrap.js',
         'src/js/*.js'
     ])
