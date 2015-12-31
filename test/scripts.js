@@ -35,8 +35,9 @@ describe('The dynamically concatenated and minified JS...', function() {
 
     it('Should contain custom JavaScript', function() {
         str.should.containEql('Custom Headline');
-        str.should.containEql('Custom Modal');
+        str.should.containEql('Custom Mobile Menu');
         str.should.containEql('Custom Post');
+        str.should.containEql('Custom Layout');
     });
 
     it('Should contain Google Analytics', function() {

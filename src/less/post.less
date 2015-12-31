@@ -9,37 +9,48 @@
 .post {
   margin-top: -@padding-xs;
 
-  h1, h2, h3, h4, h5, h6, p, hr, pre, table, ul, ol {
+  h1, h2, h3, h4, h5, h6, p, hr, pre, div, ul, ol {
     .make-xs-column(12);
     margin: 0;
     padding: 0 @padding-normal;
+    max-width: @container-width;
 
     @media (min-width: @screen-sm) {
-      padding: 0;
-      .make-sm-column(6);
-      .make-sm-column-offset(3);
-    }
-
-    @media (min-width: @screen-sm) and (max-width: @screen-md) {
       padding: 0;
       .make-sm-column(8);
       .make-sm-column-offset(2);
     }
+
+    @media (min-width: @screen-sm) and (max-width: @screen-md) {
+      padding: 0;
+      .make-sm-column(10);
+      .make-sm-column-offset(1);
+    }
   }
 
-  > h1, > h2, > h3, > h4, > h5, > h6, > p, > pre, > hr, > table, > ul, > ol, > blockquote {
+  > div, > h1, > h2, > h3, > h4, > h5, > h6, > p, > pre, > hr, > table, > ul, > ol, > blockquote {
     margin-top: @padding-xs;
   }
 
-  th, td {
-    padding: @padding-xs;
-    text-align: center;
+  .table {
+    >thead , > tbody {
+      tr > td {
+        white-space: normal;
+      }
+    }
   }
 
   ul, ol {
-    padding: @padding-xs @padding-normal;
-    font-size: 12px;
+    font-size: @font-size-base;
     list-style-position: inside;
+
+    li {
+      padding-top: @padding-base;
+
+      &:first-child {
+        padding-top: 0;
+      }
+    }
   }
 
   img {
@@ -80,6 +91,7 @@
     p {
       padding: @padding-normal;
       position: relative;
+      text-align: center;
 
       &:before, &:after {
         content: ' ';

@@ -31,11 +31,9 @@
         $document.on('click', '.card', function (e) {
             var headline = new Headline($(e.currentTarget).find('.headline-cnt'));
 
-            if (headline.isEmpty()) {
-                return;
+            if (!headline.isEmpty()) {
+                headline.onClick();
             }
-
-            headline.onClick();
         });
 
     });

@@ -1,7 +1,7 @@
 @import './mixins.less';
 @import './variables.less';
 
-.airware-modal {
+.airware-mobile-menu {
   position: fixed;
   top: 0;
   right: 0;
@@ -10,22 +10,7 @@
   background-color: @light-bg-color;
   z-index: 10;
 
-  &.lightbox {
-    background-color: rgba(0, 0, 0, 0.8);
-
-    .airware-modal-content {
-      .square(100%);
-      padding: 10% 20%;
-    }
-    
-    img {
-      .img-responsive();
-      height: 100%;
-      margin: auto;
-    }
-  }
-
-  .mobile-menu {
+  &-content {
     color: @light-gray;
     padding: 3 * @padding-normal 0;
 
@@ -51,21 +36,21 @@
 }
 
 .eng {
-  .airware-modal .engineering-nav-item {
+  .airware-mobile-menu .engineering-nav-item {
     border-left: 2px solid @eng-primary-color;
     color: @eng-primary-color;
   }
 }
 
 .design {
-  .airware-modal .design-nav-item {
+  .airware-mobile-menu .design-nav-item {
     border-left: 2px solid @design-primary-color;
     color: @design-primary-color;
   }
 }
 
 .open-source {
-  .airware-modal .open-source-nav-item {
+  .airware-mobile-menu .open-source-nav-item {
     border-left: 2px solid @open-source-primary-color;
     color: @open-source-primary-color;
   }
