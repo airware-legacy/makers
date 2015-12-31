@@ -3,6 +3,8 @@
  */
 
 (function () {
+    // TODO: Add support for previous, and next
+    
     function Lightbox() {
         this.$el = $('.airware-lightbox');
         this.$content = this.$el.find('.airware-lightbox-content');
@@ -12,14 +14,6 @@
 
         this._current = -1;
     }
-
-    Lightbox.prototype.next = function () {
-
-    };
-
-    Lightbox.prototype.prev = function () {
-
-    };
 
     Lightbox.prototype.show = function ($current, $imgs) {
         var self = this, html = '';
