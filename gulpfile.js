@@ -14,11 +14,11 @@ var Author = require('./lib/Author'),
     gzip = require('gulp-gzip'),
     hb = require('handlebars'),
     highlight = require('highlight.js'),
+    htmlMin = require('gulp-htmlmin'),
     indexify = require('./lib/gulp-indexify'),
     layouts = require('handlebars-layouts'),
     less = require('gulp-less'),
     marked = require('gulp-marked'),
-    minifyHTML = require('gulp-minify-html'),
     mocha = require('gulp-mocha'),
     moment = require('moment'),
     parsePath = require('parse-filepath'),
@@ -148,7 +148,7 @@ gulp.task('posts', ['static', 'styles', 'scripts', 'partials', 'authors'], funct
                 }
             }))
             .pipe(processPosts(data, template))
-            .pipe(minifyHTML())
+            .pipe(htmlMin())
             .pipe(gzip({ append: false }))
             .pipe(gulp.dest('build'))
             .on('end', function() {
@@ -172,7 +172,7 @@ gulp.task('pages', ['posts'], function() {
         .pipe(frontMatter())
         .pipe(processPages(data, hb))
         .pipe(indexify('error'))
-        .pipe(minifyHTML())
+        .pipe(htmlMin())
         .pipe(gzip({ append: false }))
         .pipe(gulp.dest('build'));
 });
