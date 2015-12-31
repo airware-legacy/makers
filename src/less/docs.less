@@ -2,11 +2,13 @@
 @import './mixins.less';
 
 .docs {
-  .make-md-column(10);
-  .make-md-column-offset(1);
-  .make-sm-column(8);
-  .make-sm-column-offset(2);
-  .make-xs-column(12);
+  padding: 0 @padding-xs;
+
+  .docs-sections, .docs-links {
+    .make-xs-column(12);
+    .make-md-column(2);
+  }
+
 
   .docs-sections-list {
     margin: 0 0 @padding-xs 0;
@@ -19,7 +21,12 @@
   }
 
   .docs-sections-list-item {
-    height: @padding-normal;
+    margin-top: @padding-xs;
+    border-bottom: 1px solid @light-gray;
+
+    &:first-child {
+      margin-top: 0;
+    }
 
     a, a:hover {
       color: @open-source-primary-color;
@@ -27,6 +34,14 @@
   }
 
   .docs-content {
+    .make-xs-column(12);
+    .make-md-column(8);
+    margin-top: @padding-xs;
+
+    @media (min-width: @screen-md) {
+      margin-top: 0;
+    }
+
     .docs-title {
       &:first-child {
         margin-top: 0;
@@ -35,6 +50,21 @@
   }
 
   .docs-links {
-    text-align: right;
+    margin-top: @padding-xs;
+
+    @media (min-width: @screen-md) {
+      text-align: right;
+      margin-top: 0;
+    }
+
+    .btn {
+      padding: @padding-xs @padding-normal;
+      border-radius: 0;
+
+      &.btn-open-source {
+        background-color: @open-source-primary-color;
+        color: @light-font-color;
+      }
+    }
   }
 }
