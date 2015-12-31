@@ -23,7 +23,7 @@ var argv         = require('yargs').argv,
     moment       = require('moment'),
     Page         = require('./lib/Page'),
     parsePath    = require('parse-filepath'),
-    processPosts = require('./lib/gulp-process-posts'),
+    Post         = require('./lib/Post'),
     reviewerList = require('./lib/hb-helper-reviewerlist'),
     tap          = require('gulp-tap'),
     uglify       = require('gulp-uglify');
@@ -147,7 +147,23 @@ gulp.task('posts', ['static', 'styles', 'scripts', 'partials', 'authors'], funct
                     return highlight.highlightAuto(code).value;
                 }
             }))
-            .pipe(processPosts(data, template))
+            .pipe(tap(function(file) {
+                var post = new Post(extend(true, {}, file.frontMatter, {
+                    slug       : parsePath(file.path).name,
+                    content    : file.contents.toString(),
+                    authors    : data.authors,
+                    pageTitle  : data.pageTitle,
+                    year       : data.year,
+                    timestamp  : data.timestamp
+                }));
+
+                // Populate the posts object for reuse
+                data.posts.push(post);
+
+                // Alter the path, write the rendered template, and put back in stream
+                file.path = post.makePath(file.path);
+                file.contents = new Buffer(template(post));
+            }))
             .pipe(htmlMin())
             .pipe(gzip({ append: false }))
             .pipe(gulp.dest('build'))
