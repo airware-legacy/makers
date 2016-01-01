@@ -10,6 +10,7 @@
     };
 
     function Lightbox() {
+        this.hide = this.hide.bind(this);
         this.prev = this.prev.bind(this);
         this.next = this.next.bind(this);
         this.onKeyDown = this.onKeyDown.bind(this);
@@ -18,12 +19,18 @@
         this.$content = this.$el.find('.airware-lightbox-content');
         this.$counter = this.$el.find('.airware-lightbox-counter');
 
+        this.$leftArrow = this.$el.find('.airware-lightbox-left-arrow');
+        this.$leftArrow.on('click', this.prev);
+
+        this.$rightArrow = this.$el.find('.airware-lightbox-right-arrow');
+        this.$rightArrow.on('click', this.next);
+
         this.$body = $('body');
         this.$document = $(document);
         this.swipeManager = this.$document.hammer();
 
         this.$close = this.$el.find('.airware-lightbox-dismiss');
-        this.$close.on('click', this.hide.bind(this));
+        this.$close.on('click', this.hide);
 
         this._current = -1;
         this._$images = null;
@@ -150,6 +157,8 @@
 
     Lightbox.prototype.updateCounter = function () {
         this.$counter.text((this._current + 1) + '/' + this._$images.length);
+        this.$leftArrow.toggleClass('hidden', this._current === 0);
+        this.$rightArrow.toggleClass('hidden', this._current === this._$images.length - 1);
     };
 
     Lightbox.prototype.destroy = function () {

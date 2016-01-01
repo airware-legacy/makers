@@ -1,4 +1,5 @@
 @import './mixins.less';
+@import './variables.less';
 
 .airware-lightbox {
   position: fixed;
@@ -31,6 +32,51 @@
 
       &.active {
         opacity: 1;
+      }
+    }
+  }
+
+  .airware-lightbox-arrow {
+    display: none;
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    cursor: pointer;
+    .square(@hamburger-size);
+    .multi-value-transform(translate(0, -50%) rotate(45deg));
+
+    @media (min-width: @screen-sm) {
+      display: block;
+    }
+
+    &.airware-lightbox-left-arrow {
+      left: @padding-normal + (3 * @hamburger-icon-height);
+    }
+
+    &.airware-lightbox-right-arrow {
+      right: @padding-normal + (3 * @hamburger-icon-height);
+    }
+
+    &-icon {
+      position: relative;
+      display: inline-block;
+      .square(100%);
+
+      &:before {
+        content: ' ';
+        position: absolute;
+        top: 0;
+        .square(100%);
+      }
+
+      &.airware-lightbox-left-arrow-icon {
+        border-left: @hamburger-icon-height solid @light-bg-color;
+        border-bottom: @hamburger-icon-height solid @light-bg-color;
+      }
+
+      &.airware-lightbox-right-arrow-icon {
+        border-right: @hamburger-icon-height solid @light-bg-color;
+        border-top: @hamburger-icon-height solid @light-bg-color;
       }
     }
   }
