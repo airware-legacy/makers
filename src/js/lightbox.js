@@ -16,8 +16,9 @@
 
         this.$el = $('.airware-lightbox');
         this.$content = this.$el.find('.airware-lightbox-content');
-        this.$body = $('body');
+        this.$counter = this.$el.find('.airware-lightbox-counter');
 
+        this.$body = $('body');
         this.$document = $(document);
         this.swipeManager = this.$document.hammer();
 
@@ -66,6 +67,7 @@
         }
         var $current = this._getCurrentImage();
         this._current--;
+        this.updateCounter();
         this._slide($current, $current.prev(), 'airware.lightbox.slideRightOut', 'airware.lightbox.slideLeftIn');
     };
 
@@ -75,6 +77,7 @@
         }
         var $current = this._getCurrentImage();
         this._current++;
+        this.updateCounter();
         this._slide($current, $current.next(), 'airware.lightbox.slideLeftOut', 'airware.lightbox.slideRightIn');
     };
 
@@ -96,6 +99,7 @@
         // add content
         this.$content.append(html);
         this._$images = this.$content.children();
+        this.updateCounter();
 
         this.$el.velocity(this.options.overlay.transitions.in, {
             duration: this.options.overlay.transitions.duration,
@@ -142,6 +146,10 @@
                 });
             }
         });
+    };
+
+    Lightbox.prototype.updateCounter = function () {
+        this.$counter.text((this._current + 1) + '/' + this._$images.length);
     };
 
     Lightbox.prototype.destroy = function () {
