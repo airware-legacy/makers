@@ -33,7 +33,7 @@
 
     Hamburger.prototype.onHide = function () {
         this.css.zIndex = 0;
-        this.$el.css(this.css);
+        this.$el.css(this.css).removeClass('active');
     };
 
     function MobileMenu() {
