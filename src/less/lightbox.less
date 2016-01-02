@@ -1,0 +1,147 @@
+@import './mixins.less';
+@import './variables.less';
+
+.airware-lightbox {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+
+  .airware-lightbox-content {
+    position: relative;
+    z-index: 2;
+    max-width: 100%;
+    height: 100%;
+    opacity: 0;
+
+    @media (min-width: @screen-md) {
+      max-width: 80%;
+      margin: 0 20%;
+    }
+
+    img {
+      position: relative;
+      margin-left: auto;
+      margin-right: auto;
+      opacity: 0;
+      top: 50%;
+      .translate(0, -50%);
+      .img-responsive();
+
+      &.active {
+        opacity: 1;
+      }
+    }
+  }
+
+  .airware-lightbox-arrow {
+    display: none;
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    cursor: pointer;
+    .square(@hamburger-size);
+    .multi-value-transform(translate(0, -50%) rotate(45deg));
+
+    @media (min-width: @screen-sm) {
+      display: block;
+    }
+
+    &.airware-lightbox-left-arrow {
+      left: @padding-normal + (3 * @hamburger-icon-height);
+    }
+
+    &.airware-lightbox-right-arrow {
+      right: @padding-normal + (3 * @hamburger-icon-height);
+    }
+
+    &-icon {
+      position: relative;
+      display: inline-block;
+      .square(100%);
+
+      &:before {
+        content: ' ';
+        position: absolute;
+        top: 0;
+        .square(100%);
+      }
+
+      &.airware-lightbox-left-arrow-icon {
+        border-left: @hamburger-icon-height solid @light-bg-color;
+        border-bottom: @hamburger-icon-height solid @light-bg-color;
+      }
+
+      &.airware-lightbox-right-arrow-icon {
+        border-right: @hamburger-icon-height solid @light-bg-color;
+        border-top: @hamburger-icon-height solid @light-bg-color;
+      }
+    }
+  }
+
+  .airware-lightbox-counter-cnt {
+    width: 100%;
+    padding: @padding-xs 0;
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    z-index: 2;
+    color: @light-font-color;
+    font-size: @font-size-base;
+
+    @media (min-width: @screen-md) {
+      padding: @padding-normal 0;
+    }
+  }
+
+  .airware-lightbox-dismiss {
+    position: absolute;
+    z-index: 2;
+    top: @padding-normal;
+    right: @padding-xs;
+    cursor: pointer;
+    .square(@hamburger-size);
+
+    @media (min-width: @screen-md) {
+      right: @padding-normal;
+    }
+
+    &-icon {
+      &:before, &:after {
+        content: ' ';
+        position: absolute;
+        width: 100%;
+        top: 4 * @hamburger-icon-height;
+        background: @light-bg-color;
+        height: @hamburger-icon-height;
+        .transition(transform 0.2s ease-in-out);
+        -webkit-transition: -webkit-transform 0.2s ease-in-out;
+        .rotate(0deg);
+      }
+    }
+
+    &.active {
+      .airware-lightbox-dismiss-icon {
+
+        &:before {
+          .rotate(45deg);
+        }
+
+        &:after {
+          .rotate(-45deg);
+        }
+      }
+    }
+  }
+
+  .airware-lightbox-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    background-color: rgb(26,27,20);
+    opacity: 0.9;
+  }
+}

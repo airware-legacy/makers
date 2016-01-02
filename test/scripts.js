@@ -33,10 +33,18 @@ describe('The dynamically concatenated and minified JS...', function() {
     });
 
     it('Should contain custom JavaScript', function() {
-        str.should.containEql('Custom Headline');
-        str.should.containEql('Custom Mobile Menu');
-        str.should.containEql('Custom Post');
-        str.should.containEql('Custom Layout');
+        var scripts = [
+            'Custom Headline',
+            'Custom Mobile Menu',
+            'Custom Post',
+            'Custom Layout',
+            'Custom Lightbox',
+            'Custom Animations'
+        ];
+
+        scripts.forEach(function (script) {
+            str.should.containEql(script);
+        });
     });
 
     it('Should contain Google Analytics', function() {

@@ -2,7 +2,7 @@
  * Custom Post
  */
 
-(function () { //eslint-disable-line no-extra-semi
+(function () {
     'use-strict';
 
     function Post($el) {
@@ -11,9 +11,20 @@
         this.$links = this.$el.find('a');
         this.$tables = this.$el.find('table');
 
+        this.init();
+    }
+
+    Post.prototype.init = function () {
+        this.initImages();
         this.initTables();
         this.initLinks();
-    }
+    };
+
+    Post.prototype.initImages = function () {
+        this.$imgs.each(function (index) {
+            $(this).attr('data-lightbox-img', index);
+        });
+    };
 
     Post.prototype.initTables = function () {
         this.$tables.each(function () {

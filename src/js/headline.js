@@ -2,7 +2,7 @@
  * Custom Headline
  */
 
-(function () { //eslint-disable-line no-extra-semi
+(function () {
     'use-strict';
 
     function Headline($el) {
