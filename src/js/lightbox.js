@@ -49,11 +49,14 @@
                 transitions: {
                     delay: 100,
                     duration: 200,
-                    in: 'transition.expandIn',
-                    out: 'transition.expandOut'
+                    in: 'airware.expandIn',
+                    out: 'airware.expandOut'
                 }
             }
         };
+
+        // hack to fix fixed position scrolling bug in iOS 8
+        $.Velocity.hook(this.$el, 'translateZ', '1px');
     }
 
     Lightbox.prototype.onKeyDown = function (e) {
