@@ -57,6 +57,7 @@ a, a:hover {
   margin-top: @header-height;
   position: relative;
   padding: 0;
+  .translate3d(0, 0, 1px);
 
   .airware-content {
     padding: @padding-normal 0;
@@ -82,8 +83,9 @@ a, a:hover {
 
 .airware-footer {
   position: relative;
-  width: 100%;
   background: @body-bg;
+  .square(100%);
+  .translate3d(0, 0, 1px);
 
   hr {
     margin-top: 0;

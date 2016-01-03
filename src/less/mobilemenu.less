@@ -9,6 +9,7 @@
   left: 0;
   background-color: @light-bg-color;
   z-index: 10;
+  overflow: auto;
 
   &-content {
     color: @light-gray;
@@ -19,6 +20,9 @@
       margin-left: @padding-normal;
       margin-right: @padding-normal;
       margin-bottom: 0;
+      font-family: @normal-font-family;
+      font-weight: normal;
+      font-size: @font-size-base;
     }
 
     .airware-nav-item {
@@ -37,21 +41,21 @@
 
 .eng {
   .airware-mobile-menu .engineering-nav-item {
-    border-left: 2px solid @eng-primary-color;
+    border-left: @header-mobile-active-border-width solid @eng-primary-color;
     color: @eng-primary-color;
   }
 }
 
 .design {
   .airware-mobile-menu .design-nav-item {
-    border-left: 2px solid @design-primary-color;
+    border-left: @header-mobile-active-border-width  solid @design-primary-color;
     color: @design-primary-color;
   }
 }
 
 .open-source {
   .airware-mobile-menu .open-source-nav-item {
-    border-left: 2px solid @open-source-primary-color;
+    border-left: @header-mobile-active-border-width  solid @open-source-primary-color;
     color: @open-source-primary-color;
   }
 }

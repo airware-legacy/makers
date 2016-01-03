@@ -33,7 +33,7 @@
 
     Hamburger.prototype.onHide = function () {
         this.css.zIndex = 0;
-        this.$el.css(this.css);
+        this.$el.css(this.css).removeClass('active');
     };
 
     function MobileMenu() {
@@ -47,14 +47,16 @@
 
         this.options = {
             transitions: {
-                in: 'transition.expandIn',
-                out: 'transition.expandOut'
+                in: 'airware.expandIn',
+                out: 'airware.expandOut'
             },
-            duration: 200,
             breakpoint: 992
         };
 
         this.$window.on('resize', this.onResize.bind(this));
+
+        // hack to fix iOS 8 positioning issue
+        $.Velocity.hook(this.$el, 'translateZ', 1);
     }
 
     MobileMenu.prototype.onResize = function () {
@@ -67,8 +69,6 @@
         var self = this;
 
         this.$el.velocity('stop').velocity(this.options.transitions.in, {
-            duration: this.options.duration,
-
             begin: function () {
                 self.hamburger.onShow(self.getZIndex());
                 self.$el.removeClass('hidden');
@@ -85,8 +85,6 @@
         var self = this;
 
         this.$el.velocity('stop').velocity(this.options.transitions.out, {
-            duration: this.options.duration,
-
             begin: function () {
                 self.hamburger.onHide();
             },
