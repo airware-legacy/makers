@@ -2,6 +2,7 @@ var argv         = require('yargs').argv,
     Author       = require('./lib/Author'),
     concat       = require('gulp-concat'),
     cssNano      = require('gulp-cssnano'),
+    david        = require('gulp-david'),
     del          = require('del'),
     eslint       = require('gulp-eslint'),
     express      = require('express'),
@@ -280,6 +281,15 @@ gulp.task('serve', function(done) {
 });
 
 
+// Check deps with David service
+gulp.task('deps', function() {
+    return gulp.src('package.json')
+        .pipe(david({ update: true }))
+        .pipe(david.reporter)
+        .pipe(gulp.dest('.'));
+});
+
+
 // Watch certain files
 gulp.task('watch', ['build'], function() {
     return gulp.watch([
@@ -302,4 +312,8 @@ gulp.task('build', [
 
 
 // What to do when you run `$ gulp`
-gulp.task('default', ['watch', 'serve']);
+gulp.task('default', [
+    'watch',
+    'serve',
+    'deps'
+]);
