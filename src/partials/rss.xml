@@ -1,0 +1,20 @@
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+	<channel>
+		<title>{{title}} | {{pageTitle}}</title>
+		<description>{{description}}</description>
+		<link>{{link}}</link>
+		<lastBuildDate>{{buildDate}}</lastBuildDate>
+		<atom:link href="{{rssLink}}" rel="self" type="application/rss+xml"/>
+		<webMaster>ejohnson@airware.com (Eric Johnson)</webMaster>
+		{{#each posts}}
+		<item>
+			<title>{{this.title}}</title>
+			<description>{{this.snippet}}</description>
+			<link>{{this.link}}</link>
+			<guid>{{this.link}}</guid>
+			<dc:creator>{{this.author.name}}</dc:creator>
+			<pubDate>{{this.pubDate}}</pubDate>
+		</item>
+		{{/each}}
+	</channel>
+</rss>

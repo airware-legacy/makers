@@ -6,6 +6,7 @@ var argv         = require('yargs').argv,
     eslint       = require('gulp-eslint'),
     express      = require('express'),
     extend       = require('jquery-extend'),
+    filter       = require('gulp-filter'),
     frontMatter  = require('gulp-front-matter'),
     fs           = require('fs'),
     gulp         = require('gulp'),
@@ -15,7 +16,6 @@ var argv         = require('yargs').argv,
     hb           = require('handlebars'),
     highlight    = require('highlight.js'),
     htmlMin      = require('gulp-htmlmin'),
-    indexify     = require('./lib/gulp-indexify'),
     layouts      = require('handlebars-layouts'),
     less         = require('gulp-less'),
     marked       = require('gulp-marked'),
@@ -185,25 +185,39 @@ gulp.task('posts', ['static', 'styles', 'scripts', 'partials', 'authors'], funct
  */
 
 // Generate posts
-gulp.task('pages', ['posts'], function() {
-    return gulp.src('src/pages/**/*.html')
-        .pipe(frontMatter())
-        .pipe(tap(function(file) {
-            var page = new Page(extend(true, {}, file.frontMatter, {
-                slug      : path.parse(file.path).name,
-                content   : file.contents.toString(),
-                posts     : data.posts,
-                year      : data.year,
-                timestamp : data.timestamp,
-                pageTitle : data.pageTitle
-            }));
-            var template = hb.compile(page.content);
-            file.contents = new Buffer(template(page));
-        }))
-        .pipe(indexify('error'))
-        .pipe(htmlMin())
-        .pipe(gzip({ append: false }))
-        .pipe(gulp.dest('build'));
+gulp.task('pages', ['posts'], function(done) {
+    fs.readFile('src/partials/rss.xml', 'utf-8', function(err, rssStr) {
+        if (err) throw err;
+        var rssTemplate = hb.compile(rssStr);
+
+        gulp.src('src/pages/**/*.html')
+            .pipe(frontMatter())
+            .pipe(tap(function(file) {
+                file.data = new Page(extend(true, {}, file.frontMatter, {
+                    path      : file.path,
+                    posts     : data.posts,
+                    year      : data.year,
+                    timestamp : data.timestamp,
+                    pageTitle : data.pageTitle
+                }));
+                file.path = file.data.path;
+                var template = hb.compile(file.contents.toString());
+                file.contents = new Buffer(template(file.data));
+            }))
+            .pipe(htmlMin())
+            .pipe(gzip({ append: false }))
+            .pipe(gulp.dest('build'))
+            .pipe(filter(function(file) {
+                return file.data.rss;
+            }))
+            .pipe(tap(function(file) {
+                file.path = file.data.rssPath;
+                file.contents = new Buffer(rssTemplate(file.data));
+            }))
+            .pipe(gzip({ append: false }))
+            .pipe(gulp.dest('build'))
+            .on('end', done);
+    });
 });
 
 
