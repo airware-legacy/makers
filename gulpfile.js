@@ -302,11 +302,11 @@ gulp.task('watch', ['build'], function() {
 
 // Build Macro
 gulp.task('build', [
-    // 'clean'
-    // 'static', 'styles', 'scripts', 'partials', 'authors'
-    // 'posts'
-    // 'pages'
-    // 'test',
+    // Step 0: 'clean'
+    // Step 1: 'static', 'styles', 'scripts', 'partials', 'authors'
+    // Step 2: 'posts'
+    // Step 3: 'pages'
+    // Step 4: 'test',
     'lint'
 ]);
 
