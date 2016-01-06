@@ -104,41 +104,38 @@
   }
 }
 
-/* default nav hover */
-.nav-item-hover-color(@design-primary-color);
-
+/* header backgrounds */
 .eng {
   .airware-header {
     .header-eng-bg();
   }
-
-  .engineering-nav-item {
-    border-bottom: @header-active-border-width solid @eng-primary-color;
-  }
-
-  .nav-item-hover-color(@eng-primary-color);
 }
 
 .design {
   .airware-header {
     .header-design-bg();
   }
-
-  .design-nav-item {
-    border-bottom: @header-active-border-width solid @design-primary-color;
-  }
-
-  .nav-item-hover-color(@design-primary-color);
 }
 
 .open-source {
   .airware-header {
     .header-design-bg();
   }
+}
 
-  .open-source-nav-item {
-    border-bottom: @header-active-border-width solid @open-source-primary-color;
-  }
+.airware-header.vili-header {
+  .vili-viking();
+}
 
-  .nav-item-hover-color(@open-source-primary-color);
+/* nav hover colors */
+.engineering-nav-item:hover {
+  border-bottom: @header-active-border-width solid @eng-primary-color;
+}
+
+.design-nav-item:hover {
+  border-bottom: @header-active-border-width solid @design-primary-color;
+}
+
+.open-source-nav-item:hover {
+  border-bottom: @header-active-border-width solid @open-source-primary-color;
 }
