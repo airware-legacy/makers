@@ -1,3 +1,5 @@
+'use strict';
+
 var argv         = require('yargs').argv,
     Author       = require('./lib/Author'),
     del          = require('del'),
@@ -138,7 +140,7 @@ gulp.task('posts', ['static', 'styles', 'scripts', 'partials', 'authors'], (done
             }))
             .pipe(g.tap((file) => {
                 var post = new Post(extend(true, {}, file.frontMatter, {
-                    slug       : path.parse(file.path).name,
+                    path       : file.path,
                     content    : file.contents.toString(),
                     authors    : data.authors,
                     pageTitle  : data.pageTitle,
@@ -150,7 +152,7 @@ gulp.task('posts', ['static', 'styles', 'scripts', 'partials', 'authors'], (done
                 data.posts.push(post);
 
                 // Alter the path, write the rendered template, and put back in stream
-                file.path = post.makePath(file.path);
+                file.path = post.path;
                 file.contents = new Buffer(template(post));
             }))
             .pipe(g.htmlmin())
