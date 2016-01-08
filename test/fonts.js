@@ -1,19 +1,19 @@
 var fs = require('fs');
 
 
-describe('The build/fonts directory...', function() {
+describe('The build/fonts directory...', () => {
 
     var files = [];
 
-    before(function(done) {
-        fs.readdir('build/fonts/', function(err, arr) {
+    before((done) => {
+        fs.readdir('build/fonts/', (err, arr) => {
             if (err) throw err;
             files = arr;
             done();
         });
     });
 
-    it('Should include Colfax Medium files', function() {
+    it('Should include Colfax Medium files', () => {
         files.should.containEql('Colfax-Medium.eot');
         files.should.containEql('Colfax-Medium.otf');
         files.should.containEql('Colfax-Medium.svg');
@@ -21,7 +21,7 @@ describe('The build/fonts directory...', function() {
         files.should.containEql('Colfax-Medium.woff');
     });
 
-    it('Should include Colfax Regular files', function() {
+    it('Should include Colfax Regular files', () => {
         files.should.containEql('Colfax-Regular.eot');
         files.should.containEql('Colfax-Regular.otf');
         files.should.containEql('Colfax-Regular.svg');
@@ -29,7 +29,7 @@ describe('The build/fonts directory...', function() {
         files.should.containEql('Colfax-Regular.woff');
     });
 
-    it('Should include Colfax Regular Italic files', function() {
+    it('Should include Colfax Regular Italic files', () => {
         files.should.containEql('Colfax-RegularItalic.eot');
         files.should.containEql('Colfax-RegularItalic.otf');
         files.should.containEql('Colfax-RegularItalic.svg');

@@ -1,4 +1,4 @@
-var argv   = require('yargs'),
+var argv   = require('yargs').argv,
     fs     = require('fs'),
     jsdom  = require('jsdom').jsdom,
     moment = require('moment'),
@@ -14,38 +14,38 @@ function loadDocument(data) {
 }
 
 
-describe('The dynamically generated home page...', function() {
+describe('The dynamically generated home page...', () => {
 
     var handle = 'build/index.html';
     var buf, document;
 
-    it('Should exist', function(done) {
-        fs.readFile(handle, function(err, data) {
+    it('Should exist', (done) => {
+        fs.readFile(handle, (err, data) => {
             if (err) throw err;
             buf = data;
             done();
         });
     });
 
-    it('Should be gzipped', function(done) {
-        zlib.gunzip(buf, function(err, data) {
+    it('Should be gzipped', (done) => {
+        zlib.gunzip(buf, (err, data) => {
             if (err) throw err;
             document = loadDocument(data);
             done();
         });
     });
 
-    it('Should contain a <title> element from the header partial', function() {
+    it('Should contain a <title> element from the header partial', () => {
         document.getElementsByTagName('title')[0].innerHTML
             .should.equal('Blog | Airware Makers');
     });
 
-    it('Should contain just one <h1> element', function() {
+    it('Should contain just one <h1> element', () => {
         document.getElementsByTagName('h1').length
             .should.equal(1);
     });
 
-    it('Should contain copyright text from the footer partial', function() {
+    it('Should contain copyright text from the footer partial', () => {
         var year = moment().format('YYYY');
         document.getElementsByClassName('copy-right-text')[0].innerHTML
             .should.containEql('© Copyright ' + year + ', Airware. All Rights Reserved.');
@@ -54,38 +54,38 @@ describe('The dynamically generated home page...', function() {
 });
 
 
-describe('The dynamically generated engineering page...', function() {
+describe('The dynamically generated engineering page...', () => {
 
     var handle = 'build/engineering/index.html';
     var buf, document;
 
-    it('Should exist', function(done) {
-        fs.readFile(handle, function(err, data) {
+    it('Should exist', (done) => {
+        fs.readFile(handle, (err, data) => {
             if (err) throw err;
             buf = data;
             done();
         });
     });
 
-    it('Should be gzipped', function(done) {
-        zlib.gunzip(buf, function(err, data) {
+    it('Should be gzipped', (done) => {
+        zlib.gunzip(buf, (err, data) => {
             if (err) throw err;
             document = loadDocument(data);
             done();
         });
     });
 
-    it('Should contain a <title> element from the header partial', function() {
+    it('Should contain a <title> element from the header partial', () => {
         document.getElementsByTagName('title')[0].innerHTML
             .should.equal('Engineering | Airware Makers');
     });
 
-    it('Should contain just one <h1> element', function() {
+    it('Should contain just one <h1> element', () => {
         document.getElementsByTagName('h1').length
             .should.equal(1);
     });
 
-    it('Should contain copyright text from the footer partial', function() {
+    it('Should contain copyright text from the footer partial', () => {
         var year = moment().format('YYYY');
         document.getElementsByClassName('copy-right-text')[0].innerHTML
             .should.containEql('© Copyright ' + year + ', Airware. All Rights Reserved.');
@@ -94,38 +94,38 @@ describe('The dynamically generated engineering page...', function() {
 });
 
 
-describe('The dynamically generated design page...', function() {
+describe('The dynamically generated design page...', () => {
 
     var handle = 'build/design/index.html';
     var buf, document;
 
-    it('Should exist', function(done) {
-        fs.readFile(handle, function(err, data) {
+    it('Should exist', (done) => {
+        fs.readFile(handle, (err, data) => {
             if (err) throw err;
             buf = data;
             done();
         });
     });
 
-    it('Should be gzipped', function(done) {
-        zlib.gunzip(buf, function(err, data) {
+    it('Should be gzipped', (done) => {
+        zlib.gunzip(buf, (err, data) => {
             if (err) throw err;
             document = loadDocument(data);
             done();
         });
     });
 
-    it('Should contain a <title> element from the header partial', function() {
+    it('Should contain a <title> element from the header partial', () => {
         document.getElementsByTagName('title')[0].innerHTML
             .should.equal('Design | Airware Makers');
     });
 
-    it('Should contain just one <h1> element', function() {
+    it('Should contain just one <h1> element', () => {
         document.getElementsByTagName('h1').length
             .should.equal(1);
     });
 
-    it('Should contain copyright text from the footer partial', function() {
+    it('Should contain copyright text from the footer partial', () => {
         var year = moment().format('YYYY');
         document.getElementsByClassName('copy-right-text')[0].innerHTML
             .should.containEql('© Copyright ' + year + ', Airware. All Rights Reserved.');

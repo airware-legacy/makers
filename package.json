@@ -75,6 +75,7 @@
       "ga": true
     },
     "rules": {
+      "prefer-arrow-callback": 2,
       "no-mixed-spaces-and-tabs": 2,
       "space-after-keywords": 2,
       "semi": 2,

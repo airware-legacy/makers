@@ -30,7 +30,7 @@ var data;
  */
 
 // Clean data and build dirs
-gulp.task('clean', function(done) {
+gulp.task('clean', (done) => {
     data = {
         authors   : [], // Populated by 'authors' task
         posts     : [], // Populated by 'posts' task
@@ -50,11 +50,11 @@ gulp.task('clean', function(done) {
  */
 
 // Copy static files to build dir
-gulp.task('static', ['clean'], function() {
+gulp.task('static', ['clean'], () => {
     return gulp.src('src/static/**')
-        .pipe(g.if(/robots\.txt/, g.tap(function(file) {
-            // Clear robots.txt if we're building production
-            if ( process.env.TRAVIS_BRANCH == 'master' ) file.contents = new Buffer('');
+        .pipe(g.if(/robots\.txt/, g.tap((file) => {
+            if ( process.env.TRAVIS_BRANCH == 'master' )
+                file.contents = new Buffer('');
         })))
         .pipe(g.gzip({ append: false }))
         .pipe(gulp.dest('build'));
@@ -62,7 +62,7 @@ gulp.task('static', ['clean'], function() {
 
 
 // Minify and combine all CSS
-gulp.task('styles', ['clean'], function() {
+gulp.task('styles', ['clean'], () => {
     return gulp.src([
         'node_modules/bootstrap/dist/css/bootstrap.css',
         'node_modules/highlight.js/styles/default.css',
@@ -76,7 +76,7 @@ gulp.task('styles', ['clean'], function() {
 });
 
 // Minify and combine all JavaScript
-gulp.task('scripts', ['clean'], function() {
+gulp.task('scripts', ['clean'], () => {
     return gulp.src([
         'node_modules/jquery/dist/jquery.js',
         'node_modules/velocity-animate/velocity.js',
@@ -94,9 +94,9 @@ gulp.task('scripts', ['clean'], function() {
 
 
 // Register HB partials
-gulp.task('partials', ['clean'], function() {
+gulp.task('partials', ['clean'], () => {
     return gulp.src('src/partials/*.html')
-        .pipe(g.tap(function(file) {
+        .pipe(g.tap((file) => {
             var name = path.parse(file.path).name;
             var html = file.contents.toString();
             hb.registerPartial(name, html);
@@ -105,11 +105,11 @@ gulp.task('partials', ['clean'], function() {
 
 
 // Load authors
-gulp.task('authors', ['clean'], function() {
+gulp.task('authors', ['clean'], () => {
     return gulp.src('src/authors/*.md')
         .pipe(g.frontMatter())
         .pipe(g.marked())
-        .pipe(g.tap(function(file) {
+        .pipe(g.tap((file) => {
             var author = new Author(extend(true, {}, file.frontMatter, {
                 slug    : path.parse(file.path).name,
                 bio     : file.contents.toString()
@@ -124,19 +124,19 @@ gulp.task('authors', ['clean'], function() {
  */
 
 // Generate posts
-gulp.task('posts', ['static', 'styles', 'scripts', 'partials', 'authors'], function(done) {
-    fs.readFile('src/partials/post.html', 'utf-8', function(err, str) {
+gulp.task('posts', ['static', 'styles', 'scripts', 'partials', 'authors'], (done) => {
+    fs.readFile('src/partials/post.html', 'utf-8', (err, str) => {
         if (err) throw err;
         var template = hb.compile(str);
 
         gulp.src('src/posts/*.md')
             .pipe(g.frontMatter())
             .pipe(g.marked({
-                highlight: function(code) {
+                highlight: (code) => {
                     return highlight.highlightAuto(code).value;
                 }
             }))
-            .pipe(g.tap(function(file) {
+            .pipe(g.tap((file) => {
                 var post = new Post(extend(true, {}, file.frontMatter, {
                     slug       : path.parse(file.path).name,
                     content    : file.contents.toString(),
@@ -156,9 +156,9 @@ gulp.task('posts', ['static', 'styles', 'scripts', 'partials', 'authors'], funct
             .pipe(g.htmlmin())
             .pipe(g.gzip({ append: false }))
             .pipe(gulp.dest('build'))
-            .on('end', function() {
+            .on('end', () => {
                 // Sort posts by date descending
-                data.posts.sort(function(a, b) {
+                data.posts.sort((a, b) => {
                     return moment(a.date).format('X') < moment(b.date).format('X'); // DESC
                 });
                 done();
@@ -172,14 +172,14 @@ gulp.task('posts', ['static', 'styles', 'scripts', 'partials', 'authors'], funct
  */
 
 // Generate posts
-gulp.task('pages', ['posts'], function(done) {
-    fs.readFile('src/partials/rss.xml', 'utf-8', function(err, rssStr) {
+gulp.task('pages', ['posts'], (done) => {
+    fs.readFile('src/partials/rss.xml', 'utf-8', (err, rssStr) => {
         if (err) throw err;
         var rssTemplate = hb.compile(rssStr);
 
         gulp.src('src/pages/**/*.html')
             .pipe(g.frontMatter())
-            .pipe(g.tap(function(file) {
+            .pipe(g.tap((file) => {
                 file.data = new Page(extend(true, {}, file.frontMatter, {
                     path      : file.path,
                     posts     : data.posts,
@@ -194,10 +194,10 @@ gulp.task('pages', ['posts'], function(done) {
             .pipe(g.htmlmin())
             .pipe(g.gzip({ append: false }))
             .pipe(gulp.dest('build'))
-            .pipe(g.filter(function(file) {
+            .pipe(g.filter((file) => {
                 return file.data.rss;
             }))
-            .pipe(g.tap(function(file) {
+            .pipe(g.tap((file) => {
                 file.path = file.data.rssPath;
                 file.contents = new Buffer(rssTemplate(file.data));
             }))
@@ -213,7 +213,7 @@ gulp.task('pages', ['posts'], function(done) {
  */
 
 // Run tests and product coverage
-gulp.task('test', ['pages'], function () {
+gulp.task('test', ['pages'], () => {
     return gulp.src('test/*.js')
         .pipe(g.mocha({
             require : ['should']
@@ -226,7 +226,7 @@ gulp.task('test', ['pages'], function () {
  */
 
 // Lint as JS files (including this one)
-gulp.task('lint', ['test'], function () {
+gulp.task('lint', ['test'], () => {
     return gulp.src([
         'gulpfile.js',
         'src/js/*.js',
@@ -244,23 +244,23 @@ gulp.task('lint', ['test'], function () {
  */
 
 // Serve files for local development
-gulp.task('serve', function(done) {
+gulp.task('serve', (done) => {
     var port = argv.p || 3000;
 
     express()
         // Set compression header for all requests
-        .use(function(req, res, next) {
+        .use((req, res, next) => {
             res.header('Content-Encoding', 'gzip');
             next();
         })
         // Static middleware
         .use(express.static('build'))
         // Serve error page
-        .use(function(req, res) {
+        .use((req, res) => {
             res.status(404)
                 .sendFile(__dirname + '/build/error.html');
         })
-        .listen(port, function() {
+        .listen(port, () => {
             g.util.log('Server listening on port', port);
             done();
         });
@@ -268,7 +268,7 @@ gulp.task('serve', function(done) {
 
 
 // Check deps with David service
-gulp.task('deps', function() {
+gulp.task('deps', () => {
     return gulp.src('package.json')
         .pipe(g.david({ update: true }))
         .pipe(g.david.reporter)
@@ -277,7 +277,7 @@ gulp.task('deps', function() {
 
 
 // Watch certain files
-gulp.task('watch', ['build'], function() {
+gulp.task('watch', ['build'], () => {
     return gulp.watch([
         'src/**/*',
         'test/*',
