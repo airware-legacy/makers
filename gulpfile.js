@@ -1,33 +1,19 @@
 var argv         = require('yargs').argv,
     Author       = require('./lib/Author'),
-    concat       = require('gulp-concat'),
-    cssNano      = require('gulp-cssnano'),
-    david        = require('gulp-david'),
     del          = require('del'),
-    eslint       = require('gulp-eslint'),
     express      = require('express'),
     extend       = require('jquery-extend'),
-    filter       = require('gulp-filter'),
-    frontMatter  = require('gulp-front-matter'),
     fs           = require('fs'),
+    g            = require('gulp-load-plugins')(),
     gulp         = require('gulp'),
-    gulpif       = require('gulp-if'),
-    gutil        = require('gulp-util'),
-    gzip         = require('gulp-gzip'),
     hb           = require('handlebars'),
     highlight    = require('highlight.js'),
-    htmlMin      = require('gulp-htmlmin'),
     layouts      = require('handlebars-layouts'),
-    less         = require('gulp-less'),
-    marked       = require('gulp-marked'),
-    mocha        = require('gulp-mocha'),
     moment       = require('moment'),
     Page         = require('./lib/Page'),
     path         = require('path'),
     Post         = require('./lib/Post'),
-    reviewerList = require('./lib/hb-helper-reviewerlist'),
-    tap          = require('gulp-tap'),
-    uglify       = require('gulp-uglify');
+    reviewerList = require('./lib/hb-helper-reviewerlist');
 
 
 // Config HB
@@ -66,11 +52,11 @@ gulp.task('clean', function(done) {
 // Copy static files to build dir
 gulp.task('static', ['clean'], function() {
     return gulp.src('src/static/**')
-        .pipe(gulpif(/robots\.txt/, tap(function(file) {
+        .pipe(g.if(/robots\.txt/, g.tap(function(file) {
             // Clear robots.txt if we're building production
             if ( process.env.TRAVIS_BRANCH == 'master' ) file.contents = new Buffer('');
         })))
-        .pipe(gzip({ append: false }))
+        .pipe(g.gzip({ append: false }))
         .pipe(gulp.dest('build'));
 });
 
@@ -82,10 +68,10 @@ gulp.task('styles', ['clean'], function() {
         'node_modules/highlight.js/styles/default.css',
         'src/less/custom.less'
     ])
-    .pipe(gulpif(/[.]less$/, less()))
-    .pipe(concat('all.min.css'))
-    .pipe(cssNano())
-    .pipe(gzip({ append: false }))
+    .pipe(g.if(/[.]less$/, g.less()))
+    .pipe(g.concat('all.min.css'))
+    .pipe(g.cssnano())
+    .pipe(g.gzip({ append: false }))
     .pipe(gulp.dest('build'));
 });
 
@@ -100,9 +86,9 @@ gulp.task('scripts', ['clean'], function() {
         'node_modules/bootstrap/dist/js/bootstrap.js',
         'src/js/*.js'
     ])
-    .pipe(concat('all.min.js'))
-    .pipe(uglify({ preserveComments: 'some' }))
-    .pipe(gzip({ append: false }))
+    .pipe(g.concat('all.min.js'))
+    .pipe(g.uglify({ preserveComments: 'some' }))
+    .pipe(g.gzip({ append: false }))
     .pipe(gulp.dest('build'));
 });
 
@@ -110,7 +96,7 @@ gulp.task('scripts', ['clean'], function() {
 // Register HB partials
 gulp.task('partials', ['clean'], function() {
     return gulp.src('src/partials/*.html')
-        .pipe(tap(function(file) {
+        .pipe(g.tap(function(file) {
             var name = path.parse(file.path).name;
             var html = file.contents.toString();
             hb.registerPartial(name, html);
@@ -121,9 +107,9 @@ gulp.task('partials', ['clean'], function() {
 // Load authors
 gulp.task('authors', ['clean'], function() {
     return gulp.src('src/authors/*.md')
-        .pipe(frontMatter())
-        .pipe(marked())
-        .pipe(tap(function(file) {
+        .pipe(g.frontMatter())
+        .pipe(g.marked())
+        .pipe(g.tap(function(file) {
             var author = new Author(extend(true, {}, file.frontMatter, {
                 slug    : path.parse(file.path).name,
                 bio     : file.contents.toString()
@@ -144,13 +130,13 @@ gulp.task('posts', ['static', 'styles', 'scripts', 'partials', 'authors'], funct
         var template = hb.compile(str);
 
         gulp.src('src/posts/*.md')
-            .pipe(frontMatter())
-            .pipe(marked({
+            .pipe(g.frontMatter())
+            .pipe(g.marked({
                 highlight: function(code) {
                     return highlight.highlightAuto(code).value;
                 }
             }))
-            .pipe(tap(function(file) {
+            .pipe(g.tap(function(file) {
                 var post = new Post(extend(true, {}, file.frontMatter, {
                     slug       : path.parse(file.path).name,
                     content    : file.contents.toString(),
@@ -167,8 +153,8 @@ gulp.task('posts', ['static', 'styles', 'scripts', 'partials', 'authors'], funct
                 file.path = post.makePath(file.path);
                 file.contents = new Buffer(template(post));
             }))
-            .pipe(htmlMin())
-            .pipe(gzip({ append: false }))
+            .pipe(g.htmlmin())
+            .pipe(g.gzip({ append: false }))
             .pipe(gulp.dest('build'))
             .on('end', function() {
                 // Sort posts by date descending
@@ -192,8 +178,8 @@ gulp.task('pages', ['posts'], function(done) {
         var rssTemplate = hb.compile(rssStr);
 
         gulp.src('src/pages/**/*.html')
-            .pipe(frontMatter())
-            .pipe(tap(function(file) {
+            .pipe(g.frontMatter())
+            .pipe(g.tap(function(file) {
                 file.data = new Page(extend(true, {}, file.frontMatter, {
                     path      : file.path,
                     posts     : data.posts,
@@ -205,17 +191,17 @@ gulp.task('pages', ['posts'], function(done) {
                 var template = hb.compile(file.contents.toString());
                 file.contents = new Buffer(template(file.data));
             }))
-            .pipe(htmlMin())
-            .pipe(gzip({ append: false }))
+            .pipe(g.htmlmin())
+            .pipe(g.gzip({ append: false }))
             .pipe(gulp.dest('build'))
-            .pipe(filter(function(file) {
+            .pipe(g.filter(function(file) {
                 return file.data.rss;
             }))
-            .pipe(tap(function(file) {
+            .pipe(g.tap(function(file) {
                 file.path = file.data.rssPath;
                 file.contents = new Buffer(rssTemplate(file.data));
             }))
-            .pipe(gzip({ append: false }))
+            .pipe(g.gzip({ append: false }))
             .pipe(gulp.dest('build'))
             .on('end', done);
     });
@@ -229,7 +215,7 @@ gulp.task('pages', ['posts'], function(done) {
 // Run tests and product coverage
 gulp.task('test', ['pages'], function () {
     return gulp.src('test/*.js')
-        .pipe(mocha({
+        .pipe(g.mocha({
             require : ['should']
         }));
 });
@@ -248,8 +234,8 @@ gulp.task('lint', ['test'], function () {
         'lib/**/*.js',
         '!node_modules/**'
     ])
-    .pipe(eslint())
-    .pipe(eslint.format());
+    .pipe(g.eslint())
+    .pipe(g.eslint.format());
 });
 
 
@@ -275,7 +261,7 @@ gulp.task('serve', function(done) {
                 .sendFile(__dirname + '/build/error.html');
         })
         .listen(port, function() {
-            gutil.log('Server listening on port', port);
+            g.util.log('Server listening on port', port);
             done();
         });
 });
@@ -284,8 +270,8 @@ gulp.task('serve', function(done) {
 // Check deps with David service
 gulp.task('deps', function() {
     return gulp.src('package.json')
-        .pipe(david({ update: true }))
-        .pipe(david.reporter)
+        .pipe(g.david({ update: true }))
+        .pipe(g.david.reporter)
         .pipe(gulp.dest('.'));
 });
 
