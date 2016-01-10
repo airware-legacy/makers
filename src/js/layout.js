@@ -1,5 +1,3 @@
-/* eslint prefer-arrow-callback: 0 */
-
 /*!
  * Custom Layout
  */
@@ -45,7 +43,7 @@
         return this.$header.outerHeight() >= this.$window.scrollTop();
     };
 
-    $(document).ready(function () {
+    $(document).ready(() => {
         new Layout();
     });
 })();

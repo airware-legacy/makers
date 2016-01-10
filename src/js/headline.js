@@ -1,5 +1,3 @@
-/* eslint prefer-arrow-callback: 0 */
-
 /*!
  * Custom Headline
  */
@@ -11,15 +9,15 @@
         this.$el = $el;
     }
 
-    Headline.prototype.isEmpty = function () {
+    Headline.prototype.isEmpty = function() {
         return this.$el.length === 0;
     };
 
-    Headline.prototype.isExternal = function () {
+    Headline.prototype.isExternal = function() {
         return this.$el.hasClass('external');
     };
 
-    Headline.prototype.onClick = function () {
+    Headline.prototype.onClick = function() {
         if (this.isExternal()) {
             window.open(this.$el.data('href'), '_blank');
         } else {
@@ -28,9 +26,9 @@
     };
 
     var $document = $(document);
-    $document.ready(function () {
+    $document.ready(() => {
 
-        $document.on('click', '.card', function (e) {
+        $document.on('click', '.card', (e) => {
             var headline = new Headline($(e.currentTarget).find('.headline-cnt'));
 
             if (!headline.isEmpty()) {

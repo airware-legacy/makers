@@ -77,21 +77,26 @@ gulp.task('styles', ['clean'], () => {
     .pipe(gulp.dest('build'));
 });
 
+
 // Minify and combine all JavaScript
 gulp.task('scripts', ['clean'], () => {
-    return gulp.src([
-        'node_modules/jquery/dist/jquery.js',
-        'node_modules/velocity-animate/velocity.js',
-        'node_modules/velocity-animate/velocity.ui.js',
-        'node_modules/hammerjs/hammer.js',
-        'node_modules/jquery-hammerjs/jquery.hammer.js',
-        'node_modules/bootstrap/dist/js/bootstrap.js',
-        'src/js/*.js'
-    ])
-    .pipe(g.concat('all.min.js'))
-    .pipe(g.uglify({ preserveComments: 'some' }))
-    .pipe(g.gzip({ append: false }))
-    .pipe(gulp.dest('build'));
+    return gulp.src('src/js/*.js')
+        .pipe(g.babel({
+            presets  : ['es2015'],
+            comments : true
+        }))
+        .pipe(g.addSrc.prepend([
+            'node_modules/jquery/dist/jquery.js',
+            'node_modules/velocity-animate/velocity.js',
+            'node_modules/velocity-animate/velocity.ui.js',
+            'node_modules/hammerjs/hammer.js',
+            'node_modules/jquery-hammerjs/jquery.hammer.js',
+            'node_modules/bootstrap/dist/js/bootstrap.js'
+        ]))
+        .pipe(g.concat('all.min.js'))
+        .pipe(g.uglify({ preserveComments: 'some' }))
+        .pipe(g.gzip({ append: false }))
+        .pipe(gulp.dest('build'));
 });
 
 
@@ -233,7 +238,7 @@ gulp.task('lint', ['test'], () => {
         'gulpfile.js',
         'src/js/*.js',
         'test/*.js',
-        'lib/**/*.js',
+        'lib/*.js',
         '!node_modules/**'
     ])
     .pipe(g.eslint())

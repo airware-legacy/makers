@@ -28,6 +28,17 @@ describe('The dynamically concatenated and minified JS...', () => {
         str.should.containEql('jQuery JavaScript Library');
     });
 
+    it('Should contain VelocityJS', () => {
+        str.should.containEql('velocityQueueEntryFlag');
+        str.should.containEql('Velocity UI Pack');
+    });
+
+    it('Should contain HammerJS', () => {
+        str.should.containEql('Hammer.JS');
+        str.should.containEql('data("hammer")');
+    });
+
+
     it('Should contain Bootstrap', () => {
         str.should.containEql('Bootstrap');
     });
