@@ -27,10 +27,6 @@ hb.registerHelper('reviewerList', reviewerList);
 var data;
 
 
-/* *
- * Build Step 0
- */
-
 // Clean data and build dirs
 gulp.task('clean', (done) => {
     data = {
@@ -47,12 +43,8 @@ gulp.task('clean', (done) => {
 });
 
 
-/* *
- * Build Step 1
- */
-
 // Copy static files to build dir
-gulp.task('static', ['clean'], () => {
+gulp.task('static', () => {
     return gulp.src('src/static/**')
         .pipe(g.if(/robots\.txt/, g.tap((file) => {
             if ( process.env.TRAVIS_BRANCH == 'master' )
@@ -64,7 +56,7 @@ gulp.task('static', ['clean'], () => {
 
 
 // Minify and combine all CSS
-gulp.task('styles', ['clean'], () => {
+gulp.task('styles', () => {
     return gulp.src([
         'node_modules/bootstrap/dist/css/bootstrap.css',
         'node_modules/highlight.js/styles/default.css',
@@ -79,7 +71,7 @@ gulp.task('styles', ['clean'], () => {
 
 
 // Minify and combine all JavaScript
-gulp.task('scripts', ['clean'], () => {
+gulp.task('scripts', () => {
     return gulp.src('src/js/*.js')
         .pipe(g.babel({
             presets  : ['es2015'],
@@ -101,7 +93,7 @@ gulp.task('scripts', ['clean'], () => {
 
 
 // Register HB partials
-gulp.task('partials', ['clean'], () => {
+gulp.task('partials', () => {
     return gulp.src('src/partials/*.html')
         .pipe(g.tap((file) => {
             var name = path.parse(file.path).name;
@@ -112,7 +104,7 @@ gulp.task('partials', ['clean'], () => {
 
 
 // Load authors
-gulp.task('authors', ['clean'], () => {
+gulp.task('authors', () => {
     return gulp.src('src/authors/*.md')
         .pipe(g.frontMatter())
         .pipe(g.marked())
@@ -126,12 +118,8 @@ gulp.task('authors', ['clean'], () => {
 });
 
 
-/* *
- * Build Step 2
- */
-
 // Generate posts
-gulp.task('posts', ['static', 'styles', 'scripts', 'partials', 'authors'], (done) => {
+gulp.task('posts', (done) => {
     fs.readFile('src/partials/post.html', 'utf-8', (err, str) => {
         if (err) throw err;
         var template = hb.compile(str);
@@ -174,12 +162,9 @@ gulp.task('posts', ['static', 'styles', 'scripts', 'partials', 'authors'], (done
 
 });
 
-/* *
- * Build Step 3
- */
 
 // Generate posts
-gulp.task('pages', ['posts'], (done) => {
+gulp.task('pages', (done) => {
     fs.readFile('src/partials/rss.xml', 'utf-8', (err, rssStr) => {
         if (err) throw err;
         var rssTemplate = hb.compile(rssStr);
@@ -215,12 +200,8 @@ gulp.task('pages', ['posts'], (done) => {
 });
 
 
-/* *
- * Build Step 4
- */
-
 // Run tests and product coverage
-gulp.task('test', ['pages'], () => {
+gulp.task('test', () => {
     return gulp.src('test/*.js')
         .pipe(g.mocha({
             require : ['should']
@@ -228,12 +209,8 @@ gulp.task('test', ['pages'], () => {
 });
 
 
-/* *
- * Build Step 5
- */
-
 // Lint as JS files (including this one)
-gulp.task('lint', ['test'], () => {
+gulp.task('lint', () => {
     return gulp.src([
         'gulpfile.js',
         'src/js/*.js',
@@ -245,10 +222,6 @@ gulp.task('lint', ['test'], () => {
     .pipe(g.eslint.format());
 });
 
-
-/* * 
- * Helper Tasks
- */
 
 // Serve files for local development
 gulp.task('serve', (done) => {
@@ -284,29 +257,38 @@ gulp.task('deps', () => {
 
 
 // Watch certain files
-gulp.task('watch', ['build'], () => {
-    return gulp.watch([
-        'src/**/*',
-        'test/*',
-        'lib/**'
-    ], ['build']);
+gulp.task('watch', () => {
+    var paths = [
+        'src/**/*.*',
+        'test/*.js',
+        'lib/*.js'
+    ];
+
+    gulp.watch(paths, ['build'])
+        .on('change', (e) => {
+            g.util.log('File', e.path, 'was', e.type);
+        });
 });
 
 
 // Build Macro
-gulp.task('build', [
-    // Step 0: 'clean'
-    // Step 1: 'static', 'styles', 'scripts', 'partials', 'authors'
-    // Step 2: 'posts'
-    // Step 3: 'pages'
-    // Step 4: 'test',
-    'lint'
-]);
-
+gulp.task('build', (done) => {
+    g.sequence(
+        'clean',
+        ['static', 'styles', 'scripts', 'partials', 'authors'],
+        'posts',
+        'pages',
+        'test',
+        'lint'
+    )(done);
+});
 
 // What to do when you run `$ gulp`
-gulp.task('default', [
-    'watch',
-    'serve',
-    'deps'
-]);
+gulp.task('default', (done) => {
+    g.sequence(
+        'build',
+        'watch',
+        'serve',
+        'deps'
+    )(done);
+});
