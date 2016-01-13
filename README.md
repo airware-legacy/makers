@@ -82,3 +82,47 @@ To Do
 * Author pages
 * Separate test tasks for rapid local development versus full tests for CI runs
 * Upgrade to Gulp 4 (when out)
+
+Licenses
+--------
+
+### Content
+
+The writing, visual design, imagery, video, and other media of the Airware Makers Blog are subject to copyright as this agreement below.
+
+```
+You are granted a limited, royalty-free, non-sublicensable,
+non-exclusive license to copy, reproduce, and privately display the
+content for the sole and limited purpose of testing an installation of
+the code. You may not distribute, publicly display, or create derivative
+works of the content. The code is licensed under separate terms.
+
+THE CONTENT IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+THE CONTENT CREATORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES
+OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+ARISING FROM, OUT OF, OR IN CONNECTION WITH THE CONTENT OR THE USE OF THE
+CONTENT.
+```
+
+
+### Code
+
+The code of the Airware Makers blog is covered by the Apache V2 software license. You're welcome to use it as inspiration or borrow specific peices for your own project.
+
+```
+Copyright 2016 Airware
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+```
