@@ -46,7 +46,7 @@ gulp.task('clean', (done) => {
 // Copy static files to build dir
 gulp.task('static', () => {
     return gulp.src('src/static/**')
-        .pipe(g.if(/robots\.txt/, g.tap((file) => {
+        .pipe(g.if('robots.txt', g.tap((file) => {
             if ( process.env.TRAVIS_BRANCH == 'master' )
                 file.contents = new Buffer('');
         })))
