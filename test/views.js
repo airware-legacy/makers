@@ -1,3 +1,5 @@
+'use strict';
+
 var argv   = require('yargs').argv,
     fs     = require('fs'),
     jsdom  = require('jsdom').jsdom,
