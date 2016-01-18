@@ -64,7 +64,7 @@ gulp.task('styles', () => {
         'node_modules/highlight.js/styles/default.css',
         'src/less/custom.less'
     ])
-    .pipe(g.if(/[.]less$/, g.less()))
+    .pipe(g.if('*.less', g.less()))
     .pipe(g.concat('all.min.css'))
     .pipe(g.cssnano())
     .pipe(gulp.dest('build'));
