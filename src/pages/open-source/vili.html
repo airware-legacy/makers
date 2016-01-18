@@ -33,23 +33,65 @@ class: open-source
 			<div class="docs-content">
 				<h2 id="overview" class="docs-title">Overview</h2>
 				<p class="docs-desc">
-					This is the overview section
+                    <a href="http://kubernetes.io/">Kubernetes</a> is an awesome open source project, and we at Airware use it as the foundation of our Airware Cloud infrastructure. Google’s years of experience with containers shines in the quality of the Kubernetes architecture. The thing we love most about Kubernetes is that it provides a REST API and enables us to build powerful applications to manage our infrastructure. Vili is such an application. It’s built to:
+				</p>
+                <ul>
+                    <li>Manage both manual and continuous deployments</li>
+                    <li>Gate production deployments through our QA process</li>
+                    <li>Provide transparency into the current state of our infrastructure</li>
+				</ul>
+
+				<h2 id="background" class="docs-title">Background</h2>
+				<p class="docs-desc">
+					Some background is necessary to lay out the problem we faced that Vili was built to solve. At Airware, we:
+				</p>
+                <ul>
+                    <li>use <a href="https://github.com/">GitHub</a> for version control</li>
+                    <li>have a <strong>microservices</strong> architecture</li>
+                    <li>write code in multiple languages and frameworks (Go, Python, Node.js), and build <a href="https://www.docker.com/">Docker</a> images to abstract away this complexity</li>
+                    <li>tag Docker images with the Git <strong>SHA</strong> and <strong>branch</strong> they were built from</li>
+                    <li>push Docker images to <a href="https://quay.io/">Quay.io</a>, which has a full <a href="http://docs.quay.io/api/swagger/">API</a> we can query for images</li>
+                    <li>use <a href="http://kubernetes.io/v1.1/docs/user-guide/namespaces.html">Kubernetes namespaces</a> to manage environments</li>
+                    <li>use <a href="http://kubernetes.io/v1.1/docs/user-guide/replication-controller.html">replication controllers</a> to deploy applications</li>
+                    <li>use <a href="http://kubernetes.io/v1.1/docs/user-guide/pods.html">pods</a> to run jobs</li>
+                    <li>use <a href="https://slack.com/">Slack</a> for team messaging</li>
+                </ul>
+				<p class="docs-desc">
+                    Kubernetes takes a lot of the complexity out of managing this infrastructure, but it doesn't have access to our Docker image repository, and writing replication controllers manually for each new deployment in each environment is prone to error. There is also no out-of-the-box solution in Kubernetes for doing continuous deployments, notifications, or QA gating.
 				</p>
 
-				<h2 id="install" class="docs-title">Installation</h2>
+				<h2 id="solution" class="docs-title">Solution</h2>
 				<p class="docs-desc">
-					This is the install section
+                    Vili solves these problems by building a framework that combines Quay.io, GitHub, Firebase and Slack to create, manage and get insights into Kubernetes replication controllers, pods and nodes:
+                    <ul>
+                        <li>Quay.io stores all versions of our microservice applications. Vili uses the Quay.io API to query versions that are available</li>
+                        <li>GitHub stores YAML replication controller and pod templates, and environment variables that are used to populate the templates</li>
+                        <li>Firebase stores approval state for each application version, as well as deployment information</li>
+                        <li>Slack is used to notify the team about deployments and to send deploy commands to Vili</li>
+                    </ul>
+                    Vili also uses Okta for authentication, allowing teams to limit who has access to deployments.
 				</p>
-
-				<h2 id="examples" class="docs-title">Examples</h2>
 				<p class="docs-desc">
-					This is the examples section
+                    Vili provides a clean user interface to hide all this complexity. After users log into the UI, the first thing they do is navigate to an environment. Within that environment, they see a list of applications and jobs. They can navigate to one of those and view a full list of all versions, sorted with most recent one at the top. If a version is currently deployed, it is highlighed in this list. Users can click the "deploy" button to start the deployment process for any application.
+                    <div class="docs-images" data-lightbox="1">
+                        <img src="/img/vili/app_home_page.png" data-lightbox-img="0" />
+                        <img src="/img/vili/deployment_start.png" data-lightbox-img="1" />
+                        <img src="/img/vili/deployment_in_progress.png" data-lightbox-img="2" />
+                    </div>
+                </p>
+				<p class="docs-desc">
+                    After builds are verified in an "approval environment", the QA team can click the "approve" button in the app home page, which then makes the build deployable in production. This puts a system in place for robust QA gating of production deployments.
+                </p>
+
+				<h2 id="setup" class="docs-title">Setup</h2>
+				<p class="docs-desc">
+					Please read the <a href="https://github.com/airware/vili#setup" target="_blank">setup instructions</a> on GitHub to get going with Vili.
 				</p>
 			</div>
 
 			<div class="docs-links">
-				<a href="https://github.com/airware" target="_blank" class="btn btn-open-source github-btn">
-					View on Github
+				<a href="https://github.com/airware/vili" target="_blank" class="btn btn-open-source github-btn">
+					View on GitHub
 				</a>
 			</div>
 		</section>
