@@ -245,6 +245,19 @@ gulp.task('deps', () => {
 });
 
 
+// Examine package.json for unused deps (except for frontend and gulp)
+gulp.task('package', g.depcheck({
+    ignoreMatches: [
+        'babel-preset-es2015',
+        'bootstrap',
+        'gulp-*',
+        'jquery-hammerjs',
+        'should',
+        'velocity-animate'
+    ]
+}));
+
+
 // Watch certain files
 gulp.task('watch', () => {
     let paths = [
@@ -296,6 +309,7 @@ gulp.task('deploy', () => {
 gulp.task('default', (done) => {
     g.sequence(
         'deps',
+        'package',
         'build',
         'watch',
         'serve'
