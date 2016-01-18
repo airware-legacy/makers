@@ -1,5 +1,3 @@
-/* eslint prefer-arrow-callback: 0 */
-
 /*!
  * Custom Post
  */
@@ -23,13 +21,13 @@
     };
 
     Post.prototype.initImages = function () {
-        this.$imgs.each(function (index) {
+        this.$imgs.each(function(index) {
             $(this).attr('data-lightbox-img', index);
         });
     };
 
     Post.prototype.initTables = function () {
-        this.$tables.each(function () {
+        this.$tables.each(function() {
             $(this)
                .addClass('table')
                .wrap('<div class="table-responsive"></div>');
@@ -37,12 +35,12 @@
     };
 
     Post.prototype.initLinks = function () {
-        this.$links.each(function () {
+        this.$links.each(function() {
             $(this).attr('target', '_blank');
         });
     };
 
-    $(document).ready(function () {
+    $(document).ready(() =>{
         new Post($('.post'));
     });
 })();

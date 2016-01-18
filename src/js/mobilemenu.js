@@ -1,5 +1,3 @@
-/* eslint prefer-arrow-callback: 0 */
-
 /*!
  * Custom Mobile Menu
  */
@@ -106,7 +104,7 @@
         }
     };
 
-    $(document).ready(function () {
+    $(document).ready(() => {
         new MobileMenu();
     });
 })();

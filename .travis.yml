@@ -2,33 +2,22 @@ sudo: false
 language: node_js
 node_js:
 - '5'
-- '4.2'
-- '4.1'
-- '4.0'
+- '4'
 env:
   global:
   - secure: CALxAOIx4Bw3xSk31f3xmrDEfawmPeWXZByo14hrPUESiFytd6vOSUxRw7Q096fklROxuqsSR+elXK7IPlzxpdUJN3FGS2J8YrdV9cgLZSCdEXvIBGY73PMyk8SGjlaQnZfR5i7RlALaOGm3fzvkMu89QYSw8Jbkv0h3U3r/V/k/CJUUaTboQUkZC7OI6Wluzme+88L58i3sgtHv6mTVYPjIi4sr3WgmKQ1I8fZ7iOPYoGUUhdgauI4KTlgeMEYF3NO9wBBLLcMsHcq2glbBUgWqgTvG5wvROhb5IxRg9cc0qPuPU+cnjAIWgwv7AqDGpQ5D3SSFu4X+er1z10/Kn0DpIMcIW6hzA40mi3IaZp3VMqp/uCiPjjkg71vC7iQLMCdlN7NRcMI6R3HYabPnXznhLXjAJGA+Nn6kDcNNKJEupllDRrAoITl8LSDBg9fE489xtvosQ8SEg+JcvKubZSAXCwgI0/Yj4VO6ZPsiEpuEIvJ/VghpCFvCYPB+nMFxdUelE8lPv7O6MBkxuI/3lFbxUQEHcYDAg0h3/c2rjymAb49Inmrwyu9375MFfejQ2R/FCWazsgL1RhUkY4EpHPIu3KP4mZFS/Vwx0/AZ2xLQGNUKTFwtfrUHBRk+nWLmWxj4joQj5kQhbjZJ234v13bg73K2UYEL68xctBeE194=
   - secure: B2TVN7pA6GJxqUUy4vJm/tSz/544oJJrJ3+zfsd2XkGzgjPKCVFwwtPgjIYH97FHU5QZhx2Y3V6PqxgHgscICISEiDxI0IqkomZ4UWi5/EyUSdlvcuwUot9YVAmwNgcj4wf1MVYh3xge7HFqeVFcBgK/XDrr58yHt7TzuiBrH+rDu9HCpZWAUSlfLGk827vnqfrSAdlGnTwG/CT6rK2qLn0V27JMQuofLDFrd69Qw6eRWabO+SBaR24kD1uQaOba0iK8qi712iNQowAyR5ZOSiPmdHjJ5U2kxQY9sjOfXfecyxDWiwYZrEdKP5imVY11034+Vi9DHnEWa1mPffa9nR0ZfLCXV85HpaHdDisx8zX6w6KjRrJ6+NGnGQl7FpfLg7OX7XsYgxidhl/KJy5LAVgDisWBXMJM1oYse7uzjGz0lj8MGnsedUCRa15fo4QYa+dVQ3zxXFzdF52h4IHu+rsZFIJU2NnzbkNbJeL5SdeLvlQ/qB0v2eSQbEFYEqIvY/kjnYmW7vBNO4ij+G/RL7IZtR5/nk5Ta3xsWdUFl+GvZJSef91VOggZk7NIuIZKVAJc1ka4t1qmxPr1phXuanA8BkX2EoYPt8/NMQOR7mnbOrGoxopyxoTEkRmpHABKkDcO3RyQujoK3yIAZ0FC400x+WZ77iYHYNfq3eTbEp0=
+script: gulp build
 deploy:
-- provider: s3
-  region: us-east-1
-  access_key_id: $AWS_ACCESS_KEY_ID
-  secret_access_key: $AWS_SECRET_ACCESS_KEY
-  detect_encoding: true
-  local_dir: build
+- provider: script
+  script: gulp deploy -b airware-makers
   skip_cleanup: true
-  bucket: airware-makers
   on:
     branch: master
-    node_js: '4.2'
-- provider: s3
-  region: us-east-1
-  access_key_id: $AWS_ACCESS_KEY_ID
-  secret_access_key: $AWS_SECRET_ACCESS_KEY
-  detect_encoding: true
-  local_dir: build
+    node_js: '4'
+- provider: script
+  script: gulp deploy -b airware-makers-staging
   skip_cleanup: true
-  bucket: airware-makers-staging
   on:
     branch: develop
-    node_js: '4.2'
+    node_js: '4'

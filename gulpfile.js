@@ -27,10 +27,6 @@ hb.registerHelper('reviewerList', reviewerList);
 var data;
 
 
-/* *
- * Build Step 0
- */
-
 // Clean data and build dirs
 gulp.task('clean', (done) => {
     data = {
@@ -47,24 +43,19 @@ gulp.task('clean', (done) => {
 });
 
 
-/* *
- * Build Step 1
- */
-
 // Copy static files to build dir
-gulp.task('static', ['clean'], () => {
+gulp.task('static', () => {
     return gulp.src('src/static/**')
-        .pipe(g.if(/robots\.txt/, g.tap((file) => {
+        .pipe(g.if('robots.txt', g.tap((file) => {
             if ( process.env.TRAVIS_BRANCH == 'master' )
                 file.contents = new Buffer('');
         })))
-        .pipe(g.gzip({ append: false }))
         .pipe(gulp.dest('build'));
 });
 
 
 // Minify and combine all CSS
-gulp.task('styles', ['clean'], () => {
+gulp.task('styles', () => {
     return gulp.src([
         'node_modules/bootstrap/dist/css/bootstrap.css',
         'node_modules/highlight.js/styles/default.css',
@@ -73,30 +64,33 @@ gulp.task('styles', ['clean'], () => {
     .pipe(g.if(/[.]less$/, g.less()))
     .pipe(g.concat('all.min.css'))
     .pipe(g.cssnano())
-    .pipe(g.gzip({ append: false }))
     .pipe(gulp.dest('build'));
 });
 
+
 // Minify and combine all JavaScript
-gulp.task('scripts', ['clean'], () => {
-    return gulp.src([
-        'node_modules/jquery/dist/jquery.js',
-        'node_modules/velocity-animate/velocity.js',
-        'node_modules/velocity-animate/velocity.ui.js',
-        'node_modules/hammerjs/hammer.js',
-        'node_modules/jquery-hammerjs/jquery.hammer.js',
-        'node_modules/bootstrap/dist/js/bootstrap.js',
-        'src/js/*.js'
-    ])
-    .pipe(g.concat('all.min.js'))
-    .pipe(g.uglify({ preserveComments: 'some' }))
-    .pipe(g.gzip({ append: false }))
-    .pipe(gulp.dest('build'));
+gulp.task('scripts', () => {
+    return gulp.src('src/js/*.js')
+        .pipe(g.babel({
+            presets  : ['es2015'],
+            comments : true
+        }))
+        .pipe(g.addSrc.prepend([
+            'node_modules/jquery/dist/jquery.js',
+            'node_modules/velocity-animate/velocity.js',
+            'node_modules/velocity-animate/velocity.ui.js',
+            'node_modules/hammerjs/hammer.js',
+            'node_modules/jquery-hammerjs/jquery.hammer.js',
+            'node_modules/bootstrap/dist/js/bootstrap.js'
+        ]))
+        .pipe(g.concat('all.min.js'))
+        .pipe(g.uglify({ preserveComments: 'some' }))
+        .pipe(gulp.dest('build'));
 });
 
 
 // Register HB partials
-gulp.task('partials', ['clean'], () => {
+gulp.task('partials', () => {
     return gulp.src('src/partials/*.html')
         .pipe(g.tap((file) => {
             var name = path.parse(file.path).name;
@@ -107,7 +101,7 @@ gulp.task('partials', ['clean'], () => {
 
 
 // Load authors
-gulp.task('authors', ['clean'], () => {
+gulp.task('authors', () => {
     return gulp.src('src/authors/*.md')
         .pipe(g.frontMatter())
         .pipe(g.marked())
@@ -121,12 +115,8 @@ gulp.task('authors', ['clean'], () => {
 });
 
 
-/* *
- * Build Step 2
- */
-
 // Generate posts
-gulp.task('posts', ['static', 'styles', 'scripts', 'partials', 'authors'], (done) => {
+gulp.task('posts', (done) => {
     fs.readFile('src/partials/post.html', 'utf-8', (err, str) => {
         if (err) throw err;
         var template = hb.compile(str);
@@ -156,7 +146,6 @@ gulp.task('posts', ['static', 'styles', 'scripts', 'partials', 'authors'], (done
                 file.contents = new Buffer(template(post));
             }))
             .pipe(g.htmlmin())
-            .pipe(g.gzip({ append: false }))
             .pipe(gulp.dest('build'))
             .on('end', () => {
                 // Sort posts by date descending
@@ -169,12 +158,9 @@ gulp.task('posts', ['static', 'styles', 'scripts', 'partials', 'authors'], (done
 
 });
 
-/* *
- * Build Step 3
- */
 
 // Generate posts
-gulp.task('pages', ['posts'], (done) => {
+gulp.task('pages', (done) => {
     fs.readFile('src/partials/rss.xml', 'utf-8', (err, rssStr) => {
         if (err) throw err;
         var rssTemplate = hb.compile(rssStr);
@@ -194,7 +180,6 @@ gulp.task('pages', ['posts'], (done) => {
                 file.contents = new Buffer(template(file.data));
             }))
             .pipe(g.htmlmin())
-            .pipe(g.gzip({ append: false }))
             .pipe(gulp.dest('build'))
             .pipe(g.filter((file) => {
                 return file.data.rss;
@@ -203,19 +188,14 @@ gulp.task('pages', ['posts'], (done) => {
                 file.path = file.data.rssPath;
                 file.contents = new Buffer(rssTemplate(file.data));
             }))
-            .pipe(g.gzip({ append: false }))
             .pipe(gulp.dest('build'))
             .on('end', done);
     });
 });
 
 
-/* *
- * Build Step 4
- */
-
 // Run tests and product coverage
-gulp.task('test', ['pages'], () => {
+gulp.task('test', () => {
     return gulp.src('test/*.js')
         .pipe(g.mocha({
             require : ['should']
@@ -223,17 +203,13 @@ gulp.task('test', ['pages'], () => {
 });
 
 
-/* *
- * Build Step 5
- */
-
 // Lint as JS files (including this one)
-gulp.task('lint', ['test'], () => {
+gulp.task('lint', () => {
     return gulp.src([
         'gulpfile.js',
         'src/js/*.js',
         'test/*.js',
-        'lib/**/*.js',
+        'lib/*.js',
         '!node_modules/**'
     ])
     .pipe(g.eslint())
@@ -241,23 +217,12 @@ gulp.task('lint', ['test'], () => {
 });
 
 
-/* * 
- * Helper Tasks
- */
-
 // Serve files for local development
 gulp.task('serve', (done) => {
     var port = argv.p || 3000;
 
     express()
-        // Set compression header for all requests
-        .use((req, res, next) => {
-            res.header('Content-Encoding', 'gzip');
-            next();
-        })
-        // Static middleware
         .use(express.static('build'))
-        // Serve error page
         .use((req, res) => {
             res.status(404)
                 .sendFile(__dirname + '/build/error.html');
@@ -279,29 +244,58 @@ gulp.task('deps', () => {
 
 
 // Watch certain files
-gulp.task('watch', ['build'], () => {
-    return gulp.watch([
-        'src/**/*',
-        'test/*',
-        'lib/**'
-    ], ['build']);
+gulp.task('watch', () => {
+    var paths = [
+        'src/**/*.*',
+        'test/*.js',
+        'lib/*.js'
+    ];
+
+    gulp.watch(paths, ['build'])
+        .on('change', (e) => {
+            g.util.log('File', e.path, 'was', e.type);
+        });
 });
 
 
 // Build Macro
-gulp.task('build', [
-    // Step 0: 'clean'
-    // Step 1: 'static', 'styles', 'scripts', 'partials', 'authors'
-    // Step 2: 'posts'
-    // Step 3: 'pages'
-    // Step 4: 'test',
-    'lint'
-]);
+gulp.task('build', (done) => {
+    g.sequence(
+        'clean',
+        ['static', 'styles', 'scripts', 'partials', 'authors'],
+        'posts',
+        'pages',
+        'test',
+        'lint'
+    )(done);
+});
+
+
+// Deploy to AWS S3
+gulp.task('deploy', () => {
+    var publisher = g.awspublish.create({
+        accessKeyId     : process.env.AWS_ACCESS_KEY_ID,
+        secretAccessKey : process.env.AWS_SECRET_ACCESS_KEY,
+        region          : 'us-west-2',
+        params : {
+            Bucket : argv.b
+        }
+    });
+
+    return gulp.src('build/**')
+        .pipe(g.awspublish.gzip())
+        .pipe(publisher.publish())
+        .pipe(publisher.sync())
+        .pipe(g.awspublish.reporter());
+});
 
 
 // What to do when you run `$ gulp`
-gulp.task('default', [
-    'watch',
-    'serve',
-    'deps'
-]);
+gulp.task('default', (done) => {
+    g.sequence(
+        'deps',
+        'build',
+        'watch',
+        'serve'
+    )(done);
+});

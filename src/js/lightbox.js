@@ -1,5 +1,3 @@
-/* eslint prefer-arrow-callback: 0 */
-
 /*!
  * Custom Lightbox
  */
@@ -98,7 +96,7 @@
 
         this._current = $current.data('lightbox-img');
 
-        $imgs.each(function (index) {
+        $imgs.each(function(index) {
             var src = $(this).attr('src');
             html += '<img src="' + src + '" class="airware-lightbox-img ' + (index === self._current ? 'active': 'hidden') + '">';
         });
@@ -126,7 +124,7 @@
                 });
             },
 
-            complete: function () {
+            complete: function() {
                 self.$close.addClass('active');
             }
         });
@@ -150,7 +148,7 @@
                     delay: self.options.overlay.transitions.delay,
                     duration: self.options.content.transitions.duration,
 
-                    complete: function () {
+                    complete: function() {
                         self.$el.addClass('hidden');
                         self._scrollLock(false);
                         self.destroy();
@@ -216,10 +214,10 @@
     };
 
     var $document = $(document);
-    $document.ready(function () {
+    $document.ready(() => {
         var lightbox = new Lightbox();
 
-        $document.on('click', '[data-lightbox-img]', function (e) {
+        $document.on('click', '[data-lightbox-img]', (e) => {
             var $currentImg = $(e.currentTarget);
             var $imgs = $currentImg.closest('[data-lightbox]').find('[data-lightbox-img]');
 
