@@ -40,7 +40,7 @@
         });
     };
 
-    $(document).ready(() =>{
+    $(document).ready(() => {
         new Post($('.post'));
     });
 })();

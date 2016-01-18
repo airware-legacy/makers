@@ -1,13 +1,13 @@
 'use strict';
 
-let fs = require('fs');
+const fs = require('fs');
 
 
 describe('The build/fonts directory...', () => {
 
     let files = [];
 
-    before((done) => {
+    before(done => {
         fs.readdir('build/fonts/', (err, arr) => {
             if (err) throw err;
             files = arr;

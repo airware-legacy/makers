@@ -1,6 +1,6 @@
 'use strict';
 
-let argv         = require('yargs').argv,
+const argv       = require('yargs').argv,
     Author       = require('./lib/Author'),
     del          = require('del'),
     express      = require('express'),
@@ -15,7 +15,8 @@ let argv         = require('yargs').argv,
     Page         = require('./lib/Page'),
     path         = require('path'),
     Post         = require('./lib/Post'),
-    reviewerList = require('./lib/hb-helper-reviewerlist');
+    reviewerList = require('./lib/hb-helper-reviewerlist'),
+    rules        = require( 'eslint-rules-es2015' );
 
 
 // Config HB
@@ -48,7 +49,7 @@ gulp.task('clean', () => {
 // Copy static files to build dir
 gulp.task('static', () => {
     return gulp.src('src/static/**')
-        .pipe(g.if('robots.txt', g.tap((file) => {
+        .pipe(g.if('robots.txt', g.tap(file => {
             if ( process.env.TRAVIS_BRANCH == 'master' )
                 file.contents = new Buffer('');
         })))
@@ -94,9 +95,9 @@ gulp.task('scripts', () => {
 // Register HB partials
 gulp.task('partials', () => {
     return gulp.src('src/partials/*.html')
-        .pipe(g.tap((file) => {
-            let name = path.parse(file.path).name;
-            let html = file.contents.toString();
+        .pipe(g.tap(file => {
+            const name = path.parse(file.path).name;
+            const html = file.contents.toString();
             hb.registerPartial(name, html);
         }));
 });
@@ -107,8 +108,8 @@ gulp.task('authors', () => {
     return gulp.src('src/authors/*.md')
         .pipe(g.frontMatter())
         .pipe(g.marked())
-        .pipe(g.tap((file) => {
-            let author = new Author(extend(true, {}, file.frontMatter, {
+        .pipe(g.tap(file => {
+            const author = new Author(extend(true, {}, file.frontMatter, {
                 slug    : path.parse(file.path).name,
                 bio     : file.contents.toString()
             }));
@@ -118,20 +119,20 @@ gulp.task('authors', () => {
 
 
 // Generate posts
-gulp.task('posts', (done) => {
+gulp.task('posts', done => {
     fs.readFile('src/partials/post.html', 'utf-8', (err, str) => {
         if (err) throw err;
-        let template = hb.compile(str);
+        const template = hb.compile(str);
 
         gulp.src('src/posts/*.md')
             .pipe(g.frontMatter())
             .pipe(g.marked({
-                highlight: (code) => {
+                highlight: code => {
                     return highlight.highlightAuto(code).value;
                 }
             }))
-            .pipe(g.tap((file) => {
-                let post = new Post(extend(true, {}, file.frontMatter, {
+            .pipe(g.tap(file => {
+                const post = new Post(extend(true, {}, file.frontMatter, {
                     path       : file.path,
                     content    : file.contents.toString(),
                     authors    : data.authors,
@@ -162,14 +163,14 @@ gulp.task('posts', (done) => {
 
 
 // Generate posts
-gulp.task('pages', (done) => {
+gulp.task('pages', done => {
     fs.readFile('src/partials/rss.xml', 'utf-8', (err, rssStr) => {
         if (err) throw err;
-        let rssTemplate = hb.compile(rssStr);
+        const rssTemplate = hb.compile(rssStr);
 
         gulp.src('src/pages/**/*.html')
             .pipe(g.frontMatter())
-            .pipe(g.tap((file) => {
+            .pipe(g.tap(file => {
                 file.data = new Page(extend(true, {}, file.frontMatter, {
                     path      : file.path,
                     posts     : data.posts,
@@ -178,15 +179,15 @@ gulp.task('pages', (done) => {
                     pageTitle : data.pageTitle
                 }));
                 file.path = file.data.path;
-                let template = hb.compile(file.contents.toString());
+                const template = hb.compile(file.contents.toString());
                 file.contents = new Buffer(template(file.data));
             }))
             .pipe(g.htmlmin())
             .pipe(gulp.dest('build'))
-            .pipe(g.filter((file) => {
+            .pipe(g.filter(file => {
                 return file.data.rss;
             }))
-            .pipe(g.tap((file) => {
+            .pipe(g.tap(file => {
                 file.path = file.data.rssPath;
                 file.contents = new Buffer(rssTemplate(file.data));
             }))
@@ -214,14 +215,14 @@ gulp.task('lint', () => {
         'lib/*.js',
         '!node_modules/**'
     ])
-    .pipe(g.eslint())
+    .pipe(g.eslint({ rules }))
     .pipe(g.eslint.format());
 });
 
 
 // Serve files for local development
-gulp.task('serve', (done) => {
-    let port = argv.p || 3000;
+gulp.task('serve', done => {
+    const port = argv.p || 3000;
 
     express()
         .use(express.static('build'))
@@ -251,7 +252,9 @@ gulp.task('package', g.depcheck({
         'babel-preset-es2015',
         'bootstrap',
         'gulp-*',
+        'hammerjs',
         'jquery-hammerjs',
+        'jquery',
         'should',
         'velocity-animate'
     ]
@@ -260,21 +263,21 @@ gulp.task('package', g.depcheck({
 
 // Watch certain files
 gulp.task('watch', () => {
-    let paths = [
+    const paths = [
         'src/**/*.*',
         'test/*.js',
         'lib/*.js'
     ];
 
     gulp.watch(paths, ['build'])
-        .on('change', (e) => {
+        .on('change', e => {
             g.util.log('File', e.path, 'was', e.type);
         });
 });
 
 
 // Build Macro
-gulp.task('build', (done) => {
+gulp.task('build', done => {
     g.sequence(
         'clean',
         ['static', 'styles', 'scripts', 'partials', 'authors'],
@@ -288,7 +291,7 @@ gulp.task('build', (done) => {
 
 // Deploy to AWS S3
 gulp.task('deploy', () => {
-    let publisher = g.awspublish.create({
+    const publisher = g.awspublish.create({
         accessKeyId     : process.env.AWS_ACCESS_KEY_ID,
         secretAccessKey : process.env.AWS_SECRET_ACCESS_KEY,
         region          : 'us-east-1',
@@ -306,7 +309,7 @@ gulp.task('deploy', () => {
 
 
 // What to do when you run `$ gulp`
-gulp.task('default', (done) => {
+gulp.task('default', done => {
     g.sequence(
         'deps',
         'package',

@@ -1,13 +1,13 @@
 'use strict';
 
-let fs = require('fs');
+const fs = require('fs');
 
 
 describe('The dynamically concatenated and minified JS...', () => {
 
     let str;
 
-    it('Should exist', (done) => {
+    it('Should exist', done => {
         fs.readFile('build/all.min.js', (err, data) => {
             if (err) throw err;
             str = data.toString();
@@ -35,7 +35,7 @@ describe('The dynamically concatenated and minified JS...', () => {
     });
 
     it('Should contain custom JavaScript', () => {
-        let scripts = [
+        const scripts = [
             'Custom Headline',
             'Custom Mobile Menu',
             'Custom Post',
@@ -44,7 +44,7 @@ describe('The dynamically concatenated and minified JS...', () => {
             'Custom Animations'
         ];
 
-        scripts.forEach((script) => {
+        scripts.forEach(script => {
             str.should.containEql(script);
         });
     });

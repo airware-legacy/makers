@@ -25,11 +25,11 @@
         }
     };
 
-    let $document = $(document);
+    const $document = $(document);
     $document.ready(() => {
 
-        $document.on('click', '.card', (e) => {
-            let headline = new Headline($(e.currentTarget).find('.headline-cnt'));
+        $document.on('click', '.card', e => {
+            const headline = new Headline($(e.currentTarget).find('.headline-cnt'));
 
             if (!headline.isEmpty()) {
                 headline.onClick();
