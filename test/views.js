@@ -3,8 +3,7 @@
 var argv   = require('yargs').argv,
     fs     = require('fs'),
     jsdom  = require('jsdom').jsdom,
-    moment = require('moment'),
-    zlib   = require('zlib');
+    moment = require('moment');
 
 
 // Helper to instantiate JSDom
@@ -18,19 +17,10 @@ function loadDocument(data) {
 
 describe('The dynamically generated home page...', () => {
 
-    var handle = 'build/index.html';
-    var buf, document;
+    var document;
 
     it('Should exist', (done) => {
-        fs.readFile(handle, (err, data) => {
-            if (err) throw err;
-            buf = data;
-            done();
-        });
-    });
-
-    it('Should be gzipped', (done) => {
-        zlib.gunzip(buf, (err, data) => {
+        fs.readFile('build/index.html', (err, data) => {
             if (err) throw err;
             document = loadDocument(data);
             done();
@@ -58,19 +48,10 @@ describe('The dynamically generated home page...', () => {
 
 describe('The dynamically generated engineering page...', () => {
 
-    var handle = 'build/engineering/index.html';
-    var buf, document;
+    var document;
 
     it('Should exist', (done) => {
-        fs.readFile(handle, (err, data) => {
-            if (err) throw err;
-            buf = data;
-            done();
-        });
-    });
-
-    it('Should be gzipped', (done) => {
-        zlib.gunzip(buf, (err, data) => {
+        fs.readFile('build/engineering/index.html', (err, data) => {
             if (err) throw err;
             document = loadDocument(data);
             done();
@@ -98,19 +79,10 @@ describe('The dynamically generated engineering page...', () => {
 
 describe('The dynamically generated design page...', () => {
 
-    var handle = 'build/design/index.html';
-    var buf, document;
+    var document;
 
     it('Should exist', (done) => {
-        fs.readFile(handle, (err, data) => {
-            if (err) throw err;
-            buf = data;
-            done();
-        });
-    });
-
-    it('Should be gzipped', (done) => {
-        zlib.gunzip(buf, (err, data) => {
+        fs.readFile('build/design/index.html', (err, data) => {
             if (err) throw err;
             document = loadDocument(data);
             done();

@@ -50,7 +50,6 @@ gulp.task('static', () => {
             if ( process.env.TRAVIS_BRANCH == 'master' )
                 file.contents = new Buffer('');
         })))
-        .pipe(g.gzip({ append: false }))
         .pipe(gulp.dest('build'));
 });
 
@@ -65,7 +64,6 @@ gulp.task('styles', () => {
     .pipe(g.if(/[.]less$/, g.less()))
     .pipe(g.concat('all.min.css'))
     .pipe(g.cssnano())
-    .pipe(g.gzip({ append: false }))
     .pipe(gulp.dest('build'));
 });
 
@@ -87,7 +85,6 @@ gulp.task('scripts', () => {
         ]))
         .pipe(g.concat('all.min.js'))
         .pipe(g.uglify({ preserveComments: 'some' }))
-        .pipe(g.gzip({ append: false }))
         .pipe(gulp.dest('build'));
 });
 
@@ -149,7 +146,6 @@ gulp.task('posts', (done) => {
                 file.contents = new Buffer(template(post));
             }))
             .pipe(g.htmlmin())
-            .pipe(g.gzip({ append: false }))
             .pipe(gulp.dest('build'))
             .on('end', () => {
                 // Sort posts by date descending
@@ -184,7 +180,6 @@ gulp.task('pages', (done) => {
                 file.contents = new Buffer(template(file.data));
             }))
             .pipe(g.htmlmin())
-            .pipe(g.gzip({ append: false }))
             .pipe(gulp.dest('build'))
             .pipe(g.filter((file) => {
                 return file.data.rss;
@@ -193,7 +188,6 @@ gulp.task('pages', (done) => {
                 file.path = file.data.rssPath;
                 file.contents = new Buffer(rssTemplate(file.data));
             }))
-            .pipe(g.gzip({ append: false }))
             .pipe(gulp.dest('build'))
             .on('end', done);
     });
@@ -228,14 +222,7 @@ gulp.task('serve', (done) => {
     var port = argv.p || 3000;
 
     express()
-        // Set compression header for all requests
-        .use((req, res, next) => {
-            res.header('Content-Encoding', 'gzip');
-            next();
-        })
-        // Static middleware
         .use(express.static('build'))
-        // Serve error page
         .use((req, res) => {
             res.status(404)
                 .sendFile(__dirname + '/build/error.html');
@@ -283,12 +270,32 @@ gulp.task('build', (done) => {
     )(done);
 });
 
+
+// Deploy to AWS S3
+gulp.task('deploy', () => {
+    var publisher = g.awspublish.create({
+        accessKeyId     : process.env.AWS_ACCESS_KEY_ID,
+        secretAccessKey : process.env.AWS_SECRET_ACCESS_KEY,
+        region          : 'us-west-2',
+        params : {
+            Bucket : argv.b
+        }
+    });
+
+    return gulp.src('build/**')
+        .pipe(g.awspublish.gzip())
+        .pipe(publisher.publish())
+        .pipe(publisher.sync())
+        .pipe(g.awspublish.reporter());
+});
+
+
 // What to do when you run `$ gulp`
 gulp.task('default', (done) => {
     g.sequence(
+        'deps',
         'build',
         'watch',
-        'serve',
-        'deps'
+        'serve'
     )(done);
 });
