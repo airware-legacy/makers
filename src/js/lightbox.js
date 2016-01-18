@@ -3,7 +3,7 @@
  */
 
 (function () {
-    var KEYS = {
+    let KEYS = {
         ESCAPE: 27,
         ARROW_LEFT: 37,
         ARROW_RIGHT: 39
@@ -60,7 +60,7 @@
     }
 
     Lightbox.prototype.onKeyDown = function (e) {
-        var keyCode = e.keyCode || e.which;
+        let keyCode = e.keyCode || e.which;
 
         if (keyCode === KEYS.ESCAPE) {
             this.hide();
@@ -75,7 +75,7 @@
         if (this._isAnimating || this._current <= 0) {
             return;
         }
-        var $current = this._getCurrentImage();
+        let $current = this._getCurrentImage();
         this._current--;
         this.updateCounter();
         this._slide($current, $current.prev(), 'airware.lightbox.slideRightOut', 'airware.lightbox.slideLeftIn');
@@ -85,19 +85,19 @@
         if (this._isAnimating || this._current >= this._$images.length - 1) {
             return;
         }
-        var $current = this._getCurrentImage();
+        let $current = this._getCurrentImage();
         this._current++;
         this.updateCounter();
         this._slide($current, $current.next(), 'airware.lightbox.slideLeftOut', 'airware.lightbox.slideRightIn');
     };
 
     Lightbox.prototype.show = function ($current, $imgs) {
-        var self = this, html = '';
+        let self = this, html = '';
 
         this._current = $current.data('lightbox-img');
 
         $imgs.each(function(index) {
-            var src = $(this).attr('src');
+            let src = $(this).attr('src');
             html += '<img src="' + src + '" class="airware-lightbox-img ' + (index === self._current ? 'active': 'hidden') + '">';
         });
 
@@ -131,7 +131,7 @@
     };
 
     Lightbox.prototype.hide = function () {
-        var self = this;
+        let self = this;
 
         // remove document events
         this.$document.off('keydown', this.onKeyDown);
@@ -183,7 +183,7 @@
     };
 
     Lightbox.prototype._slide = function ($first, $second, firstTransition, secondTransition) {
-        var self = this;
+        let self = this;
 
         $.Velocity.hook($first, 'translateY', '-50%');
         $.Velocity.hook($second, 'translateY', '-50%');
@@ -213,13 +213,13 @@
         });
     };
 
-    var $document = $(document);
+    let $document = $(document);
     $document.ready(() => {
-        var lightbox = new Lightbox();
+        let lightbox = new Lightbox();
 
         $document.on('click', '[data-lightbox-img]', (e) => {
-            var $currentImg = $(e.currentTarget);
-            var $imgs = $currentImg.closest('[data-lightbox]').find('[data-lightbox-img]');
+            let $currentImg = $(e.currentTarget);
+            let $imgs = $currentImg.closest('[data-lightbox]').find('[data-lightbox-img]');
 
             if ($imgs.length) {
                 lightbox.show($currentImg, $imgs);

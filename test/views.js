@@ -1,6 +1,6 @@
 'use strict';
 
-var argv   = require('yargs').argv,
+let argv   = require('yargs').argv,
     fs     = require('fs'),
     jsdom  = require('jsdom').jsdom,
     moment = require('moment');
@@ -8,7 +8,7 @@ var argv   = require('yargs').argv,
 
 // Helper to instantiate JSDom
 function loadDocument(data) {
-    var port = argv.p || 3000;
+    let port = argv.p || 3000;
     return jsdom(data.toString(), {
         url : 'http://localhost:' + port + '/'
     }).defaultView.document;
@@ -17,7 +17,7 @@ function loadDocument(data) {
 
 describe('The dynamically generated home page...', () => {
 
-    var document;
+    let document;
 
     it('Should exist', (done) => {
         fs.readFile('build/index.html', (err, data) => {
@@ -38,7 +38,7 @@ describe('The dynamically generated home page...', () => {
     });
 
     it('Should contain copyright text from the footer partial', () => {
-        var year = moment().format('YYYY');
+        let year = moment().format('YYYY');
         document.getElementsByClassName('copy-right-text')[0].innerHTML
             .should.containEql('© Copyright ' + year + ', Airware. All Rights Reserved.');
     });
@@ -48,7 +48,7 @@ describe('The dynamically generated home page...', () => {
 
 describe('The dynamically generated engineering page...', () => {
 
-    var document;
+    let document;
 
     it('Should exist', (done) => {
         fs.readFile('build/engineering/index.html', (err, data) => {
@@ -69,7 +69,7 @@ describe('The dynamically generated engineering page...', () => {
     });
 
     it('Should contain copyright text from the footer partial', () => {
-        var year = moment().format('YYYY');
+        let year = moment().format('YYYY');
         document.getElementsByClassName('copy-right-text')[0].innerHTML
             .should.containEql('© Copyright ' + year + ', Airware. All Rights Reserved.');
     });
@@ -79,7 +79,7 @@ describe('The dynamically generated engineering page...', () => {
 
 describe('The dynamically generated design page...', () => {
 
-    var document;
+    let document;
 
     it('Should exist', (done) => {
         fs.readFile('build/design/index.html', (err, data) => {
@@ -100,7 +100,7 @@ describe('The dynamically generated design page...', () => {
     });
 
     it('Should contain copyright text from the footer partial', () => {
-        var year = moment().format('YYYY');
+        let year = moment().format('YYYY');
         document.getElementsByClassName('copy-right-text')[0].innerHTML
             .should.containEql('© Copyright ' + year + ', Airware. All Rights Reserved.');
     });

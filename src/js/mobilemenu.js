@@ -66,7 +66,7 @@
     };
 
     MobileMenu.prototype.show = function () {
-        var self = this;
+        let self = this;
 
         this.$el.velocity('stop').velocity(this.options.transitions.in, {
             begin: function () {
@@ -82,7 +82,7 @@
     };
 
     MobileMenu.prototype.hide = function () {
-        var self = this;
+        let self = this;
 
         this.$el.velocity('stop').velocity(this.options.transitions.out, {
             begin: function () {

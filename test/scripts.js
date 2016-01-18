@@ -1,11 +1,11 @@
 'use strict';
 
-var fs = require('fs');
+let fs = require('fs');
 
 
 describe('The dynamically concatenated and minified JS...', () => {
 
-    var str;
+    let str;
 
     it('Should exist', (done) => {
         fs.readFile('build/all.min.js', (err, data) => {
@@ -35,7 +35,7 @@ describe('The dynamically concatenated and minified JS...', () => {
     });
 
     it('Should contain custom JavaScript', () => {
-        var scripts = [
+        let scripts = [
             'Custom Headline',
             'Custom Mobile Menu',
             'Custom Post',

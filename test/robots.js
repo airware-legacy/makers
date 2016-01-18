@@ -1,11 +1,11 @@
 'use strict';
 
-var fs = require('fs');
+let fs = require('fs');
 
 
 describe('The robots.txt file...', () => {
 
-    var str;
+    let str;
 
     it('Should exist', (done) => {
         fs.readFile('build/robots.txt', (err, data) => {

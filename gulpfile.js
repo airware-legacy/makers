@@ -1,6 +1,6 @@
 'use strict';
 
-var argv         = require('yargs').argv,
+let argv         = require('yargs').argv,
     Author       = require('./lib/Author'),
     del          = require('del'),
     express      = require('express'),
@@ -24,7 +24,7 @@ hb.registerHelper('reviewerList', reviewerList);
 
 
 // Shared data object for passing between tasks
-var data;
+let data;
 
 
 // Clean data and build dirs
@@ -93,8 +93,8 @@ gulp.task('scripts', () => {
 gulp.task('partials', () => {
     return gulp.src('src/partials/*.html')
         .pipe(g.tap((file) => {
-            var name = path.parse(file.path).name;
-            var html = file.contents.toString();
+            let name = path.parse(file.path).name;
+            let html = file.contents.toString();
             hb.registerPartial(name, html);
         }));
 });
@@ -106,7 +106,7 @@ gulp.task('authors', () => {
         .pipe(g.frontMatter())
         .pipe(g.marked())
         .pipe(g.tap((file) => {
-            var author = new Author(extend(true, {}, file.frontMatter, {
+            let author = new Author(extend(true, {}, file.frontMatter, {
                 slug    : path.parse(file.path).name,
                 bio     : file.contents.toString()
             }));
@@ -119,7 +119,7 @@ gulp.task('authors', () => {
 gulp.task('posts', (done) => {
     fs.readFile('src/partials/post.html', 'utf-8', (err, str) => {
         if (err) throw err;
-        var template = hb.compile(str);
+        let template = hb.compile(str);
 
         gulp.src('src/posts/*.md')
             .pipe(g.frontMatter())
@@ -129,7 +129,7 @@ gulp.task('posts', (done) => {
                 }
             }))
             .pipe(g.tap((file) => {
-                var post = new Post(extend(true, {}, file.frontMatter, {
+                let post = new Post(extend(true, {}, file.frontMatter, {
                     path       : file.path,
                     content    : file.contents.toString(),
                     authors    : data.authors,
@@ -163,7 +163,7 @@ gulp.task('posts', (done) => {
 gulp.task('pages', (done) => {
     fs.readFile('src/partials/rss.xml', 'utf-8', (err, rssStr) => {
         if (err) throw err;
-        var rssTemplate = hb.compile(rssStr);
+        let rssTemplate = hb.compile(rssStr);
 
         gulp.src('src/pages/**/*.html')
             .pipe(g.frontMatter())
@@ -176,7 +176,7 @@ gulp.task('pages', (done) => {
                     pageTitle : data.pageTitle
                 }));
                 file.path = file.data.path;
-                var template = hb.compile(file.contents.toString());
+                let template = hb.compile(file.contents.toString());
                 file.contents = new Buffer(template(file.data));
             }))
             .pipe(g.htmlmin())
@@ -219,7 +219,7 @@ gulp.task('lint', () => {
 
 // Serve files for local development
 gulp.task('serve', (done) => {
-    var port = argv.p || 3000;
+    let port = argv.p || 3000;
 
     express()
         .use(express.static('build'))
@@ -245,7 +245,7 @@ gulp.task('deps', () => {
 
 // Watch certain files
 gulp.task('watch', () => {
-    var paths = [
+    let paths = [
         'src/**/*.*',
         'test/*.js',
         'lib/*.js'
@@ -273,7 +273,7 @@ gulp.task('build', (done) => {
 
 // Deploy to AWS S3
 gulp.task('deploy', () => {
-    var publisher = g.awspublish.create({
+    let publisher = g.awspublish.create({
         accessKeyId     : process.env.AWS_ACCESS_KEY_ID,
         secretAccessKey : process.env.AWS_SECRET_ACCESS_KEY,
         region          : 'us-east-1',

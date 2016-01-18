@@ -79,6 +79,7 @@
       "ga": true
     },
     "rules": {
+      "no-var": 2,
       "prefer-arrow-callback": 2,
       "no-mixed-spaces-and-tabs": 2,
       "space-after-keywords": 2,

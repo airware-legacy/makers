@@ -1,11 +1,11 @@
 'use strict';
 
-var fs   = require('fs');
+let fs   = require('fs');
 
 
 describe('The dynamically concatenated and minified CSS...', () => {
 
-    var str;
+    let str;
 
     it('Should exist', (done) => {
         fs.readFile('build/all.min.css', (err, data) => {

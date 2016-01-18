@@ -3,8 +3,8 @@
  */
 
 (function () {
-    var maxWidth = 1350;
-    var defaultDuration = 200;
+    let maxWidth = 1350;
+    let defaultDuration = 200;
 
     $.Velocity.RegisterEffect('airware.lightbox.slideLeftOut', {
         defaultDuration: defaultDuration,

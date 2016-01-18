@@ -1,6 +1,6 @@
 'use strict';
 
-var fs = require('fs');
+let fs = require('fs');
 
 
 describe('The assets copied from the src/static directory...', () => {
