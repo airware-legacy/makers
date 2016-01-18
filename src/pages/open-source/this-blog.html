@@ -1,0 +1,116 @@
+---
+title: This Blog
+tagline: The source code for what you're looking at!
+class: open-source
+---
+
+{{#extend "base"}}
+	{{#content "header"}}
+		{{#extend "header"}}
+			{{#content "hero"}}
+				{{> hero_headline_category}}
+			{{/content}}
+		{{/extend}}
+	{{/content}}
+
+	{{#content "body"}}
+		<section class="docs vili">
+			<div class="docs-sections">
+				<ul class="docs-sections-list">
+					<li class="docs-sections-list-item">
+						<a href="#content">Content</a>
+					</li>
+					<li class="docs-sections-list-item">
+						<a href="#builds">Builds</a>
+					</li>
+					<li class="docs-sections-list-item">
+						<a href="#testing">Testing</a>
+					</li>
+					<li class="docs-sections-list-item">
+						<a href="#devops">DevOps</a>
+					</li>
+					<li class="docs-sections-list-item">
+						<a href="#performance">Performance</a>
+					</li>
+					<li class="docs-sections-list-item">
+						<a href="#lastly">Lastly</a>
+					</li>
+				</ul>
+			</div>
+
+			<div class="docs-content">
+				<p class="docs-desc">When we set out to highlight some of the individual contributions of our engineers in a blog, we wanted to make the blog code itself something we were proud of. While it’s not a traditional open-source project, nor a platform by any means, it was a fun project that might serve as a source of inspiration or concrete ideas that you’re free to explore on GitHub.</p>
+
+				<p class="docs-desc">This blog is a static build system that’s meant to be easy for developers and technology-savvy authors alike to contribute code and content to. We borrowed concepts from platforms like <a class="external" href="https://jekyllrb.com/">Jeckyll</a>, <a class="external" href="http://wintersmith.io/">Wintersmith</a>, and <a class="external" href="https://gohugo.io/">Hugo</a> but wanted to make it our own.</p>
+
+				<h2 id="content" class="docs-title">Content</h2>
+				<p class="docs-desc">Most content exists as <a href="https://daringfireball.net/projects/markdown/">Markdown</a>, as is pretty standard nowadays. But you always need some metadata attached to your content. Each post file contains <a href="http://www.yaml.org/">YAML</a> FrontMatter that defines the author, publish date, and other information, like the post’s category. The one exception is the post ID, which is used in the URL and linked to by other posts. We use the markdown file’s name for the ID and rely on the uniqueness afforded by the file system.</p>
+
+				<h2 id="builds" class="docs-title">Builds</h2>
+				<p class="docs-desc"><a href="http://gulpjs.com/">Gulp</a> is a modern, stream-based build system that forms the foundation of our blog. It’s fundamentally three things: a simple way to define CLI tasks, a handy way to <a href="https://en.wikipedia.org/wiki/Glob_(programming)">glob</a> your way around a file system, and lightning fast thanks to its reliance on streams. It also has a simple API. Gulp v3 has just four main methods:</p>
+
+				<ul>
+					<li>`gulp.task()` to define separate routines to run, e.g. clean, build, deploy, etc.</li>
+					<li>`gulp.src()` to slurp up files and create a stream</li>
+					<li>`gulp.dest()` to write the file somewhere </li>
+					<li>`gulp.watch()` to watch the file system and trigger tasks</li>
+				</ul>
+
+				<p>Additionally, you need to know `.pipe()` to chain stream handlers together. Next, you’ll want to start getting familiar with the ecosystem of stream-compatible Gulp plugins out there on NPM. Here are some of the ones we use:</p>
+
+				<h3>Frontend</h3>
+				<ul>
+					<li><a href="https://www.npmjs.com/package/gulp-cssnano">gulp-cssnano</a>: Minify CSS to reduce file size and speed rendering</li>
+					<li><a href="https://www.npmjs.com/package/gulp-uglify">gulp-uglify</a>: Reduce JavaScript file size to speed up download and parsing</li>
+					<li><a href="https://www.npmjs.com/package/gulp-htmlmin">gulp-htmlmin</a>: Collapse whitespace in HTML to reduce file size and speed rendering</li>
+				</ul>
+
+				<h3>Backend</h3>
+				<ul>
+					<li><a href="https://www.npmjs.com/package/gulp-david">gulp-david</a>: Check package.json for out-of-date dependencies</li>
+					<li><a href="https://www.npmjs.com/package/gulp-mocha">gulp-mocha</a>: Automatically run our tests after each build</li>
+					<li><a href="https://www.npmjs.com/package/gulp-eslint">gulp-eslint</a>: Lint the code and suggest formatting changes</li>
+				</ul>
+
+				<h3>Utilities</h3>
+				<ul>
+					<li><a href="https://github.com/gulpjs/gulp-util">gulp-util</a>: Handy, first-party Gulp utility for logging and other small functionality</li>
+					<li><a href="https://www.npmjs.com/package/gulp-load-plugins">gulp-load-plugins</a>: Load all the ‘gulp-*’ plugins in package.json to clean up the required section of your gulpfile</li>
+					<li><a href="https://www.npmjs.com/package/gulp-sequence">gulp-sequence</a>: Defines a flow of tasks in parallel or series, which Gulp 3’s dependency system is not strictly capable of (looking forward to Gulp v4!)</li>
+				</ul>
+
+				<p class="docs-desc">Micromodules are the JavaScript way, so you’ll need to get used to pulling in several dependencies. But the fantastic thing about Gulp is how declarative your code becomes. Our gulpfile is currently ~300 lines of code.</p>
+
+				<h2 id="testing" class="docs-title">Testing</h2>
+				<p class="docs-desc">We test the build files extensively to make sure they are well formed. We look to make sure certain ones are present, named appropriately, and valid based on their file extension. We also introspect certain files. For instance, we load HTML into a virtual dom and parse it to make sure there is only one H1 element. This strategy is a bit unusual, but it works. Unfortunately, it’s impossible to instrument for test coverage.</p>
+
+				<h2 id="devops" class="docs-title">DevOps</h2>
+				<p class="docs-desc"><a href="https://travis-ci.org/">TravisCI</a> is a third-party, hosted, continuous-integration platform. It’s free and easy to use for open-source projects stored in a public GitHub repo. We use it to run our tests on pushes to master, develop, feature branches, as well as any pull requests.</p>
+
+				<p class="docs-desc">We also deploy through TravisCI. We’re able to encrypt AWS Credentials, specify S3 buckets, and trigger deployments off particular builds. Check out our configuration in the <a href="https://github.com/airware/makers/blob/master/.travis.yml">.travis.yml</a> in the root. Travis will automatically deploy to the appropriate environment when you push to master or develop.</p>
+
+				<img class="img-responsive" src="https://placehold.it/850x500" alt="gitflow + deploys">
+
+				<h2 id="performance" class="docs-title">Performance</h2>
+				<p class="docs-desc">Our intention was also to provide the fastest possible experience for end users. In that vein, we also designed it to be “mobile first” to be cognizant of small screens and low-bandwidth connections. Still, we wanted to use some rich media and not constrain our design team. To that end, we made a series of performance enhancements to keep things quick:</p>
+
+				<ul>
+					<li><a href="https://kraken.io/web-interface">Kraken</a>: Compress images for smaller file sizes and faster downloads</li>
+					<li>Gzip all content for smaller file sizes and faster downloads</li>
+					<li>Minify and combine all CSS and JS</li>
+					<li><a href="https://aws.amazon.com/cloudfront/">CloudFront</a>: CDN to get content closer to your end users and take advantage of AWS’s scale and fat pipes</li>
+					<li>Use HTML5 video encoded with <a href="https://zencoder.com/en/">Zencoder</a> rather than animated gifs for higher quality and drastically reduced file sizes</li>
+				</ul>
+
+				<h2 id="lastly" class="docs-title">Lastly</h2>
+				<p class="docs-desc">Unlike a true blog platform, this code is tightly coupled to our content. Please take note of the licenses for content and code in the README if you’re going to use it.</p>
+			</div>
+
+			<div class="docs-links">
+				<a href="https://github.com/airware/makers" target="_blank" class="btn btn-open-source github-btn">
+					View on Github
+				</a>
+			</div>
+		</section>
+	{{/content}}
+{{/extend}}
