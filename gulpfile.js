@@ -28,7 +28,7 @@ let data;
 
 
 // Clean data and build dirs
-gulp.task('clean', (done) => {
+gulp.task('clean', () => {
     data = {
         authors   : [], // Populated by 'authors' task
         posts     : [], // Populated by 'posts' task
@@ -38,8 +38,10 @@ gulp.task('clean', (done) => {
         timestamp : moment().format('YYYY-MM-DD-HH-mm-ss')
     };
 
-    del(['build/**', '!build'])
-        .then(done());
+    return del([
+        'build/**',
+        '!build'
+    ]);
 });
 
 
