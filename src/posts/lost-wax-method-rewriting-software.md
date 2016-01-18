@@ -39,7 +39,7 @@ Create a Wax Model
 ------------------
 The process begins with a model of your finished product. It's usually made from a material like wax that's easy to work with, yet capable of representing both structure and finished detail. The material should have a low melting point so it can be easily removed. Also it ideally possesses a low viscosity so it flows cleanly and completely out of the mold.
 
-![Original Model](https://placehold.it/625x400)
+![Original Model](https://placehold.it/850x450)
 
 In our case, the existing material for our REST APIs is Node. We originally chose it for human reasons: the members of our small team were familiar with it, and it allowed everyone to work full stack. It also allowed everyone to work full stack. We also consider it to be fast and easy to work with because of the vibrant ecosystem available for things like OAUTH, AWS, Redis, and Postgres.
 
@@ -49,7 +49,7 @@ Pack One Side in Clay
 ---------------------
 Next, pack one side of your model in wet clay and allow it to dry and harden. This creates the first half of a mold. It should sharply capture the contour of your model. Any air gaps will result in a defect of the structure or complicate the surface of your final piece.
 
-![First Half of Mold](https://placehold.it/625x400)
+![First Half of Mold](https://placehold.it/850x450)
 
 In software, the first half of the mold are [unit tests](https://en.wikipedia.org/wiki/Unit_testing). They negatively define the shape of your application at the most granular scale. Using a coverage tool that supplies [branch information](https://en.wikipedia.org/wiki/Code_coverage#Basic_coverage_criteria) will allow you to ensure that every code path is tested. Gaps are bad.
 
@@ -61,7 +61,7 @@ Pack the Opposite Side in Clay
 ------------------------------
 After the first side of your mold is dry, and you've created an effective drain, you need to pack the opposite side of your model with clay. This new clay will dry and harden without bonding to the first half. The seam between the two sides will allow you to pull them apart later.
 
-![Second Half of Mold](https://placehold.it/625x400)
+![Second Half of Mold](https://placehold.it/850x450)
 
 The second half of the mold are your [functional tests](https://en.wikipedia.org/wiki/Functional_testing). Unlike your unit tests, they exist outside your application and treat it like a [black box](https://en.wikipedia.org/wiki/Black_box). They define the interfaces that your application exposes to the outside world or consumes from other services. They are also an expression of your business logic and the use cases your product managers define and your users enact.
 
@@ -77,7 +77,7 @@ You need to create a small hole or spout in the bottom of your mold to allow the
 
 When you raise the temperature the wax will melt and clear your mold. Pour in your new molten metal and it'll take the shape of the mold. Allow it to cool before you open the mold to ensure the new piece is an accurate representation of your original model.
 
-![Heat and New Material](https://placehold.it/625x400)
+![Heat and New Material](https://placehold.it/850x450)
 
 The new material in our case is Go. We're already familiar with Go from working with three of our DevOps tools: Docker, Terraform, and Kubernetes. We also used it to write several internal CLIs. Just as important, much of our team is most comfortable in strongly typed, compiled languages. But it's a bet because the language and ecosystem are young.
 
@@ -91,13 +91,13 @@ You may want to give yourself the ability to progressively siphon traffic on a h
 
 Let Cool and Hand-Finish the Piece
 ----------------------------------
-Give the molten metal in your mold time to cool and harden. Impatient makers get burnt fingers. After a suitable period of time you should have confidence to handle your new sculpture. 
+Give the molten metal in your mold time to cool and harden. Impatient makers get burnt fingers. After a suitable period of time you should have confidence to handle your new sculpture.
 
 Notice the rough areas around the seam between the two halves of the mold, near the spout, or caused by any gaps or air bubbles between the model and the mold. You may also see defects related to pouring the new metal too quickly or at the wrong temperature.
 
 These defects or gaps require some handiwork. Polish or sand down any rough edges. Fill in any gaps with additional metal.
 
-![Finished Peice](https://placehold.it/625x400)
+![Finished Peice](https://placehold.it/850x450)
 
 Keep an eye on your metrics and logs while you turn up the heat and perform the switch. Dashboards that display 500 errors, CPU utilization, or RAM usage will let you know if your proxies are performing as intended. We use a mixture of [Kibana](https://www.elastic.co/products/kibana) and [Systig](http://www.sysdig.org/) to introspect our environments and containers for health. Stay on call in case your new application cracks under stress. Jump instantly on any [regressions](https://en.wikipedia.org/wiki/Software_regression) that your users experience.
 
