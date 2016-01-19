@@ -8,7 +8,7 @@
         <link type="text/css" rel="stylesheet" href="/all.min.css?{{timestamp}}"/>
         <link type="image/x-icon" rel="shortcut icon" href="/favicon.ico"/>
     </head>
-    <body class="{{class}}">
+    <body class="{{#each classes}}{{this}} {{/each}}">
             {{#block "header"}}{{/block}}
 
             <main class="container-fluid airware-main">
