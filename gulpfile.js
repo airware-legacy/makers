@@ -148,7 +148,7 @@ gulp.task('posts', done => {
                 file.path = post.path;
                 file.contents = new Buffer(template(post));
             }))
-            .pipe(g.htmlmin())
+            .pipe(g.htmlmin({ collapseWhitespace: true }))
             .pipe(gulp.dest('build'))
             .on('end', () => {
                 // Sort posts by date descending
@@ -182,7 +182,7 @@ gulp.task('pages', done => {
                 const template = hb.compile(file.contents.toString());
                 file.contents = new Buffer(template(file.data));
             }))
-            .pipe(g.htmlmin())
+            .pipe(g.htmlmin({ collapseWhitespace: true }))
             .pipe(gulp.dest('build'))
             .pipe(g.filter(file => {
                 return file.data.rss;
