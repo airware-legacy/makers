@@ -5,8 +5,9 @@ reviewers:
 - chuck-taylor
 - caity-cronkhite
 category: engineering
-thumbnail: test.png
 date: 2015-12-13
+poster: https://placehold.it/1200x1080
+thumb: https://placehold.it/250x250
 tags:
 - Fabrication
 - 3D Printing

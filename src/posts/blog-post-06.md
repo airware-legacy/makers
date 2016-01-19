@@ -4,8 +4,9 @@ author: mark-bauer
 reviewers:
 - eric-johnson
 category: design
-thumbnail: test.png
 date: 2015-12-15
+poster: https://placehold.it/1200x1080
+thumb: https://placehold.it/250x250
 tags:
 - User Experience
 - Optimization

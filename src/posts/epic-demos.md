@@ -5,8 +5,9 @@ reviewers:
 - volkan-gurel
 - caity-cronkhite
 category: engineering
-thumbnail: test.png
 date: 2015-12-10
+poster: https://placehold.it/1200x1080
+thumb: https://placehold.it/250x250
 tags:
 - Agile
 - Scrum

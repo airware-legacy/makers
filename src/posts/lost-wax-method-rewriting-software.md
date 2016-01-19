@@ -7,8 +7,9 @@ reviewers:
 - mek-stittri
 - volkan-gurel
 category: engineering
-thumbnail: test.png
 date: 2015-12-07
+poster: https://placehold.it/1200x1080
+thumb: https://placehold.it/250x250
 tags:
 - Software
 - Node
