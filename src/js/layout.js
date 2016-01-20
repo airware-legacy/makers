@@ -1,24 +1,24 @@
+'use-strict';
+
 /*!
  * Custom Layout
  */
 
 (function () {
-    'use-strict';
-
-    function Layout() {
+    function Layout () {
         this.$window = $(window);
         this.$header = $('.airware-header');
         this.$hero = $('.airware-hero');
 
         this.options = {
-            header: {
-                css: {
-                    opacity: 0
+            header : {
+                css : {
+                    opacity : 0
                 }
             },
-            hero: {
-                transition: 'transition.slideDownBigIn',
-                duration: 500
+            hero : {
+                transition : 'transition.slideDownBigIn',
+                duration   : 500
             }
         };
 
@@ -27,14 +27,14 @@
     }
 
     Layout.prototype.slideInHero = function () {
-        this.$hero.velocity(this.options.hero.transition, { duration: this.options.hero.duration });
+        this.$hero.velocity(this.options.hero.transition, { duration : this.options.hero.duration });
     };
 
     Layout.prototype.onScroll = function () {
-        if (!this._isHeaderInViewport()) {
-            this.options.header.css.opacity = 0;
-        } else {
+        if (this._isHeaderInViewport()) {
             this.options.header.css.opacity = 1;
+        } else {
+            this.options.header.css.opacity = 0;
         }
         this.$header.css(this.options.header.css);
     };

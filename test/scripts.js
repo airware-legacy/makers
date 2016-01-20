@@ -4,7 +4,6 @@ const fs = require('fs');
 
 
 describe('The dynamically concatenated and minified JS...', () => {
-
     let str;
 
     it('Should exist', done => {
@@ -52,5 +51,4 @@ describe('The dynamically concatenated and minified JS...', () => {
     it('Should contain Google Analytics', () => {
         str.should.containEql('Google Analytics');
     });
-
 });

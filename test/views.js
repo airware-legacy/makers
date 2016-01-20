@@ -7,16 +7,20 @@ const argv = require('yargs').argv,
 
 
 // Helper to instantiate JSDom
-function loadDocument(data) {
+function loadDocument (data) {
     const port = argv.p || 3000;
     return jsdom(data.toString(), {
-        url : 'http://localhost:' + port + '/'
+        url : `http://localhost:${port}/`
     }).defaultView.document;
 }
 
 
-describe('The dynamically generated home page...', () => {
+// Set var for the tests
+const year = moment().format('YYYY');
+const copy = `© Copyright ${year}, Airware. All Rights Reserved.`;
 
+
+describe('The dynamically generated home page...', () => {
     let document;
 
     it('Should exist', done => {
@@ -38,16 +42,13 @@ describe('The dynamically generated home page...', () => {
     });
 
     it('Should contain copyright text from the footer partial', () => {
-        const year = moment().format('YYYY');
         document.getElementsByClassName('copy-right-text')[0].innerHTML
-            .should.containEql('© Copyright ' + year + ', Airware. All Rights Reserved.');
+            .should.containEql(copy);
     });
-
 });
 
 
 describe('The dynamically generated engineering page...', () => {
-
     let document;
 
     it('Should exist', done => {
@@ -69,16 +70,13 @@ describe('The dynamically generated engineering page...', () => {
     });
 
     it('Should contain copyright text from the footer partial', () => {
-        const year = moment().format('YYYY');
         document.getElementsByClassName('copy-right-text')[0].innerHTML
-            .should.containEql('© Copyright ' + year + ', Airware. All Rights Reserved.');
+            .should.containEql(copy);
     });
-
 });
 
 
 describe('The dynamically generated design page...', () => {
-
     let document;
 
     it('Should exist', done => {
@@ -100,9 +98,7 @@ describe('The dynamically generated design page...', () => {
     });
 
     it('Should contain copyright text from the footer partial', () => {
-        const year = moment().format('YYYY');
         document.getElementsByClassName('copy-right-text')[0].innerHTML
-            .should.containEql('© Copyright ' + year + ', Airware. All Rights Reserved.');
+            .should.containEql(copy);
     });
-
 });

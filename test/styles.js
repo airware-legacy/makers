@@ -4,7 +4,6 @@ const fs = require('fs');
 
 
 describe('The dynamically concatenated and minified CSS...', () => {
-
     let str;
 
     it('Should exist', done => {
@@ -26,5 +25,4 @@ describe('The dynamically concatenated and minified CSS...', () => {
     it('Should contain Custom fonts', () => {
         str.should.containEql('Custom Fonts');
     });
-
 });

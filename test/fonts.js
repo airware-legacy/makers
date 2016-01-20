@@ -4,7 +4,6 @@ const fs = require('fs');
 
 
 describe('The build/fonts directory...', () => {
-
     let files = [];
 
     before(done => {
@@ -38,5 +37,4 @@ describe('The build/fonts directory...', () => {
         files.should.containEql('Colfax-RegularItalic.ttf');
         files.should.containEql('Colfax-RegularItalic.woff');
     });
-
 });

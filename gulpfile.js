@@ -1,7 +1,9 @@
 'use strict';
 
-const argv       = require('yargs').argv,
-    Author       = require('./lib/Author'),
+const Author     = require('./lib/Author'),
+    Page         = require('./lib/Page'),
+    Post         = require('./lib/Post'),
+    argv         = require('yargs').argv,
     del          = require('del'),
     express      = require('express'),
     extend       = require('jquery-extend'),
@@ -12,11 +14,8 @@ const argv       = require('yargs').argv,
     highlight    = require('highlight.js'),
     layouts      = require('handlebars-layouts'),
     moment       = require('moment'),
-    Page         = require('./lib/Page'),
     path         = require('path'),
-    Post         = require('./lib/Post'),
-    reviewerList = require('./lib/hb-helper-reviewerlist'),
-    rules        = require( 'eslint-rules-es2015' );
+    reviewerList = require('./lib/hb-helper-reviewerlist');
 
 
 // Config HB
@@ -50,8 +49,9 @@ gulp.task('clean', () => {
 gulp.task('static', () => {
     return gulp.src('src/static/**')
         .pipe(g.if('robots.txt', g.tap(file => {
-            if ( process.env.TRAVIS_BRANCH == 'master' )
+            if (process.env.TRAVIS_BRANCH == 'master') {
                 file.contents = new Buffer('');
+            }
         })))
         .pipe(gulp.dest('build'));
 });
@@ -75,7 +75,7 @@ gulp.task('styles', () => {
 gulp.task('scripts', () => {
     return gulp.src('src/js/*.js')
         .pipe(g.babel({
-            presets  : ['es2015'],
+            presets  : [ 'es2015' ],
             comments : true
         }))
         .pipe(g.addSrc.prepend([
@@ -87,7 +87,7 @@ gulp.task('scripts', () => {
             'node_modules/bootstrap/dist/js/bootstrap.js'
         ]))
         .pipe(g.concat('all.min.js'))
-        .pipe(g.uglify({ preserveComments: 'some' }))
+        .pipe(g.uglify({ preserveComments : 'some' }))
         .pipe(gulp.dest('build'));
 });
 
@@ -96,9 +96,7 @@ gulp.task('scripts', () => {
 gulp.task('partials', () => {
     return gulp.src('src/partials/*.html')
         .pipe(g.tap(file => {
-            const name = path.parse(file.path).name;
-            const html = file.contents.toString();
-            hb.registerPartial(name, html);
+            hb.registerPartial(path.parse(file.path).name, file.contents.toString());
         }));
 });
 
@@ -110,8 +108,8 @@ gulp.task('authors', () => {
         .pipe(g.marked())
         .pipe(g.tap(file => {
             const author = new Author(extend(true, {}, file.frontMatter, {
-                slug    : path.parse(file.path).name,
-                bio     : file.contents.toString()
+                slug : path.parse(file.path).name,
+                bio  : file.contents.toString()
             }));
             data.authors.push(author);
         }));
@@ -127,18 +125,18 @@ gulp.task('posts', done => {
         gulp.src('src/posts/*.md')
             .pipe(g.frontMatter())
             .pipe(g.marked({
-                highlight: code => {
+                highlight : code => {
                     return highlight.highlightAuto(code).value;
                 }
             }))
             .pipe(g.tap(file => {
                 const post = new Post(extend(true, {}, file.frontMatter, {
-                    path       : file.path,
-                    content    : file.contents.toString(),
-                    authors    : data.authors,
-                    pageTitle  : data.pageTitle,
-                    year       : data.year,
-                    timestamp  : data.timestamp
+                    path      : file.path,
+                    content   : file.contents.toString(),
+                    authors   : data.authors,
+                    pageTitle : data.pageTitle,
+                    year      : data.year,
+                    timestamp : data.timestamp
                 }));
 
                 // Populate the posts object for reuse
@@ -148,7 +146,7 @@ gulp.task('posts', done => {
                 file.path = post.path;
                 file.contents = new Buffer(template(post));
             }))
-            .pipe(g.htmlmin({ collapseWhitespace: true }))
+            .pipe(g.htmlmin({ collapseWhitespace : true }))
             .pipe(gulp.dest('build'))
             .on('end', () => {
                 // Sort posts by date descending
@@ -158,7 +156,6 @@ gulp.task('posts', done => {
                 done();
             });
     });
-
 });
 
 
@@ -182,7 +179,7 @@ gulp.task('pages', done => {
                 const template = hb.compile(file.contents.toString());
                 file.contents = new Buffer(template(file.data));
             }))
-            .pipe(g.htmlmin({ collapseWhitespace: true }))
+            .pipe(g.htmlmin({ collapseWhitespace : true }))
             .pipe(gulp.dest('build'))
             .pipe(g.filter(file => {
                 return file.data.rss;
@@ -201,7 +198,7 @@ gulp.task('pages', done => {
 gulp.task('test', () => {
     return gulp.src('test/*.js')
         .pipe(g.mocha({
-            require : ['should']
+            require : [ 'should' ]
         }));
 });
 
@@ -215,7 +212,7 @@ gulp.task('lint', () => {
         'lib/*.js',
         '!node_modules/**'
     ])
-    .pipe(g.eslint({ rules }))
+    .pipe(g.eslint())
     .pipe(g.eslint.format());
 });
 
@@ -228,7 +225,7 @@ gulp.task('serve', done => {
         .use(express.static('build'))
         .use((req, res) => {
             res.status(404)
-                .sendFile(__dirname + '/build/error.html');
+                .sendFile(path.join(__dirname, '/build/error.html'));
         })
         .listen(port, () => {
             g.util.log('Server listening on port', port);
@@ -240,7 +237,7 @@ gulp.task('serve', done => {
 // Check deps with David service
 gulp.task('deps', () => {
     return gulp.src('package.json')
-        .pipe(g.david({ update: true }))
+        .pipe(g.david({ update : true }))
         .pipe(g.david.reporter)
         .pipe(gulp.dest('.'));
 });
@@ -248,7 +245,7 @@ gulp.task('deps', () => {
 
 // Examine package.json for unused deps (except for frontend and gulp)
 gulp.task('package', g.depcheck({
-    ignoreMatches: [
+    ignoreMatches : [
         'babel-preset-es2015',
         'bootstrap',
         'gulp-*',
@@ -269,7 +266,7 @@ gulp.task('watch', () => {
         'lib/*.js'
     ];
 
-    gulp.watch(paths, ['build'])
+    gulp.watch(paths, [ 'build' ])
         .on('change', e => {
             g.util.log('File', e.path, 'was', e.type);
         });
@@ -280,7 +277,7 @@ gulp.task('watch', () => {
 gulp.task('build', done => {
     g.sequence(
         'clean',
-        ['static', 'styles', 'scripts', 'partials', 'authors'],
+        [ 'static', 'styles', 'scripts', 'partials', 'authors' ],
         'posts',
         'pages',
         'test',
@@ -295,9 +292,7 @@ gulp.task('deploy', () => {
         accessKeyId     : process.env.AWS_ACCESS_KEY_ID,
         secretAccessKey : process.env.AWS_SECRET_ACCESS_KEY,
         region          : 'us-east-1',
-        params : {
-            Bucket : argv.b
-        }
+        params          : { Bucket : argv.b }
     });
 
     return gulp.src('build/**')

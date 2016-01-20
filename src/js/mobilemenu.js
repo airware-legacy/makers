@@ -5,8 +5,8 @@
 (function () {
     'use-strict';
 
-    function Hamburger(menu) {
-        this.css = { zIndex: 0 };
+    function Hamburger (menu) {
+        this.css = { zIndex : 0 };
         this.menu = menu;
         this.$el = $('.airware-nav-hamburger');
         this.$el.on('click', this.onClick.bind(this));
@@ -36,7 +36,7 @@
         this.$el.css(this.css).removeClass('active');
     };
 
-    function MobileMenu() {
+    function MobileMenu () {
         // jquery elements
         this.$body = $('body');
         this.$window = $(window);
@@ -46,11 +46,11 @@
         this.hamburger = new Hamburger(this);
 
         this.options = {
-            transitions: {
-                in: 'airware.expandIn',
-                out: 'airware.expandOut'
+            transitions : {
+                in  : 'airware.expandIn',
+                out : 'airware.expandOut'
             },
-            breakpoint: 992
+            breakpoint : 992
         };
 
         this.$window.on('resize', this.onResize.bind(this));
@@ -69,7 +69,7 @@
         const self = this;
 
         this.$el.velocity('stop').velocity(this.options.transitions.in, {
-            begin: function () {
+            begin () {
                 self.hamburger.onShow(self.getZIndex());
                 self.$el.removeClass('hidden');
                 self._scrollLock(true);
@@ -85,11 +85,11 @@
         const self = this;
 
         this.$el.velocity('stop').velocity(this.options.transitions.out, {
-            begin: function () {
+            begin () {
                 self.hamburger.onHide();
             },
 
-            complete: function () {
+            complete () {
                 self.$el.addClass('hidden');
                 self._scrollLock(false);
             }

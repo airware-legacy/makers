@@ -4,7 +4,6 @@ const fs = require('fs');
 
 
 describe('The robots.txt file...', () => {
-
     let str;
 
     it('Should exist', done => {
@@ -16,10 +15,10 @@ describe('The robots.txt file...', () => {
     });
 
     it('Should contain the correct dynamic content', () => {
-        if ( process.env.TRAVIS_BRANCH == 'master' )
+        if (process.env.TRAVIS_BRANCH == 'master') {
             str.should.equal('');
-        else
+        } else {
             str.should.equal('User-agent: *\nDisallow: /');
+        }
     });
-
 });

@@ -4,12 +4,12 @@
 
 (function () {
     const KEYS = {
-        ESCAPE: 27,
-        ARROW_LEFT: 37,
-        ARROW_RIGHT: 39
+        ESCAPE      : 27,
+        ARROW_LEFT  : 37,
+        ARROW_RIGHT : 39
     };
 
-    function Lightbox() {
+    function Lightbox () {
         this.hide = this.hide.bind(this);
         this.prev = this.prev.bind(this);
         this.next = this.next.bind(this);
@@ -37,20 +37,20 @@
         this._isAnimating = false;
 
         this.options = {
-            overlay: {
-                transitions: {
-                    delay: 100,
-                    duration: 100,
-                    in: 'transition.fadeIn',
-                    out: 'transition.fadeOut'
+            overlay : {
+                transitions : {
+                    delay    : 100,
+                    duration : 100,
+                    in       : 'transition.fadeIn',
+                    out      : 'transition.fadeOut'
                 }
             },
-            content: {
-                transitions: {
-                    delay: 100,
-                    duration: 200,
-                    in: 'airware.expandIn',
-                    out: 'airware.expandOut'
+            content : {
+                transitions : {
+                    delay    : 100,
+                    duration : 200,
+                    in       : 'airware.expandIn',
+                    out      : 'airware.expandOut'
                 }
             }
         };
@@ -97,9 +97,10 @@
 
         this._current = $current.data('lightbox-img');
 
-        $imgs.each(function(index) {
+        $imgs.each(function (index) {
             const src = $(this).attr('src');
-            html += '<img src="' + src + '" class="airware-lightbox-img ' + (index === self._current ? 'active': 'hidden') + '">';
+            const cls = (index === self._current ? 'active' : 'hidden');
+            html += `<img src="${src}" class="airware-lightbox-img ${cls}">`;
         });
 
         // set document events
@@ -113,19 +114,19 @@
         this.updateCounter();
 
         this.$el.velocity(this.options.overlay.transitions.in, {
-            duration: this.options.overlay.transitions.duration,
+            duration : this.options.overlay.transitions.duration,
 
-            begin: function () {
+            begin () {
                 self.$el.removeClass('hidden');
                 self._scrollLock(true);
 
                 self.$content.velocity(self.options.content.transitions.in, {
-                    delay: self.options.content.transitions.delay,
-                    duration: self.options.content.transitions.duration
+                    delay    : self.options.content.transitions.delay,
+                    duration : self.options.content.transitions.duration
                 });
             },
 
-            complete: function() {
+            complete () {
                 self.$close.addClass('active');
             }
         });
@@ -140,16 +141,16 @@
         this.swipeManager.off('swipeleft', this.next);
 
         this.$content.velocity(this.options.content.transitions.out, {
-            duration: this.options.content.transitions.duration,
+            duration : this.options.content.transitions.duration,
 
-            begin: function () {
+            begin () {
                 self.$close.removeClass('active');
 
                 self.$el.velocity(self.options.overlay.transitions.out, {
-                    delay: self.options.overlay.transitions.delay,
-                    duration: self.options.content.transitions.duration,
+                    delay    : self.options.overlay.transitions.delay,
+                    duration : self.options.content.transitions.duration,
 
-                    complete: function() {
+                    complete () {
                         self.$el.addClass('hidden');
                         self._scrollLock(false);
                         self.destroy();
@@ -160,7 +161,9 @@
     };
 
     Lightbox.prototype.updateCounter = function () {
-        this.$counter.text((this._current + 1) + '/' + this._$images.length);
+        const n = this._current + 1;
+        const txt = `${n}/${this._$images.length}`;
+        this.$counter.text(txt);
         this.$leftArrow.toggleClass('hidden', this._current === 0);
         this.$rightArrow.toggleClass('hidden', this._current === this._$images.length - 1);
     };
@@ -190,23 +193,23 @@
         $.Velocity.hook($second, 'translateY', '-50%');
 
         $first.velocity(firstTransition, {
-            display: 'block',
+            display : 'block',
 
-            begin: function () {
+            begin () {
                 self._isAnimating = true;
             },
 
-            complete: function () {
+            complete () {
                 $first.removeClass('active').addClass('hidden');
 
                 $second.velocity(secondTransition, {
-                    display: 'block',
+                    display : 'block',
 
-                    begin: function () {
+                    begin () {
                         $second.addClass('active').removeClass('hidden');
                     },
 
-                    complete: function () {
+                    complete () {
                         self._isAnimating = false;
                     }
                 });
