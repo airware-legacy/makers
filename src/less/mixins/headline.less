@@ -23,5 +23,20 @@
     font-family: @italic-font-family;
     text-transform: capitalize;
     color: @headline-cat-color;
+
+    &:hover {
+      border-bottom-width: 1px;
+      border-bottom-style: dotted;
+    }
+
+    &[href*="engineering"] {
+      color: @eng-primary-color;
+      border-bottom-color: @eng-primary-color;
+    }
+
+    &[href*="design"] {
+      color: @design-primary-color;
+      border-bottom-color: @design-primary-color;
+    }
   }
 }

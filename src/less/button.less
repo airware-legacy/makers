@@ -1,0 +1,22 @@
+@import './variables.less';
+
+.btn {
+  padding: @padding-xs @padding-normal;
+  border-radius: 0;
+  .transition(@btn-transition);
+
+  &:hover {
+    .box-shadow(@btn-hover);
+  }
+
+  &.btn-open-source {
+    background-color: @open-source-primary-color;
+    color: @light-font-color;
+  }
+
+  &.btn-careers {
+    border: 1px solid @light-gray;
+    background-color: @body-bg;
+    color: @dark-font-color;
+  }
+}

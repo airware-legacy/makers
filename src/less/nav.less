@@ -87,7 +87,7 @@
       text-decoration: none;
       display: none;
 
-      @media (min-width: @screen-md) {
+      @media (min-width: 768px) {
         display: inline-block;
       }
 
@@ -96,7 +96,7 @@
       }
     }
 
-    @media (min-width: @screen-sm) {
+    @media (min-width: 768px) {
       &-items {
         text-align: right;
       }
@@ -108,18 +108,30 @@
 .eng {
   .airware-header {
     .header-eng-bg();
+
+    .engineering-nav-item {
+      border-bottom: @header-active-border-width solid @eng-primary-color;
+    }
   }
 }
 
 .design {
   .airware-header {
     .header-design-bg();
+
+    .design-nav-item {
+      border-bottom: @header-active-border-width solid @design-primary-color;
+    }
   }
 }
 
 .open-source {
   .airware-header {
     .header-design-bg();
+
+    .open-source-nav-item {
+      border-bottom: @header-active-border-width solid @open-source-primary-color;
+    }
   }
 }
 

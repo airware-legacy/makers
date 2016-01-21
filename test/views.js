@@ -42,7 +42,7 @@ describe('The dynamically generated home page...', () => {
     });
 
     it('Should contain copyright text from the footer partial', () => {
-        document.getElementsByClassName('copy-right-text')[0].innerHTML
+        document.getElementsByClassName('copyright')[0].innerHTML
             .should.containEql(copy);
     });
 });
@@ -70,7 +70,7 @@ describe('The dynamically generated engineering page...', () => {
     });
 
     it('Should contain copyright text from the footer partial', () => {
-        document.getElementsByClassName('copy-right-text')[0].innerHTML
+        document.getElementsByClassName('copyright')[0].innerHTML
             .should.containEql(copy);
     });
 });
@@ -98,7 +98,7 @@ describe('The dynamically generated design page...', () => {
     });
 
     it('Should contain copyright text from the footer partial', () => {
-        document.getElementsByClassName('copy-right-text')[0].innerHTML
+        document.getElementsByClassName('copyright')[0].innerHTML
             .should.containEql(copy);
     });
 });

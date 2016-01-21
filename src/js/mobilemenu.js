@@ -50,7 +50,7 @@
                 in  : 'airware.expandIn',
                 out : 'airware.expandOut'
             },
-            breakpoint : 992
+            breakpoint : 768
         };
 
         this.$window.on('resize', this.onResize.bind(this));

@@ -25,7 +25,9 @@
   .snippet {
     height: unit(3 * @line-height-base, em);
     overflow: hidden;
-    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
 
     &:after {
       content: ' ';
@@ -61,4 +63,16 @@
   .headline, .headline-light, .headline-category {
     color: @open-source-primary-color;
   }
+}
+
+.eng .headline-cnt .headline-category {
+  color: @eng-primary-color;
+}
+
+.design .headline-cnt .headline-category {
+  color: @design-primary-color;
+}
+
+.open-source .headline-cnt .headline-category {
+  color: @open-source-primary-color;
 }
