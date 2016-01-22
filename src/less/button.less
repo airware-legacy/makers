@@ -5,6 +5,10 @@
   border-radius: 0;
   .transition(@btn-transition);
 
+  &:focus, &:active:focus {
+    outline: 0;
+  }
+
   &:hover {
     .box-shadow(@btn-hover);
   }

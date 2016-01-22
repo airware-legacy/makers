@@ -36,6 +36,119 @@
     }
   }
 
+  &.template-mode {
+    .airware-lightbox-arrow {
+      display: none;
+    }
+
+    .airware-lightbox-counter-cnt {
+      display: none;
+    }
+
+    .airware-lightbox-dismiss-icon {
+      &:before, &:after {
+        background: @dark-bg-color;
+      }
+    }
+
+    .airware-lightbox-content {
+      background: @light-bg-color;
+      .square(100%);
+
+      .careers-cnt {
+        overflow: auto;
+        height: 100%;
+        padding: 60px 45px;
+
+        .careers-title {
+          margin: 0;
+          padding-bottom: 15px;
+          font-family: Colfax-Medium;
+        }
+
+        .careers-tagline {
+          margin: 0;
+          padding-bottom: 30px;
+          color: @home-primary-color;
+          border-bottom: 2px solid @home-primary-color;
+        }
+
+        .career-list {
+          list-style: none;
+          margin: 0;
+          padding: 0;
+
+          &-item {
+            width: 100%;
+            line-height: 45px;
+            white-space: nowrap;
+            border-bottom: 1px solid @home-primary-color;
+
+            .career-name, .career-apply {
+              width: 49%;
+              display: inline-block;
+            }
+
+            .external {
+              padding: @padding-sm 0;
+              display: inline-block;
+              width: 100%;
+
+              &, &:focus {
+                text-decoration: none;
+              }
+            }
+
+            .career-name {
+              color: @dark-font-color;
+
+              &:hover {
+                color: @dark-font-color;
+              }
+            }
+
+            .career-apply {
+              display: none;
+              text-align: right;
+              color: @blue;
+
+              &:hover {
+                color: @blue;
+              }
+
+              @media (min-width: 500px) {
+                display: inline-block;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .airware-lightbox-overlay {
+      background-color: transparent;
+    }
+
+    @media (min-width: 768px) {
+      .airware-lightbox-dismiss-icon {
+        &:before, &:after {
+          background: @light-bg-color;
+        }
+      }
+
+      .airware-lightbox-content {
+        margin: 5% auto;
+        width: 60%;
+        height: 80%;
+        max-width: @post-width;
+      }
+
+      .airware-lightbox-overlay {
+        background-color: rgb(26,27,20);
+      }
+    }
+  }
+
   .airware-lightbox-arrow {
     display: none;
     position: absolute;
@@ -98,11 +211,12 @@
 
   .airware-lightbox-dismiss {
     position: absolute;
-    z-index: 2;
+    z-index: 5;
     top: @padding-normal;
     right: @padding-xs;
     cursor: pointer;
     .square(@hamburger-size);
+    .translate3d(0, 0, 1px);
 
     @media (min-width: @screen-md) {
       right: @padding-normal;
