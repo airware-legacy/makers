@@ -5,104 +5,104 @@
 (function () {
     'use-strict';
 
-    function Hamburger (menu) {
-        this.css = { zIndex : 0 };
-        this.menu = menu;
-        this.$el = $('.airware-nav-hamburger');
-        this.$el.on('click', this.onClick.bind(this));
+    class Hamburger {
+        constructor (menu) {
+            this.css = { zIndex : 0 };
+            this.menu = menu;
+            this.$el = $('.airware-nav-hamburger');
+            this.$el.on('click', this.onClick.bind(this));
+        }
+
+        onClick () {
+            if (this.isActive()) {
+                this.$el.removeClass('active');
+                this.menu.hide();
+            } else {
+                this.$el.addClass('active');
+                this.menu.show();
+            }
+        }
+
+        isActive () {
+            return this.$el.hasClass('active');
+        }
+
+        onShow (zIndex) {
+            this.css.zIndex = zIndex + 1;
+            this.$el.css(this.css);
+        }
+
+        onHide () {
+            this.css.zIndex = 0;
+            this.$el.css(this.css).removeClass('active');
+        }
     }
 
-    Hamburger.prototype.onClick = function () {
-        if (this.isActive()) {
-            this.$el.removeClass('active');
-            this.menu.hide();
-        } else {
-            this.$el.addClass('active');
-            this.menu.show();
+    class MobileMenu {
+        constructor () {
+            // jquery elements
+            this.$body = $('body');
+            this.$window = $(window);
+            this.$el = $('.airware-mobile-menu');
+
+            // views
+            this.hamburger = new Hamburger(this);
+
+            this.options = {
+                transitions : {
+                    in  : 'airware.expandIn',
+                    out : 'airware.expandOut'
+                },
+                breakpoint : 768
+            };
+
+            this.$window.on('resize', this.onResize.bind(this));
+
+            // hack to fix iOS 8 positioning issue
+            $.Velocity.hook(this.$el, 'translateZ', 1);
         }
-    };
 
-    Hamburger.prototype.isActive = function () {
-        return this.$el.hasClass('active');
-    };
+        onResize () {
+            if (this.$window.outerWidth() >= this.options.breakpoint) {
+                this.hide();
+            }
+        }
 
-    Hamburger.prototype.onShow = function (zIndex) {
-        this.css.zIndex = zIndex + 1;
-        this.$el.css(this.css);
-    };
+        show () {
+            const self = this;
 
-    Hamburger.prototype.onHide = function () {
-        this.css.zIndex = 0;
-        this.$el.css(this.css).removeClass('active');
-    };
+            this.$el.velocity('stop').velocity(this.options.transitions.in, {
+                begin () {
+                    self.hamburger.onShow(self.getZIndex());
+                    self.$el.removeClass('hidden');
+                    self._scrollLock(true);
+                }
+            });
+        }
 
-    function MobileMenu () {
-        // jquery elements
-        this.$body = $('body');
-        this.$window = $(window);
-        this.$el = $('.airware-mobile-menu');
+        getZIndex () {
+            return +this.$el.css('z-index');
+        }
 
-        // views
-        this.hamburger = new Hamburger(this);
+        hide () {
+            const self = this;
 
-        this.options = {
-            transitions : {
-                in  : 'airware.expandIn',
-                out : 'airware.expandOut'
-            },
-            breakpoint : 768
-        };
+            this.$el.velocity('stop').velocity(this.options.transitions.out, {
+                begin () {
+                    self.hamburger.onHide();
+                },
 
-        this.$window.on('resize', this.onResize.bind(this));
+                complete () {
+                    self.$el.addClass('hidden');
+                    self._scrollLock(false);
+                }
+            });
+        }
 
-        // hack to fix iOS 8 positioning issue
-        $.Velocity.hook(this.$el, 'translateZ', 1);
+        _scrollLock (isLock) {
+            this.$body.toggleClass('scroll-lock', isLock);
+        }
     }
-
-    MobileMenu.prototype.onResize = function () {
-        if (this.$window.outerWidth() >= this.options.breakpoint) {
-            this.hide();
-        }
-    };
-
-    MobileMenu.prototype.show = function () {
-        const self = this;
-
-        this.$el.velocity('stop').velocity(this.options.transitions.in, {
-            begin () {
-                self.hamburger.onShow(self.getZIndex());
-                self.$el.removeClass('hidden');
-                self._scrollLock(true);
-            }
-        });
-    };
-
-    MobileMenu.prototype.getZIndex = function () {
-        return +this.$el.css('z-index');
-    };
-
-    MobileMenu.prototype.hide = function () {
-        const self = this;
-
-        this.$el.velocity('stop').velocity(this.options.transitions.out, {
-            begin () {
-                self.hamburger.onHide();
-            },
-
-            complete () {
-                self.$el.addClass('hidden');
-                self._scrollLock(false);
-            }
-        });
-    };
-
-    MobileMenu.prototype._scrollLock = function (isLock) {
-        if (isLock) {
-            this.$body.addClass('scroll-lock');
-        } else {
-            this.$body.removeClass('scroll-lock');
-        }
-    };
 
     $(document).ready(() => {
         new MobileMenu();
