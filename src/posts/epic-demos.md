@@ -19,11 +19,11 @@ The Challenge of Integration
 ----------------------------
 At Airware, we're developing a Cloud platform that manages and analyzes data that should be conceptually familiar to every technologist in the Bay Area. We're also developing our own native clients, firmware, and hardware. These disparate systems are expected to integrate seamlessly with one another. An example of one of our past epics is "Fixed-Wing Flight,". If you're in a pure software business, take a moment to reflect on the complexity that implies. Some components are even expected to work offline. It's a classic set of distributed computing problems.
 
-![Airware Cloud](https://placehold.it/850x450)
+![Airware Cloud](https://placehold.it/750x400)
 
 What's interesting about the mixture of cloud, native, firmware, and hardware components is that our platform essentially represents a spectrum of agility. On the cloud side, we are hyper agile and practice [continuous delivery](https://en.wikipedia.org/wiki/Continuous_delivery). At the other extreme our hardware is necessarily waterfall--a mistake means waiting weeks for the next spin of boards. In between, our native apps and firmware are reasonably agile with the help of SIL and [HIL simulation](https://en.wikipedia.org/wiki/Hardware-in-the-loop_simulation) testing.
 
-![Spectrum of Agility](https://placehold.it/850x450)
+![Spectrum of Agility](https://placehold.it/750x400)
 
 Did I mention our stuff lives in the physical world and flies through the air? We're in an industry where safety is critical. Aerospace doesn't [move fast and break things](http://www.businessinsider.com/mark-zuckerberg-2010-10). We do, however, need to move as fast as our ridiculously high standards for quality allow. This means missing no opportunity to prove to ourselves that things work together as designed.
 
@@ -36,7 +36,7 @@ The process starts with our product managers, engineering managers, and relevant
 
 It may begin with a back-office persona creating an area of interest (such as a field) on a map in the Airware Cloud UI. That item is accessed through our APIs by a different persona in our native client. They make some tweaks to the flight plan, connect to an aircraft, and begin flying. The drone will fly a [Zamboni pattern](https://en.wikipedia.org/wiki/Ice_resurfacer), take pictures, and log the telemetry. This data will be retrieved from the aircraft, uploaded to the Airware Cloud, and finally processed into an [orthomosaic](https://en.wikipedia.org/wiki/Orthophoto).
 
-![Fixed Wing Flight](https://placehold.it/850x450)
+![Fixed Wing Flight](https://placehold.it/750x400)
 
 Ideally each step in the script highlights a new feature we're building in that release. We occasionally insert existing features if they are necessary to create a seamless series of steps. The steps are grouped into phases that are mostly owned by a team or lead. This is useful later for charting the progress of features or teams individually to surface problems earlier.
 
@@ -73,7 +73,7 @@ F    |0.00  |Story is not yet started or cannot be shown
 
 We translate the grades into a [GPA](https://en.wikipedia.org/wiki/Grading_(education)). Airware is fortunate to have many past top performers from excellent schools. Sufficed to say, these individuals are not accustomed to anything below a 4.0. There's a [natural drive](https://en.wikipedia.org/wiki/Gamification) to push the GPA upward, which helps working through problems that may not be the most fun aspects of the project.
 
-![The Scorecard](https://placehold.it/850x450)
+![The Scorecard](https://placehold.it/750x400)
 
 Why does this work?
 -------------------
@@ -86,7 +86,7 @@ Secondly, the process of developing a scorecard constrains the set of problems y
 
 Thirdly, this process demonstrates incremental improvement. This keeps us on track and allows us to see and celebrate some of the smaller wins. It also allows us to make better predictions. We observe problems well in advance and can make corrections in the form of resources and scope decrease if necessary. For instance, it's trivial to chart of our GPA of each phase over time. The slope of the lines indicates your projected completion date.
 
-![Scorecard Chart](https://placehold.it/850x450)
+![Scorecard Chart](https://placehold.it/750x400)
 
 Arguably the greatest benefit is that the script represents an end-to-end workflow. This puts emphasis on the seams or interfaces between each component that might normally receive less attention if they were developed in isolation from one another according to a mere spec.
 

@@ -31,15 +31,15 @@ Our Process
 
 The first thing we did was break the workflow down into all of the necessary tasks and put them up on the whiteboard.
 
-![](https://placehold.it/850x450)
+![](https://placehold.it/750x400)
 
 After that, we scrutinized our list. We asked questions like: Is this task necessary? Could we automate this? Can we combine these tasks? Our goal was to organize all of the tasks into a logical sequence by grouping them into “steps.” During this process, we came up with some clever and technically ambitious ideas to streamline the workflow, including auto-generating elements of the flight plan, but more on that later.  
 
-![](https://placehold.it/850x450)
+![](https://placehold.it/750x400)
 
 Once the workflow was broken down into steps, we started iterating on how these steps should be represented in the UI. We laid out our options in a series of whiteboard sketches. We were shooting for volume at this point in the project; we wanted to explore as many ideas as possible in low fidelity to quickly get a sense of what worked and what didn't. We identified pros and cons of each sketch, pruned the truly crazy ideas, and were left with a list of viable contenders.
 
-![](https://placehold.it/850x450)
+![](https://placehold.it/750x400)
 
 
 ### Refinement
@@ -48,7 +48,7 @@ We recognized that the designs fell into two camps: single page layouts and mult
 
 The multi-step options also gave us opportunities to provide the user with feedback at each step. The prototypes also taught us how precious map real estate was in this context, so we focused on designs that utilized as much screen real estate as possible.
 
-![](https://placehold.it/850x450)
+![](https://placehold.it/750x400)
 
 Prototype of the full screen “panel” animation
 
@@ -59,7 +59,7 @@ Knowing this, we decided to place this workflow in new a full-screen view we now
 
 Although it’s fairly common in native mobile and tablet applications, I had my doubts about how well it would perform in a web browser. However, I underestimated how far CSS transitions have come over the past few years! The transition felt smooth and natural. This transition, along with the dark color palette, helped to focus the user and made it clear that they were transitioning into a new “mode.”
 
-![](https://placehold.it/850x450)
+![](https://placehold.it/750x400)
 
 
 Final Idea
@@ -70,7 +70,7 @@ The final design ended being a simple three-step process.
 ### Step 1
 In step one, we ask the user to give us the location where they will be flying and what data products they want to generate with the flight data. Special thanks to Jona Dinges for the beautiful low-poly artwork that we use to represent our data products.
 
-![](https://placehold.it/850x450)
+![](https://placehold.it/750x400)
 
 ### Step 2
 
@@ -82,7 +82,7 @@ Step two is where the user actually creates the flight plan. Although a flight p
 
 My favorite part about this is that we auto-generate both the geofence and the survey area based on the information that the user gave us in the previous step. It’s not a perfect system yet—we still rely on the user's judgement to make adjustments. However, auto-generating speeds up the process and considerably reduces the learning curve.
 
-![](https://placehold.it/850x450)
+![](https://placehold.it/750x400)
 
 
 ### Step 3
