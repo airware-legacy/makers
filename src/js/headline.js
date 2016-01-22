@@ -5,25 +5,27 @@
 (function () {
     'use-strict';
 
-    function Headline ($el) {
-        this.$el = $el;
-    }
-
-    Headline.prototype.isEmpty = function () {
-        return this.$el.length === 0;
-    };
-
-    Headline.prototype.isExternal = function () {
-        return this.$el.hasClass('external');
-    };
-
-    Headline.prototype.onClick = function () {
-        if (this.isExternal()) {
-            window.open(this.$el.data('href'), '_blank');
-        } else {
-            window.location.href = this.$el.data('href');
+    class Headline {
+        constructor ($el) {
+            this.$el = $el;
         }
-    };
+
+        isEmpty () {
+            return this.$el.length === 0;
+        }
+
+        isExternal () {
+            return this.$el.hasClass('external');
+        }
+
+        onClick () {
+            if (this.isExternal()) {
+                window.open(this.$el.data('href'), '_blank');
+            } else {
+                window.location.href = this.$el.data('href');
+            }
+        }
+    }
 
     const $document = $(document);
     $document.ready(() => {
