@@ -2,10 +2,13 @@
 @import './mixins.less';
 
 .docs {
+  max-width: @container-width;
   padding: 0 @padding-xs;
+  margin: 0 auto;
 
   .docs-sections, .docs-links {
     .make-xs-column(12);
+    .make-sm-column(3);
     .make-md-column(2);
   }
 
@@ -34,12 +37,18 @@
   }
 
   .docs-content {
+    margin: @padding-xs auto 0 auto;
     .make-xs-column(12);
+    .make-sm-column(6);
     .make-md-column(8);
-    margin-top: @padding-xs;
 
-    @media (min-width: @screen-md) {
+    @media (min-width: 768px) {
       margin-top: 0;
+      max-width: @post-width;
+
+      .docs-inner-content {
+        margin: auto;
+      }
     }
 
     .docs-title {
@@ -55,16 +64,6 @@
     @media (min-width: @screen-md) {
       text-align: right;
       margin-top: 0;
-    }
-
-    .btn {
-      padding: @padding-xs @padding-normal;
-      border-radius: 0;
-
-      &.btn-open-source {
-        background-color: @open-source-primary-color;
-        color: @light-font-color;
-      }
     }
   }
 

@@ -1,0 +1,102 @@
+@import './variables.less';
+
+.airware-footer {
+  padding: 0;
+  position: relative;
+  background: @body-bg;
+  padding-top: 75px;
+  .square(100%);
+  .translate3d(0, 0, 1px);
+
+  hr {
+    margin-top: 0;
+    padding-bottom: @padding-xs;
+  }
+
+  .careers {
+    text-align: center;
+    background-color: @pre-bg;
+    padding: 100px 0;
+  }
+
+  &-links {
+    height: 60px;
+  }
+
+  &-cnt {
+    max-width: @container-width;
+    margin: 0 auto;
+
+    .external-links, .copyright {
+      width: 100%;
+      display: inline-block;
+      text-align: center;
+    }
+
+    .copyright {
+      color: @home-primary-color;
+    }
+
+    .external-links {
+      .external {
+        color: @home-primary-color;
+      }
+    }
+
+    @media (max-width: @container-width) {
+      .external-links {
+        padding-right: @padding-normal;
+      }
+
+      .copyright {
+        padding-left: @padding-normal;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .external-links, .copyright {
+        width: 49%;
+      }
+
+      .external-links {
+        text-align: right;
+
+        .external {
+          margin-left: @padding-sm;
+
+          &:first-child {
+            margin-left: 0;
+          }
+        }
+      }
+
+      .copyright {
+        text-align: left;
+      }
+    }
+  }
+}
+
+.eng {
+  .airware-footer {
+    .external-links .external {
+      color: @eng-primary-color;
+    }
+  }
+}
+
+.design {
+  .airware-footer {
+    .external-links .external{
+      color: @design-primary-color;
+    }
+  }
+}
+
+.open-source {
+  .airware-footer {
+    .external-links .external {
+      color: @open-source-primary-color;
+    }
+  }
+}

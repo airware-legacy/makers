@@ -24,7 +24,16 @@
 
         this.$window.scroll(this.onScroll.bind(this));
         this.slideInHero();
+        this.setGlobalLinkClickListener();
     }
+
+    Layout.prototype.setGlobalLinkClickListener = function () {
+        $(document).on('click', '.external', e => {
+            e.stopPropagation();
+            e.preventDefault();
+            window.open($(e.target).attr('href'), '_blank');
+        });
+    };
 
     Layout.prototype.slideInHero = function () {
         this.$hero.velocity(this.options.hero.transition, { duration : this.options.hero.duration });
