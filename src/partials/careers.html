@@ -4,33 +4,14 @@
         <p class="careers-tagline">Think you have what it takes? Join the team in San Francisco</p>
 
         <ul class="career-list">
+            {{#each careers}}
             <li class="career-list-item">
-                <a class="external" href="http://www.airware.com/careers#/tabs-13472">
-                    <span class="career-name">Software Engineer - C#</span>
+                <a class="external" href="{{link}}">
+                    <span class="career-name">{{title}}</span>
                     <span class="career-apply">Apply</span>
                 </a>
             </li>
-
-            <li class="career-list-item">
-                <a class="external" href="http://www.airware.com/careers#/tabs-49240">
-                    <span class="career-name">Software Engineer - JavaScript</span>
-                    <span class="career-apply">Apply</span>
-                </a>
-            </li>
-
-            <li class="career-list-item">
-                <a class="external" href="http://www.airware.com/careers#/tabs-129954">
-                    <span class="career-name">Software Engineer - Data Analysis</span>
-                    <span class="career-apply">Apply</span>
-                </a>
-            </li>
-
-            <li class="career-list-item">
-                <a class="external" href="http://www.airware.com/careers#/tabs-121037">
-                    <span class="career-name">Software Engineer - Image & Data Processing</span>
-                    <span class="career-apply">Apply</span>
-                </a>
-            </li>
+            {{/each}}
         </ul>
     </div>
 </script>

@@ -28,20 +28,25 @@ let data;
 
 
 // Clean data and build dirs
-gulp.task('clean', () => {
-    data = {
-        authors   : [], // Populated by 'authors' task
-        posts     : [], // Populated by 'posts' task
-        tags      : [], // Populated by 'posts' task
-        pageTitle : 'Airware Makers',
-        year      : moment().format('YYYY'),
-        timestamp : moment().format('YYYY-MM-DD-HH-mm-ss')
-    };
+gulp.task('clean', done => {
+    fs.readFile('src/data/careers.json', 'utf-8', (err, careers) => {
+        if (err) throw err;
 
-    return del([
-        'build/**',
-        '!build'
-    ]);
+        data = {
+            authors   : [], // Populated by 'authors' task
+            posts     : [], // Populated by 'posts' task
+            tags      : [], // Populated by 'posts' task
+            careers   : JSON.parse(careers),
+            pageTitle : 'Airware Makers',
+            year      : moment().format('YYYY'),
+            timestamp : moment().format('YYYY-MM-DD-HH-mm-ss')
+        };
+
+        del([
+            'build/**',
+            '!build'
+        ]).then(done());
+    });
 });
 
 
@@ -134,6 +139,7 @@ gulp.task('posts', done => {
                     path      : file.path,
                     content   : file.contents.toString(),
                     authors   : data.authors,
+                    careers   : data.careers,
                     pageTitle : data.pageTitle,
                     year      : data.year,
                     timestamp : data.timestamp
@@ -172,6 +178,7 @@ gulp.task('pages', done => {
                     path      : file.path,
                     posts     : data.posts,
                     year      : data.year,
+                    careers   : data.careers,
                     timestamp : data.timestamp,
                     pageTitle : data.pageTitle
                 }));
