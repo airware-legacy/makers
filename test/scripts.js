@@ -7,7 +7,7 @@ describe('The dynamically concatenated and minified JS...', () => {
     let str;
 
     it('Should exist', done => {
-        fs.readFile('build/all.min.js', (err, data) => {
+        fs.readFile('build/js/all.min.js', (err, data) => {
             if (err) throw err;
             str = data.toString();
             done();

@@ -98,7 +98,7 @@ gulp.task('scripts', () => {
     .pipe(g.concat('all.min.js'))
     .pipe(g.uglify({ preserveComments : 'some' }))
     .pipe(g.sourcemaps.write('.'))
-    .pipe(gulp.dest('build'));
+    .pipe(gulp.dest('build/js'));
 });
 
 
