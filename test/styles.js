@@ -7,7 +7,7 @@ describe('The dynamically concatenated and minified CSS...', () => {
     let str;
 
     it('Should exist', done => {
-        fs.readFile('build/all.min.css', (err, data) => {
+        fs.readFile('build/css/all.min.css', (err, data) => {
             if (err) throw err;
             str = data.toString();
             done();
