@@ -80,22 +80,25 @@ gulp.task('styles', () => {
 
 // Minify and combine all JavaScript
 gulp.task('scripts', () => {
-    return gulp.src('src/js/*.js')
-        .pipe(g.babel({
-            presets  : [ 'es2015' ],
-            comments : true
-        }))
-        .pipe(g.addSrc.prepend([
-            'node_modules/jquery/dist/jquery.js',
-            'node_modules/velocity-animate/velocity.js',
-            'node_modules/velocity-animate/velocity.ui.js',
-            'node_modules/hammerjs/hammer.js',
-            'node_modules/jquery-hammerjs/jquery.hammer.js',
-            'node_modules/bootstrap/dist/js/bootstrap.js'
-        ]))
-        .pipe(g.concat('all.min.js'))
-        .pipe(g.uglify({ preserveComments : 'some' }))
-        .pipe(gulp.dest('build'));
+    return gulp.src([
+        'node_modules/jquery/dist/jquery.js',
+        'node_modules/velocity-animate/velocity.js',
+        'node_modules/velocity-animate/velocity.ui.js',
+        'node_modules/hammerjs/hammer.js',
+        'node_modules/jquery-hammerjs/jquery.hammer.js',
+        'node_modules/bootstrap/dist/js/bootstrap.js',
+        'src/js/*.js'
+    ])
+    .pipe(g.sourcemaps.init({ loadMaps : true }))
+    .pipe(g.babel({
+        presets  : [ 'es2015' ],
+        comments : true,
+        compact  : false
+    }))
+    .pipe(g.concat('all.min.js'))
+    .pipe(g.uglify({ preserveComments : 'some' }))
+    .pipe(g.sourcemaps.write('.'))
+    .pipe(gulp.dest('build'));
 });
 
 
