@@ -6,8 +6,8 @@ reviewers:
 - caity-cronkhite
 category: design
 date: 2015-01-15
-poster: https://placehold.it/1200x1080
-thumb: https://placehold.it/250x250
+poster: /img/casestudy/poster.png
+thumb: /img/casestudy/card.png
 tags:
 - User Experience
 ---
