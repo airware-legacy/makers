@@ -40,7 +40,8 @@ describe('The dynamically concatenated and minified JS...', () => {
             'Custom Post',
             'Custom Layout',
             'Custom Lightbox',
-            'Custom Animations'
+            'Custom Animations',
+            'Custom Parallax'
         ];
 
         scripts.forEach(script => {

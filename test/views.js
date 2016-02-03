@@ -36,8 +36,8 @@ describe('The dynamically generated home page...', () => {
             .should.equal('Blog | Airware Makers');
     });
 
-    it('Should contain just one <h1> element', () => {
-        document.getElementsByTagName('h1').length
+    it('Should contain just one <h2> element', () => {
+        document.getElementsByTagName('h2').length
             .should.equal(1);
     });
 
@@ -64,8 +64,8 @@ describe('The dynamically generated engineering page...', () => {
             .should.equal('Engineering | Airware Makers');
     });
 
-    it('Should contain just one <h1> element', () => {
-        document.getElementsByTagName('h1').length
+    it('Should contain just one <h2> element', () => {
+        document.getElementsByTagName('h2').length
             .should.equal(1);
     });
 
@@ -92,8 +92,8 @@ describe('The dynamically generated design page...', () => {
             .should.equal('Design | Airware Makers');
     });
 
-    it('Should contain just one <h1> element', () => {
-        document.getElementsByTagName('h1').length
+    it('Should contain just one <h2> element', () => {
+        document.getElementsByTagName('h2').length
             .should.equal(1);
     });
 
