@@ -6,8 +6,8 @@ reviewers:
 - caity-cronkhite
 category: design
 date: 2015-12-11
-poster: https://placehold.it/1200x1080
-thumb: https://placehold.it/250x250
+poster: /img/flightplanning/poster.png
+thumb: /img/flightplanning/card.png
 tags:
 - Sketch
 - Process
@@ -31,15 +31,15 @@ Our Process
 
 The first thing we did was break the workflow down into all of the necessary tasks and put them up on the whiteboard.
 
-![](https://placehold.it/750x400)
+![Whitboard](/img/flightplanning/whiteboard.png)
 
 After that, we scrutinized our list. We asked questions like: Is this task necessary? Could we automate this? Can we combine these tasks? Our goal was to organize all of the tasks into a logical sequence by grouping them into “steps.” During this process, we came up with some clever and technically ambitious ideas to streamline the workflow, including auto-generating elements of the flight plan, but more on that later.  
 
-![](https://placehold.it/750x400)
+![Disorganized](/img/flightplanning/disorganized.png)
 
 Once the workflow was broken down into steps, we started iterating on how these steps should be represented in the UI. We laid out our options in a series of whiteboard sketches. We were shooting for volume at this point in the project; we wanted to explore as many ideas as possible in low fidelity to quickly get a sense of what worked and what didn't. We identified pros and cons of each sketch, pruned the truly crazy ideas, and were left with a list of viable contenders.
 
-![](https://placehold.it/750x400)
+![Organized](/img/flightplanning/organized.png)
 
 
 ### Refinement
@@ -70,7 +70,7 @@ The final design ended being a simple three-step process.
 ### Step 1
 In step one, we ask the user to give us the location where they will be flying and what data products they want to generate with the flight data. Special thanks to Jona Dinges for the beautiful low-poly artwork that we use to represent our data products.
 
-![](https://placehold.it/750x400)
+![Info](/img/flightplanning/1-info.png)
 
 ### Step 2
 
@@ -82,13 +82,13 @@ Step two is where the user actually creates the flight plan. Although a flight p
 
 My favorite part about this is that we auto-generate both the geofence and the survey area based on the information that the user gave us in the previous step. It’s not a perfect system yet—we still rely on the user's judgement to make adjustments. However, auto-generating speeds up the process and considerably reduces the learning curve.
 
-![](https://placehold.it/750x400)
-
+![Plan](/img/flightplanning/2-plan.png)
 
 ### Step 3
 
 After creating a flight plan, the user picks a date or date range to fly the job, assigns an available operator to it, and submits the job for approval. The job is then put into a “pending” state until it is processed based on each company’s approval workflows. In most cases, we can automatically return a decision about whether or not the job is approved within seconds. However, some companies may require a human being to make the final decision about whether to approve the job, which would obviously take longer.
 
+![Operators](/img/flightplanning/3-operators.png)
 
 Conclusion
 ----------

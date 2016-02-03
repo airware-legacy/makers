@@ -6,8 +6,8 @@ reviewers:
 - caity-cronkhite
 category: engineering
 date: 2015-12-13
-poster: https://placehold.it/1200x1080
-thumb: https://placehold.it/250x250
+poster: /img/y6/poster.png
+thumb: /img/y6/card.png
 tags:
 - Fabrication
 - 3D Printing
