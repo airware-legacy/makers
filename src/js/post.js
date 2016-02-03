@@ -26,12 +26,12 @@
 
         initImages () {
             this.$imgs.each(function (index) {
-                let $img = $(this);
+                const $img = $(this);
                 $img.attr('data-lightbox-img', index);
 
-                let color = $img.data(FULL_WIDTH);
+                const color = $img.data(FULL_WIDTH);
                 if (color) {
-                    $img.parent().addClass(FULL_WIDTH).css({ 'background-color': color });
+                    $img.parent().addClass(FULL_WIDTH).css({ 'background-color' : color });
                 }
             });
         }

@@ -16,7 +16,7 @@
     }
 
     $(document).ready(() => {
-        let layout = new Layout();
+        const layout = new Layout();
         layout.setGlobalLinkClickListener();
     });
 })();

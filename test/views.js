@@ -37,8 +37,8 @@ describe('The dynamically generated home page...', () => {
     });
 
     it('Should contain just one <h2> element', () => {
-        document.getElementsByTagName('h2').length
-            .should.equal(1);
+        const header = document.getElementsByClassName('airware-header')[0];
+        header.getElementsByTagName('h2').length.should.equal(1);
     });
 
     it('Should contain copyright text from the footer partial', () => {
@@ -65,8 +65,8 @@ describe('The dynamically generated engineering page...', () => {
     });
 
     it('Should contain just one <h2> element', () => {
-        document.getElementsByTagName('h2').length
-            .should.equal(1);
+        const header = document.getElementsByClassName('airware-header')[0];
+        header.getElementsByTagName('h2').length.should.equal(1);
     });
 
     it('Should contain copyright text from the footer partial', () => {
@@ -93,8 +93,8 @@ describe('The dynamically generated design page...', () => {
     });
 
     it('Should contain just one <h2> element', () => {
-        document.getElementsByTagName('h2').length
-            .should.equal(1);
+        const header = document.getElementsByClassName('airware-header')[0];
+        header.getElementsByTagName('h2').length.should.equal(1);
     });
 
     it('Should contain copyright text from the footer partial', () => {

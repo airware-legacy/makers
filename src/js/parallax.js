@@ -41,21 +41,21 @@
         }
 
         shouldParallax () {
-            return typeof requestAnimationFrame !== 'undefined' && browser.name !== 'IE' && device.type !== 'mobile' && device.type !== 'tablet';
+            return typeof window.requestAnimationFrame !== 'undefined' && browser.name !== 'IE' && device.type !== 'mobile' && device.type !== 'tablet';
         }
 
         parallax ($el, rate) {
             const self = this;
 
             this.$window.scroll(() => {
-                requestAnimationFrame(() => {
+                window.requestAnimationFrame(() => {
                     self.transform($el, (self.$window.scrollTop() / self.$window.outerHeight()) * ($el.outerHeight() * rate));
                 });
             });
         }
 
         transform ($el, pos) {
-            $el.css({ transform: 'translate3d(0, ' + pos + '%, 0)' });
+            $el.css({ transform : `translate3d(0, ${pos}%, 0)` });
         }
     }
 

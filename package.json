@@ -78,7 +78,8 @@
       "_": true,
       "window": true,
       "document": true,
-      "ga": true
+      "ga": true,
+      "UAParser": true
     },
     "rules": {
       "array-bracket-spacing": [
