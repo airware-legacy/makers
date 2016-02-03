@@ -6,19 +6,25 @@
   margin-right: auto;
 }
 
-.post {
+.post-content {
   margin-top: -@padding-xs;
 
   h1, h2, h3, h4, h5, h6, p, hr, pre, div, ul, ol {
     margin: 0;
     padding: 0 @padding-normal;
     width: 100%;
-    max-width: @container-width;
+
+    &:not(.full-width) {
+      max-width: @container-width;
+    }
 
     @media (min-width: @screen-sm) {
       padding: 0;
-      width: @post-width;
       margin: 0 auto;
+
+      &:not(.full-width) {
+        width: @post-width;
+      }
     }
   }
 
@@ -49,7 +55,6 @@
 
   img {
     .img-responsive();
-    width: 100%;
     cursor: pointer;
   }
 
@@ -81,7 +86,6 @@
     background: @gray;
     padding: @padding-normal;
     border: 0;
-    margin-bottom: 0;
 
     p {
       padding: @padding-normal;
@@ -106,6 +110,17 @@
         right: 0;
         bottom: -@padding-xs;
       }
+    }
+  }
+
+  .full-width {
+    .make-xs-column(12);
+    margin-bottom: @padding-xs;
+
+    img {
+      margin: auto;
+      padding: 75px;
+      max-width: @post-width;
     }
   }
 }

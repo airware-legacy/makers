@@ -84,6 +84,7 @@ gulp.task('scripts', () => {
             comments : true
         }))
         .pipe(g.addSrc.prepend([
+            'node_modules/ua-parser-js/dist/ua-parser.min.js',
             'node_modules/jquery/dist/jquery.js',
             'node_modules/velocity-animate/velocity.js',
             'node_modules/velocity-animate/velocity.ui.js',
@@ -260,7 +261,8 @@ gulp.task('package', g.depcheck({
         'jquery-hammerjs',
         'jquery',
         'should',
-        'velocity-animate'
+        'velocity-animate',
+        'ua-parser-js'
     ]
 }));
 
