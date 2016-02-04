@@ -3,20 +3,43 @@
 .airware-footer {
   padding: 0;
   position: relative;
-  background: @body-bg;
-  padding-top: 75px;
+  background: @pre-bg;
+  margin-top: 75px;
   .square(100%);
   .translate3d(0, 0, 1px);
 
   hr {
-    margin-top: 0;
-    padding-bottom: @padding-xs;
+    margin: 0;
   }
 
   .careers {
     text-align: center;
     background-color: @pre-bg;
     padding: 100px 0;
+  }
+
+  .github-icon, .dribble-icon, .twitter-icon {
+    vertical-align: middle;
+    position: relative;
+    width: 30px;
+    height: 30px;
+    background-size: 27px;
+    background-repeat: no-repeat;
+    display: inline-block;
+  }
+
+  .github-icon {
+    .github-bg();
+  }
+
+  .dribble-icon {
+    .dribble-bg();
+  }
+
+  .twitter-icon {
+    top: 2px;
+    background-size: 28px;
+    .twitter-bg();
   }
 
   &-links {
@@ -39,7 +62,12 @@
 
     .external-links {
       .external {
+        margin-left: 15px;
         color: @home-primary-color;
+
+        &:first-child {
+          margin-left: 0;
+        }
       }
     }
 
