@@ -5,8 +5,8 @@ reviewers:
 - eric-johnson
 category: design
 date: 2015-12-08
-poster: /img/digitalproductdesign/poster.png
-thumb: /img/digitalproductdesign/poster.png
+poster: /img/simple-definition-digital-product-design/poster.png
+thumb: /img/simple-definition-digital-product-design/poster.png
 tags:
 - Product
 - Visual Design
@@ -20,7 +20,7 @@ While the evolution is exciting, as a designer it can be difficult to know exact
 
 That changed when I started at Airware. I came on board as the first Product Designer and I was asked to give a “What is Product Design?” presentation for some of the managers and engineers. It’s pretty much the most fundamental question you can be asked as an employee, “what do you do here?” and I was worried that I wouldn’t be able to give a compelling answer. So fueled by some healthy panic I came up with a way of describing things that really clicked with people, and actually helped influence the way I think about my own job.
 
-![Machine](/img/digitalproductdesign/machine.png)
+![Machine](/img/simple-definition-digital-product-design/machine.png)
 
 The idea is that designers help people take advantage of very complex technology without forcing them to understand how it actually works.* What designers really create is an abstraction, a mental shortcut built on concepts with which the user is already familiar. In most cases this abstraction will be very different from the way that technology is implemented under the hood, it will be simplified and more in line with how they see the world. So even though designers work on a software applications with buttons, dropdowns and toolbars these are really just the vocabulary they use to communicate a more abstract idea.
 

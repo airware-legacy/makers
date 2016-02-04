@@ -6,8 +6,8 @@ reviewers:
 - caity-cronkhite
 category: engineering
 date: 2015-12-13
-poster: /img/y6/poster.png
-thumb: /img/y6/card.png
+poster: /img/hackathon-y6-fabrication/poster.png
+thumb: /img/hackathon-y6-fabrication/card.png
 tags:
 - Fabrication
 - 3D Printing
@@ -20,13 +20,13 @@ Y6 Configuration
 ----------------
 To set the context, everyone is likely familiar with quadrotors that utilize a simple X-shaped frame. You may have even seen an “X8” without realizing it. X8s are similar but have two rotors per arm, whereas an octorotors would have all eight propellers arranged in a disc.
 
-![Quad/X8/Octo](/img/y6/comparison.png)
+![Quad/X8/Octo](/img/hackathon-y6-fabrication/comparison.png)
 
 Eight rotors gives you some redundancy compared with a standard quadrotor. The benefit of an X8 over an octorotor is that you get double the power in the same small package, so you can fly in tight spaces. There is no free lunch, however: you use more battery and lose 5-10% efficiency because the bottom props operate in the wash of the upper props.
 
 X8s are more maneuverable than a large, disc-shaped octocopter. They are also far more compact for shipping and storage. We’ve learned that operational concerns like assembly and disassembly time, pack volume, and ease of use can equal or outweigh flight characteristics for many customers.
 
-![Y6 image](/img/y6/y6_post_images.png)
+![Y6 image](/img/hackathon-y6-fabrication/y6_post_images.png)
 
 The Y6 configuration shares the redundancy and compact format characteristics of the X8, but it only has three arms and six motors. This decreases weight and increases flight time marginally over the X8. You can also argue that it has a wider field of view for a suspended wide-angle camera, which may be desirable for applications like cinematography.
 
@@ -37,7 +37,7 @@ Unique Characteristics
 
 The team wanted to further enhance the operational compactness of the Y6 configuration. They designed two of the arms to fold backward along the axis of the third arm. This allows the pack volume of the Y6 to be the width of it’s central cage.
 
-![Folding arms](/img/y6/folding_arms.png)
+![Folding arms](/img/hackathon-y6-fabrication/folding_arms.png)
 
 Special fasteners hold the arms in place during flight. We had to take special care to make sure that vibration would not loosen the arms.
 
@@ -45,7 +45,7 @@ Special fasteners hold the arms in place during flight. We had to take special c
 
 One unique design element is the battery masts. They use silicon bushings and isolate the battery from the rest of the frame, which protects it from vibration.
 
-![Battery tray](/img/y6/battery_tray.png)
+![Battery tray](/img/hackathon-y6-fabrication/battery_tray.png)
 
 Somewhat counter-intuitively, the flight sensors (accelerometers, gyros, etc.) are also mounted on this component next to the battery. The added mass of the battery acts as a sort of ballast, which further isolates these sensitive components from the harsh vibration of the motors and propellers.
 
@@ -53,7 +53,7 @@ Somewhat counter-intuitively, the flight sensors (accelerometers, gyros, etc.) a
 
 The construction of the Y6 body is sort of like a 2D plate sandwich. It’s reminiscent of the movement inside a mechanical watch. This allows moderately complicated forms without any complex tooling such as molding or [CNC](https://en.wikipedia.org/wiki/CNC_router) techniques needed to produce compound curves.
 
-![carbon cage image](/img/y6/carbon_cage.png)
+![carbon cage image](/img/hackathon-y6-fabrication/carbon_cage.png)
 
 Another benefit of the carbon material is that the frame naturally acts a [Faraday cage](https://en.wikipedia.org/wiki/Faraday_cage) or EMI shield to protect against electromagnetic interference. This simultaneously improves radio communication with the aircraft and the quality of the sensor data flowing into the flight controller.
 
@@ -61,7 +61,7 @@ Another benefit of the carbon material is that the frame naturally acts a [Farad
 
 To take advantage of the large field of view on this drone, the team installed a gimbal-stabilized GoPro video camera for night filming. To light the way, they installed a 100-watt LED with a high amperage, remotely-controlled relay. Warning: it will melt styrofoam cups at a range of three feet.
 
-![Camera and lights](/img/y6/lights.png)
+![Camera and lights](/img/hackathon-y6-fabrication/lights.png)
 
 The Y6 also carries a video transmitter separate from the normal wireless communications systems that connect drone and operator. It also includes bright standard aviation lighting: red on left, green on right, and white on rear. All these auxiliary functions are mediated through a switch panel on the body of the drone for ground checks. For good measure, the team also used anti-spark connectors on the battery to prevent them from wearing out over time.
 

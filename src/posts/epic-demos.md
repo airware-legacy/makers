@@ -6,8 +6,8 @@ reviewers:
 - caity-cronkhite
 category: engineering
 date: 2015-12-10
-poster: /img/epicdemos/poster.png
-thumb: /img/epicdemos/card.png
+poster: /img/epic-demos/poster.png
+thumb: /img/epic-demos/card.png
 tags:
 - Agile
 - Scrum
