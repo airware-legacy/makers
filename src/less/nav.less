@@ -43,6 +43,7 @@
   }
 
   .airware-hero {
+    position: relative;
     &:extend(.jumbotron);
     .make-md-column(10);
     .make-md-column-offset(1);
@@ -54,10 +55,6 @@
     background: transparent;
     opacity: 0;
     .backface-visibility(hidden);
-
-    h2 {
-      font-size: 35px;
-    }
   }
 
   .airware-nav {
@@ -164,10 +161,6 @@
       border-bottom: @header-active-border-width solid @open-source-primary-color;
     }
   }
-}
-
-.airware-header.vili-header {
-  .vili-viking();
 }
 
 /* nav hover colors */

@@ -36,9 +36,8 @@ describe('The dynamically generated home page...', () => {
             .should.equal('Blog | Airware Makers');
     });
 
-    it('Should contain just one <h2> element', () => {
-        const header = document.getElementsByClassName('airware-header')[0];
-        header.getElementsByTagName('h2').length.should.equal(1);
+    it('Should contain just one <h1> element', () => {
+        document.getElementsByTagName('h1').length.should.equal(1);
     });
 
     it('Should contain copyright text from the footer partial', () => {
@@ -64,9 +63,8 @@ describe('The dynamically generated engineering page...', () => {
             .should.equal('Engineering | Airware Makers');
     });
 
-    it('Should contain just one <h2> element', () => {
-        const header = document.getElementsByClassName('airware-header')[0];
-        header.getElementsByTagName('h2').length.should.equal(1);
+    it('Should contain just one <h1> element', () => {
+        document.getElementsByTagName('h1').length.should.equal(1);
     });
 
     it('Should contain copyright text from the footer partial', () => {
@@ -92,9 +90,8 @@ describe('The dynamically generated design page...', () => {
             .should.equal('Design | Airware Makers');
     });
 
-    it('Should contain just one <h2> element', () => {
-        const header = document.getElementsByClassName('airware-header')[0];
-        header.getElementsByTagName('h2').length.should.equal(1);
+    it('Should contain just one <h1> element', () => {
+        document.getElementsByTagName('h1').length.should.equal(1);
     });
 
     it('Should contain copyright text from the footer partial', () => {
