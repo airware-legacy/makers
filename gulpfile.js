@@ -249,8 +249,7 @@ gulp.task('serve', done => {
 // Check deps with David service
 gulp.task('deps', () => {
     return gulp.src('package.json')
-        .pipe(g.david({ update : true }))
-        .pipe(gulp.dest('.'));
+        .pipe(g.david());
 });
 
 
