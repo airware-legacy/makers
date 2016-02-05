@@ -40,6 +40,14 @@
     }
   }
 
+  h2 {
+    margin: @padding-normal auto -5px auto;
+  }
+
+  h3 {
+    margin: 20px auto -5px auto;
+  }
+
   ul, ol {
     font-size: @font-size-base;
     list-style-position: inside;
@@ -59,12 +67,12 @@
   }
 
   a {
-    color: @gray;
+    color: @dark-font-color;
+    border-bottom: 1px dotted @dark-font-color;
 
     &:hover {
-      color: @gray;
+      color: @blue;
       text-decoration: none;
-      border-bottom: 1px dotted @gray;
     }
   }
 
@@ -113,13 +121,21 @@
     }
   }
 
+  .post-img-hover {
+    .transition(all 0.4s ease-in-out;);
+
+    &:hover {
+      .box-shadow(@btn-hover);
+    }
+  }
+
   .full-width {
     .make-xs-column(12);
-    margin-bottom: @padding-xs;
+    margin: @padding-normal auto;
 
     img {
       margin: auto;
-      padding: 75px;
+      padding: 40px;
       max-width: @post-width;
     }
   }
@@ -130,11 +146,6 @@
     background: @eng-primary-color;
     color: @blockquote-dark-font-color;
   }
-
-  a {
-    color: @eng-primary-color;
-    border-bottom-color: @eng-primary-color;
-  }
 }
 
 .post[data-post-category="design"] {
@@ -142,21 +153,11 @@
     background: @design-primary-color;
     color: @blockquote-light-font-color;
   }
-
-  a {
-    color: @design-primary-color;
-    border-bottom-color: @design-primary-color;
-  }
 }
 
 .post[data-post-category="open-source"] {
   blockquote {
     background: @open-source-primary-color;
     color: @blockquote-dark-font-color;
-  }
-
-  a {
-    color: @open-source-primary-color;
-    border-bottom-color: @open-source-primary-color;
   }
 }

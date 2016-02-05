@@ -47,6 +47,7 @@
   }
 
   &-cnt {
+    position: relative;
     max-width: @container-width;
     margin: 0 auto;
 
@@ -68,6 +69,21 @@
         &:first-child {
           margin-left: 0;
         }
+      }
+    }
+
+    @media (max-width: 768px) {
+      .external-links, .copyright {
+        position: absolute;
+      }
+
+      .external-links {
+        top: -@padding-sm;
+        padding-right: 0 !important;
+      }
+
+      .copyright {
+        bottom: 10px;
       }
     }
 

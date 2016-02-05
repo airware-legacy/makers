@@ -4,14 +4,26 @@
 .grid {
   .grid-cell {
     .make-xs-column(12);
-    .make-md-column(6);
+    .make-sm-column(6);
     margin-top: @padding-xs;
 
     &:first-child {
       margin-top: 0;
     }
 
-    @media (min-width: @screen-md) {
+    @media (max-width: @screen-md) {
+        .card {
+          h2 {
+            padding-bottom: 0 !important;
+          }
+
+          .snippet {
+            display: none !important;
+          }
+        }
+    }
+
+    @media (min-width: @screen-sm) {
       &, &:first-child {
         margin-top: 0;
       }

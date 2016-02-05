@@ -94,12 +94,13 @@
     }
 
     &-item {
-      padding: @padding-base 0;
+      padding: @padding-base 0 0 0;
       font-size: @font-size-base;
       margin-left: @padding-normal;
       color: #fff;
       text-decoration: none;
       display: none;
+      .transition(padding 0.2s ease-in-out);
 
       @media (min-width: 768px) {
         display: inline-block;
@@ -134,6 +135,7 @@
     }
 
     .engineering-nav-item {
+      padding: @padding-base 0;
       border-bottom: @header-active-border-width solid @eng-primary-color;
     }
   }
@@ -146,6 +148,7 @@
     }
 
     .design-nav-item {
+      padding: @padding-base 0;
       border-bottom: @header-active-border-width solid @design-primary-color;
     }
   }
@@ -158,6 +161,7 @@
     }
 
     .open-source-nav-item {
+      padding: @padding-base 0;
       border-bottom: @header-active-border-width solid @open-source-primary-color;
     }
   }
@@ -165,13 +169,16 @@
 
 /* nav hover colors */
 .engineering-nav-item:hover {
-  border-bottom: @header-active-border-width solid @eng-primary-color;
+  padding: @padding-base 0;
+  border-bottom: @header-active-border-width solid rgba(244, 187,65,.5);
 }
 
 .design-nav-item:hover {
-  border-bottom: @header-active-border-width solid @design-primary-color;
+  padding: @padding-base 0;
+  border-bottom: @header-active-border-width solid rgba(67,195,183,.5);
 }
 
 .open-source-nav-item:hover {
-  border-bottom: @header-active-border-width solid @open-source-primary-color;
+  padding: @padding-base 0;
+  border-bottom: @header-active-border-width solid rgba(245,130,64,.5);
 }

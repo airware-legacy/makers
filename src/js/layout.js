@@ -13,10 +13,17 @@
                 window.open($(e.currentTarget).attr('href'), '_blank');
             });
         }
+
+        fadeInCards () {
+            $('.card').each(function () {
+                $(this).velocity('transition.fadeIn', { duration : 300, easing : 'ease-in-out' });
+            });
+        }
     }
 
     $(document).ready(() => {
         const layout = new Layout();
         layout.setGlobalLinkClickListener();
+        layout.fadeInCards();
     });
 })();
