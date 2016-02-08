@@ -9,7 +9,14 @@
   cursor: pointer;
   position: relative;
   padding: 0;
+  opacity: 0;
   .transition(@card-transition);
+
+  @media (max-width: @screen-lg) {
+    .snippet {
+      display: none;
+    }
+  }
 
   &:after {
     content: ' ';
@@ -36,12 +43,13 @@
     @media (min-width: @screen-sm) {
       .card-thumbnail {
         float: left;
-        .square(@thumbnail-size);
+        width: @thumbnail-width;
+        height: @thumbnail-height;
       }
 
       .card-content {
-        height: @thumbnail-size;
-        margin-left: @thumbnail-size;
+        height: @thumbnail-height;
+        margin-left: @thumbnail-width;
       }
     }
   }
@@ -53,7 +61,7 @@
   &-thumbnail {
     background-size: cover;
     background-position: center center;
-    height: @thumbnail-size;
+    height: @thumbnail-height;
   }
 
   &-content {

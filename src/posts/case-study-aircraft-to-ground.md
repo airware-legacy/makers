@@ -6,8 +6,8 @@ reviewers:
 - caity-cronkhite
 category: design
 date: 2015-01-15
-poster: https://placehold.it/1200x1080
-thumb: https://placehold.it/250x250
+poster: /img/case-study-aircraft-to-ground/poster.png
+thumb: /img/case-study-aircraft-to-ground/card.png
 tags:
 - User Experience
 ---
@@ -22,9 +22,7 @@ The Problem Space
 -----------------
 The problem with the old connection flow was that it lacked cohesion. Even though the ultimate user goal of connecting to an aircraft was straightforward, the workflow required users to navigate to different areas of the application to perform checks and set values. From our user interviews, we learned that the operators were hoping for a more opinionated workflow, one that walked them through each step in the process.
 
-![](https://placehold.it/750x400)
-
-![Before: The old workflow required users to bounce back and forth between the Preflight and Operator tabs multiple times during the connection process.](https://placehold.it/750x400)
+![Before: The old workflow required users to bounce back and forth between the Preflight and Operator tabs multiple times during the connection process.](/img/case-study-aircraft-to-ground/preflight.png)
 
 The fact that such a critical flow required multiple context switches spoke to a larger problem with the app’s Information Architecture. The high-level navigation of the app did not reflect how operators actually used it. We knew that we needed to address some of these more fundamental organization problems to improve the connection experience. However, restructuring high-level navigation can be a slippery slope that leads to a full-fledged redesign, and we didn’t have the time to invest in that. So our approach was to design the ideal connection flow and to make any information architecture changes necessary to support that, and nothing more.
 
@@ -34,12 +32,12 @@ We landed on a solution that converted the four horizontal blades (Preflight, Op
 
 We realized that nearly everything in the Preflight tab was either a setting or part of the connection workflow. So we took all of the settings, organized them into logical groups, and relocated them to the header. This way, settings would be accessible from anywhere in the application, and it would free us up to move all of the aircraft connection functionality into one place.
 
-![After: Simplified navigation and connected aircraft panel](https://placehold.it/750x400)
+![After: Simplified navigation and connected aircraft panel](/img/case-study-aircraft-to-ground/connect_new.png)
 
-![After: Settings were relocated to a global menu in the header](https://placehold.it/750x400)
+![After: Settings were relocated to a global menu in the header](/img/case-study-aircraft-to-ground/operator.png)
 
 The connection functionality would now live in the Fly tab in the new aircraft pane. We merged all of the aircraft information and actions into this pane and used the connection flow as the way to “unlock” it. When we had operators walk through the new flow for the first time, their feedback was overwhelmingly positive: “Why hasn’t it been this way all along?” The new flow was much more intuitive and saved them a significant amount of time in the field.
 
-![Step-by-step aircraft connection flow from start to finish](https://placehold.it/750x400)
+![Step-by-step aircraft connection flow from start to finish](/img/case-study-aircraft-to-ground/connect_details.png)
 
 Overall, this project was a successful exercise in making a big impact in a short amount of time. In two engineering sprints, we were able to greatly improve a critical workflow while simultaneously updating the navigation, settings, and visual styling. To me, this drove home the importance of focus when changing a core piece of functionality. Even the change required that we restructure a significant portion of the application, we were able to navigate the myriad tough decisions and tradeoffs because we had our overarching user goal of improving the connection flow to ground the project.

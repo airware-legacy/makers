@@ -54,23 +54,30 @@
     .airware-lightbox-content {
       background: @light-bg-color;
       .square(100%);
+      height: auto;
+      overflow: auto;
+      max-height: 80%;
+
+      @media (max-width: 768px) {
+        height: 100%;
+        max-height: 100%;
+      }
 
       .careers-cnt {
-        overflow: auto;
         height: 100%;
-        padding: 60px 45px;
+        padding: 45px;
 
         .careers-title {
           margin: 0;
-          padding-bottom: 15px;
+          padding-bottom: 7px;
           font-family: Colfax-Medium;
         }
 
         .careers-tagline {
           margin: 0;
-          padding-bottom: 30px;
+          padding-bottom: 20px;
           color: @home-primary-color;
-          border-bottom: 2px solid @home-primary-color;
+          border-bottom: 1px solid @light-gray;
         }
 
         .career-list {
@@ -80,9 +87,9 @@
 
           &-item {
             width: 100%;
-            line-height: 45px;
+            line-height: 30px;
             white-space: nowrap;
-            border-bottom: 1px solid @home-primary-color;
+            border-bottom: 1px solid @light-gray;
 
             .career-name, .career-apply {
               width: 49%;

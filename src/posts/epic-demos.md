@@ -6,8 +6,8 @@ reviewers:
 - caity-cronkhite
 category: engineering
 date: 2015-12-10
-poster: https://placehold.it/1200x1080
-thumb: https://placehold.it/250x250
+poster: /img/epic-demos/poster.png
+thumb: /img/epic-demos/card.png
 tags:
 - Agile
 - Scrum

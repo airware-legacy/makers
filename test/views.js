@@ -37,8 +37,7 @@ describe('The dynamically generated home page...', () => {
     });
 
     it('Should contain just one <h1> element', () => {
-        document.getElementsByTagName('h1').length
-            .should.equal(1);
+        document.getElementsByTagName('h1').length.should.equal(1);
     });
 
     it('Should contain copyright text from the footer partial', () => {
@@ -65,8 +64,7 @@ describe('The dynamically generated engineering page...', () => {
     });
 
     it('Should contain just one <h1> element', () => {
-        document.getElementsByTagName('h1').length
-            .should.equal(1);
+        document.getElementsByTagName('h1').length.should.equal(1);
     });
 
     it('Should contain copyright text from the footer partial', () => {
@@ -93,8 +91,7 @@ describe('The dynamically generated design page...', () => {
     });
 
     it('Should contain just one <h1> element', () => {
-        document.getElementsByTagName('h1').length
-            .should.equal(1);
+        document.getElementsByTagName('h1').length.should.equal(1);
     });
 
     it('Should contain copyright text from the footer partial', () => {

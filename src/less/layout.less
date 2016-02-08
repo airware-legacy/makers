@@ -8,6 +8,8 @@
 body {
   background-color: @body-bg;
   font-size: @font-size-base;
+  color: @dark-font-color;
+  line-height: @line-height-base;
 
   &.scroll-lock {
     overflow: hidden;
@@ -54,7 +56,6 @@ a, a:hover {
   width: 100%;
   z-index: 2;
   background-color: @body-bg;
-  margin-top: @header-height;
   position: relative;
   padding: 0;
   .translate3d(0, 0, 1px);
@@ -65,11 +66,13 @@ a, a:hover {
   }
 }
 
-.home, .design, .engineering {
-  .airware-content {
-    margin: 0 auto;
-    max-width: @container-width;
-    padding: @padding-normal @padding-xs;
+body:not(.post) {
+  &.home, &.design, &.engineering {
+    .airware-content {
+      margin: 0 auto;
+      max-width: @container-width;
+      padding: @padding-normal @padding-xs;
+    }
   }
 }
 

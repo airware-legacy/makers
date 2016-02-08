@@ -5,6 +5,9 @@
 (function () {
     'use-strict';
 
+    const FULL_WIDTH = 'full-width';
+    const POST_CONTENT = '.post-content';
+
     class Post {
         constructor ($el) {
             this.$el = $el;
@@ -23,7 +26,13 @@
 
         initImages () {
             this.$imgs.each(function (index) {
-                $(this).attr('data-lightbox-img', index);
+                const $img = $(this);
+                $img.attr('data-lightbox-img', index);
+
+                const color = $img.data(FULL_WIDTH);
+                if (color) {
+                    $img.parent().addClass(FULL_WIDTH).css({ 'background-color' : color });
+                }
             });
         }
 
@@ -43,6 +52,6 @@
     }
 
     $(document).ready(() => {
-        new Post($('.post'));
+        new Post($(POST_CONTENT));
     });
 })();

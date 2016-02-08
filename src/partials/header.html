@@ -1,7 +1,18 @@
 <header class="airware-header {{#block 'custom-header-class'}}{{/block}}">
+
     <div class="airware-header-cnt">
         {{> nav}}
         {{#block "hero"}}{{/block}}
     </div>
-    <div class="airware-header-bg-overlay"></div>
+
+    <div class="airware-header-bg-cnt">
+        <div class="airware-header-bg"
+             {{#poster}}
+                style="background-image: url({{this}});
+                background-position: center center;
+                background-size: cover;"
+             {{/poster}}>{{#block "backgroundContent"}}{{/block}}</div>
+
+        <div class="airware-header-bg-overlay"></div>
+    </div>
 </header>
