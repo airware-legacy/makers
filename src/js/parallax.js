@@ -46,7 +46,7 @@
 
         parallax ($el, rate) {
             const self = this;
-            
+
             this.$window.scroll(() => {
                 window.requestAnimationFrame(() => {
                     self.transform($el, (self.$window.scrollTop() / self.$window.outerHeight()) * ($el.outerHeight() * rate));
@@ -63,3 +63,4 @@
         new Parallax();
     });
 })();
+
