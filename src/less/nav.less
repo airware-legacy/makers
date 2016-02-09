@@ -15,6 +15,20 @@
     .backface-visibility(hidden);
     position: absolute;
     transform-origin: 50% 50%;
+
+    .video-js {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+
+      /* aspect ratio 16:9 */
+      width: 177.77777778vh;
+      min-width: 100%;
+      min-height: 56.25vw;
+
+      .translate(-50%, -50%);
+      .transition(opacity 0.2s ease-in-out);
+    }
   }
 
   .airware-header-bg-cnt {
@@ -28,7 +42,7 @@
     padding: @padding-normal @padding-xs;
     z-index: 2;
 
-    @media (min-width: @screen-md) {
+    @media (min-width: 768px) {
       padding: @padding-normal;
     }
   }
@@ -65,8 +79,15 @@
     &-logo-cnt, &-items {
       .make-sm-column(6);
       .make-xs-column(6);
+      width: auto !important;
       padding: 0;
       text-align: center;
+    }
+
+    &-items {
+      @media (min-width: 768px) {
+        float: right;
+      }
     }
 
     &-logo-cnt {
@@ -163,6 +184,14 @@
     .open-source-nav-item {
       padding: @padding-base 0;
       border-bottom: @header-active-border-width solid @open-source-primary-color;
+    }
+  }
+}
+
+.vili {
+  .airware-header {
+    .airware-header-bg {
+      .vili-viking();
     }
   }
 }

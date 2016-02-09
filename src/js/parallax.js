@@ -33,7 +33,7 @@
 
                 complete () {
                     if (self.shouldParallax()) {
-                        self.parallax(self.$header, 0.2);
+                        self.parallax(self.$header, 0.1);
                         self.parallax(self.$hero, 0.5);
                     }
                 }
@@ -46,6 +46,11 @@
 
         parallax ($el, rate) {
             const self = this;
+
+            let $video = $el.find('video');
+            if ($video.length) {
+                rate = 0.1;
+            }
 
             this.$window.scroll(() => {
                 window.requestAnimationFrame(() => {
