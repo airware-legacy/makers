@@ -46,12 +46,7 @@
 
         parallax ($el, rate) {
             const self = this;
-
-            let $video = $el.find('video');
-            if ($video.length) {
-                rate = 0.1;
-            }
-
+            
             this.$window.scroll(() => {
                 window.requestAnimationFrame(() => {
                     self.transform($el, (self.$window.scrollTop() / self.$window.outerHeight()) * ($el.outerHeight() * rate));
