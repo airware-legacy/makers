@@ -72,6 +72,10 @@ body:not(.post) {
       margin: 0 auto;
       max-width: @container-width;
       padding: @padding-normal @padding-xs;
+
+      @media (min-width: 768px) {
+        padding: @padding-normal;
+      }
     }
   }
 }

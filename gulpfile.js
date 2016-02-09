@@ -77,7 +77,6 @@ gulp.task('styles', () => {
     .pipe(gulp.dest('build/css'));
 });
 
-
 // Minify and combine all JavaScript
 gulp.task('scripts', () => {
     return gulp.src([

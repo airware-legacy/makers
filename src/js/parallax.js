@@ -33,7 +33,7 @@
 
                 complete () {
                     if (self.shouldParallax()) {
-                        self.parallax(self.$header, 0.2);
+                        self.parallax(self.$header, 0.1);
                         self.parallax(self.$hero, 0.5);
                     }
                 }
@@ -63,3 +63,4 @@
         new Parallax();
     });
 })();
+

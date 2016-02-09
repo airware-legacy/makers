@@ -9,6 +9,7 @@ classes:
 {{#extend "base"}}
 	{{#content "header"}}
 		{{#extend "header"}}
+			{{#content "custom-header-class"}}vili-header{{/content}}
 			{{#content "hero"}}
 				{{> hero_headline_category}}
 			{{/content}}
@@ -32,6 +33,10 @@ classes:
 						<a href="#setup">Setup</a>
 					</li>
 				</ul>
+
+				<a href="https://github.com/airware/vili" class="btn btn-open-source github-btn external">
+					View on GitHub
+				</a>
 			</div>
 
 			<div class="docs-content" data-lightbox="">
@@ -79,12 +84,6 @@ classes:
 					<h2 id="setup" class="docs-title">Setup</h2>
 					<p class="docs-desc">Please read the <a class="external" href="https://github.com/airware/vili#setup">setup instructions</a> on GitHub to get going with Vili.</p>
 				</div>
-			</div>
-
-			<div class="docs-links">
-				<a href="https://github.com/airware/vili" class="btn btn-open-source github-btn external">
-					View on GitHub
-				</a>
 			</div>
 		</section>
 	{{/content}}

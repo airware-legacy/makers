@@ -6,10 +6,23 @@
   padding: 0 @padding-xs;
   margin: 0 auto;
 
-  .docs-sections, .docs-links {
+  .docs-sections {
     .make-xs-column(12);
     .make-sm-column(3);
-    .make-md-column(2);
+
+    @media (min-width: 768px) {
+      width: 30%;
+      padding-right: @padding-normal;
+    }
+
+    .github-btn {
+      .make-xs-column(12);
+      margin-bottom: @padding-xs;
+
+      @media (min-width: 768px) {
+        margin-top: @padding-normal;
+      }
+    }
   }
 
 
@@ -17,34 +30,43 @@
     margin: 0 0 @padding-xs 0;
     padding: 0;
     list-style: none;
+    display: none;
 
-    @media (min-width: @screen-md) {
+    @media (min-width: 768px) {
       margin: 0;
+      display: block
     }
   }
 
   .docs-sections-list-item {
-    margin-top: @padding-xs;
     border-bottom: 1px solid @light-gray;
 
     &:first-child {
       margin-top: 0;
     }
 
-    a, a:hover {
+    a {
+      line-height: 45px;
+      width: 100%;
+      display: block;
       color: @open-source-primary-color;
+      .transition(text-indent 0.2s ease-in-out);
+
+      &:hover {
+        text-indent: 10px;
+        background-color: @pre-bg;
+      }
     }
   }
 
   .docs-content {
     margin: @padding-xs auto 0 auto;
     .make-xs-column(12);
-    .make-sm-column(6);
-    .make-md-column(8);
+    .make-sm-column(9);
 
     @media (min-width: 768px) {
       margin-top: 0;
-      max-width: @post-width;
+      width: 70%;
 
       .docs-inner-content {
         margin: auto;
@@ -56,14 +78,15 @@
         margin-top: 0;
       }
     }
-  }
 
-  .docs-links {
-    margin-top: @padding-xs;
+    a {
+      color: @dark-font-color;
+      border-bottom: 1px dotted @dark-font-color;
 
-    @media (min-width: @screen-md) {
-      text-align: right;
-      margin-top: 0;
+      &:hover {
+        color: @blue;
+        text-decoration: none;
+      }
     }
   }
 

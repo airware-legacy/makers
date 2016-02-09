@@ -2,16 +2,35 @@
 @import './variables.less';
 
 .grid {
-  .grid-cell {
-    .make-xs-column(12);
-    .make-sm-column(6);
-    margin-top: @padding-xs;
+  .grid-row {
+    padding: 0 @padding-xs;
 
-    &:first-child {
-      margin-top: 0;
+    @media (min-width: 768px) {
+      padding: 0 @padding-normal;
     }
 
-    @media (max-width: @screen-md) {
+    .grid-cell {
+      .make-xs-column(12);
+      .make-sm-column(6);
+      margin-top: @padding-xs;
+      padding-left: 0;
+      padding-right: 0;
+
+      &:first-child {
+        margin-top: 0;
+      }
+
+      @media (min-width: 768px) {
+        padding-left: @padding-xs;
+        padding-right: 0;
+
+        &:first-child {
+          padding-left: 0;
+          padding-right: 15px;
+        }
+      }
+
+      @media (max-width: @screen-md) {
         .card {
           h2 {
             padding-bottom: 0 !important;
@@ -21,11 +40,12 @@
             display: none !important;
           }
         }
-    }
+      }
 
-    @media (min-width: @screen-sm) {
-      &, &:first-child {
-        margin-top: 0;
+      @media (min-width: @screen-sm) {
+        &, &:first-child {
+          margin-top: 0;
+        }
       }
     }
   }
