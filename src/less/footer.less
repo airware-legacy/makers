@@ -30,16 +30,45 @@
 
   .github-icon {
     .github-bg();
+
+    &:after {
+      content: url('/img/github_hover.png');
+      display: none;
+    }
+
+
+    &:hover {
+      .github-hover-bg();
+    }
   }
 
   .dribble-icon {
     .dribble-bg();
+
+    &:after {
+      content: url('/img/dribbble_hover.png');
+      display: none;
+    }
+
+
+    &:hover {
+      .dribble-hover-bg();
+    }
   }
 
   .twitter-icon {
     top: 2px;
     background-size: 28px;
     .twitter-bg();
+
+    &:after {
+      content: url('/img/twitter_hover.png');
+      display: none;
+    }
+
+    &:hover {
+      .twitter-hover-bg();
+    }
   }
 
   &-links {
@@ -59,6 +88,16 @@
 
     .copyright {
       color: @home-primary-color;
+
+      a {
+        color: @dark-font-color;
+        border-bottom: 1px dotted @dark-font-color;
+
+        &:hover {
+          color: @blue;
+          text-decoration: none;
+        }
+      }
     }
 
     .external-links {

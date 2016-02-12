@@ -17,7 +17,7 @@ function loadDocument (data) {
 
 // Set var for the tests
 const year = moment().format('YYYY');
-const copy = `© Copyright ${year}, Airware. All Rights Reserved.`;
+const copy = `© Copyright ${year}, <a class="external" href="https://www.airware.com/">Airware</a>. All Rights Reserved.`;
 
 
 describe('The dynamically generated home page...', () => {
