@@ -24,6 +24,8 @@ The problem with the old connection flow was that it lacked cohesion. Even thoug
 
 ![Before: The old workflow required users to bounce back and forth between the Preflight and Operator tabs multiple times during the connection process.](/img/case-study-aircraft-to-ground/preflight.png)
 
+![After: Settings were relocated to a global menu in the header](/img/case-study-aircraft-to-ground/operator.png)
+
 The fact that such a critical flow required multiple context switches spoke to a larger problem with the app’s Information Architecture. The high-level navigation of the app did not reflect how operators actually used it. We knew that we needed to address some of these more fundamental organization problems to improve the connection experience. However, restructuring high-level navigation can be a slippery slope that leads to a full-fledged redesign, and we didn’t have the time to invest in that. So our approach was to design the ideal connection flow and to make any information architecture changes necessary to support that, and nothing more.
 
 The Solution
@@ -33,8 +35,6 @@ We landed on a solution that converted the four horizontal blades (Preflight, Op
 We realized that nearly everything in the Preflight tab was either a setting or part of the connection workflow. So we took all of the settings, organized them into logical groups, and relocated them to the header. This way, settings would be accessible from anywhere in the application, and it would free us up to move all of the aircraft connection functionality into one place.
 
 ![After: Simplified navigation and connected aircraft panel](/img/case-study-aircraft-to-ground/connect_new.png)
-
-![After: Settings were relocated to a global menu in the header](/img/case-study-aircraft-to-ground/operator.png)
 
 The connection functionality would now live in the Fly tab in the new aircraft pane. We merged all of the aircraft information and actions into this pane and used the connection flow as the way to “unlock” it. When we had operators walk through the new flow for the first time, their feedback was overwhelmingly positive: “Why hasn’t it been this way all along?” The new flow was much more intuitive and saved them a significant amount of time in the field.
 
