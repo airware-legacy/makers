@@ -42,7 +42,7 @@ The process begins with a model of your finished product. It's usually made from
 
 <img data-full-width="#343741"  src="/img/lost-wax-method-rewriting-software/one.png" alt="Original Model" />
 
-In our case, the existing material for our REST APIs is Node. We originally chose it for human reasons: the members of our small team were familiar with it, and it allowed everyone to work full stack. It also allowed everyone to work full stack. We also consider it to be fast and easy to work with because of the vibrant ecosystem available for things like OAUTH, AWS, Redis, and Postgres.
+In our case, the existing material for our REST APIs is Node. We originally chose it for human reasons: the members of our small team were familiar with it, and it allowed everyone to work full stack. We also consider it to be fast and easy to work with because of the vibrant ecosystem available for things like OAUTH, AWS, Redis, and Postgres.
 
 Node's melting point is low for us because of the DevOps decisions we made early on. All of our services run in [Docker](https://www.docker.com/) containers, so they are easily portable. Its viscosity is also low because we orchestrate our cluster with [Kubernetes](http://kubernetes.io/), so there is no custom tooling to deploy, run a Node container, or discover other services.
 

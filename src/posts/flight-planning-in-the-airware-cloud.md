@@ -14,14 +14,14 @@ tags:
 - Art
 ---
 
-The goal of this project was to design a UI in the Airware Cloud that enables users to create a new job as easily as possible. This is an crucial experience because a “job” is the fundamental unit of work here at Airware. It encapsulates all of the work that goes into collecting data with a drone—from planning the flight, through the collection of data, and ultimately the creation of a data product.
+The goal of this project was to design a UI in the Airware Cloud that enables users to create a new job as easily as possible. This is a crucial experience because a “job” is the fundamental unit of work here at Airware. It encapsulates all of the work that goes into collecting data with a drone—from planning the flight, through the collection of data, and ultimately the creation of a data product.
 
 
 The Problem Space
 -----------------
 Before a job ever makes it into the hands of a drone operator, it needs to pass through a rigorous approval process. This process ensures that the job is safe to fly and able to capture all of the necessary data.
 
-The challenge is that the person who creates the job and submits it for approval will not know much about flight planning or drone operation. In fact, our target persona was someone working in the home office of a small to medium-sized business—the folks who create and manage work. These people don’t necessarily operate the drone: Their role is more analogous to a dispatcher than a drone operator. We needed to design a way of abstracting the complex flight planning workflow into a much simpler one for this new audience.
+The challenge is that the person who creates the job and submits it for approval will not know much about flight planning or drone operation. These people don’t necessarily operate the drone: Their role is more analogous to a dispatcher than a drone operator. We needed to design a way of abstracting the complex flight planning workflow into a much simpler one for this new audience.
 
 
 Our Process

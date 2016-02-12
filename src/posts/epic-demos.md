@@ -71,7 +71,7 @@ D    |1.00  |Functionality is in some rudimentary state
 D-   | 0.5  |
 F    |0.00  |Story is not yet started or cannot be shown
 
-We translate the grades into a [GPA](https://en.wikipedia.org/wiki/Grading_(education)). Airware is fortunate to have many past top performers from excellent schools. Sufficed to say, these individuals are not accustomed to anything below a 4.0. There's a [natural drive](https://en.wikipedia.org/wiki/Gamification) to push the GPA upward, which helps working through problems that may not be the most fun aspects of the project.
+We translate the grades into a [GPA](https://en.wikipedia.org/wiki/Grading_(education). Airware is fortunate to have many past top performers from excellent schools. Sufficed to say, these individuals are not accustomed to anything below a 4.0. There's a [natural drive](https://en.wikipedia.org/wiki/Gamification) to push the GPA upward, which helps working through problems that may not be the most fun aspects of the project.
 
 ![The Scorecard](https://placehold.it/750x400)
 
