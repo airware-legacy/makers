@@ -9,7 +9,7 @@
 .post-content {
   margin-top: -@padding-xs;
 
-  h1, h2, h3, h4, h5, h6, p, hr, pre, div, ul, ol {
+  h1, h2, h3, h4, h5, h6, p, hr, pre, div, ul, ol, video {
     margin: 0;
     padding: 0 @padding-normal;
     width: 100%;
@@ -30,6 +30,10 @@
 
   > div, > h1, > h2, > h3, > h4, > h5, > h6, > p, > pre, > hr, > table, > ul, > ol, > blockquote {
     margin-top: @padding-xs;
+  }
+
+  h4 {
+    margin: 20px auto -15px auto;
   }
 
   .table {
@@ -59,6 +63,11 @@
         padding-top: 0;
       }
     }
+  }
+
+  video {
+    display: block;
+    margin: 20px auto;
   }
 
   img {

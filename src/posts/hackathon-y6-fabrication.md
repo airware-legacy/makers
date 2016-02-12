@@ -37,7 +37,12 @@ Unique Characteristics
 
 The team wanted to further enhance the operational compactness of the Y6 configuration. They designed two of the arms to fold backward along the axis of the third arm. This allows the pack volume of the Y6 to be the width of it’s central cage.
 
-<img class="post-img-hover" src="/img/hackathon-y6-fabrication/folding_arms.png" alt="Folding arms" />
+<video autoplay loop>
+  <source src="https://videos.airware.com/y6-moving-arms/high.mp4" type="video/mp4">
+  <source src="https://videos.airware.com/y6-moving-arms/high.webm" type="video/webm">
+  <source src="https://videos.airware.com/y6-moving-arms/high.ogg" type="video/ogg">
+  <source src="https://videos.airware.com/y6-moving-arms/low.mp4" type="video/mp4">
+</video>
 
 Special fasteners hold the arms in place during flight. We had to take special care to make sure that vibration would not loosen the arms.
 

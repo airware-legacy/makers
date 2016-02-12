@@ -15,7 +15,7 @@
   .careers {
     text-align: center;
     background-color: @pre-bg;
-    padding: 100px 0;
+    padding: 100px 15px;
   }
 
   .github-icon, .dribble-icon, .twitter-icon {
@@ -62,6 +62,8 @@
     }
 
     .external-links {
+      padding-left: 0;
+
       .external {
         margin-left: 15px;
         color: @home-primary-color;
@@ -87,7 +89,7 @@
       }
     }
 
-    @media (max-width: @container-width) {
+    @media (min-width: 768px) and (max-width: @container-width) {
       .external-links {
         padding-right: @padding-normal;
       }
