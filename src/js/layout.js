@@ -47,7 +47,7 @@
                     $video.css({ opacity : 1 });
                 });
             } else {
-                this.$header.css({ backgroundImage : 'url(/img/vili/poster.png)' });
+                this.$header.css({ backgroundImage : 'url(/img/vili/poster.png)', backgroundPosition : '32%' });
             }
         }
     }

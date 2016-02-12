@@ -1,0 +1,21 @@
+@import './variables.less';
+@import './mixins.less';
+
+.error {
+  .square(100%);
+  background-color: @yellow;
+
+  &-cnt {
+    margin-top: 15%;
+
+    .error-face {
+      margin: auto;
+      .square(55px);
+      .error-face-bg();
+    }
+
+    .error-message {
+      text-align: center;
+    }
+  }
+}
