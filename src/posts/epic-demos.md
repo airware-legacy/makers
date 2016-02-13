@@ -19,11 +19,11 @@ The Challenge of Integration
 ----------------------------
 At Airware, we're developing a Cloud platform that manages and analyzes data that should be conceptually familiar to every technologist in the Bay Area. We're also developing our own native clients, firmware, and hardware. These disparate systems are expected to integrate seamlessly with one another. An example of one of our past epics is "Fixed-Wing Flight,". If you're in a pure software business, take a moment to reflect on the complexity that implies. Some components are even expected to work offline. It's a classic set of distributed computing problems.
 
-![Airware Cloud](https://placehold.it/750x400)
+![Airware Cloud](/img/epic-demos/cloud_app.png)
 
 What's interesting about the mixture of cloud, native, firmware, and hardware components is that our platform essentially represents a spectrum of agility. On the cloud side, we are hyper agile and practice [continuous delivery](https://en.wikipedia.org/wiki/Continuous_delivery). At the other extreme our hardware is necessarily waterfall--a mistake means waiting weeks for the next spin of boards. In between, our native apps and firmware are reasonably agile with the help of SIL and [HIL simulation](https://en.wikipedia.org/wiki/Hardware-in-the-loop_simulation) testing.
 
-![Spectrum of Agility](https://placehold.it/750x400)
+![Spectrum of Agility](/img/epic-demos/agility_spectrum.png)
 
 Did I mention our stuff lives in the physical world and flies through the air? We're in an industry where safety is critical. Aerospace doesn't [move fast and break things](http://www.businessinsider.com/mark-zuckerberg-2010-10). We do, however, need to move as fast as our ridiculously high standards for quality allow. This means missing no opportunity to prove to ourselves that things work together as designed.
 
@@ -36,7 +36,7 @@ The process starts with our product managers, engineering managers, and relevant
 
 It may begin with a back-office persona creating an area of interest (such as a field) on a map in the Airware Cloud UI. That item is accessed through our APIs by a different persona in our native client. They make some tweaks to the flight plan, connect to an aircraft, and begin flying. The drone will fly a [Zamboni pattern](https://en.wikipedia.org/wiki/Ice_resurfacer), take pictures, and log the telemetry. This data will be retrieved from the aircraft, uploaded to the Airware Cloud, and finally processed into an [orthomosaic](https://en.wikipedia.org/wiki/Orthophoto).
 
-![Fixed Wing Flight](https://placehold.it/750x400)
+![Fixed Wing Flight](/img/epic-demos/fw_photo_survey.png)
 
 Ideally each step in the script highlights a new feature we're building in that release. We occasionally insert existing features if they are necessary to create a seamless series of steps. The steps are grouped into phases that are mostly owned by a team or lead. This is useful later for charting the progress of features or teams individually to surface problems earlier.
 
