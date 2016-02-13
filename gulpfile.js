@@ -42,6 +42,12 @@ gulp.task('clean', done => {
             timestamp : moment().format('YYYY-MM-DD-HH-mm-ss')
         };
 
+        if (process.env.TRAVIS_BRANCH == undefined) {
+            data.env = 'local';
+        } else if (process.env.TRAVIS_BRANCH != 'master') {
+            data.env = process.env.TRAVIS_BRANCH;
+        }
+
         del([
             'build/**',
             '!build'
@@ -143,6 +149,7 @@ gulp.task('posts', done => {
                 const post = new Post(extend(true, {}, file.frontMatter, {
                     path      : file.path,
                     content   : file.contents.toString(),
+                    env       : data.env,
                     authors   : data.authors,
                     careers   : data.careers,
                     pageTitle : data.pageTitle,
@@ -182,6 +189,7 @@ gulp.task('pages', done => {
                 file.data = new Page(extend(true, {}, file.frontMatter, {
                     path      : file.path,
                     posts     : data.posts,
+                    env       : data.env,
                     year      : data.year,
                     careers   : data.careers,
                     timestamp : data.timestamp,

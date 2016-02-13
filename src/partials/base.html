@@ -9,6 +9,12 @@
         <link type="image/x-icon" rel="shortcut icon" href="/favicon.ico"/>
     </head>
     <body class="{{#each classes}}{{this}} {{/each}}">
+            {{#if env}}
+                <div class="env-badge {{env}}">
+                    <span>{{env}}</span>
+                </div>
+            {{/if}}
+
             {{#block "header"}}{{/block}}
 
             <main class="container-fluid airware-main">
