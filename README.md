@@ -79,10 +79,13 @@ Maintainers
 To Do
 -----
 
+* Tags on post cards
 * Tag pages
 * Author pages
+* Tech tags on OS projects
 * Separate test tasks for rapid local development versus full tests for CI runs
 * Upgrade to Gulp 4 (when out)
+* Upgrade to Bootstrap 4 (when out)
 
 Licenses
 --------
