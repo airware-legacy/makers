@@ -14,6 +14,23 @@
             <p class="text-center" style="margin-top:45px; color: #a5abb4;">
                 <em>Thanks to {{#reviewerList reviewers}}{{/reviewerList}} for reading drafts of this post.</em>
             </p>
+
+            {{#if comments}}
+                <p>Join the conversation on...</p>
+
+                <div>
+                {{#if comments.twitterHash}}
+                    <a class="btn external btn-block btn-warning" href="https://news.ycombinator.com/item?id={{comments.hnItemId}}">Hacker News</a>
+                {{/if}}
+                {{#if comments.hnItemId}}
+                    <a class="btn external btn-block btn-info" href="{{comments.twitterHash}}">Twitter {{comments.twitterHash}}</a>
+                {{/if}}
+                {{#if comments.redditURL}}
+                    <a class="btn external btn-block btn-primary" href="{{comments.redditURL}}">Reddit</a>
+                {{/if}}
+            </div>
+            {{/if}}
+
         </div>
     {{/content}}
 {{/extend}}
