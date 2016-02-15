@@ -73,7 +73,10 @@ F    |0.00  |Story is not yet started or cannot be shown
 
 We translate the grades into a [GPA](https://en.wikipedia.org/wiki/Grading_(education). Airware is fortunate to have many past top performers from excellent schools. Sufficed to say, these individuals are not accustomed to anything below a 4.0. There's a [natural drive](https://en.wikipedia.org/wiki/Gamification) to push the GPA upward, which helps working through problems that may not be the most fun aspects of the project.
 
-![The Scorecard](https://placehold.it/750x400)
+
+<a class="external" href="https://docs.google.com/spreadsheets/d/14V7ep0_V6PEPoFJ1dWoo0U6QGRK-zlmqMNR76ojukvc/edit">
+    <img class="post-img-hover" src="/img/epic-demos/grades.png" alt="The Scorecard" />
+</a>
 
 Why does this work?
 -------------------
@@ -86,7 +89,7 @@ Secondly, the process of developing a scorecard constrains the set of problems y
 
 Thirdly, this process demonstrates incremental improvement. This keeps us on track and allows us to see and celebrate some of the smaller wins. It also allows us to make better predictions. We observe problems well in advance and can make corrections in the form of resources and scope decrease if necessary. For instance, it's trivial to chart of our GPA of each phase over time. The slope of the lines indicates your projected completion date.
 
-![Scorecard Chart](https://placehold.it/750x400)
+![Scorecard Chart](/img/epic-demos/chart.png)
 
 Arguably the greatest benefit is that the script represents an end-to-end workflow. This puts emphasis on the seams or interfaces between each component that might normally receive less attention if they were developed in isolation from one another according to a mere spec.
 
