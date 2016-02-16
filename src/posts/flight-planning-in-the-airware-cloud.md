@@ -5,7 +5,7 @@ reviewers:
 - eric-johnson
 - caity-cronkhite
 category: design
-date: 2015-12-11
+date: 2016-02-11
 poster: /img/flight-planning-in-the-airware-cloud/poster.png
 thumb: /img/flight-planning-in-the-airware-cloud/card.png
 tags:

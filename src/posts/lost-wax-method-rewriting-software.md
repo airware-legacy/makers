@@ -7,7 +7,7 @@ reviewers:
 - mek-stittri
 - volkan-gurel
 category: engineering
-date: 2015-12-07
+date: 2016-02-14
 poster: /img/lost-wax-method-rewriting-software/poster.png
 thumb: /img/lost-wax-method-rewriting-software/card.png
 tags:

@@ -5,7 +5,7 @@ reviewers:
 - eric-johnson
 - caity-cronkhite
 category: design
-date: 2015-01-15
+date: 2015-02-07
 poster: /img/case-study-aircraft-to-ground/poster.png
 thumb: /img/case-study-aircraft-to-ground/card.png
 tags:
