@@ -42,9 +42,9 @@ Once the workflow was broken down into steps, we started iterating on how these 
 
 ### Refinement
 
-We recognized that the designs fell into two camps: single page layouts and multi-page flows. Since creating a flight plan is such an interaction-heavy task, we decided to quickly prototype some options to make a more informed decision about which direction to take. Once the prototypes were built, it became obvious that the single page options weren’t going to cut it.The multi-step flows broke up this relatively large workflow into smaller, less daunting steps much more effectively.
+We recognized that the designs fell into two camps: single page layouts and multi-page flows. Since creating a flight plan is such an interaction-heavy task, we decided to quickly prototype some options to make a more informed decision about which direction to take. Once the prototypes were built, it became obvious that the single page options weren’t going to cut it. The multi-step flows broke up this relatively large workflow into smaller, less daunting steps much more effectively.
 
-![Whitboard](/img/flight-planning-in-the-airware-cloud/whiteboard.png)
+![Whiteboard](/img/flight-planning-in-the-airware-cloud/whiteboard.png)
 
 The multi-step options also gave us opportunities to provide the user with feedback at each step. The prototypes also taught us how precious map real estate was in this context, so we focused on designs that utilized as much screen real estate as possible.
 
