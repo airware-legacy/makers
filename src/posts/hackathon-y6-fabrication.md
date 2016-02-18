@@ -74,7 +74,7 @@ The Y6 also carries a video transmitter separate from the normal wireless commun
 
 |Attribute|Value|
 |---------|-----|
-|Propellers|• 6 count<br>• Wood (for vibration characteristics)<br>• One top prop spins in the opposite direction (to help maintain yaw authority)<br>• Pairs (top/bottom) counter-rotate|
+|Propellers|• 6 count<br>• Wood (for vibration characteristics)<br>• One top prop spins in the opposite direction (to help maintain yaw authority)<br>• Pairs (top/bottom) counter-rotate at constant speed|
 |Batteries|6 cell Lithium Polymer batteries (due to current draw and efficiency)|
 |Dry Weight (without batteries)|6 kg (with payload)|
 |Flight time|~20 minutes|
