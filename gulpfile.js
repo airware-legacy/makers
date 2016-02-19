@@ -56,6 +56,13 @@ gulp.task('clean', done => {
 });
 
 
+// Copy font files to build dir
+gulp.task('fonts', () => {
+    return gulp.src('node_modules/font-awesome/fonts/*')
+        .pipe(gulp.dest('build/fonts'));
+});
+
+
 // Copy static files to build dir
 gulp.task('static', () => {
     return gulp.src('src/static/**')
@@ -73,6 +80,7 @@ gulp.task('styles', () => {
     return gulp.src([
         'node_modules/bootstrap/dist/css/bootstrap.css',
         'node_modules/highlight.js/styles/default.css',
+        'node_modules/font-awesome/css/font-awesome.css',
         'src/less/custom.less'
     ])
     .pipe(g.sourcemaps.init({ loadMaps : true }))
@@ -266,6 +274,7 @@ gulp.task('package', g.depcheck({
     ignoreMatches : [
         'babel-preset-es2015',
         'bootstrap',
+        'font-awesome',
         'gulp-*',
         'hammerjs',
         'jquery-hammerjs',
@@ -296,7 +305,7 @@ gulp.task('watch', () => {
 gulp.task('build', done => {
     g.sequence(
         'clean',
-        [ 'static', 'styles', 'scripts', 'partials', 'authors' ],
+        [ 'fonts', 'static', 'styles', 'scripts', 'partials', 'authors' ],
         'posts',
         'pages',
         'test',

@@ -11,22 +11,48 @@
         <div class="row post-content" data-lightbox data-post-category="{{category}}">
             {{{this.content}}}
 
-            <p class="text-center" style="margin-top:45px; color: #a5abb4;">
-                <em>Thanks to {{#reviewerList reviewers}}{{/reviewerList}} for reading drafts of this post.</em>
+            <p style="margin-top:50px; color: #a5abb4;">
+                Thanks to {{#reviewerList reviewers}}{{/reviewerList}} for reading drafts of this post.
             </p>
 
             {{#if comments}}
-                <p>Join the conversation on...</p>
+                <p style="color:#a5abb4; margin-top:50px;">Join the conversation on...</p>
 
-                <div>
-                {{#if comments.twitterHash}}
-                    <a class="btn external btn-block btn-warning" href="https://news.ycombinator.com/item?id={{comments.hnItemId}}">Hacker News</a>
+                <div style="white-space:nowrap;">
+                {{#if comments.linkedInURL}}
+                    <a class="btn external btn-social btn-linkedin" href="{{comments.linkedInURL}}">
+                      <i class="fa fa-linkedin">
+                        <span class="btn-social-name">LinkedIn</span>
+                      </i>
+                    </a>
+                {{/if}}
+                {{#if comments.dribbbleURL}}
+                    <a class="btn external btn-social btn-dribbble" href="{{comments.dribbbleURL}}">
+                      <i class="fa fa-dribbble">
+                        <span class="btn-social-name">Dribbble</span>
+                      </i>
+                    </a>
                 {{/if}}
                 {{#if comments.hnItemId}}
-                    <a class="btn external btn-block btn-info" href="{{comments.twitterHash}}">Twitter {{comments.twitterHash}}</a>
+                    <a class="btn external btn-social btn-hacker-news" href="https://news.ycombinator.com/item?id={{comments.hnItemId}}">
+                      <i class="fa fa-hacker-news">
+                        <span class="btn-social-name">Hacker News</span>
+                      </i>
+                    </a>
+                {{/if}}
+                {{#if comments.twitterHash}}
+                    <a class="btn external btn-social btn-twitter" href="{{comments.twitterHash}}">
+                      <i class="fa fa-twitter">
+                        <span class="btn-social-name">Twitter</span>
+                      </i>
+                    </a>
                 {{/if}}
                 {{#if comments.redditURL}}
-                    <a class="btn external btn-block btn-primary" href="{{comments.redditURL}}">Reddit</a>
+                    <a class="btn external btn-social btn-reddit" href="{{comments.redditURL}}">
+                      <i class="fa fa-reddit">
+                        <span class="btn-social-name">Reddit</span>
+                      </i>
+                    </a>
                 {{/if}}
             </div>
             {{/if}}
