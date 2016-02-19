@@ -27,4 +27,67 @@
       border: 1px solid transparent;
     }
   }
+
+  &.btn-social {
+    display: block;
+    border: none;
+    margin-left: 10px;
+    margin-left: 0;
+    width: 100%;
+    margin-bottom: 10px;
+
+    @media (min-width: 850px) {
+      width: auto;
+      display: inline-block;
+      margin-left: 10px;
+      margin-bottom: 0;
+    }
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    &, &:hover {
+      color: @home-primary-color;
+    }
+
+    .fa {
+      font-size: 20px;
+      color: @light-font-color;
+    }
+
+    .btn-social-name {
+      padding-left: 10px;
+      font-size: 15px;
+      color: @light-font-color;
+    }
+  }
+
+  &.btn-hacker-news {
+    background-color: @hacker-news-bg;
+  }
+
+  &.btn-dribbble {
+    background-color: @dribbble-bg;
+  }
+
+  &.btn-linkedin {
+    background-color: @linkedin-bg;
+  }
+
+  &.btn-twitter {
+    background-color: @twitter-bg;
+  }
+
+  &.btn-reddit {
+    background-color: @reddit-bg;
+
+    .fa {
+      color: #3C6D97;
+    }
+
+    .btn-social-name {
+      color: #3C6D97;
+    }
+  }
 }
