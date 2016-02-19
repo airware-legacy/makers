@@ -38,7 +38,7 @@
     "gulp-cssnano": "^2.0.0",
     "gulp-david": "^0.4.1",
     "gulp-depcheck": "^1.1.0",
-    "gulp-eslint": "^1.1.1",
+    "gulp-eslint": "^2.0.0",
     "gulp-filter": "^3.0.1",
     "gulp-front-matter": "^1.3.0",
     "gulp-htmlmin": "^1.3.0",
@@ -167,14 +167,12 @@
       ],
       "semi": 2,
       "semi-spacing": 2,
-      "space-after-keywords": 2,
-      "space-before-keywords": 2,
+      "keyword-spacing": 2,
       "space-before-blocks": 2,
       "space-before-function-paren": 2,
       "sort-vars": 2,
       "space-in-parens": 2,
       "space-infix-ops": 2,
-      "space-return-throw-case": 2,
       "space-unary-ops": 2,
       "spaced-comment": [
         2,
@@ -185,7 +183,7 @@
           ]
         }
       ],
-      "no-arrow-condition": 2,
+      "no-confusing-arrow": 2,
       "no-class-assign": 2,
       "no-dupe-class-members": 2,
       "no-this-before-super": 2,
