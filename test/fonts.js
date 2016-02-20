@@ -37,4 +37,13 @@ describe('The build/fonts directory...', () => {
         files.should.containEql('Colfax-RegularItalic.ttf');
         files.should.containEql('Colfax-RegularItalic.woff');
     });
+
+    it('Should include Font Awesome files', () => {
+        files.should.containEql('fontawesome-webfont.eot');
+        files.should.containEql('fontawesome-webfont.svg');
+        files.should.containEql('fontawesome-webfont.ttf');
+        files.should.containEql('fontawesome-webfont.woff');
+        files.should.containEql('fontawesome-webfont.woff2');
+        files.should.containEql('FontAwesome.otf');
+    });
 });
