@@ -6,6 +6,8 @@ reviewers:
 - caity-cronkhite
 category: engineering
 date: 2016-02-16
+comments:
+  twitterHash: 'AirwareMakersY6Fab'
 poster: /img/hackathon-y6-fabrication/poster.png
 thumb: /img/hackathon-y6-fabrication/card.png
 tags:

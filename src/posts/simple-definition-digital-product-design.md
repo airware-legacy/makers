@@ -5,6 +5,8 @@ reviewers:
 - eric-johnson
 category: design
 date: 2016-02-15
+comments:
+  twitterHash: 'AirwareMakersProductDesign'
 poster: /img/simple-definition-digital-product-design/poster.png
 thumb: /img/simple-definition-digital-product-design/poster.png
 tags:

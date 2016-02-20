@@ -6,6 +6,8 @@ reviewers:
 - caity-cronkhite
 category: design
 date: 2015-02-07
+comments:
+  twitterHash: 'AirwareMakersAircraftConnection'
 poster: /img/case-study-aircraft-to-ground/poster.png
 thumb: /img/case-study-aircraft-to-ground/card.png
 tags:

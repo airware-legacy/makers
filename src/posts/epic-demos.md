@@ -6,6 +6,8 @@ reviewers:
 - caity-cronkhite
 category: engineering
 date: 2016-02-10
+comments:
+  twitterHash: 'AirwareMakersEpicDemos'
 poster: /img/epic-demos/poster.png
 thumb: /img/epic-demos/card.png
 tags:
