@@ -15,7 +15,8 @@ const Author     = require('./lib/Author'),
     layouts      = require('handlebars-layouts'),
     moment       = require('moment'),
     path         = require('path'),
-    reviewerList = require('./lib/hb-helper-reviewerlist');
+    reviewerList = require('./lib/hb-helper-reviewerlist'),
+    rules        = require('@airware/eslint-rules');
 
 
 // Config HB
@@ -232,7 +233,12 @@ gulp.task('lint', () => {
         'lib/*.js',
         '!node_modules/**'
     ])
-    .pipe(g.eslint())
+    .pipe(g.eslint({
+        extends : 'eslint:recommended',
+        env     : { node : true, es6 : true, mocha : true },
+        globals : { $ : true, window : true, document : true, ga : true, UAParser : true },
+        rules
+    }))
     .pipe(g.eslint.format());
 });
 
@@ -264,6 +270,7 @@ gulp.task('deps', () => {
 // Examine package.json for unused deps (except for frontend and gulp)
 gulp.task('package', g.depcheck({
     ignoreMatches : [
+        '@airware/eslint-rules',
         'babel-preset-es2015',
         'bootstrap',
         'gulp-*',
