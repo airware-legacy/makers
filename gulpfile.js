@@ -74,6 +74,7 @@ gulp.task('styles', () => {
     return gulp.src([
         'node_modules/bootstrap/dist/css/bootstrap.css',
         'node_modules/highlight.js/styles/default.css',
+        'node_modules/font-awesome/css/font-awesome.css',
         'src/less/custom.less'
     ])
     .pipe(g.sourcemaps.init({ loadMaps : true }))
@@ -273,6 +274,7 @@ gulp.task('package', g.depcheck({
         '@airware/eslint-rules',
         'babel-preset-es2015',
         'bootstrap',
+        'font-awesome',
         'gulp-*',
         'hammerjs',
         'jquery-hammerjs',
