@@ -99,7 +99,7 @@ Arguably the greatest benefit is that the script represents an end-to-end workfl
 Conclusion
 ----------
 
-Making large, complex, and multidisciplinary systems sometimes requires original thinking. This extension of vanilla agile works great for us, and we've now run it successfully six times, spanning almost a year. If you'd like to try it, [download this sample scorecard](http://example.com) to get started.
+Making large, complex, and multidisciplinary systems sometimes requires original thinking. This extension of vanilla agile works great for us, and we've now run it successfully six times, spanning almost a year. If you'd like to try it, [download this sample scorecard](https://docs.google.com/spreadsheets/d/14V7ep0_V6PEPoFJ1dWoo0U6QGRK-zlmqMNR76ojukvc/edit) to get started.
 
 Here's some other things to keep in mind:
 
