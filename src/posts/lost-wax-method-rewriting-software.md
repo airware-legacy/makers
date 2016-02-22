@@ -9,6 +9,7 @@ reviewers:
 category: engineering
 comments:
   twitterHash: 'AirwareMakersLostWax'
+  hnItemId: 11151021
 date: 2016-02-14
 poster: /img/lost-wax-method-rewriting-software/poster.png
 thumb: /img/lost-wax-method-rewriting-software/card.png
