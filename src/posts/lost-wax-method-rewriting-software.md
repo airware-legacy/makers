@@ -10,6 +10,7 @@ category: engineering
 comments:
   twitterHash: 'AirwareMakersLostWax'
   hnItemId: 11151021
+  redditURL: 'https://www.reddit.com/r/coding/comments/4715hd/airware_makers_the_lost_wax_method_of_rewriting/'
 date: 2016-02-14
 poster: /img/lost-wax-method-rewriting-software/poster.png
 thumb: /img/lost-wax-method-rewriting-software/card.png
