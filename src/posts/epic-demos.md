@@ -8,6 +8,7 @@ category: engineering
 date: 2016-02-10
 comments:
   twitterHash: 'AirwareMakersEpicDemos'
+  redditURL: 'https://www.reddit.com/r/softwaredevelopment/comments/47187z/airware_makers_epic_demos/'
 poster: /img/epic-demos/poster.png
 thumb: /img/epic-demos/card.png
 tags:
