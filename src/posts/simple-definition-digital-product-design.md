@@ -7,6 +7,7 @@ category: design
 date: 2016-02-15
 comments:
   twitterHash: 'AirwareMakersProductDesign'
+  redditURL: 'https://www.reddit.com/r/product_design/comments/4712ch/airware_makers_a_simpleish_definition_of_digital/'
 poster: /img/simple-definition-digital-product-design/poster.png
 thumb: /img/simple-definition-digital-product-design/poster.png
 tags:
