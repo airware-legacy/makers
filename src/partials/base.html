@@ -9,27 +9,27 @@
         <link type="image/x-icon" rel="shortcut icon" href="/favicon.ico"/>
     </head>
     <body class="{{#each classes}}{{this}} {{/each}}">
-            {{#if env}}
-                <div class="env-badge {{env}}">
-                    <span>{{env}}</span>
-                </div>
-            {{/if}}
+        {{#if env}}
+            <div class="env-badge {{env}}">
+                <span>{{env}}</span>
+            </div>
+        {{/if}}
 
-            {{#block "header"}}{{/block}}
+        {{#block "header"}}{{/block}}
 
-            <main class="container-fluid airware-main">
-                <div class="airware-content">
-                    {{#block "body"}}{{/block}}
-                </div>
-            </main>
+        <main class="container-fluid airware-main">
+            <div class="airware-content">
+                {{#block "body"}}{{/block}}
+            </div>
+        </main>
 
-            {{> footer}}
-            {{> mobilemenu}}
-            {{> hamburger}}
-            {{> lightbox}}
+        {{> footer}}
+        {{> mobilemenu}}
+        {{> hamburger}}
+        {{> lightbox}}
 
-            {{> careers}}
-            {{> vili_header}}
-            <script type="text/javascript" src="/js/all.min.js?{{timestamp}}"></script>
+        {{> careers}}
+        {{> vili_header}}
+        <script type="text/javascript" src="/js/all.min.js?{{timestamp}}"></script>
     </body>
 </html>
