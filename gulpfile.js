@@ -126,18 +126,34 @@ gulp.task('partials', () => {
 });
 
 
-// Load authors
-gulp.task('authors', () => {
-    return gulp.src('src/authors/*.md')
-        .pipe(g.frontMatter())
-        .pipe(g.marked())
-        .pipe(g.tap(file => {
-            const author = new Author(extend(true, {}, file.frontMatter, {
-                slug : path.parse(file.path).name,
-                bio  : file.contents.toString()
-            }));
-            data.authors.push(author);
-        }));
+// Load authors and make pages
+gulp.task('authors', done => {
+    fs.readFile('src/partials/author.html', 'utf-8', (err, str) => {
+        if (err) throw err;
+        const template = hb.compile(str);
+
+        gulp.src('src/authors/*.md')
+            .pipe(g.frontMatter())
+            .pipe(g.marked())
+            .pipe(g.tap(file => {
+                const author = new Author(extend(true, {}, file.frontMatter, {
+                    bio     : file.contents.toString(),
+                    path    : file.path,
+                    content : file.contents.toString(),
+                    env     : data.env
+                }));
+
+                // Populate the authors collection for re-use
+                data.authors.push(author);
+
+                // Alter the path, write the rendered template, and put back in stream
+                file.path = author.path;
+                file.contents = new Buffer(template(author));
+            }))
+            .pipe(g.htmlmin({ collapseWhitespace : true }))
+            .pipe(gulp.dest('build'))
+            .on('end', done);
+    });
 });
 
 
@@ -166,7 +182,7 @@ gulp.task('posts', done => {
                     timestamp : data.timestamp
                 }));
 
-                // Populate the posts object for reuse
+                // Populate the posts collection for reuse
                 data.posts.push(post);
 
                 // Alter the path, write the rendered template, and put back in stream
@@ -312,7 +328,8 @@ gulp.task('watch', () => {
 gulp.task('build', done => {
     g.sequence(
         'clean',
-        [ 'fonts', 'static', 'styles', 'scripts', 'partials', 'authors' ],
+        [ 'fonts', 'static', 'styles', 'scripts', 'partials' ],
+        'authors',
         'posts',
         'pages',
         'test',
