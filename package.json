@@ -27,7 +27,7 @@
   },
   "homepage": "https://makers.airware.com",
   "dependencies": {
-    "@airware/eslint-rules": "^2.0.0",
+    "@airware/eslint-rules": "^2.2.0",
     "babel-preset-es2015": "^6.3.13",
     "bootstrap": "^3.3.6",
     "del": "^2.2.0",
