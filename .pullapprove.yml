@@ -1,0 +1,27 @@
+approve_by_comment: true
+approve_regex: '^:\+1:'
+reject_regex: '^:\-1:'
+reset_on_push: false
+reviewers:
+  -
+    name: devs
+    required: 1
+    members:
+      - edj-boston
+      - Stonelinks
+      - unboundfire
+    conditions:
+      branches:
+        - develop
+        - master
+  -
+    name: editors
+    required: 1
+    members:
+      - edj-boston
+    conditions:
+      branches:
+        - develop
+        - master
+      files:
+        - "src/posts/*"
