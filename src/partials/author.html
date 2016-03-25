@@ -1,28 +1,76 @@
 {{#extend "base"}}
     {{#content "header"}}
-        {{#extend "header"}}{{/extend}}
+        {{#extend "header"}}
+          {{#content "hero"}}
+            {{> hero_author}}
+          {{/content}}
+        {{/extend}}
     {{/content}}
 
     {{#content "body"}}
-        <div class="container">
-            <div class="row">
-                <h1>{{name}}</h1>
-                <dl>
-                    <dt>Nickname</dt>
-                    <dd>{{nickname}}</dd>
-                    <dt>Organization</dt>
-                    <dd>{{org}}</dd>
-                    <dt>Title</dt>
-                    <dd>{{title}}</dd>
-                    <dt>Email</dt>
-                    <dd>{{email}}</dd>
-                    <dt>Twitter</dt>
-                    <dd><a href="https://twitter.com/{{twitter}}">@{{twitter}}</a></dd>
-                    <dt>Site</dt>
-                    <dd><a href="{{site}}">{{site}}</a></dd>
-                </dl>
-                {{{this.content}}}
-            </div>
-        </div>
+        <section class="author-bio-cnt">
+          <div class="author-bio">
+            <h3 class="title author-bio-title">About</h3>
+            {{{this.content}}}
+          </div>
+
+          <div class="author-social-media">
+            <h3 class="title author-social-media-title">Elsewhere</h3>
+
+            {{#twitter}}
+              <a class="btn external btn-social btn-twitter" href="{{.}}">
+                <i class="fa fa-twitter">
+                  <span class="btn-social-name">Twitter</span>
+                </i>
+              </a>
+            {{/twitter}}
+
+            {{#dribbble}}
+              <a class="btn external btn-social btn-dribbble" href="{{.}}">
+                <i class="fa fa-dribbble">
+                  <span class="btn-social-name">Dribbble</span>
+                </i>
+              </a>
+            {{/dribbble}}
+
+            {{#github}}
+              <a class="btn external btn-social btn-github" href="{{.}}">
+                <i class="fa fa-github">
+                  <span class="btn-social-name">Github</span>
+                </i>
+              </a>
+            {{/github}}
+
+            {{#linkedin}}
+              <a class="btn external btn-social btn-linkedin" href="{{.}}">
+                <i class="fa fa-linkedin">
+                  <span class="btn-social-name">LinkedIn</span>
+                </i>
+              </a>
+            {{/linkedin}}
+
+            {{#site}}
+              <a class="btn external btn-social btn-personal" href="{{.}}">
+                <i class="fa fa-globe">
+                  <span class="btn-social-name">Personal Site</span>
+                </i>
+              </a>
+            {{/site}}
+          </div>
+        </section>
+
+        <section class="author-posts-cnt">
+          <div class="author-posts-max-wrapper">
+            <h3 class="title author-posts-title">Posts by {{name}} ({{this.posts.length}})</h3>
+            {{> posts posts=this.posts}}
+          </div>
+        </section>
+
+        <section class="author-posts-cnt">
+          <div class="author-posts-max-wrapper">
+            <h3 class="title author-post-title">Posts mentioning {{name}} ({{this.posts.length}})</h3>
+            {{> posts posts=this.posts}}
+          </div>
+        </section>
     {{/content}}
 {{/extend}}

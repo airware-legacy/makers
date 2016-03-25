@@ -1,0 +1,94 @@
+@import "./mixins.less";
+@import "./variables.less";
+
+.author-bio-cnt, .author-posts-max-wrapper {
+  width: 100%;
+  display: table;
+  margin: 0 auto;
+  max-width: @container-width;
+  padding: 60px @padding-xs;
+
+  .title {
+    margin: 0;
+    padding-bottom: @padding-normal;
+  }
+}
+
+.author-hero-cnt {
+  display: table;
+  margin: auto;
+  white-space: nowrap;
+
+  &:after {
+    clear: both;
+  }
+
+  .author-img {
+    .square(90px);
+    border-radius: 50%;
+    border: 2px solid @light-font-color;
+    background-color: @dark-font-color;
+    margin: auto;
+
+    @media (min-width: 768px) {
+      float: left;
+    }
+  }
+
+  .author-info {
+    margin: auto;
+
+    @media (min-width: 768px) {
+      float: right;
+      margin-left: @padding-xs;
+      margin-top: @padding-base;
+
+      .author-name, .author-title {
+        text-align: left;
+      }
+    }
+
+    .author-name, .author-title {
+      color: @light-font-color;
+    }
+  }
+}
+
+.author-bio-cnt {
+  .author-bio {
+    .make-xs-column(12);
+    .make-md-column(8);
+    padding: 0;
+
+    @media (min-width: 768px) {
+      p {
+        padding-right: @padding-large;
+      }
+    }
+  }
+
+  .author-social-media {
+    .make-xs-column(12);
+    .make-md-column(4);
+    padding: 60px 0 0 0;
+
+    @media (min-width: @screen-md) {
+      padding: 0;
+    }
+
+    .btn {
+      width: 100%;
+      margin: @padding-xs 0 0 0;
+
+      &:first-of-type {
+        margin: 0;
+      }
+    }
+  }
+}
+
+.author-posts-cnt {
+  margin: 0 auto;
+  border-top: 1px solid @light-gray;
+  width: 100%;
+}
