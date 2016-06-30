@@ -7,8 +7,8 @@ reviewers:
 - caity-cronkhite
 category: engineering
 date: 2016-06-29
-poster: /img/lost-wax-method-rewriting-software/poster.png
-thumb: /img/lost-wax-method-rewriting-software/card.png
+poster: /img/testing-your-first-redux-app/honeycomb.png
+thumb: /img/testing-your-first-redux-app/honeycomb_small.png
 tags:
 - Software
 - Node
