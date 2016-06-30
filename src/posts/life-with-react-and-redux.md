@@ -14,19 +14,17 @@ tags:
 - React
 ---
 
-The front-end landscape has changed drastically over the last few years. It can
+The front-end landscape has changed drastically over the last few years. Your large single page backbone app is long in the tooth, Grunt has fallen out of vogue and you’re sick of dealing with promise libraries in ES5 land. When looking at modernizing your frontend toolbox, it can
 be a daunting task trying to set up these new technology stacks because you are
 required to learn so many new concepts all at once.
 
-I'm going to share with you the knowledge that I have gained through painfully
-setting up these apps. Today we are going to talk about a very simple weather app that I built with [Redux](http://redux.js.org/) and how these patterns can help you.
+I'm going to share with you the knowledge that I have gained by getting up to speed with these new frontend tools. Today we’ll go through a very simple weather app that I built with Redux and how these patterns can help you.
 
-This post will assume that you have a basic understanding of [Webpack](https://webpack.github.io/), [Babel](https://babeljs.io/), [React](https://facebook.github.io/react/), and [Redux](http://redux.js.org/). If not, I would take a look at their documents and follow some of their tutorials first, then come back to this post. Also, review our [GitHub repository](https://github.com/unboundfire/example-weather-webapp) while reading this post; our code is more detailed in the repository, and I won’t explain every step in this post.
+This post will assume that you have a basic understanding of [Webpack](https://webpack.github.io/), [Babel](https://babeljs.io/), [React](https://facebook.github.io/react/), and [Redux](http://redux.js.org/). If not, I would stop and take a look at their documentation and follow some of their tutorials first, then come back to this post. Also, review our [GitHub repository](https://github.com/unboundfire/example-weather-webapp) while reading this post; our code is more detailed in the repository, and I won’t explain every step in this post.
 
 Mocks
 -------------------
-First, we need to decide what we want our app to look like. I went ahead and created
-some mocks for us to work with. The app is broken down into two pages: a list view and a details view.
+First, we need to decide what our simple weather app should look like. I went ahead and created some mocks for us to work with. The app is broken down into two pages: a list view and a details view.
 
 <div class="post-img-sidebyside">
   <img class="sidebyside" src="/img/life-with-react-and-redux/weather_list_mock.png" alt="Weather List" />
@@ -35,18 +33,18 @@ some mocks for us to work with. The app is broken down into two pages: a list vi
 
 Data Model
 -------------------
-Now that we know what our web app will look like, we must model our data and pick a good API to work with that can supply these data requirements.
+Now that we know what our web app will look like, we must model our data and pick a good API to work with that can fulfill these data requirements.
 
-Weekly weather based on location
-Detailed day weather
+* Weekly weather based on location
+* Detailed day weather
 
-The OpenWeatherMap API meets our data requirements, and it is super easy to use. The first thing we should do is create an account to get our API key. Our rough data model will look something like this:
+The [OpenWeatherMap](http://openweathermap.org/) API meets our data requirements, and it is super easy to use. The first thing we should do is create an account to get our API key. Our rough data model will look something like this:
 
 [Code snippet: JSON Object that represent data]
 
-Setup
+Build Dependencies
 -------------------
-[Webpack](https://webpack.github.io/) is an awesome tool, but it can be one that is hard to wrap your head around at first. Please read our README for a more detailed description of our setup. Below is an example webpack configuration that you can use for reference:
+[Webpack](https://webpack.github.io/) is an awesome tool for building and shipping your code, but it can be one that is hard to wrap your head around at first. Please read our [README](https://github.com/unboundfire/example-weather-webapp/blob/master/README.md) for a more detailed description of our setup. Below is an example webpack configuration that you can use for reference:
 
 ```
 const config = {
@@ -101,12 +99,12 @@ const config = {
 
 Building the App
 -------------------
+
 Bootstrap, Store, Reducers, Actions
-The first thing we need to do is create a starting point for our app. In [Redux](http://redux.js.org/), you set up a Provider. You can think of a Provider as a wrapper for your application. It takes two arguments: store and children. The Provider will set up some basic syncing with the store, so any time the store changes, it will alert the child components that have been passed into it. This helps make one-directional data flow a breeze.
+---
+The first thing we need to do is create a starting point for our app. In [Redux](http://redux.js.org/), you set up a Provider. Think of a Provider as a wrapper for your application. It takes two arguments: store and children. The store is where all application states are encapsulated, and in this case the only child to the Provider is the main container of your app. The Provider will set up some basic syncing with the store, so any time the store changes, it will alert the child components that have been passed into it. This helps make one-directional data flow a breeze.
 
-<img class="post-img-hover" src="/img/life-with-react-and-redux/flux_diagram.png" alt="Flux Diagram" />
-
-The store contains a graph of nodes called reducers and any middleware we might want to support, like asyncronous actions and router middleware. When the dispatcher fires an action, the store will receive it and pass it into the graph of reducers that we have set up. Those reducers will, in turn, decide what they should do with this action.
+The store contains a graph of nodes called reducers and any middleware we might want to support, like asynchronous actions and router middleware. When the dispatcher fires an action, the store will receive it and pass it into the graph of reducers that we have set up. Those reducers will, in turn, decide what they should do with this action.
 
 ```
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
@@ -134,11 +132,12 @@ export default function (initialState) {
 }
 ```
 
-Reducers are a great way to split your data into small chunks that mutate your state. They basically contain any business logic that your app needs and can also help you with your UI state. When we return state from a reducer, we never overwrite our current state; we are always making a mutation of that state and passing it along. Also, a key benefit of using reducers is that they are incredibly easy to unit test!
+Reducers are a great way to split your data into small chunks that mutate your state. They contain any business logic that your app needs and can help with UI state management. When we return state from a reducer, we never overwrite our current state; we are always making a mutation of that state and passing it along. Also, a key benefit of using reducers is that they are incredibly easy to unit test. We’ll cover testing in more detail in a follow-on blog post.
 
 I’ve split our app into a few simple reducers below, so you can see how we have broken our data layer up into smaller chunks. These reducers hold all of our truth and only actions can interact with them. Your view layer can never directly modify any of this data; instead, the view layer requests an action to update the store based on user interaction. More on actions next.
 
 Weather Details
+---
 ```
 const details = {
   min: '',
@@ -153,6 +152,7 @@ export default function (state = details) {
 ```
 
 Weather Weekly
+---
 ```
 import { WEATHER_SUCCESS } from '../constants';
 
@@ -177,6 +177,7 @@ export default function (state = weather, action) {
 ```
 
 Header
+---
 ```
 import locationUtils from '../utils/locationUtils';
 import { ACTIONS_DROPDOWN_TOGGLE } from '../constants';
@@ -222,6 +223,7 @@ export default function (state = header, action) {
 ```
 
 Modal
+---
 ```
 import { MODAL_TOGGLE } from '../constants';
 import Settings from '../components/Settings';
@@ -248,6 +250,7 @@ export default function (state = modal, action) {
 ```
 
 Settings
+---
 ```
 import { SETTINGS_UNITS, SETTINGS_LOCATION } from '../constants';
 
@@ -283,6 +286,7 @@ export default function (state = settings, action) {
 Actions are verbs that are dispatched from your views, and will end up talking to your reducers and updating any state. All actions MUST have a type property so that our reducers understand what type of action needs to take place. For example, we have an action called getWeather, which takes in our settings, makes an AJAX request, gets our weekly weather for us, and sends it to our weather reducer. I’m highlighting this action because it’s an asynchronous action, so it looks slightly different than a synchronous action.
 
 Asynchronous and Synchronous Actions
+---
 ```
 import apiUtils from '../utils/apiUtils';
 import weatherUtils from '../utils/weatherUtils';
@@ -359,11 +363,11 @@ export function getWeather(settings) {
 
 View Components
 -------------------
-The job of the view component is rather simple in this architecture. Let’s say we have a settings menu where you can change the units where the weather would appear. The user would click on the option to change the setting, our view would react to this and fire off an action describing the interaction. This would then flow into the store and be passed down to the appropriate reducer. The reducer then decides what to do with this new information and update any state, if needed. Any views rendered that depend on this state will receive the new information and react to the new props.
+Since all state is encapsulated in the store, the job of view components are rather simple. Let’s say we have a settings menu where you can change the units where the weather would appear. The user would click on the option to change the setting, our view would react to this and fire off an action describing the interaction. This would then flow into the store and be passed down to the appropriate reducer. The reducer then decides what to do with this new information and update any state, if needed. Any views rendered that depend on this state will receive the new information and react to the new props.
 
-One of my personal favorite features of using React [Redux](http://redux.js.org/) is that it supplies us with a connect function that will wrap our component and push any state changes that we might want in our view, so we don’t have to worry about passing our app state top down and keeping in sync with our store. It also removes some of the magic because you can see exactly what chunks of data each specific component needs from the store. We are going to make use of this pattern throughout our app.
+One of my personal favorite features of using [React](https://facebook.github.io/react/) [Redux](http://redux.js.org/) is that it supplies us with a connect function that will wrap our component and push any state changes that we might want in our view, so we don’t have to worry about passing our app state top down and keeping in sync with our store. It also removes some of the magic because you can see exactly what chunks of data each specific component needs from the store. We are going to make use of this pattern throughout our app.
 
-Here is an example component of how connect works. When the app initial loads we plan on having our App.jsx fetch our weather data before it mounts, and depending on the route, will render the list or details component.
+Here is an example component of how connect works. When the app initially loads we plan on having our App.jsx fetch our weather data before it mounts, and depending on the route, will render the list or details component.
 
 ```
 import React, { PropTypes } from 'react';
@@ -425,7 +429,7 @@ export default function ({ children }) {
 }
 ```
 
-Now that we have our data loaded into our store and since we are using the connect pattern, our components will instantly be in sync with the new data and render it. You may have noticed how we barely even mention our components throughout this post because [Redux](http://redux.js.org/) really makes it that easy!
+Now that we have our data loaded into our store and since we are using the connect pattern, our components will instantly be in sync and render with the new data. You may have noticed how we barely even mention our components throughout this post because [Redux](http://redux.js.org/) really makes it that easy!
 
 ```
 import React, { PropTypes } from 'react';
@@ -523,4 +527,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(WeatherList);
 
 Conclusion
 -------------------
-We live in a world where we can structure our JavaScript apps like never before. The introduction of [React](https://facebook.github.io/react/) has lead to amazing flux frameworks (like [Redux](http://redux.js.org/)) that help you build a very resilient codebase that’s maintainable and feature-proof in many ways.
+We live in a world where we can structure our JavaScript apps like never before. The introduction and opinionated nature of [React](https://facebook.github.io/react/) has lead to amazing ecosystem of frameworks (like [Redux](http://redux.js.org/)) that help you build a very resilient codebase that’s maintainable and feature-proof in many ways.
+
+Our readers with an eye for quality will notice the lack of tests in this post. Look out for a follow on blog post that will go into detail how we test react/redux apps like the one described here!
