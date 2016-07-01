@@ -1,9 +1,14 @@
 ---
 name: Luke Doyle
 nickname: Luke D
-title: Software Engineer
+job: Software Engineer
 org: Airware
 email: ldoyle@airware.com
+twitter: https://twitter.com/Stonelinks
 ---
 
-Lucas is a Software Engineer on Airware's Cloud/UI team. He helps build the configuration manager and cloud frontend. Prior to Airware, he spent two years in Tokyo writing the frontend for a cutting-edge industrial robotics planning platform. While an undergrad at RPI, he helped develop an intra-wing robotic inspection system for Boeing, as well as an experimental X-ray optic production facility at the Harvard-Smithsonian Center for Astrophysics. Outside his passion for robotics, Luke enjoys running, cycling, sailing, bad puns, building furniture out of garbage and is a voracious consumer of podcasts.
+I'm a Software Engineer on Airware's front-end team. Prior to Airware, I spent two years in Tokyo working on a cutting-edge industrial robotics platform.
+
+While an undergrad at RPI, I helped develop an intra-wing robotic inspection system for Boeing, as well as an experimental X-ray optic production facility at the Harvard-Smithsonian Center for Astrophysics.
+
+Outside my passion is robotics, running, cycling, sailing, bad puns, building furniture, and is a voracious consumer of podcasts.

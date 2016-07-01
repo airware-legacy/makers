@@ -1,9 +1,10 @@
 ---
 name: Mark Bauer
 nickname: Mark B
-title: Product Designer
+job: Head of Design
 org: Airware
 email: mbauer@airware.com
+twitter: https://twitter.com/bauerdesigns
 ---
 
 I'm originally from the Philadelphia area, but I moved out here a few years ago to work as a Product Designer for Box. As far as design goes, I consider myself to be a generalist. I’m interested in designing for a wide range of mediums and developing my skills in every phase of of the design process, from early iteration and testing all the way through creating beautiful visuals.

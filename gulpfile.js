@@ -138,10 +138,11 @@ gulp.task('authors', done => {
             .pipe(g.marked())
             .pipe(g.tap(file => {
                 const author = new Author(extend(true, {}, file.frontMatter, {
-                    bio     : file.contents.toString(),
-                    path    : file.path,
-                    content : file.contents.toString(),
-                    env     : data.env
+                    bio       : file.contents.toString(),
+                    path      : file.path,
+                    content   : file.contents.toString(),
+                    env       : data.env,
+                    pageTitle : data.pageTitle
                 }));
 
                 // Populate the authors collection for re-use
