@@ -40,7 +40,21 @@ Now that we know what our web app will look like, we must model our data and pic
 
 The [OpenWeatherMap](http://openweathermap.org/) API meets our data requirements, and it is super easy to use. The first thing we should do is create an account to get our API key. Our rough data model will look something like this:
 
-[Code snippet: JSON Object that represent data]
+```
+{
+  weather: {
+    city: '',
+    country: '',
+    weatherList: []
+  },
+  details: {
+    min: '',
+    max: '',
+    current: '',
+    hourly: []
+  }
+}
+```
 
 Build Dependencies
 -------------------
