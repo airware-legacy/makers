@@ -19,6 +19,18 @@
     color: @font-color;
   }
 
+  a {
+    &, &:hover, &:visited {
+      font-family: @italic-font-family;
+      color: @font-color;
+      text-decoration: none;
+    }
+
+    &:hover {
+      border-bottom: 1px dotted @font-color;
+    }
+  }
+
   .headline-category {
     font-family: @italic-font-family;
     text-transform: capitalize;
