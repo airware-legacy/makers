@@ -102,6 +102,7 @@ gulp.task('scripts', () => {
         'node_modules/hammerjs/hammer.js',
         'node_modules/jquery-hammerjs/jquery.hammer.js',
         'node_modules/bootstrap/dist/js/bootstrap.js',
+        'node_modules/trianglify/dist/trianglify.min.js',
         'src/js/*.js'
     ])
     .pipe(g.sourcemaps.init({ loadMaps : true }))
@@ -304,7 +305,8 @@ gulp.task('package', g.depcheck({
         'jquery',
         'should',
         'velocity-animate',
-        'ua-parser-js'
+        'ua-parser-js',
+        'trianglify'
     ]
 }));
 
