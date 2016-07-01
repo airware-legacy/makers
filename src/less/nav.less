@@ -188,6 +188,23 @@
   }
 }
 
+.generated-background {
+  .airware-header {
+    .airware-header-bg-overlay {
+      opacity: 0.5;
+      background-color: @dark-gray;
+    }  
+  }
+
+  .airware-header-bg {
+    background-size: auto !important;
+
+    @media (min-width: 1800px) {
+      background-size: cover !important;
+    }
+  }
+}
+
 /* nav hover colors */
 .engineering-nav-item:hover {
   padding: @padding-base 0;

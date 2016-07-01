@@ -28,6 +28,26 @@
             });
         }
 
+        setAuthorBackground () {
+            const $authorHeroName = $('.author-hero-cnt .author-name');
+
+            if ($authorHeroName.length) {
+                /* eslint camelcase: ["error", {properties: "never"}] */ // eslint-disable-line
+                window.rand = 2; // hack to make this work with babel
+                window.ctx = document.createElement('canvas'); // hack to make this work with babel
+                const pattern = window.Trianglify({
+                    cell_size : 15,
+                    variance  : 60,
+                    x_colors  : 'random',
+                    width     : 1800,
+                    height    : 500,
+                    seed      : $authorHeroName.text().toUpperCase()
+                });
+
+                $('.airware-header-bg').css({ backgroundImage : `url('${pattern.png()}')` });
+            }
+        }
+
         setViliHeader () {
             if (!this.$body.hasClass('vili')) {
                 return;
@@ -56,6 +76,7 @@
         const layout = new Layout();
         layout.setGlobalLinkClickListener();
         layout.fadeInCards();
+        layout.setAuthorBackground();
         layout.setViliHeader();
     });
 })();
