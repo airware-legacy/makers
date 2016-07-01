@@ -95,6 +95,10 @@
     code {
       white-space: pre;
       word-wrap: normal;
+
+      &, span {
+        font-family: monospace;
+      }
     }
   }
 
@@ -135,6 +139,17 @@
 
     &:hover {
       .box-shadow(@btn-hover);
+    }
+  }
+
+  .post-img-sidebyside {
+    text-align: center;
+
+    .sidebyside {
+      display: inline-block;
+      vertical-align: middle;
+      margin-bottom: @padding-xs;
+      height: 500px;
     }
   }
 
