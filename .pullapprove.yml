@@ -19,6 +19,7 @@ reviewers:
     required: 1
     members:
       - edj-boston
+      - brentdavidson1
     conditions:
       branches:
         - develop
