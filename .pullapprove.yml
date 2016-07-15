@@ -13,7 +13,6 @@ reviewers:
     conditions:
       branches:
         - develop
-        - master
   -
     name: editors
     required: 1
@@ -22,7 +21,4 @@ reviewers:
       - brentdavidson1
     conditions:
       branches:
-        - develop
         - master
-      files:
-        - "src/posts/*"
