@@ -44,7 +44,9 @@
                     seed      : $authorHeroName.text().toUpperCase()
                 });
 
-                $('.airware-header-bg').css({ backgroundImage : `url('${pattern.png()}')` });
+                $('.airware-header-bg')
+                  .css({ opacity : 0, backgroundImage : `url('${pattern.png()}')` })
+                  .velocity('transition.fadeIn', { duration : 50 });
             }
         }
 
