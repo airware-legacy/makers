@@ -6,6 +6,9 @@ reviewers:
 - eric-johnson
 - caity-cronkhite
 category: engineering
+comments:
+  hnItemId: 12103018
+  twitterHash: 'AirwareMakersTestingRedux'
 date: 2016-06-29
 poster: /img/testing-your-first-redux-app/honeycomb.png
 thumb: /img/testing-your-first-redux-app/honeycomb_small.png

@@ -6,6 +6,9 @@ reviewers:
 - caity-cronkhite
 - mark-bauer
 category: design
+comments:
+  hnItemId: 12103059
+  twitterHash: 'AirwareMakersFlightTesting'
 date: 2016-07-08
 poster: /img/flight-testing-and-autonomous-design-challenges/flight-testing-hero.png
 thumb: /img/flight-testing-and-autonomous-design-challenges/flight-testing-card.png
