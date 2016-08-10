@@ -5,6 +5,9 @@ reviewers:
 - eric-johnson
 - caity-cronkhite
 category: engineering
+comments:
+  hnItemId: 12103014
+  twitterHash: 'AirwareMakersLifeWithReactRedux'
 date: 2016-05-21
 poster: /img/life-with-react-and-redux/weather_app.png
 thumb: /img/life-with-react-and-redux/weather_app.png
