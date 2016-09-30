@@ -48,7 +48,7 @@
     "gulp-less": "^3.0.5",
     "gulp-load-plugins": "^1.2.0",
     "gulp-marked": "^1.0.0",
-    "gulp-mocha": "^2.2.0",
+    "gulp-mocha": "^3.0.1",
     "gulp-sequence": "^0.4.4",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-tap": "^0.1.3",
