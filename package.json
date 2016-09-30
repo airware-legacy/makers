@@ -61,7 +61,7 @@
     "jquery": "^2.1.4",
     "jquery-extend": "^2.0.3",
     "jquery-hammerjs": "^2.0.0",
-    "jsdom": "^8.0.2",
+    "jsdom": "^9.5.0",
     "moment": "^2.11.2",
     "should": "^11.1.0",
     "trianglify": "^0.4.0",
