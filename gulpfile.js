@@ -260,9 +260,10 @@ gulp.task('lint', () => {
         '!node_modules/**'
     ])
     .pipe(g.eslint({
-        extends : 'eslint:recommended',
-        env     : { node : true, es6 : true, mocha : true },
-        globals : { $ : true, window : true, document : true, ga : true, UAParser : true },
+        extends       : 'eslint:recommended',
+        env           : [ 'node', 'mocha' ],
+        globals       : [ '$', 'window', 'document', 'ga', 'UAParser' ],
+        parserOptions : { 'ecmaVersion' : 6 },
         rules
     }))
     .pipe(g.eslint.format());
