@@ -14,10 +14,10 @@ deploy:
   skip_cleanup: true
   on:
     branch: master
-    node_js: '4'
+    node_js: '6'
 - provider: script
   script: gulp deploy -b airware-makers-staging
   skip_cleanup: true
   on:
     branch: develop
-    node_js: '4'
+    node_js: '6'
