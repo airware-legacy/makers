@@ -41,7 +41,7 @@
     "gulp-david": "^1.0.0",
     "gulp-depcheck": "^1.1.0",
     "gulp-eslint": "^3.0.1",
-    "gulp-filter": "^4.0.0",
+    "gulp-filter": "^5.0.0",
     "gulp-front-matter": "^1.3.0",
     "gulp-htmlmin": "^3.0.0",
     "gulp-if": "^2.0.0",
@@ -50,8 +50,8 @@
     "gulp-marked": "^1.0.0",
     "gulp-mocha": "^3.0.1",
     "gulp-sequence": "^0.4.4",
-    "gulp-sourcemaps": "^1.6.0",
-    "gulp-tap": "^0.1.3",
+    "gulp-sourcemaps": "^2.6.0",
+    "gulp-tap": "^1.0.1",
     "gulp-uglify": "^2.0.0",
     "gulp-util": "^3.0.7",
     "hammerjs": "^2.0.6",
@@ -61,12 +61,12 @@
     "jquery": "^3.1.1",
     "jquery-extend": "^2.0.3",
     "jquery-hammerjs": "^2.0.0",
-    "jsdom": "^9.5.0",
+    "jsdom": "^11.0.0",
     "moment": "^2.11.2",
     "should": "^11.1.0",
     "trianglify": "^1.0.1",
     "ua-parser-js": "^0.7.10",
     "velocity-animate": "^1.2.3",
-    "yargs": "^6.0.0"
+    "yargs": "^8.0.1"
   }
 }

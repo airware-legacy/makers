@@ -1,8 +1,8 @@
 sudo: false
 language: node_js
 node_js:
-- '5'
-- '4'
+- 'node'
+- '6'
 env:
   global:
   - secure: CALxAOIx4Bw3xSk31f3xmrDEfawmPeWXZByo14hrPUESiFytd6vOSUxRw7Q096fklROxuqsSR+elXK7IPlzxpdUJN3FGS2J8YrdV9cgLZSCdEXvIBGY73PMyk8SGjlaQnZfR5i7RlALaOGm3fzvkMu89QYSw8Jbkv0h3U3r/V/k/CJUUaTboQUkZC7OI6Wluzme+88L58i3sgtHv6mTVYPjIi4sr3WgmKQ1I8fZ7iOPYoGUUhdgauI4KTlgeMEYF3NO9wBBLLcMsHcq2glbBUgWqgTvG5wvROhb5IxRg9cc0qPuPU+cnjAIWgwv7AqDGpQ5D3SSFu4X+er1z10/Kn0DpIMcIW6hzA40mi3IaZp3VMqp/uCiPjjkg71vC7iQLMCdlN7NRcMI6R3HYabPnXznhLXjAJGA+Nn6kDcNNKJEupllDRrAoITl8LSDBg9fE489xtvosQ8SEg+JcvKubZSAXCwgI0/Yj4VO6ZPsiEpuEIvJ/VghpCFvCYPB+nMFxdUelE8lPv7O6MBkxuI/3lFbxUQEHcYDAg0h3/c2rjymAb49Inmrwyu9375MFfejQ2R/FCWazsgL1RhUkY4EpHPIu3KP4mZFS/Vwx0/AZ2xLQGNUKTFwtfrUHBRk+nWLmWxj4joQj5kQhbjZJ234v13bg73K2UYEL68xctBeE194=
@@ -14,10 +14,10 @@ deploy:
   skip_cleanup: true
   on:
     branch: master
-    node_js: '4'
+    node_js: '6'
 - provider: script
   script: gulp deploy -b airware-makers-staging
   skip_cleanup: true
   on:
     branch: develop
-    node_js: '4'
+    node_js: '6'
