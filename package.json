@@ -51,7 +51,7 @@
     "gulp-mocha": "^3.0.1",
     "gulp-sequence": "^0.4.4",
     "gulp-sourcemaps": "^2.6.0",
-    "gulp-tap": "^0.1.3",
+    "gulp-tap": "^1.0.1",
     "gulp-uglify": "^2.0.0",
     "gulp-util": "^3.0.7",
     "hammerjs": "^2.0.6",
